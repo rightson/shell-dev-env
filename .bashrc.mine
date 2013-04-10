@@ -1,0 +1,167 @@
+# .bashrc
+# Check for an interactive session
+[ -z "$PS1" ] && return
+
+# Source environment settings 
+GlobalEnvRCFiles=(
+    /etc/bashrc
+    /etc/bash.bashrc
+    ~/.bashrc.color
+    ~/.bashrc.buildenv
+    /etc/bash_completion
+)
+for each in ${GlobalEnvRCFiles[@]}; do
+    [ -r $each ] && . $each
+done
+
+function setup_ps1()
+{
+    local root="$txtred\u$txtrst"
+    local user="$txtred\u$txtrst"
+    local host="$txtblu$1$txtrst"
+    local rpwd="$txtgrn\w$txtrst"
+    local opwd="$txtgrn\W$txtrst"
+    local date="$txtpur\t$txtrst"
+    local at="$txtwht@$txtrst"
+    if [ "`id -u`" -eq 0 ]; then
+        PS1="\u@$HOSTNAME[\w]# "
+    else
+        #PS1="${user}${at}${host}:${rpwd} ${date}\n\$ "
+        PS1="${user}${at}${host}:${rpwd}\n\$ "
+        #PS1="${rpwd}\n$ "
+    fi 
+}
+
+function get_ipaddr()
+{
+    local uname=`uname`
+    if [ $uname == 'Linux' ]; then
+        local ip=`ifconfig | grep -A1 -e '^eth0' | tail -n 1`
+        if [[ $ip =~ .*addr:([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}).* ]]; then
+            echo ${BASH_REMATCH[1]};
+        else
+            echo 'localhost'
+        fi
+    else
+        local ip=`ifconfig | grep -A3 -e '^en0' | tail -n 1 | awk '{print $2}'`
+        echo $ip
+    fi
+}
+
+export PATH=/usr/local/bin:/sbin:/usr/sbin:/usr/local/sbin:$PATH
+#export PATH=/usr/local/share/python:$PATH
+#export PATH=/usr/local/Cellar/ruby/1.9.3-p374/bin:$PATH
+export VIM_BIN=/usr/bin/vim
+export EDITOR=$VIM_BIN
+export SVN_EDITOR=$EDITOR
+export VISUAL=$VIM_BIN
+export GREP_COLOR="1;33"
+export HISTCONTROL=ignoreboth
+#export TERM=xterm
+export TERM="xterm-256color"
+export IP=`get_ipaddr`   #`ifconfig | grep inet | tail -n 1 | awk '{print $2}'`
+export HOSTNAME="`echo $IP`"
+
+#[ -z "$DISPLAY" ] || xset b 0
+
+# customize cmds
+alias vi='vim'
+alias vim='vim -O'
+#alias ls='ls -G'
+alias ls='ls --color=auto'
+#alias grep='grep -rn --color'
+alias grep='grep --color'
+alias mv='mv -i'
+alias scp='scp -r'
+alias wget='wget -c'
+alias urxvt="urxvt -tint white -sh 35";
+alias tree='tree -C'
+alias al='alias'
+alias ual='unalias -a; . ~/.bashrc; alias'
+alias l='ls -lCF'
+alias l.='ls -ld .*'
+alias la='ls -A'
+alias ll='ls -l'
+alias lh='ls -lh'
+
+# sudos
+alias steal='sudo chown -R `id -u`:`id -g`'
+alias 755='sudo chmod -R 755'
+alias ifconfig='sudo ifconfig'
+#alias du1='sudo du -h -d1'
+alias du1='sudo du -h --max-depth 1'
+alias du1g='sudo du -h -d1|grep G'
+alias lsof='sudo lsof'
+alias yum='sudo yum'
+alias quota='sudo quota `whoami`'
+alias minicom='sudo minicom'
+alias vncserver='vncserver -geometry 1400x900'
+alias vncviewer='vncviewer -encoding Tight -quality 9'
+
+# shell management
+alias so='unalias -a ; . ~/.bash_profile'
+alias virc='vim ~/.bashrc.local'
+alias vibu='vim ~/.bashrc.buildenv'
+alias vivi='vim ~/.vimrc'
+alias vnc-kill='vncserver -kill'
+alias kill-ssh='killall -9 ssh'
+
+# development
+alias py=python
+SIMPLE_HTTP='python -m SimpleHTTPServer 8000'
+alias simple-pyhttp="echo $SIMPLE_HTTP; $SIMPLE_HTTP"
+#alias svndiff='svn di --diff-cmd /usr/local/bin/svndiff.sh'
+#alias sc='. /usr/local/ut/bin/list_svn_diff.sh set check'
+#alias s='. /usr/local/ut/bin/list_svn_diff.sh set'
+#alias sr='. /usr/local/ut/bin/list_svn_diff.sh reset'
+#alias st='svn status'
+#alias stq='svn status -q'
+#alias svnup="find . -type d | grep -v .svn | xargs svn up"
+alias clean-swp='rm -f .*.swp'
+
+VIRTUAL_ENV=~/Virtualenv
+DEV_DIR=~/Developer
+alias 2virtualenv="cd $VIRTUAL_ENV"
+
+virtualenv_list() {
+    ls -lh $VIRTUAL_ENV
+}
+
+virtualenv_load() {
+    echo "${VIRTUAL_ENV}/$1/bin/activate"
+}
+
+create_virtualenv__alias() {
+    for item in "$@"; do
+        alias so-$item=". `virtualenv_load ${item}`"
+    done
+}
+
+developer_shortcuts_creator() {
+    for item in "$@"; do
+        alias 2${item}="cd ${DEV_DIR}/${item};"
+    done
+}
+
+developer_shortcuts_venv_creator() {
+    for item in "$@"; do
+        alias 2${item}="cd ${DEV_DIR}/${item}; so-${item}"
+    done
+}
+
+# universal developer shortcuts
+DEVELOPER_DIRS=`ls ~/Developer`
+developer_shortcuts_creator ${DEVELOPER_DIRS}
+
+# python virtualenv shortcuts
+VIRTUALENV_INSTANCES=(`find $VIRTUAL_ENV -mindepth 1 -maxdepth 1 -type d | xargs basename`)
+create_virtualenv__alias ${VIRTUALENV_INSTANCES[@]}
+developer_shortcuts_venv_creator ${VIRTUALENV_INSTANCES[@]}
+
+# developer shortcuts
+#projects=('taiwan_host' 'Excellent Trader' 'figurerobics')
+#developer_shortcuts_creator ${projects[@]}
+
+# set PS1
+setup_ps1 "$HOSTNAME"
+#echo '~/.bashrc.local'
