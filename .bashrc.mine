@@ -150,18 +150,14 @@ developer_shortcuts_venv_creator() {
 }
 
 # universal developer shortcuts
-DEVELOPER_DIRS=`ls ~/Developer`
-developer_shortcuts_creator ${DEVELOPER_DIRS}
+#DEVELOPER_DIRS=`ls ~/Developer`
+#developer_shortcuts_creator ${DEVELOPER_DIRS}
 
 # python virtualenv shortcuts
-VIRTUALENV_INSTANCES=(`find $VIRTUAL_ENV -mindepth 1 -maxdepth 1 -type d | xargs basename`)
-create_virtualenv__alias ${VIRTUALENV_INSTANCES[@]}
-developer_shortcuts_venv_creator ${VIRTUALENV_INSTANCES[@]}
-
-# developer shortcuts
-#projects=('taiwan_host' 'Excellent Trader' 'figurerobics')
-#developer_shortcuts_creator ${projects[@]}
+#VIRTUALENV_INSTANCES=(`find $VIRTUAL_ENV -mindepth 1 -maxdepth 1 -type d | xargs basename`)
+#create_virtualenv__alias ${VIRTUALENV_INSTANCES[@]}
+#developer_shortcuts_venv_creator ${VIRTUALENV_INSTANCES[@]}
 
 # set PS1
 setup_ps1 "$HOSTNAME"
-#echo '~/.bashrc.local'
+#echo '. ~/.bashrc.local'
