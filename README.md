@@ -41,8 +41,8 @@ and you can enjoy it!
 	
 If you are interested in my custom VIM settings, try to append below code to ~/.vimrc
 
-	source ~/.my-env/vundle.bashrc  
-	source ~/.my-env/hotkeys.bashrc
+	source ~/.my-env/vundle.vimrc  
+	source ~/.my-env/hotkeys.vimrc
 	source ~/.my-env/vimrc
 	
 If you have vundle installed, remember to run `:BundleInstall` afterward. 
