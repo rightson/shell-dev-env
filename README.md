@@ -1,3 +1,8 @@
+Why this?
+===================
+
+I have to work in multipe Linux distributions and OSX concurrently, so I need a better architecture to maintain my configurations in such complex development environment. If you have better idea, you are welcome to revise this codebase.
+
 Shell Development Configuration
 ===================
 
