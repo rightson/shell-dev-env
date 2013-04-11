@@ -56,10 +56,10 @@ alias clean-swp='rm -f .*.swp'
 
 # Shortcuts for svn cmd line
 if [ -d ${SVN_TOOL_PATH} ]; then
-    alias svndiff="svn di --diff-cmd ${SVN_TOOL_PATH}/svndiff.sh"
-    alias s=".  ${SVN_TOOL_PATH}/list_svn_diff.sh set"
-    alias sc=". ${SVN_TOOL_PATH}/list_svn_diff.sh set check"
-    alias sr=". ${SVN_TOOL_PATH}/list_svn_diff.sh reset"
+    alias svndiff="svn di --diff-cmd ${SVN_TOOL_PATH}/svn-diff.sh"
+    alias s=".  ${SVN_TOOL_PATH}/list-svn-diff.sh set"
+    alias sc=". ${SVN_TOOL_PATH}/list-svn-diff.sh set check"
+    alias sr=". ${SVN_TOOL_PATH}/list-svn-diff.sh reset"
 fi
 alias st='svn status'
 alias stq='svn status -q'
