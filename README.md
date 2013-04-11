@@ -60,6 +60,19 @@ Just create soft link in your binary folder in PATH, such as ~/bin or /usr/local
 	ln -s ~/Developer/shell-dev-env/bin/cs.sh /usr/local/bin/	
 Then just type `cs.sh` from command line, then you can see the usage.
 
+##### Tips
+
+If you need to create multiple index (ex: index for applications, device drivers for kernel source), you could achieve this by repeatly running `cs add <dir>` command in your working directory, the cscope.out file works well in this case. For example,
+
+	cd ~/Developer/your_dirver_dir
+	cs.sh add .
+	cs.sh add ../your_kernel_source_dir
+	
+then you could get `cscope.out` file immediately.
+
+Happy Coding~
+
+
 ### Magic svn command wrapper
 
 If you have to work with Subversion command line client and you are also a VIMer, you can try to use my svn solution by adding below:
