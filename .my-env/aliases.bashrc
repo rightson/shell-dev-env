@@ -84,7 +84,7 @@ fi
 
 if [ -d ${VIRTUALENV_PATH} ]; then
     INSTANCES=`find $VIRTUALENV_PATH -mindepth 1 -maxdepth 1 -type d`
-    if [ ! -z ${INSTANCES} ]; then
+    if [ ! -z "${INSTANCES}" ]; then
         for item in ${INSTANCES[@]}; do
             item=${item##*/}
             activate="${VIRTUALENV_PATH}/${item}/bin/activate"

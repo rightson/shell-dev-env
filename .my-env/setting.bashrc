@@ -1,3 +1,4 @@
+#!/bin/bash -x
 # .bashrc
 
 
@@ -40,4 +41,4 @@ export GREP_COLOR="1;33"
 export HISTCONTROL=ignoreboth
 export TERM=xterm
 
-echo '. ~/.my-env/setting.bashrc'
+#echo '. ~/.my-env/setting.bashrc'
