@@ -62,9 +62,9 @@ Then just type `cs.sh` from command line, then you can see the usage.
 
 ##### Tips
 
-If you need to create multiple index (ex: index for applications, device drivers for kernel source), you could achieve this by repeatly running `cs add <dir>` command in your working directory, the cscope.out file works well in this case. For example,
+If you need to create multiple index (ex: index for device drivers and kernel source code), you could achieve this by repeatly running `cs add <dir>` command in your working directory, the cscope.out file works well in this case. For example,
 
-	cd ~/Developer/your_dirver_dir
+	cd ~/Developer/your_driver_dir
 	cs.sh add .
 	cs.sh add ../your_kernel_source_dir
 	
