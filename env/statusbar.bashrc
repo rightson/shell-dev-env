@@ -1,5 +1,5 @@
 #!/bin/bash
-# bash color
+# prettfy PS1 in bash
 
 
 txtblk='\e[0;30m' # Black - Regular

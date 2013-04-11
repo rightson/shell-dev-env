@@ -1,12 +1,12 @@
 #!/bin/bash
-# aliases
+# create handy aliases
 
 
-# Paths
+# Set your paths
 export ENV_PATH=~/.my-env
-export BIN_PATH=/usr/local/bin
 export DEV_PATH=~/Developer
 export VIRTUALENV_PATH=~/Virtualenv
+export SVN_TOOL_PATH=/usr/local/bin
 
 # Cmds
 export SIMPLE_HTTP='python -m SimpleHTTPServer 8000'
@@ -55,11 +55,11 @@ alias clean-swp='rm -f .*.swp'
 
 
 # Shortcuts for svn cmd line
-if [ -d ${BIN_PATH} ]; then
-    alias svndiff="svn di --diff-cmd ${BIN_PATH}/svndiff.sh"
-    alias s=".  ${BIN_PATH}/list_svn_diff.sh set"
-    alias sc=". ${BIN_PATH}/list_svn_diff.sh set check"
-    alias sr=". ${BIN_PATH}/list_svn_diff.sh reset"
+if [ -d ${SVN_TOOL_PATH} ]; then
+    alias svndiff="svn di --diff-cmd ${SVN_TOOL_PATH}/svndiff.sh"
+    alias s=".  ${SVN_TOOL_PATH}/list_svn_diff.sh set"
+    alias sc=". ${SVN_TOOL_PATH}/list_svn_diff.sh set check"
+    alias sr=". ${SVN_TOOL_PATH}/list_svn_diff.sh reset"
 fi
 alias st='svn status'
 alias stq='svn status -q'
@@ -89,12 +89,13 @@ if [ -d ${VIRTUALENV_PATH} ]; then
             item=${item##*/}
             activate="${VIRTUALENV_PATH}/${item}/bin/activate"
             alias so-$item=". $activate"
-            #alias 2${item}="cd ${DEV_PATH}/${item}; so-${item}"
+            alias 2${item}="cd ${DEV_PATH}/${item}; so-${item}"
         done
+        unset item activate
     fi
 fi
 
 
 # Unset variables
 unset SIMPLE_HTTP
-unset ENV_PATH BIN_PATH DEV_PATH
+unset ENV_PATH SVN_TOOL_PATH DEV_PATH

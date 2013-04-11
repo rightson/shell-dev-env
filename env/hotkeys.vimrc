@@ -1,4 +1,4 @@
-" hotkeys for Rightson Chen
+" vim hotkeys
 
 " Tab operations
 :noremap <c-w>t :tabnew<CR>:o ./<CR>

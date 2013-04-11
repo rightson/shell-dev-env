@@ -1,3 +1,6 @@
+" Scott Chen's VIM setting
+syntax on
+
 " Command mode
 set history=512
 set timeoutlen=250
