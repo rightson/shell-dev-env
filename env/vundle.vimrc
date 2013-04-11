@@ -1,3 +1,4 @@
+set nocompatible               " be iMproved
 syntax on
 filetype off                   " required!
 
