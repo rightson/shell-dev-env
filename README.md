@@ -1,7 +1,7 @@
 Why this?
 ===================
 
-I have to work in multipe Linux distributions and OSX concurrently, so I need a better architecture to maintain my configurations in such complex development environment. If you have better idea, you are welcome to revise this codebase.
+I have to work within various Linux distributions and OSX at the same time, I need a better architecture to maintain my configurations in such complex development environment, so I create this repository for helping people in similar situation. Welcome to enjoy and modify these snippets.
 
 Shell Development Configuration
 ===================
@@ -89,3 +89,4 @@ After that, source your bashrc file again (you can run `so` in console if you ha
 
 
 Enjoy : )
+s
