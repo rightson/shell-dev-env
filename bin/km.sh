@@ -1,8 +1,9 @@
 #!/bin/sh
+# author: Scott Chen
 
 usage()
 {
-    echo "Kermit Easy Command (Scott Chen)"
+    echo "Kermit Easy Command"
     echo ""
     echo "Usage:"
     echo "  `basename $0` help"
