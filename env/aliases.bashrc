@@ -11,6 +11,49 @@ export SVN_TOOL_PATH=/usr/local/bin
 # Cmds
 export SIMPLE_HTTP='python -m SimpleHTTPServer 8000'
 
+
+# Create dynamic aliases
+if [ -d ${DEV_PATH} ]; then
+    LS=/bin/ls
+    PROJECTS=`${LS} ${DEV_PATH}`
+    for item in ${PROJECTS[@]}; do
+        if [ ! -z "${item}" ]; then
+            alias 2${item}="cd ${DEV_PATH}/${item}"
+        fi
+    done
+    unset LS PROJECTS
+fi
+
+
+if [ -d ${VIRTUALENV_PATH} ]; then
+    FIND=/usr/bin/find
+    INSTANCES=`${FIND} $VIRTUALENV_PATH -mindepth 1 -maxdepth 1 -type d`
+    if [ ! -z "${INSTANCES}" ]; then
+        for item in ${INSTANCES[@]}; do
+            item=${item##*/}
+            activate="${VIRTUALENV_PATH}/${item}/bin/activate"
+            alias so-$item=". $activate"
+            #alias 2${item}="cd ${DEV_PATH}/${item}; so-${item}"
+        done
+        unset item activate
+    fi
+    unset FIND INSTANCES
+fi
+
+
+# Shortcuts for svn cmd line
+if [ -d ${SVN_TOOL_PATH} ]; then
+    alias svndiff="svn di --diff-cmd ${SVN_TOOL_PATH}/svn-diff.sh"
+    alias s=".  ${SVN_TOOL_PATH}/list-svn-diff.sh set"
+    alias sc=". ${SVN_TOOL_PATH}/list-svn-diff.sh set check"
+    alias sr=". ${SVN_TOOL_PATH}/list-svn-diff.sh reset"
+fi
+alias st='svn status'
+alias stq='svn status -q'
+alias svnup="find . -type d | grep -v .svn | xargs svn up"
+
+
+
 # Platform dependent arguments
 if [ `uname` == 'Linux' ]; then
     export BASH_RCFILE='~/.bashrc'
@@ -52,48 +95,6 @@ alias virc="vim ${ENV_PATH}"
 alias kill-vnc='vncserver -kill'
 alias kill-ssh='killall -9 ssh'
 alias clean-swp='rm -f .*.swp'
-
-
-# Shortcuts for svn cmd line
-if [ -d ${SVN_TOOL_PATH} ]; then
-    alias svndiff="svn di --diff-cmd ${SVN_TOOL_PATH}/svn-diff.sh"
-    alias s=".  ${SVN_TOOL_PATH}/list-svn-diff.sh set"
-    alias sc=". ${SVN_TOOL_PATH}/list-svn-diff.sh set check"
-    alias sr=". ${SVN_TOOL_PATH}/list-svn-diff.sh reset"
-fi
-alias st='svn status'
-alias stq='svn status -q'
-alias svnup="find . -type d | grep -v .svn | xargs svn up"
-
-
-# Shortcuts for remote access
-alias reverse-ln='ssh -D 8888 -N -f rightson@rightson.org'
-alias 2is='ssh is90246@alumni.cis.nctu.edu.tw'
-alias 2dorm7='ssh rightson@dorm7.com'
-alias 2ln='ssh rightson@rightson.org'
-alias 2build-machine='ssh scott@10.32.48.162'
-
-
-# Create dynamic alias
-if [ -d ${DEV_PATH} ]; then
-    for item in `ls ${DEV_PATH}`; do
-        alias 2${item}="cd ${DEV_DIR}/${item};" 2> /dev/null
-    done
-fi
-
-
-if [ -d ${VIRTUALENV_PATH} ]; then
-    INSTANCES=`find $VIRTUALENV_PATH -mindepth 1 -maxdepth 1 -type d`
-    if [ ! -z "${INSTANCES}" ]; then
-        for item in ${INSTANCES[@]}; do
-            item=${item##*/}
-            activate="${VIRTUALENV_PATH}/${item}/bin/activate"
-            alias so-$item=". $activate"
-            alias 2${item}="cd ${DEV_PATH}/${item}; so-${item}"
-        done
-        unset item activate
-    fi
-fi
 
 
 # Unset variables
