@@ -4,7 +4,7 @@
 
 # Set your paths
 export ENV_PATH=~/.my-env
-export DEV_PATH=~/Developer
+export DEV_PATH=~/Dropbox/Developer
 export VIRTUALENV_PATH=~/Virtualenv
 export SVN_TOOL_PATH=/usr/local/bin
 
