@@ -15,17 +15,13 @@ Steps for setting Shell
 
 ### Set up bashrc, vimrc and screenrc
 
-Go to your development directory first, for example:
+Just clone the package
 
-	cd ~/Developer 
-
-Then clone this package
-
-	git clone https://github.com/rightson/shell-dev-env.git
+	git clone https://github.com/rightson/shell-dev-env.git ~/.shell-dev-env
 
 Create soft link to the env folder, here my folder is named `.my-env` in ~:
 
-	ln -s ~/Developer/shell-dev-env/env ~/.my-env
+	ln -s ~/.shell-dev-env/env ~/.my-env
 
 Append below code to ~/.bash_profile (or ~/.bashrc in Linux)
  
