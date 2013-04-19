@@ -1,7 +1,7 @@
-Why this?
+Introduction
 ===================
 
-I like to work within various Linux distributions and OSX at the same time, I need a better architecture to maintain my configurations in such complex development environment, so I create this repository for helping people in similar situation. Welcome to enjoy and modify these snippets.
+Welcome to enjoy and modify the Linux Shell settings!
 
 Shell Development Configuration
 ===================
