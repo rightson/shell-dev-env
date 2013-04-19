@@ -54,18 +54,18 @@ My screenrc are can also be included in your ~/.screenrc:
 
 cs.sh is put in `shell-dev-env/bin` folder, remember to change mode to use it:
 
-	chmod +x ~/Developer/shell-dev-env/bin/*
+	chmod +x ~/.shell-dev-env/bin/*
 
 Just create soft link in your binary folder in PATH, such as ~/bin or /usr/local/bin, for example:
 
-	ln -s ~/Developer/shell-dev-env/bin/cs.sh /usr/local/bin/	
+	ln -s ~/.shell-dev-env/bin/cs.sh /usr/local/bin/	
 Then just type `cs.sh` from command line, then you can see the usage.
 
 ##### Tips
 
 If you need to create multiple index (ex: index for device drivers and kernel source code), you could achieve this by repeatly running `cs add <dir>` command in your working directory, the cscope.out file works well in this case. For example,
 
-	cd ~/Developer/your_driver_dir
+	cd ~/your_driver_source_dir
 	cs.sh add .
 	cs.sh add ../your_kernel_source_dir
 	
@@ -78,11 +78,11 @@ Happy Coding~
 
 If you have to work with Subversion command line client and you are also a VIMer, you can try to use my svn solution by adding below:
 
-	ln -s ~/Developer/shell-dev-env/bin/svn-diff.sh /usr/local/bin/
-	ln -s ~/Developer/shell-dev-env/bin/list-svn-diff.sh /usr/local/bin/
+	ln -s ~/.shell-dev-env/bin/svn-diff.sh /usr/local/bin/
+	ln -s ~/.shell-dev-env/bin/list-svn-diff.sh /usr/local/bin/
 
 After that, source your bashrc file again (you can run `so` in console if you had `source` *aliases.bashrc* already), then, run `s` in your svn working copy folder, you can see the modified file in command line, use `sc` and `sr` to create and clean special special alias (ex, s1, s2, s3) for checking the svn diff result via vimdiff immediately.
 
 
 Enjoy : )
-s
+
