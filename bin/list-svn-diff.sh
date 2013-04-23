@@ -1,6 +1,6 @@
 #/bin/bash
 
-SVNDIFF="svn diff --diff-cmd ~/ut/svndiff.sh"
+SVNDIFF="svn diff --diff-cmd /usr/local/bin/svn-diff.sh"
 RM="sudo rm -rf"
 TMPFILE=/tmp/svn_diff.list.$$
 
