@@ -1,6 +1,7 @@
 #/bin/bash
 
-SVNDIFF="svn diff --diff-cmd /usr/local/bin/svn-diff.sh"
+DIFF_WRAPPER=/usr/local/bin/svn-diff.sh
+SVNDIFF="svn diff --diff-cmd ${DIFF_WRAPPER}"
 RM="sudo rm -rf"
 TMPFILE=/tmp/svn_diff.list.$$
 

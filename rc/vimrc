@@ -1,0 +1,3 @@
+source ~/.shell-dev-env/env/vim/vundle.vimrc
+source ~/.shell-dev-env/env/vim/hotkeys.vimrc
+source ~/.shell-dev-env/env/vim/setting.vimrc

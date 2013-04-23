@@ -1,0 +1,3 @@
+source ~/.shell-dev-env/env/bash/statusbar.bashrc
+source ~/.shell-dev-env/env/bash/aliases.bashrc
+source ~/.shell-dev-env/env/bash/variables.bashrc
