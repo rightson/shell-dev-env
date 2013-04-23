@@ -39,13 +39,15 @@ txtrst='\e[0m'    # Text Reset
 function get_ipaddr()
 {
     if [ `uname` == 'Linux' ]; then
-        local interface='eth0'
-        local ip=`/sbin/ifconfig | grep -A1 -e "^$interface" | tail -n 1` 
-        if [[ $ip =~ .*addr:([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}).* ]]; then 
-            echo ${BASH_REMATCH[1]}; 
-        else
-            echo 'localhost'
-        fi
+        for i in `seq 1 1 10`; do
+            local interface="eth${i}"
+            local ip=`/sbin/ifconfig | grep -A1 -e "^$interface" | tail -n 1` 
+            if [[ $ip =~ .*addr:([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}).* ]]; then 
+                echo ${BASH_REMATCH[1]};
+                return
+            fi
+        done
+        echo 'localhost'
     else
         local interface='en0'
         local ip=`/sbin/ifconfig | grep -A3 -e "^$interface" | tail -n 1 | awk '{print $2}'` 
