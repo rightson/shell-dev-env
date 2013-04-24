@@ -6,16 +6,16 @@ Welcome to enjoy and modify the Linux Shell Preset Configuration!
 Shell Development Configuration
 ===================
 
-1. Just clone the package
+Just clone the package
 
 	git clone https://github.com/rightson/shell-dev-env.git ~/.shell-dev-env
 
-2. Start to deploy the environment
+Then deploy the environment
 
 	cd ~/.shell-dev-env
 	bash deploy.sh
 
-3. Enjoy it!	
+Enjoy it!	
 
 
 About cs.sh
