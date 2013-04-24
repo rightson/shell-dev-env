@@ -8,14 +8,16 @@ Welcome to try this package and improve it!
 Installation
 ===================
 
-Just clone the package
+Just clone the package:
 
 	git clone https://github.com/rightson/shell-dev-env.git ~/.shell-dev-env
 
-Then deploy the environment
+and run the deployment script:
 
 	cd ~/.shell-dev-env
 	bash deploy.sh
+	
+then run `source ~/.bashrc` or `source ~/.bash_profile`.
 
 Enjoy it!	
 
