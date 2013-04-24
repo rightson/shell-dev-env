@@ -16,7 +16,7 @@ and run the deployment script:
 
 	bash ~/.shell-dev-env/deploy.sh	
 	
-then run `source ~/.bashrc` or `source ~/.bash_profile`.
+then run `source ~/.bashrc` or `source ~/.bash_profile` to apply the latest bashrc.
 
 Enjoy it!	
 
