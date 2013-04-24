@@ -1,7 +1,7 @@
 Introduction
 ===================
 
-`shell-dev-env` is a sample Linux Shell Configuration, it provides a intuitive architecture for deploying your bashrc, vimrc, and screerc.
+`shell-dev-env` is a sample Linux Shell Configuration, it provides an intuitive architecture for deploying your bashrc, vimrc, and screerc.
 
 Welcome to try this package and improve it!
 
