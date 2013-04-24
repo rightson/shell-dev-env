@@ -1,7 +1,9 @@
 Introduction
 ===================
 
-Welcome to enjoy and modify the Linux Shell Preset Configuration!
+`shell-dev-env` is a sample Linux Shell Configuration, it provides a intuitive architecture for deploying your bashrc, vimrc, and screerc.
+
+Welcome to try this package and improve it!
 
 Shell Environment Configuration
 ===================
@@ -17,13 +19,18 @@ Then deploy the environment
 
 Enjoy it!	
 
+### Tips
+
+1. The deploy.sh will append the ~/.shell-dev-env/rc template files to your ~/.bashrc, ~/.vimrc, and ~/.screernc individually.
+2. You could customize your bashrc, vimrc, and screenrc in ~/.shell-dev-env/env/ directly.
+3. You could enable vundle in ~/.vimrc file	
 
 Handy Utilities
 ===================
 
 There'are some useful utilities included in your PATH after installed, you can try to use them happily:
 
-#### cs.sh
+### cs.sh
 
 cs.sh is a wrapper for Cscope, it can generate cscope.out file in a smart way.
 
@@ -36,7 +43,7 @@ Then just type `cs.sh` from command line then you can see the usage, below is an
 then you could get `cscope.out` file immediately.
 
 
-#### list-svn-diff.sh
+### list-svn-diff.sh
 
 If you work with Subversion command line client, list-svn-diff can help you combine the `svn diff` with `vimdiff` in a quick fashion.
 
@@ -50,7 +57,7 @@ If there are some changes in your SVN working copy, you will see some messages l
 
 Then you can use the alias `s1` to invoke svn diff command which will use `vimdiff` to start your diff process.
 
-#### km.sh
+### km.sh
 
 km.sh is a wrapper for `kermit`, it can help people work with kermit without having to type lengthy commands. Just type `km.sh` in your command line then you can understand how to use it.
 
