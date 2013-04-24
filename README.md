@@ -3,10 +3,8 @@ Introduction
 
 Welcome to enjoy and modify the Linux Shell Preset Configuration!
 
-Shell Development Configuration
-===================
+### Shell Development Configuration
 
-### Steps
 
 1. Just clone the package
 
