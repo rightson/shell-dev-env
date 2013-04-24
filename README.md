@@ -3,7 +3,7 @@ Introduction
 
 Welcome to enjoy and modify the Linux Shell Preset Configuration!
 
-Shell Development Configuration
+Shell Environment Configuration
 ===================
 
 Just clone the package
@@ -18,22 +18,16 @@ Then deploy the environment
 Enjoy it!	
 
 
-About cs.sh
+Handy Utilities
 ===================
 
-cs.sh is a wrapper for Cscope, it can generate cscope.out file in a quick way, it is put in `shell-dev-env/bin` folder.
-	
-	chmod +x ~/.shell-dev-env/bin/*
+There'are some useful utilities included in your PATH after installed, you can try to use them happily:
 
-Just create soft link in your binary folder in PATH, such as ~/bin or /usr/local/bin, for example:
+#### cs.sh
 
-	ln -s ~/.shell-dev-env/bin/cs.sh /usr/local/bin/	
+cs.sh is a wrapper for Cscope, it can generate cscope.out file in a smart way.
 
-Then just type `cs.sh` from command line, then you can see the usage.
-
-##### Tips
-
-If you need to create multiple index (ex: index for device drivers and kernel source code), you could achieve this by repeatly running `cs add <dir>` command in your working directory, the cscope.out file works well in this case. For example,
+Then just type `cs.sh` from command line then you can see the usage, below is an example:
 
 	cd ~/your_driver_source_dir
 	cs.sh add .
@@ -41,18 +35,24 @@ If you need to create multiple index (ex: index for device drivers and kernel so
 	
 then you could get `cscope.out` file immediately.
 
-Happy Coding~
 
-Magic svn command wrapper
-===================
+#### list-svn-diff.sh
 
-If you have to work with Subversion command line client and you are also a VIMer, you can try to use my svn solution by adding below:
+If you work with Subversion command line client, list-svn-diff can help you combine the `svn diff` with `vimdiff` in a quick fashion.
 
-	ln -s ~/.shell-dev-env/bin/svn-diff.sh /usr/local/bin/
-	ln -s ~/.shell-dev-env/bin/list-svn-diff.sh /usr/local/bin/
+In command line, type `s`, list-svn-diff.sh will inspect you code change in subversion working copy. 
 
-After that, source your bashrc file again (you can run `so` in console if you had `source` *aliases.bashrc* already), then, run `s` in your svn working copy folder, you can see the modified file in command line, use `sc` and `sr` to create and clean special special alias (ex, s1, s2, s3) for checking the svn diff result via vimdiff immediately.
+    s
 
+If there are some changes in your SVN working copy, you will see some messages like:
+
+    alias s1='svn diff --diff-cmd ~/.shell-dev-env/bin/svn-diff.sh lowlevel_init.S '
+
+Then you can use the alias `s1` to invoke svn diff command which will use `vimdiff` to start your diff process.
+
+#### km.sh
+
+km.sh is a wrapper for `kermit`, it can help people work with kermit without having to type lengthy commands. Just type `km.sh` in your command line then you can understand how to use it.
 
 Enjoy : )
 

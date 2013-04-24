@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -x
 
 IDENTIFIER='Added by shell-dev-env.'
 

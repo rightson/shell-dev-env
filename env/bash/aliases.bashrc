@@ -3,10 +3,10 @@
 
 
 # Set your paths
-export ENV_PATH=~/.my-env
-export DEV_PATH=~/Dropbox/Developer
+export ENV_PATH=~/.shell-dev-env
+export DEV_PATH=~/Workspace
 export VIRTUALENV_PATH=~/Virtualenv
-export SVN_TOOL_PATH=/usr/local/bin
+export SVN_TOOL_PATH=$ENV_PATH/bin
 
 # Cmds
 export SIMPLE_HTTP='python -m SimpleHTTPServer 8000'
