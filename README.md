@@ -5,7 +5,7 @@ Introduction
 
 Welcome to try this package and improve it!
 
-Configuration
+Installation
 ===================
 
 Just clone the package
