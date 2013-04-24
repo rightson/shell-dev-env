@@ -11,37 +11,28 @@ fi
 VIMRC=$HOME/.vimrc
 SCREENRC=$HOME/.screenrc
 
-FILES=($BASHRC $VIMRC $SCREENRC)
+FILES=("$BASHRC|bashrc" "$VIMRC|vimrc" "$SCREENRC|screenrc")
 
 function apply_patch() {
 
     echo 'Patching...'
     for each in ${FILES[@]}; do
-        if [ ! -f $each ]; then
-            echo "Creating rc file $each"
-            touch $each
+        local rc_file=`echo $each | cut -d "|" -f 1`
+        local rc_tmpl=`echo $each | cut -d "|" -f 2`
+        if [ ! -f $rc_file ]; then
+            echo "Creating $rc_file ... "
+            touch $rc_file
+        fi
+        if [ -z "`grep \"$IDENTIFIER\" $rc_file`" ]; then
+            echo "Patching $rc_tmpl: $rc_file ..."
+            cat $RC_TEMPLATE_LOC/$rc_tmpl >> $rc_file
         fi
     done
-    
-    if [ -z "`grep \"$IDENTIFIER\" $BASHRC`" ]; then
-        echo "Patching bashrc: $BASHRC"
-        cat $RC_TEMPLATE_LOC/bashrc >> $BASHRC
-    fi
-    
-    if [ -z "`grep \"$IDENTIFIER\" $VIMRC`" ]; then
-        echo "Patching vimrc: $BASHRC"
-        cat $RC_TEMPLATE_LOC/vimrc >> $VIMRC
-    fi
-    
-    if [ -z "`grep \"$IDENTIFIER\" $SCREENRC`" ]; then
-        echo "Patching screenrc: $BASHRC"
-        cat $RC_TEMPLATE_LOC/screenrc >> $SCREENRC
-    fi
     
     echo 'Done!'
 }
 
-case $ARGV[1] in
+case $1 in
     *)
         apply_patch
     ;;
