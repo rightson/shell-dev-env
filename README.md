@@ -5,7 +5,7 @@ Introduction
 
 Welcome to try this package and improve it!
 
-Shell Environment Configuration
+Configuration
 ===================
 
 Just clone the package
