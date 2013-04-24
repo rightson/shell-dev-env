@@ -1,4 +1,6 @@
 
 # Added by shell-dev-env.
+# =Begin= 
 source $HOME/.shell-dev-env/env/screen/statusbar.screenrc
+# =End=
 
