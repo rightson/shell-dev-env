@@ -1,6 +1,8 @@
-#!/bin/bash -x
+#!/bin/bash
 
 IDENTIFIER='Added by shell-dev-env.'
+SCRIPT_LOCATION=$(cd `dirname ${BASH_SOURCE[0]}` && pwd)
+RC_TEMPLATE_LOC=$SCRIPT_LOCATION/rc
 
 BASHRC=$HOME/.bash_profile
 if [ "`uname`" = "Linux" ]; then
@@ -14,7 +16,7 @@ FILES=($BASHRC $VIMRC $SCREENRC)
 function apply_patch() {
 
     echo 'Patching...'
-    for each in $FILES[@]; do
+    for each in ${FILES[@]}; do
         if [ ! -f $each ]; then
             echo "Creating rc file $each"
             touch $each
@@ -23,17 +25,17 @@ function apply_patch() {
     
     if [ -z "`grep \"$IDENTIFIER\" $BASHRC`" ]; then
         echo "Patching bashrc: $BASHRC"
-        cat rc/bashrc >> $BASHRC
+        cat $RC_TEMPLATE_LOC/bashrc >> $BASHRC
     fi
     
     if [ -z "`grep \"$IDENTIFIER\" $VIMRC`" ]; then
         echo "Patching vimrc: $BASHRC"
-        cat rc/vimrc >> $VIMRC
+        cat $RC_TEMPLATE_LOC/vimrc >> $VIMRC
     fi
     
     if [ -z "`grep \"$IDENTIFIER\" $SCREENRC`" ]; then
         echo "Patching screenrc: $BASHRC"
-        cat rc/screenrc >> $SCREENRC
+        cat $RC_TEMPLATE_LOC/screenrc >> $SCREENRC
     fi
     
     echo 'Done!'
