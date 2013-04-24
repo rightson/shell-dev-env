@@ -3,8 +3,8 @@ Introduction
 
 Welcome to enjoy and modify the Linux Shell Preset Configuration!
 
-### Shell Development Configuration
-
+Shell Development Configuration
+===================
 
 1. Just clone the package
 
@@ -18,7 +18,8 @@ Welcome to enjoy and modify the Linux Shell Preset Configuration!
 3. Enjoy it!	
 
 
-### About cs.sh
+About cs.sh
+===================
 
 cs.sh is a wrapper for Cscope, it can generate cscope.out file in a quick way, it is put in `shell-dev-env/bin` folder.
 	
@@ -42,8 +43,8 @@ then you could get `cscope.out` file immediately.
 
 Happy Coding~
 
-
-### Magic svn command wrapper
+Magic svn command wrapper
+===================
 
 If you have to work with Subversion command line client and you are also a VIMer, you can try to use my svn solution by adding below:
 
