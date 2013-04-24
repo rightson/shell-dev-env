@@ -1,6 +1,6 @@
 # Prettfy status bar in Screen
 
-#pvbell off
+vbell off
 autodetach on
 startup_message off
 defscrollback 90000
