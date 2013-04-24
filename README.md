@@ -14,8 +14,7 @@ Just clone the package:
 
 and run the deployment script:
 
-	cd ~/.shell-dev-env
-	bash deploy.sh
+	bash ~/.shell-dev-env/deploy.sh	
 	
 then run `source ~/.bashrc` or `source ~/.bash_profile`.
 
@@ -23,9 +22,10 @@ Enjoy it!
 
 ### Tips
 
-1. The deploy.sh will append the ~/.shell-dev-env/rc template files to your ~/.bashrc, ~/.vimrc, and ~/.screernc individually.
-2. You could customize your bashrc, vimrc, and screenrc in ~/.shell-dev-env/env/ directly.
-3. You could enable vundle in ~/.vimrc file	
+1. You could enable vundle in ~/.vimrc file
+2. You could customize your bashrc, vimrc, and screenrc in ~/.shell-dev-env/env/.
+3. The deploy.sh will append ~/.shell-dev-env/rc/* to your ~/.bashrc, ~/.vimrc, and ~/.screernc separately.
+
 
 Handy Utilities
 ===================
