@@ -1,1 +1,4 @@
+
+# Added by shell-dev-env.
 source $HOME/.shell-dev-env/env/screen/statusbar.screenrc
+
