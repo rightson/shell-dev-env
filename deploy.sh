@@ -9,6 +9,14 @@ fi
 VIMRC=$HOME/.vimrc
 SCREENRC=$HOME/.screenrc
 
+FILES=($BASHRC $VIMRC $SCREENRC)
+
+for each in $FILES[@]; do
+    if [ ! -f $each ]; then
+        touch $each
+    fi
+done
+
 if [ -z "`grep \"$IDENTIFIER\" $BASHRC`" ]; then
     cat rc/bashrc >> $BASHRC
 fi

@@ -39,7 +39,7 @@ txtrst='\e[0m'    # Text Reset
 function get_ipaddr()
 {
     if [ `uname` == 'Linux' ]; then
-        for i in `seq 1 1 10`; do
+        for i in `seq 0 1 10`; do
             local interface="eth${i}"
             local ip=`/sbin/ifconfig | grep -A1 -e "^$interface" | tail -n 1` 
             if [[ $ip =~ .*addr:([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}).* ]]; then 
