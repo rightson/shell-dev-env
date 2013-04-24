@@ -1,64 +1,35 @@
 Introduction
 ===================
 
-Welcome to enjoy and modify the Linux Shell settings!
+Welcome to enjoy and modify the Linux Shell Preset Configuration!
 
 Shell Development Configuration
 ===================
 
-This package is for developers who are lazy to configure their bash shell environment across different OS distributions again again and again.
+### Steps
 
-cs.sh is a script that wraps dirty flow when creating index for cscope.
-
-Steps for setting Shell
-============
-
-### Set up bashrc, vimrc and screenrc
-
-Just clone the package
+1. Just clone the package
 
 	git clone https://github.com/rightson/shell-dev-env.git ~/.shell-dev-env
 
-Create soft link to the env folder, here my folder is named `.my-env` in ~:
+2. Start to deploy the environment
 
-	ln -s ~/.shell-dev-env/env ~/.my-env
+	cd ~/.shell-dev-env
+	bash deploy.sh
 
-Append below code to ~/.bash_profile (or ~/.bashrc in Linux)
- 
-	source ~/.my-env/statusbar.bashrc
-	source ~/.my-env/aliases.bashrc 
-	source ~/.my-env/bashrc
-
-Then, run
-
-	source ~/.bashrc
-	
-and you can enjoy it!
-	
-If you are interested in my custom VIM settings, try to append below code to ~/.vimrc
-
-	source ~/.my-env/vundle.vimrc  
-	source ~/.my-env/hotkeys.vimrc
-	source ~/.my-env/vimrc
-	
-If you have vundle installed, remember to run `:BundleInstall` afterward. 
-Otherwise, comment out the first line `source ~/.my-env/vundle.bashrc` to your `~/.vimrc`
- and have a look at [vundle](https://github.com/gmarik/vundle) first.
-
-My screenrc are can also be included in your ~/.screenrc:
-
-	source ~/.my-env/statusbar.screenrc
+3. Enjoy it!	
 
 
 ### About cs.sh
 
-cs.sh is put in `shell-dev-env/bin` folder, remember to change mode to use it:
-
+cs.sh is a wrapper for Cscope, it can generate cscope.out file in a quick way, it is put in `shell-dev-env/bin` folder.
+	
 	chmod +x ~/.shell-dev-env/bin/*
 
 Just create soft link in your binary folder in PATH, such as ~/bin or /usr/local/bin, for example:
 
 	ln -s ~/.shell-dev-env/bin/cs.sh /usr/local/bin/	
+
 Then just type `cs.sh` from command line, then you can see the usage.
 
 ##### Tips
