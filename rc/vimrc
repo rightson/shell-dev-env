@@ -1,7 +1,7 @@
 
 " Added by shell-dev-env.
 " =Begin= 
-" source ~/.shell-dev-env/env/vim/vundle.vimrc
+" source $HOME/.shell-dev-env/env/vim/vundle.vimrc
 source $HOME/.shell-dev-env/env/vim/hotkeys.vimrc
 source $HOME/.shell-dev-env/env/vim/setting.vimrc
 " =End=
