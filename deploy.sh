@@ -30,6 +30,11 @@ function apply_patch() {
     done
     
     echo 'Done!'
+    echo ''
+    echo 'Please run below command to apply the change:'
+    echo ''
+    echo "  source $BASHRC"
+    echo ''
 }
 
 case $1 in
