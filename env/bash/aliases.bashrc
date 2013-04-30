@@ -96,6 +96,8 @@ alias kill-vnc='vncserver -kill'
 alias kill-ssh='killall -9 ssh'
 alias clean-swp='rm -f .*.swp'
 
+alias ai='sudo apt-get install -y'
+alias yi='sudo yum install -y'
 
 # Unset variables
 unset SIMPLE_HTTP
