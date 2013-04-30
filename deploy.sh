@@ -27,6 +27,11 @@ function apply_patch() {
             echo "Patching $rc_tmpl: $rc_file ..."
             cat $RC_TEMPLATE_LOC/$rc_tmpl >> $rc_file
         fi
+        local softlink=$SCRIPT_LOCATION/$rc_tmpl
+        if [ ! -f $softlink ]; then
+            echo "Creating softlink for $rc_file at $softlink"
+            ln -s $rc_file $softlink
+        fi
     done
     
     echo 'Done!'
@@ -35,6 +40,7 @@ function apply_patch() {
     echo ''
     echo "  source $BASHRC"
     echo ''
+    echo 'After that, use "virc" or "so" to edit or apply rc files'
 }
 
 case $1 in

@@ -46,9 +46,9 @@ Bundle 'vim-scripts/simple-pairs'
 
 " Code browsing
 Bundle 'vim-scripts/cscope.vim'
-Bundle 'vim-scripts/ctags.vim'
-Bundle 'vim-scripts/gtags.vim'
-Bundle 'vim-scripts/taglist.vim'
+"Bundle 'vim-scripts/ctags.vim'
+"Bundle 'vim-scripts/gtags.vim'
+"Bundle 'vim-scripts/taglist.vim'
 
 filetype plugin indent on     " required!
 
