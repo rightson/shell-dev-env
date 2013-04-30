@@ -102,8 +102,13 @@ case "$1" in
     clean) 
         clear_cscope_list       
         ;;
-    *) 
+    -h|--help|help) 
         usage
+        ;;
+    *) 
+        add_cscope_search_path $@
+        generate_cscope_files
+        generate_cscope_out
         ;;
 esac
 
