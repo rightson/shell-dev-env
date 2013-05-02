@@ -59,7 +59,7 @@ if [ `uname` == 'Linux' ]; then
     export BASH_RCFILE='~/.bashrc'
 
     alias ls='ls --color'
-    alias grep='grep -rn --color'
+    alias grep='grep --color'
     alias du1='sudo du -h --max-depth 1'
 else # Darwin
     export BASH_RCFILE='~/.bash_profile'

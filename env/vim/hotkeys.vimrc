@@ -25,7 +25,8 @@
 :noremap <F6> :%!xxd
 
 " Beautify JSON
-:noremap <F8> :%!python -m json.tool<CR><CR>
+":noremap <F8> :%!python -m json.tool<CR><CR>
+:noremap <F8>:TListOpen<CR>
 
 " Toggle mouse
 :noremap <F9> :if &mouse == 'a' \| set mouse= \| else \| set mouse=a \| endif<CR><CR>
@@ -34,7 +35,6 @@
 " Toggle line number
 :noremap <F12> :set nu!<CR>
 
-nmap <C-s-t> :%s/\s\+$//<CR>
 
 " Tabs
 """ nmap <D-t> :tabnew<cr>

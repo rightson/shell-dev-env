@@ -35,20 +35,20 @@ Bundle 'http://github.com/gmarik/vim-visual-star-search.git'
 Bundle 'Lokaltog/vim-easymotion'
 
 " Syntax related
-Bundle "Markdown"
-Bundle 'pyflakes.vim'
-Bundle 'python.vim'
-Bundle "jQuery"
-Bundle 'tpope/vim-rails'
-Bundle 'clang-complete'
-Bundle 'vim-scripts/simple-pairs'
+"Bundle "Markdown"
+"Bundle 'pyflakes.vim'
+"Bundle 'python.vim'
+"Bundle "jQuery"
+"Bundle 'tpope/vim-rails'
+"Bundle 'clang-complete'
+"Bundle 'vim-scripts/simple-pairs'
 
 
 " Code browsing
-Bundle 'vim-scripts/cscope.vim'
+"Bundle 'vim-scripts/cscope.vim'
 "Bundle 'vim-scripts/ctags.vim'
-"Bundle 'vim-scripts/gtags.vim'
-"Bundle 'vim-scripts/taglist.vim'
+Bundle 'vim-scripts/gtags.vim'
+Bundle 'vim-scripts/taglist.vim'
 
 filetype plugin indent on     " required!
 
