@@ -26,7 +26,7 @@
 
 " Beautify JSON
 ":noremap <F8> :%!python -m json.tool<CR><CR>
-:noremap <F8>:TListOpen<CR>
+:noremap <F8> :TlistOpen<CR>
 
 " Toggle mouse
 :noremap <F9> :if &mouse == 'a' \| set mouse= \| else \| set mouse=a \| endif<CR><CR>
