@@ -46,7 +46,7 @@ Bundle 'Lokaltog/vim-easymotion'
 
 " Code browsing
 "Bundle 'vim-scripts/cscope.vim'
-Bundle 'vim-scripts/ctags.vim'
+"Bundle 'vim-scripts/ctags.vim'
 Bundle 'vim-scripts/gtags.vim'
 Bundle 'vim-scripts/taglist.vim'
 

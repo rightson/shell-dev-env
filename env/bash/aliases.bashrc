@@ -17,8 +17,19 @@ if [ -d ${DEV_PATH} ]; then
     LS=/bin/ls
     PROJECTS=`${LS} ${DEV_PATH}`
     for item in ${PROJECTS[@]}; do
+        dest=${DEV_PATH}/${item}
         if [ ! -z "${item}" ]; then
-            alias 2${item}="cd ${DEV_PATH}/${item}"
+            alias 2${item}="cd ${dest}"
+            if [ "${item:0:1}" = "L" ]; then
+                suffix=pkg-odm_adps_full_features-20110916/ast2300_evb_build
+                dir1="${dest}/SourceCode/${suffix}"
+                dir2="${dest}/${suffix}"
+                if [ -d "${dir1}" ]; then
+                    alias 2${item}="cd $dir1"
+                elif [ -d "${dir2}" ]; then
+                    alias 2${item}="cd $dir2"
+                fi
+            fi
         fi
     done
     unset LS PROJECTS
@@ -98,6 +109,8 @@ alias clean-swp='rm -f .*.swp'
 
 alias ai='sudo apt-get install -y'
 alias yi='sudo yum install -y'
+
+alias 2ipmi-L02TR1='cd ~/Workspace/L02TR1-Ivy-Bridge-trunk/pkg-odm_adps_full_features-20110916/ast2300_evb_build/apps/ipmi'
 
 # Unset variables
 unset SIMPLE_HTTP

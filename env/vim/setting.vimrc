@@ -15,7 +15,7 @@ set clipboard=unnamed
 set pastetoggle=<F10>
 
 " Display
-"set mouse=a
+set mouse=a
 set background=dark
 set ruler
 set nowrap
@@ -82,11 +82,13 @@ autocmd BufReadPost *
 
 if has("gui_running")
     "set guifont=AR\ PL\ UMing\ TW:h16
-    set guifont=Monaco:h12.00
+    set guifont=AR\ PL\ UMing\ TW\ Light\ 11
+    "set guifont=Monaco:h12.00
     "set guifont=Menlo:h14.00
     set lines=120 columns=160
     "set vb
     set guioptions-=T
     set transparency=15
+    colo torte
 endif
 
