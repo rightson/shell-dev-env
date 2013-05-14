@@ -3,20 +3,22 @@
 export cscope_list=./cscope.list
 export cscope_files=./cscope.files
 
+to_abs_path() {
+    local relative_path=$1
+    echo $(cd "$relative_path"; /bin/pwd) 
+}
+
+to_abs_paths() {
+    for each in $@; do
+        to_abs_path $each
+    done
+}
+
 add_cscope_search_path() {
-    # if [ -n "$1" ]; then
-    #     echo $(cd "$1"; /bin/pwd) >> $cscope_list
-    #     cat $cscope_list | sort | uniq > $cscope_list.tmp
-    #     mv $cscope_list.tmp $cscope_list
-    #     echo -e "Current cscope search path:\n`cat $cscope_list`"
-    # else
-    #     echo "Add current path to cscope search path"
-    #     pwd > $cscope_list
-    # fi
     shift 1
     for param in "$@"; do 
         if [ "$param" != "" ]; then 
-            echo $(cd "$param"; /bin/pwd) >> $cscope_list
+            to_abs_path "$param" >> $cscope_list
             cat $cscope_list | sort | uniq > $cscope_list.tmp
             mv $cscope_list.tmp $cscope_list
         fi
@@ -52,17 +54,22 @@ generate_cscope_files() {
         find `cat $here/$cscope_list` -type f -name "*.c" -o -name "*.h" -o -name "*.S" -o -name "*.cpp" -o -name "*.equ" | grep -v svn > $here/$cscope_files 2> /dev/null
         echo "Done (`size_of_file $here/$cscope_files`)"
         cd - > /dev/null
+    else
+        echo "Error: Failed to find $cscope_list"
+        exit
     fi
 }
 
 generate_cscope_out() {
-    echo -n "Generating cscope.out ("
     if [ -f $cscope_files ]; then
+        echo -n "Generating cscope.out ("
         echo -n "cscope -b -k)..." && cscope -b -k 
+        echo "Done (`size_of_file ./cscope.out`)"
     else
-        echo -n "cscope -R -b -k)..." && cscope -R -b -k
+        echo "Error: Failed to find $cscope_files"
+        exit
+        #echo -n "cscope -R -b -k)..." && cscope -R -b -k
     fi
-    echo "Done (`size_of_file ./cscope.out`)"
 }
 
 usage() {
@@ -80,13 +87,28 @@ control_c() {
     exit;
 }
 
+cs_add() {
+    add_cscope_search_path $@
+    generate_cscope_files
+    generate_cscope_out
+}
+
+custom_add() {
+    local paths=`cat Makefile | grep BUILD_DEP_MODULE | grep -v '#' | cut -d " " -f 3`
+    local abs_paths=`to_abs_paths $paths`
+    add_cscope_search_path $abs_paths
+    generate_cscope_files
+    generate_cscope_out
+}
+
 trap control_c SIGINT SIGTERM
 
 case "$1" in
     add) 
-        add_cscope_search_path $@
-        generate_cscope_files
-        generate_cscope_out
+        cs_add $@
+        ;;
+    custom)
+        custom_add $@
         ;;
     up)
         generate_cscope_files

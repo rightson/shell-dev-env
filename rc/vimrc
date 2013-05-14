@@ -1,8 +1,8 @@
 
 " Added by shell-dev-env.
 " =Begin= 
-" source $HOME/.shell-dev-env/env/vim/vundle.vimrc
-source $HOME/.shell-dev-env/env/vim/hotkeys.vimrc
-source $HOME/.shell-dev-env/env/vim/setting.vimrc
+" source S_LOC/env/vim/vundle.vimrc
+source S_LOC/env/vim/hotkeys.vimrc
+source S_LOC/env/vim/setting.vimrc
 " =End=
 

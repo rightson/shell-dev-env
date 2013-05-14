@@ -110,7 +110,7 @@ alias clean-swp='rm -f .*.swp'
 alias ai='sudo apt-get install -y'
 alias yi='sudo yum install -y'
 
-alias 2ipmi-L02TR1='cd ~/Workspace/L02TR1-Ivy-Bridge-trunk/pkg-odm_adps_full_features-20110916/ast2300_evb_build/apps/ipmi'
+alias cs_add_deps="cat Makefile |grep BUILD_DEP | awk '{printf \"echo `pwd`/../%s\n\", $3}' | sh | xargs  cs add"
 
 # Unset variables
 unset SIMPLE_HTTP
