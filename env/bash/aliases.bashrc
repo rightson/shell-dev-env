@@ -107,10 +107,9 @@ alias kill-vnc='vncserver -kill'
 alias kill-ssh='killall -9 ssh'
 alias clean-swp='rm -f .*.swp'
 
-alias ai='sudo apt-get install -y'
-alias yi='sudo yum install -y'
-
-alias cs_add_deps="cat Makefile |grep BUILD_DEP | awk '{printf \"echo `pwd`/../%s\n\", $3}' | sh | xargs  cs add"
+alias ainstall='sudo apt-get install -y'
+alias asearch='sudo apt-cache search'
+alias yinstall='sudo yum install -y'
 
 # Unset variables
 unset SIMPLE_HTTP
