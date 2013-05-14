@@ -15,7 +15,7 @@ SCREENRC=$HOME/.screenrc
 
 FILES=("$BASHRC|bashrc" "$VIMRC|vimrc" "$SCREENRC|screenrc")
 
-function apply_patch() {
+apply_patch() {
 
     echo "Patching at $SCRIPT_LOCATION..."
     for each in ${FILES[@]}; do
@@ -27,9 +27,8 @@ function apply_patch() {
         fi
         if [ -z "`grep \"$IDENTIFIER\" $rc_file`" ]; then
             echo "Patching $rc_tmpl: $rc_file ..."
-            cat $RC_TEMPLATE_LOC/$rc_tmpl >> $rc_file
-            #str=`echo "$SCRIPT_LOCATION" | perl -pe perl -pe 's/\\/\\\\/g'`
-            #cat $RC_TEMPLATE_LOC/$rc_tmpl | sed "s/S_LOC/$str/g" >> $rc_file
+	    cat $RC_TEMPLATE_LOC/$rc_tmpl | sed "s/S_LOC/$(echo $SCRIPT_LOCATION | \ 
+		sed -e 's/\\/\\\\/g' -e 's/\//\\\//g' -e 's/*/\\\&/g')/g" >> $rc_file
         fi
         local softlink=$SCRIPT_LOCATION/$rc_tmpl
         if [ ! -f $softlink ]; then
