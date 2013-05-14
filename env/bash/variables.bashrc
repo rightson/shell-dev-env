@@ -7,8 +7,9 @@
 
 
 # Export global variables
+export ENV_PATH=/home/scott/.shell/bin
 export PATH=/usr/local/bin:/sbin:/usr/sbin:/usr/local/sbin:$PATH
-export PATH=~/.shell-dev-env/bin:$PATH
+export PATH=$ENV_PATH/bin:$PATH
 #export PATH=/usr/local/share/python:$PATH
 #export PATH=/usr/local/Cellar/ruby/1.9.3-p374/bin:$PATH
 export VIM_BIN=/usr/bin/vim

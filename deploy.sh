@@ -13,12 +13,14 @@ fi
 VIMRC=$HOME/.vimrc
 SCREENRC=$HOME/.screenrc
 
-FILES=("$BASHRC|bashrc" "$VIMRC|vimrc" "$SCREENRC|screenrc")
+RC_FILES=("$BASHRC|bashrc" "$VIMRC|vimrc" "$SCREENRC|screenrc")
+ENV_FILES=$SCRIPT_LOCATION/env/bash/*.bashrc
 
 apply_patch() {
 
     echo "Patching at $SCRIPT_LOCATION..."
-    for each in ${FILES[@]}; do
+    local script_loc=$(echo $SCRIPT_LOCATION | sed -e 's/\\/\\\\/g' -e 's/\//\\\//g' -e 's/*/\\\&/g')
+    for each in ${RC_FILES[@]}; do
         local rc_file=`echo $each | cut -d "|" -f 1`
         local rc_tmpl=`echo $each | cut -d "|" -f 2`
         if [ ! -f $rc_file ]; then
@@ -27,7 +29,8 @@ apply_patch() {
         fi
         if [ -z "`grep \"$IDENTIFIER\" $rc_file`" ]; then
             echo "Patching $rc_tmpl: $rc_file ..."
-	    cat $RC_TEMPLATE_LOC/$rc_tmpl | sed "s/S_LOC/$(echo $SCRIPT_LOCATION | sed -e 's/\\/\\\\/g' -e 's/\//\\\//g' -e 's/*/\\\&/g')/g" >> $rc_file
+	        cat $RC_TEMPLATE_LOC/$rc_tmpl | \
+            sed "s/S_LOC/$(echo $script_loc)/g" >> $rc_file
         fi
         local softlink=$SCRIPT_LOCATION/$rc_tmpl
         if [ ! -f $softlink ]; then
@@ -35,6 +38,9 @@ apply_patch() {
             ln -s $rc_file $softlink
         fi
     done
+
+    # Patch bashrc
+    sed "s/export ENV_PATH=.*$/export ENV_PATH=$(echo $script_loc)\/bin/g" -i $ENV_FILES
     
     echo 'Done!'
     echo ''

@@ -3,7 +3,7 @@
 
 
 # Set your paths
-export ENV_PATH=~/.shell-dev-env
+export ENV_PATH=/home/scott/.shell/bin
 export DEV_PATH=~/Workspace
 export VIRTUALENV_PATH=~/Virtualenv
 export SVN_TOOL_PATH=$ENV_PATH/bin
