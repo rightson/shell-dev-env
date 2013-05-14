@@ -27,8 +27,7 @@ apply_patch() {
         fi
         if [ -z "`grep \"$IDENTIFIER\" $rc_file`" ]; then
             echo "Patching $rc_tmpl: $rc_file ..."
-	    cat $RC_TEMPLATE_LOC/$rc_tmpl | sed "s/S_LOC/$(echo $SCRIPT_LOCATION | \ 
-		sed -e 's/\\/\\\\/g' -e 's/\//\\\//g' -e 's/*/\\\&/g')/g" >> $rc_file
+	    cat $RC_TEMPLATE_LOC/$rc_tmpl | sed "s/S_LOC/$(echo $SCRIPT_LOCATION | sed -e 's/\\/\\\\/g' -e 's/\//\\\//g' -e 's/*/\\\&/g')/g" >> $rc_file
         fi
         local softlink=$SCRIPT_LOCATION/$rc_tmpl
         if [ ! -f $softlink ]; then
