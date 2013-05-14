@@ -95,7 +95,10 @@ cs_add() {
 
 custom_add() {
     local paths=`cat Makefile | grep BUILD_DEP_MODULE | grep -v '#' | cut -d " " -f 3`
-    local abs_paths=`to_abs_paths $paths`
+    local abs_paths=
+    for each in $paths; do
+        abs_paths="$abs_paths ../$each"
+    done
     add_cscope_search_path $abs_paths
     generate_cscope_files
     generate_cscope_out
