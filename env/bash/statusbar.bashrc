@@ -38,21 +38,23 @@ txtrst='\e[0m'    # Text Reset
 
 function get_ipaddr()
 {
-    if [ `uname` == 'Linux' ]; then
-        for i in `seq 0 1 10`; do
-            local interface="eth${i}"
-            local ip=`/sbin/ifconfig | grep -A1 -e "^$interface" | tail -n 1` 
-            if [[ $ip =~ .*addr:([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}).* ]]; then 
-                echo ${BASH_REMATCH[1]};
-                return
-            fi
-        done
-        echo 'localhost'
-    else
-        local interface='en0'
-        local ip=`/sbin/ifconfig | grep -A3 -e "^$interface" | tail -n 1 | awk '{print $2}'` 
-        echo $ip
-    fi
+    local interface=
+    local ip=
+    for i in `seq 0 1 10`; do
+        if [ `uname` = 'Linux' ]; then
+            interface="eth${i}"
+            echo $interface
+            ip=`/sbin/ifconfig | grep -A1 -e "^$interface" | tail -n 1` 
+        else
+            interface="en${i}"
+            ip=`/sbin/ifconfig | grep -A3 -e "^$interface" | tail -n 1 | awk '{print $2}'` 
+        fi
+        if [[ $ip =~ ([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}) ]]; then 
+            echo ${BASH_REMATCH[1]};
+            return
+        fi
+    done
+    echo 'localhost'
 }
 
 root="$txtred\u$txtrst"
