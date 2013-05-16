@@ -46,6 +46,7 @@ patch_bash() {
     echo "  source $BASHRC"
     echo ''
     echo 'After that, use "virc" or "so" to edit or apply rc files'
+    echo ''
 }
 
 apply_patch() {
@@ -56,7 +57,14 @@ apply_patch() {
 }
 
 case $1 in
+    rc)
+        patch_rc
+        ;;
+    bash)
+        patch_bash
+        ;;
     *)
         apply_patch
-    ;;
+        ;;
 esac
+
