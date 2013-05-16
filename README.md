@@ -23,9 +23,11 @@ Enjoy it!
 
 ### Tips
 
-1. You could enable vundle in ~/.vimrc file
-2. You could customize your bashrc, vimrc, and screenrc in ~/.shell-dev-env/env/.
-3. The deploy.sh will append ~/.shell-dev-env/rc/* to your ~/.bashrc, ~/.vimrc, and ~/.screernc separately.
+1. Use `git pull` in `~/.shell-dev-env` to get latest version of the package.
+2. If you don't like the name `~/.shell-dev-env`, you can use other name, but remember to run deploy.sh first. You can also run `deploy.sh relocate` if you would like to rename after you had deployed.
+3. Vundle can be enabled in ~/.vimrc file, but you need to clone a vundle first.
+4. Bashrc, vimrc, and screenrc can be found in ~/.shell-dev-env/env/.
+ 
 
 
 Handy Utilities
