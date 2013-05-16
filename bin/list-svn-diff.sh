@@ -1,9 +1,10 @@
 #/bin/bash
 
-DIFF_WRAPPER=$HOME/.shell-dev-env/bin/svn-diff.sh
-SVNDIFF="svn diff --diff-cmd ${DIFF_WRAPPER}"
-RM="sudo rm -rf"
-TMPFILE=/tmp/svn_diff.list.$$
+export ENV_PATH=/home/scott/.shell-dev-env
+export DIFF_WRAPPER=$ENV_PATH/bin/svn-diff.sh
+export SVNDIFF="svn diff --diff-cmd ${DIFF_WRAPPER}"
+export RM="sudo rm -rf"
+export TMPFILE=/tmp/svn_diff.list.$$
 
 remove_file() {
     [ -f "${1}" ] && $RM ${1}
@@ -50,3 +51,5 @@ else
     echo -e "    source <this_file> set"
     echo -e "    source <this_file> reset\n"
 fi
+
+unset ENV_PATH DIFF_WRAPPER SVNDIFF RM TMPFILE

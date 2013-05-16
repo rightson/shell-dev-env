@@ -50,6 +50,10 @@ Bundle 'Lokaltog/vim-easymotion'
 Bundle 'vim-scripts/gtags.vim'
 Bundle 'vim-scripts/taglist.vim'
 
+
+" Version control
+Bundle 'airblade/vim-gitgutter'
+
 filetype plugin indent on     " required!
 
 
