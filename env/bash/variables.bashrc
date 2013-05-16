@@ -7,7 +7,7 @@
 
 
 # Export global variables
-export ENV_PATH=/home/scott/.shell/bin
+export ENV_PATH=/home/scott/.shell
 export PATH=/usr/local/bin:/sbin:/usr/sbin:/usr/local/sbin:$PATH
 export PATH=$ENV_PATH/bin:$PATH
 #export PATH=/usr/local/share/python:$PATH

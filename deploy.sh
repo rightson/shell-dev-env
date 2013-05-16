@@ -40,7 +40,7 @@ apply_patch() {
     done
 
     # Patch bashrc
-    sed "s/export ENV_PATH=.*$/export ENV_PATH=$(echo $script_loc)\/bin/g" -i $ENV_FILES
+    sed "s/export ENV_PATH=.*$/export ENV_PATH=$(echo $script_loc)\/g" -i $ENV_FILES
     
     echo 'Done!'
     echo ''
