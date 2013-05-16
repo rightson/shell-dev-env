@@ -43,7 +43,6 @@ function get_ipaddr()
     for i in `seq 0 1 10`; do
         if [ `uname` = 'Linux' ]; then
             interface="eth${i}"
-            echo $interface
             ip=`/sbin/ifconfig | grep -A1 -e "^$interface" | tail -n 1` 
         else
             interface="en${i}"
