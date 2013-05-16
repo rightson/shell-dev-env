@@ -5,7 +5,8 @@ SCRIPT_LOC_ESCAPED=$(echo $SCRIPT_LOCATION | sed -e 's/\\/\\\\/g' -e 's/\//\\\//
 
 RC_TEMPLATE_LOC=$SCRIPT_LOCATION/rc
 BASHRC=$HOME/.bash_profile
-if [ "`uname`" = "Linux" ]; then
+UNAME=`uname`
+if [ $UNAME = "Linux" ]; then
     BASHRC=$HOME/.bashrc
 fi
 VIMRC=$HOME/.vimrc
@@ -45,7 +46,7 @@ undeploy_rc_files() {
             local offsets=(`cat $rc_file | grep -E 'Added by shell-dev-env|=End=|=Begin' -n | cut -d ':' -f 1`)
             if [ $((${offsets[0]} + 1)) -eq ${offsets[1]} ]; then
                 echo -n "    Restoring $rc_file..."
-                if [ "`uname`" = "Linux" ]; then
+                if [ $UNAME = "Linux" ]; then
                     sed "$((${offsets[0]}-1)),$((${offsets[2]}+1))d" -i $rc_file
                 else
                     sed -i "" "$((${offsets[0]}-1)),$((${offsets[2]}+1))d" $rc_file
@@ -64,7 +65,7 @@ relocate_env_path() {
     echo "    Processing $_BASH_RC... done"
     echo "    Processing $_BINARY... done"
 
-    if [ "`uname`" = "Linux" ]; then
+    if [ $UNAME = "Linux" ]; then
         sed "s/export ENV_PATH=.*$/export ENV_PATH=$(echo $SCRIPT_LOC_ESCAPED)/g" -i $_BASH_RC $_BINARY
     else
         sed -i "" "s/export ENV_PATH=.*$/export ENV_PATH=$(echo $SCRIPT_LOC_ESCAPED)/g" $_BASH_RC $_BINARY
