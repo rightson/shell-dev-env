@@ -1,22 +1,23 @@
 Introduction
 ===================
 
-`shell-dev-env` is a sample Linux Shell Configuration, it provides an intuitive architecture for deploying your bashrc, vimrc, and screerc.
-
-Welcome to try this package and improve it!
+`shell-dev-env` is a configurable development environment package for Linux/OSX Shells (Bash).
+It provides a simple way to configure and orgnizes bashrc, vimrc, screerc and other custom binaries in a smart way.
 
 Installation
 ===================
 
-Just clone the package:
+There are only 3 steps to install this pacakge:
+
+Step 1, get the package - clone the package to your home folder:
 
 	git clone https://github.com/rightson/shell-dev-env.git ~/.shell-dev-env
 
-and run the deployment script:
+Step 2, deploy the package - run the deployment script:
 
 	bash ~/.shell-dev-env/deploy.sh	
 	
-then run `source ~/.bashrc` or `source ~/.bash_profile` to apply the latest bashrc.
+Step 3, use the package - run `source ~/.bashrc` or `source ~/.bash_profile` command.
 
 Enjoy it!	
 
