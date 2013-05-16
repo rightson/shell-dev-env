@@ -45,7 +45,11 @@ undeploy_rc_files() {
             local offsets=(`cat $rc_file | grep -E 'Added by shell-dev-env|=End=|=Begin' -n | cut -d ':' -f 1`)
             if [ $((${offsets[0]} + 1)) -eq ${offsets[1]} ]; then
                 echo -n "    Restoring $rc_file..."
-                sed "$((${offsets[0]}-1)),$((${offsets[2]}+1))d" -i $rc_file
+                if [ "`uname`" = "Linux" ]; then
+                    sed "$((${offsets[0]}-1)),$((${offsets[2]}+1))d" -i $rc_file
+                else
+                    sed -i "" "$((${offsets[0]}-1)),$((${offsets[2]}+1))d" $rc_file
+                fi
                 echo " done"
             fi
         fi
@@ -53,14 +57,18 @@ undeploy_rc_files() {
 }
 
 relocate_env_path() {
-    local _SCRIPT_LOC=$SCRIPT_LOCATION
-    local _BASH_RC=$_SCRIPT_LOC/env/bash/*.bashrc
-    local _BINARY=$_SCRIPT_LOC/bin/list-svn-diff.sh
+    local _BASH_RC=$SCRIPT_LOCATION/env/bash/*.bashrc
+    local _BINARY=$SCRIPT_LOCATION/bin/list-svn-diff.sh
 
     echo "Locating the ENV_PATH to $SCRIPT_LOCATION..."
     echo "    Processing $_BASH_RC... done"
     echo "    Processing $_BINARY... done"
-    sed "s/export ENV_PATH=.*$/export ENV_PATH=$(echo $SCRIPT_LOC_ESCAPED)/g" -i $_BASH_RC $_BINARY
+
+    if [ "`uname`" = "Linux" ]; then
+        sed "s/export ENV_PATH=.*$/export ENV_PATH=$(echo $SCRIPT_LOC_ESCAPED)/g" -i $_BASH_RC $_BINARY
+    else
+        sed -i "" "s/export ENV_PATH=.*$/export ENV_PATH=$(echo $SCRIPT_LOC_ESCAPED)/g" $_BASH_RC $_BINARY
+    fi
 
     echo ''
     echo 'Please run below command to complete the process manually:'
@@ -71,7 +79,6 @@ relocate_env_path() {
 
 patch_everything() {
     echo "Deoplying $SCRIPT_LOCATION..."
-    undeploy_rc_files
     deploy_rc_files 
     relocate_env_path
 }
