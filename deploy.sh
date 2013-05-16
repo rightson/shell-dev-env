@@ -2,7 +2,6 @@
 
 SCRIPT_LOCATION=$(cd `dirname ${BASH_SOURCE[0]}` && pwd)
 SCRIPT_LOC_ESCAPED=$(echo $SCRIPT_LOCATION | sed -e 's/\\/\\\\/g' -e 's/\//\\\//g' -e 's/*/\\\&/g')
-DEPLOYED_LOCATION=$SCRIPT_LOCATION_TAG/deployed-location
 
 RC_TEMPLATE_LOC=$SCRIPT_LOCATION/rc
 BASHRC=$HOME/.bash_profile
@@ -53,20 +52,8 @@ undeploy_rc_files() {
     done
 }
 
-create_env_path_tag() {
-    echo $SCRIPT_LOCATION > $DEPLOYED_LOCATION
-}
-
-get_env_path_tag() {
-    if [ -f $DEPLOYED_LOCATION ]; then
-        cat $DEPLOYED_LOCATION
-    else
-        echo $SCRIPT_LOCATION
-    fi
-}
-
 relocate_env_path() {
-    local _SCRIPT_LOC=`get_env_path_tag`
+    local _SCRIPT_LOC=$SCRIPT_LOCATION
     local _BASH_RC=$_SCRIPT_LOC/env/bash/*.bashrc
     local _BINARY=$_SCRIPT_LOC/bin/list-svn-diff.sh
 
@@ -74,6 +61,7 @@ relocate_env_path() {
     echo "    Processing $_BASH_RC... done"
     echo "    Processing $_BINARY... done"
     sed "s/export ENV_PATH=.*$/export ENV_PATH=$(echo $SCRIPT_LOC_ESCAPED)/g" -i $_BASH_RC $_BINARY
+
     echo ''
     echo 'Please run below command to complete the process manually:'
     echo ''
@@ -85,6 +73,13 @@ patch_everything() {
     echo "Deoplying $SCRIPT_LOCATION..."
     undeploy_rc_files
     deploy_rc_files 
+    relocate_env_path
+}
+
+relocate_deployment() {
+    echo "Relocating $SCRIPT_LOCATION..."
+    undeploy_rc_files 
+    deploy_rc_files
     relocate_env_path
 }
 
@@ -106,14 +101,12 @@ case $1 in
         usage
         ;;
     restore)
-        undeploy_rc_files 
+        undeploy_rc_files
         ;;
     relocate)
-        relocate_env_path
-        undeploy_rc_files 2>&1 > /dev/null
-        deploy_rc_files 2>&1 > /dev/null
+        relocate_deployment
         ;;
-    apply|*)
+    *|apply)
         patch_everything
         ;;
 esac
