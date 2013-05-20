@@ -94,11 +94,10 @@ relocate_deployment() {
 
 usage() {
     echo "Usage" 
-    echo "  `basename $0` [help|apply|restore|relocate]" 
+    echo "  $0 [all|restore|relocate]" 
     echo "" 
     echo "Options" 
-    echo "  help     - show this help" 
-    echo "  apply    - deploy everything (default action)" 
+    echo "  all      - deploy everything (default action)" 
     echo "  restore  - restore everything (bashrc, vimrc, screenrc)" 
     echo "  relocate - relocate the ENV_PATH (the location of this package)" 
     echo "" 
@@ -106,17 +105,17 @@ usage() {
 }
 
 case $1 in
-    help|h|-h)
-        usage
-        ;;
     restore)
         undeploy_rc_files
         ;;
     relocate)
         relocate_deployment
         ;;
-    *|apply)
+    all)
         patch_everything
+        ;;
+    *)
+        usage
         ;;
 esac
 
