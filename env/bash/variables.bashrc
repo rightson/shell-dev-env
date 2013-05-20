@@ -18,5 +18,5 @@ export SVN_EDITOR=$EDITOR
 export VISUAL=$VIM_BIN
 export GREP_COLOR="1;33"
 export HISTCONTROL=ignoreboth
-export TERM=xterm
+export TERM=xterm-256color
 
