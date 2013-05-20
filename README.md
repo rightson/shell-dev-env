@@ -15,7 +15,7 @@ Step 1, get the package - clone the package to your home folder:
 
 Step 2, deploy the package - run the deployment script:
 
-	bash ~/.shell-dev-env/deploy.sh	
+	bash ~/.shell-dev-env/deploy.sh	all
 	
 Step 3, use the package - run `source ~/.bashrc` or `source ~/.bash_profile` command.
 
