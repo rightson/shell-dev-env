@@ -11,7 +11,8 @@ if [ $UNAME = "Linux" ]; then
 fi
 VIMRC=$HOME/.vimrc
 SCREENRC=$HOME/.screenrc
-RC_FILES=("$BASHRC|bashrc" "$VIMRC|vimrc" "$SCREENRC|screenrc")
+TMUXCFG=$HOME/.tmux.conf
+RC_FILES=("$BASHRC|bashrc" "$VIMRC|vimrc" "$SCREENRC|screenrc" "$TMUXCFG|tmux.conf")
 
 IDENTIFIER='Added by shell-dev-env.'
 
