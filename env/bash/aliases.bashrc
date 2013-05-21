@@ -78,6 +78,7 @@ else # Darwin
     alias ls='ls -G'
     alias grep='grep --color'
     alias du1='sudo du -h -d1'
+    alias toggle-hidden-file='defaults write com.apple.Finder AppleShowAllFiles'
 fi
 
 
