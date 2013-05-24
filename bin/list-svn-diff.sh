@@ -33,7 +33,7 @@ if [ "$1" == "set" ]; then
             cmd="alias s${id}='${SVNDIFF} ${each} '"
             [ "$2" = "check" ] && cmd="$cmd; sc" 
             #echo $cmd
-            echo "alias s${id}='svn diff {{magic}} $each"
+            echo "s${id} ==> $each"
             echo $cmd >> $TMPFILE
         fi
     done
