@@ -23,12 +23,11 @@ Enjoy it!
 
 ### Tips
 
-1. Use `git pull` in `~/.shell-dev-env` to get the latest version of the package.
+1. Remember to use `git pull` in `~/.shell-dev-env` to get the latest version of the package frequently.
 2. The package is relocatable, if you don't like the name `~/.shell-dev-env`, you can rename it and run `deploy.sh relocate` to re-deploy it.
 3. Vundle can be enabled in ~/.vimrc file, but you need to clone a vundle first.
 4. Bashrc, vimrc, and screenrc can be found in ~/.shell-dev-env/env/.
  
-
 
 Handy Utilities
 ===================
