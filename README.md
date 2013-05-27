@@ -57,10 +57,14 @@ In command line, type `s`, list-svn-diff.sh will inspect you code change in subv
     s
 
 If there are some changes in your SVN working copy, you will see some messages like:
+    
+    s1 ==> lowlevel_init.S
+
+it means the `s` command had added below alias in background:
 
     alias s1='svn diff --diff-cmd ~/.shell-dev-env/bin/svn-diff.sh lowlevel_init.S '
 
-Then you can use the alias `s1` to invoke svn diff command which will use `vimdiff` to start your diff process.
+And all you have to do is type `s1` command to invoke svn diff command with `vimdiff` to check your svn diff result.
 
 ### Kermit Wrapper - km.sh
 
