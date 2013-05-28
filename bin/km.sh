@@ -119,7 +119,7 @@ get_available_users()
 }
 
 check_user()
-
+{
     local user=$1
     export valid=n
     for guy in `get_available_users`; do
