@@ -64,9 +64,25 @@ opwd="$txtgrn\W$txtrst"
 date="$txtpur\t$txtrst"
 at="$txtwht@$txtrst"
 
-if [ "`id -u`" -eq 0 ]; then
+ps1_root() {
     PS1="${root}@${host}[\w]# "
+}
+
+ps1_pretty() {
+    PS1="${user}${at}${host}:${rpwd}[${date}]\n\$ "
+}
+
+ps1_relative() {
+    PS1="[$opwd]$ "
+}
+
+ps1_absolute() {
+    PS1="[$rpwd]$ "
+}
+
+if [ "`id -u`" -eq 0 ]; then
+    ps1_root
 else
-    PS1="${user}${at}${host}:${rpwd}\n\$ "
+    ps1_pretty
 fi 
 
