@@ -2,7 +2,7 @@
 
 
 :noremap <F2> :qa!
-:noremap <F3> :Gtags -s<SPACE>
+:noremap <F3> :Gtags<SPACE>
 :noremap <F4> :GtagsCursor<CR>
 :noremap <F5> :source ~/.vimrc<CR> :diffupdate<CR>:f<CR>
 :noremap <F6> :%!xxd
