@@ -12,7 +12,7 @@ set autowrite
 
 " Clipboard
 set clipboard=unnamed
-set pastetoggle=<F10>
+set pastetoggle=<F7>
 
 " Display
 set mouse=a
