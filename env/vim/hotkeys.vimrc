@@ -4,7 +4,7 @@
 :noremap <F2> :qa!
 :noremap <F3> :Gtags -s<SPACE>
 :noremap <F4> :GtagsCursor<CR>
-:noremap <F5> :source ~/.vimrc<CR> :diffupdate<CR><CR>
+:noremap <F5> :source ~/.vimrc<CR> :diffupdate<CR>:f<CR>
 :noremap <F6> :%!xxd
 :noremap <F9> :if &mouse == 'a' \| set mouse= \| else \| set mouse=a \| endif<CR><CR>
 :noremap <F12> :set nu!<CR>

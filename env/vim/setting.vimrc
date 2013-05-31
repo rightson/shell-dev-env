@@ -91,4 +91,3 @@ if has("gui_running")
     set transparency=15
     colo torte
 endif
-
