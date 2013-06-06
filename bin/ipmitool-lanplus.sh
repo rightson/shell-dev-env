@@ -31,6 +31,11 @@ valid_ip()
     fi
 }
 
+if [ -z $USER ] || [ -z $PASSWD ]; then
+    echo 'Please config USER/PASSWD in this script!'
+    exit
+fi
+
 if [ "$1" = 'clearcache' ]; then
     execho rm -f $HOST_CACHE
     exit
@@ -48,4 +53,4 @@ else
     fi
 fi
 
-execho ipmitool -I lanplus -U $USER -P $PASSWD -H HOST $@
+execho ipmitool -I lanplus -U $USER -P $PASSWD -H $HOST $@
