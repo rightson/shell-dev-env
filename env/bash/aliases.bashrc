@@ -20,9 +20,10 @@ if [ -d ${DEV_PATH} ]; then
         dest=${DEV_PATH}/${item}
         if [ ! -z "${item}" ]; then
             if [ "${item:0:1}" = "L" ]; then
-                #pkg-odm_adps_full_features-20110916/ast2300_evb_build
-                ipmi=pkg-odm_adps_full_features-20110916/ast2300_evb_build/apps/ipmi
-                tm5=pkg-odm_adps_full_features-20110916/ast2300_evb_build/apps/ipmi/platform/evb
+                build=pkg-odm_adps_full_features-20110916/ast2300_evb_build
+                apps=$build/apps
+                ipmi=$apps/ipmi
+                tm5=$ipmi/platform/evb
                 dir1="${dest}/SourceCode/"
                 dir2="${dest}/"
                 dev_dir=
@@ -32,6 +33,8 @@ if [ -d ${DEV_PATH} ]; then
                     dev_dir=$dir2
                 fi
                 alias 2${item}-="cd $dev_dir"
+                alias 2${item}-build="cd $dev_dir/$build"
+                alias 2${item}-apps="cd $dev_dir/$apps"
                 alias 2${item}-ipmi="cd $dev_dir/$ipmi"
                 alias 2${item}-tm5="cd $dev_dir/$tm5"
             else
