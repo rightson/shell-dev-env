@@ -19,16 +19,23 @@ if [ -d ${DEV_PATH} ]; then
     for item in ${PROJECTS[@]}; do
         dest=${DEV_PATH}/${item}
         if [ ! -z "${item}" ]; then
-            alias 2${item}="cd ${dest}"
             if [ "${item:0:1}" = "L" ]; then
-                suffix=pkg-odm_adps_full_features-20110916/ast2300_evb_build
-                dir1="${dest}/SourceCode/${suffix}"
-                dir2="${dest}/${suffix}"
+                #pkg-odm_adps_full_features-20110916/ast2300_evb_build
+                ipmi=pkg-odm_adps_full_features-20110916/ast2300_evb_build/apps/ipmi
+                tm5=pkg-odm_adps_full_features-20110916/ast2300_evb_build/apps/ipmi/platform/evb
+                dir1="${dest}/SourceCode/"
+                dir2="${dest}/"
+                dev_dir=
                 if [ -d "${dir1}" ]; then
-                    alias 2${item}="cd $dir1"
+                    dev_dir=$dir1
                 elif [ -d "${dir2}" ]; then
-                    alias 2${item}="cd $dir2"
+                    dev_dir=$dir2
                 fi
+                alias 2${item}-="cd $dev_dir"
+                alias 2${item}-ipmi="cd $dev_dir/$ipmi"
+                alias 2${item}-tm5="cd $dev_dir/$tm5"
+            else
+                alias 2${item}="cd ${dest}"
             fi
         fi
     done
