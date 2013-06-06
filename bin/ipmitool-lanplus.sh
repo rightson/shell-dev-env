@@ -1,6 +1,8 @@
 #!/bin/bash
 
 HOST_CACHE=~/.wrapper-cache
+USER=
+PASSWD=
 
 usage() {
     echo "Usage: `basename $0` <IP> <Command/Data...>"
@@ -35,15 +37,15 @@ if [ "$1" = 'clearcache' ]; then
 fi
 
 if [ `valid_ip $1` -eq 0 ]; then
-    host=$1
+    HOST=$1
     echo $host > $HOST_CACHE
     shift
 else
     if [ -r $HOST_CACHE ]; then
-        host=`cat $HOST_CACHE`
+        HOST=`cat $HOST_CACHE`
     else
         usage
     fi
 fi
 
-execho ipmitool -I lanplus -U lenovo -P len0vO -H $host $@
+execho ipmitool -I lanplus -U $USER -P $PASSWD -H HOST $@
