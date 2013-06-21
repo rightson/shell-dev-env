@@ -1,24 +1,21 @@
 " vim hotkeys
 
-
 :noremap <F2> :qa!
-:noremap <F3> :Gtags<SPACE>
-:noremap <F4> :GtagsCursor<CR>
-:noremap <F5> :source ~/.vimrc<CR> :diffupdate<CR>:f<CR>
+:noremap <F3> :cs find s <C-R>=expand("<cword>")<CR>
+:noremap <F4> :cs find e
+":noremap <F3> :Gtags<SPACE>
+":noremap <F4> :GtagsCursor<CR>
+:noremap <F5> :mks! session.vim<CR> :source ~/.vimrc<CR> :diffupdate<CR> :!cs<CR> :cs reset<CR> :f<CR>
 :noremap <F6> :%!xxd
 :noremap <F9> :if &mouse == 'a' \| set mouse= \| else \| set mouse=a \| endif<CR><CR>
 :noremap <F12> :set nu!<CR>
 
-:noremap <C-n> :cn<CR>
-:noremap <C-p> :cp<CR>
-:noremap <C-c><C-o> :copen<CR>
-:noremap <C-c><C-c> :cclose<CR>
-:noremap <C-\><C-]> :GtagsCursor<CR>
+":noremap <C-n> :cn<CR>
+":noremap <C-p> :cp<CR>
+":noremap <C-c><C-o> :copen<CR>
+":noremap <C-c><C-c> :cclose<CR>
+":noremap <C-\><C-]> :GtagsCursor<CR>
 
-
-":noremap <F2> :qa!
-":noremap <F3> *
-":noremap <F4> :source ~/.vimrc<CR> :diffupdate<CR><CR>
 ":noremap <F5> :NERDTree<CR>
 ":noremap <s-F5> :NERDTreeClose<CR>
 ":noremap <F6> :%!xxd
