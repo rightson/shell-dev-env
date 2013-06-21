@@ -1,7 +1,7 @@
 " vim hotkeys
 
 :noremap <F2> :qa!
-:noremap <F3> :cs find s <C-R>=expand("<cword>")<CR>
+:noremap <F3> :cs find s <C-R>=expand("<cword>")<CR><CR>
 :noremap <F4> :cs find e
 ":noremap <F3> :Gtags<SPACE>
 ":noremap <F4> :GtagsCursor<CR>
