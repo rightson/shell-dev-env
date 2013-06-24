@@ -56,8 +56,10 @@ kermit_mode()
     local tty=$1
     local speed=$2
     if [ ! -r "/dev/$tty" ]; then
-        echo "Device '$tty' doesn't exist!"
-        exit
+        if [ ! -r "/dev/ttyUSB$tty" ]; then
+            echo "Device '$tty' doesn't exist!"
+            exit
+        fi
     fi
     if [ $# -lt 1 ]; then
         list_mode
