@@ -60,7 +60,9 @@ generate_cscope_files() {
                                            -o -name "*.pl" \
                                            -o -name "*.rb" \
                                            -o -name "*.php" \
+                                           -o -name "*.java" \
                                            -o -name "*.js" \
+                                           -o -name "*.sh" \
                                            -o -name "*.html" \
                                            -o -name "*.xml" \
             | grep -v svn > $here/$cscope_files 2> /dev/null        
