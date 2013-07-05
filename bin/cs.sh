@@ -51,7 +51,19 @@ generate_cscope_files() {
     if [ -f $cscope_list ]; then
         cd /
         echo -n "Generating cscope.file (from $cscope_list)..."
-        find `cat $here/$cscope_list` -type f -name "*.c" -o -name "*.h" -o -name "*.S" -o -name "*.cpp" -o -name "*.equ" | grep -v svn > $here/$cscope_files 2> /dev/null
+        find `cat $here/$cscope_list` -type f -name "*.c" \
+                                           -o -name "*.h" \
+                                           -o -name "*.S" \
+                                           -o -name "*.cpp" \
+                                           -o -name "*.equ" \
+                                           -o -name "*.py" \
+                                           -o -name "*.pl" \
+                                           -o -name "*.rb" \
+                                           -o -name "*.php" \
+                                           -o -name "*.js" \
+                                           -o -name "*.html" \
+                                           -o -name "*.xml" \
+            | grep -v svn > $here/$cscope_files 2> /dev/null        
         echo "Done (`size_of_file $here/$cscope_files`)"
         cd - > /dev/null
     else
