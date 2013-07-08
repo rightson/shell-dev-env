@@ -100,7 +100,7 @@ generate_cscope_out() {
 
 usage() {
     echo "Usage:"
-    echo "  `basename $0` add <dir>     add dir to cscope search path"
+    echo "  `basename $0` add <dir>     add dir to cscope search path, default dir = ."
     echo "  `basename $0` update        update cscope db"
     echo "  `basename $0` list          list cscope search path"
     echo "  `basename $0` clean         clean cscope files"
@@ -153,13 +153,7 @@ case "$1" in
     clean) 
         clear_cscope_list       
         ;;
-    -h|--help|help) 
+    *)
         usage
-        ;;
-    *) 
-        add_cscope_search_path $@
-        generate_cscope_files
-        generate_cscope_out
-        ;;
 esac
 
