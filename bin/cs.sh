@@ -46,28 +46,40 @@ size_of_file() {
     du -h $1| awk '{print $1}'
 }
 
-generate_cscope_files() {
+append_to_cscope_files() {
+    local file=$1
     local here=`pwd`
     if [ -f $cscope_list ]; then
         cd /
-        echo -n "Generating cscope.file (from $cscope_list)..."
-        find `cat $here/$cscope_list` -type f -name "*.c" \
-                                           -o -name "*.h" \
-                                           -o -name "*.S" \
-                                           -o -name "*.cpp" \
-                                           -o -name "*.equ" \
-                                           -o -name "*.py" \
-                                           -o -name "*.pl" \
-                                           -o -name "*.rb" \
-                                           -o -name "*.php" \
-                                           -o -name "*.java" \
-                                           -o -name "*.js" \
-                                           -o -name "*.sh" \
-                                           -o -name "*.html" \
-                                           -o -name "*.xml" \
-            | grep -v svn > $here/$cscope_files 2> /dev/null        
-        echo "Done (`size_of_file $here/$cscope_files`)"
+        find `cat $here/$cscope_list` -type f -name "$file" | grep -v svn >> $here/$cscope_files 2> /dev/null
         cd - > /dev/null
+    else
+        echo "Error: Failed to find $cscope_list"
+        exit
+    fi
+}
+
+generate_cscope_files() {
+    local here=`pwd`
+    if [ -f $cscope_list ]; then
+        echo -n "Generating cscope.file (from $cscope_list)..."
+        append_to_cscope_files Makefile
+        append_to_cscope_files *.h
+        append_to_cscope_files *.c
+        append_to_cscope_files *.cpp
+        append_to_cscope_files *.cc
+        append_to_cscope_files *.sh
+        append_to_cscope_files *.S
+        append_to_cscope_files *.equ
+        append_to_cscope_files *.py
+        append_to_cscope_files *.pl
+        append_to_cscope_files *.rb
+        append_to_cscope_files *.php
+        append_to_cscope_files *.java
+        append_to_cscope_files *.js
+        append_to_cscope_files *.html
+        append_to_cscope_files *.xml
+        echo "Done (`size_of_file $here/$cscope_files`)"
     else
         echo "Error: Failed to find $cscope_list"
         exit
