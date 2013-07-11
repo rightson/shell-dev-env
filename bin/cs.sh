@@ -63,6 +63,7 @@ generate_cscope_files() {
     local here=`pwd`
     if [ -f $cscope_list ]; then
         echo -n "Generating cscope.file (from $cscope_list)..."
+        rm -f $here/$cscope_files
         append_to_cscope_files Makefile
         append_to_cscope_files *.h
         append_to_cscope_files *.c
