@@ -64,22 +64,22 @@ generate_cscope_files() {
     if [ -f $cscope_list ]; then
         echo -n "Generating cscope.file (from $cscope_list)..."
         rm -f $here/$cscope_files
-        append_to_cscope_files Makefile
-        append_to_cscope_files *.h
-        append_to_cscope_files *.c
-        append_to_cscope_files *.cpp
-        append_to_cscope_files *.cc
-        append_to_cscope_files *.sh
-        append_to_cscope_files *.S
-        append_to_cscope_files *.equ
-        append_to_cscope_files *.py
-        append_to_cscope_files *.pl
-        append_to_cscope_files *.rb
-        append_to_cscope_files *.php
-        append_to_cscope_files *.java
-        append_to_cscope_files *.js
-        append_to_cscope_files *.html
-        append_to_cscope_files *.xml
+        append_to_cscope_files "Makefile"
+        append_to_cscope_files "*.h"
+        append_to_cscope_files "*.c"
+        append_to_cscope_files "*.cpp"
+        append_to_cscope_files "*.cc"
+        append_to_cscope_files "*.sh"
+        append_to_cscope_files "*.S"
+        append_to_cscope_files "*.equ"
+        append_to_cscope_files "*.py"
+        append_to_cscope_files "*.pl"
+        append_to_cscope_files "*.rb"
+        append_to_cscope_files "*.php"
+        append_to_cscope_files "*.java"
+        append_to_cscope_files "*.js"
+        append_to_cscope_files "*.html"
+        append_to_cscope_files "*.xml"
         echo "Done (`size_of_file $here/$cscope_files`)"
     else
         echo "Error: Failed to find $cscope_list"
@@ -101,7 +101,7 @@ generate_cscope_out() {
 
 usage() {
     echo "Usage:"
-    echo "  `basename $0` add <dir>     add dir to cscope search path, default dir = ."
+    echo "  `basename $0` add <dir>     add dir to cscope search path"
     echo "  `basename $0` update        update cscope db"
     echo "  `basename $0` list          list cscope search path"
     echo "  `basename $0` clean         clean cscope files"
@@ -156,5 +156,6 @@ case "$1" in
         ;;
     *)
         usage
+        ;;
 esac
 
