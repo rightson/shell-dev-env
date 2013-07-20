@@ -1,8 +1,8 @@
 Introduction
 ===================
 
-`shell-dev-env` is a configurable development environment package for Linux/OSX Shells (Bash).
-It provides a simple way to configure and orgnizes bashrc, vimrc, screerc and other custom binaries in a smart way.
+`shell-dev-env` is a configurable shell environment framework for Linux/OSX Shells (Bash).
+It help developers to configure and orgnize bashrc, vimrc, screerc as well as other custom binaries in a simple way: easy to install and easy to use.
 
 Installation
 ===================
