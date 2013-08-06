@@ -43,7 +43,7 @@ fi
 
 if [ `valid_ip $1` -eq 0 ]; then
     HOST=$1
-    echo $host > $HOST_CACHE
+    echo $HOST > $HOST_CACHE
     shift
 else
     if [ -r $HOST_CACHE ]; then
