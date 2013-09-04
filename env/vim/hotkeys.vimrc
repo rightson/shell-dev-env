@@ -1,10 +1,12 @@
 " vim hotkeys
 
 :noremap <F2> :qa!
+
 :noremap <F3> :cs find s <C-R>=expand("<cword>")<CR><CR>
 :noremap <F4> :cs find e
-":noremap <F3> :Gtags<SPACE>
-":noremap <F4> :GtagsCursor<CR>
+":noremap <F3> :GtagsCursor<CR>
+":noremap <F4> :Gtags -g<SPACE>
+
 :noremap <F5> :mks! session.vim<CR> :source ~/.vimrc<CR> :diffupdate<CR> :!cs<CR> :cs reset<CR> :f<CR>
 :noremap <F6> :%!xxd
 :noremap <F9> :if &mouse == 'a' \| set mouse= \| else \| set mouse=a \| endif<CR><CR>
