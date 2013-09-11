@@ -74,6 +74,7 @@ generate_cscope_files() {
         rm -f $here/$cscope_files
         append_to_cscope_files "Makefile"
         append_to_cscope_files "*.h"
+        append_to_cscope_files "*.hpp"
         append_to_cscope_files "*.c"
         append_to_cscope_files "*.cpp"
         append_to_cscope_files "*.cc"
@@ -109,7 +110,8 @@ generate_cscope_out() {
 
 usage() {
     echo "Usage:"
-    echo "  `basename $0` add <dir>     add dir to cscope search path"
+    echo "  `basename $0` add <dir>     add dir to cscope search path (relative)"
+    echo "  `basename $0` abs <dir>     add dir to cscope search path (absolute)"
     echo "  `basename $0` update        update cscope db"
     echo "  `basename $0` list          list cscope search path"
     echo "  `basename $0` clean         clean cscope files"
@@ -143,6 +145,10 @@ trap control_c SIGINT SIGTERM
 
 case "$1" in
     add) 
+        cs_add $@
+        ;;
+    abs) 
+        USE_ABS=y
         cs_add $@
         ;;
     custom)
