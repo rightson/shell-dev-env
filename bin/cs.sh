@@ -2,7 +2,7 @@
 
 export cscope_list=./cscope.list
 export cscope_files=./cscope.files
-export USE_ABS=
+export USE_ABS=n
 
 to_abs_path() {
     local relative_path=$1
