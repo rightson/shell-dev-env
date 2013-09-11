@@ -2,10 +2,15 @@
 
 export cscope_list=./cscope.list
 export cscope_files=./cscope.files
+export USE_ABS=
 
 to_abs_path() {
     local relative_path=$1
-    echo $(cd "$relative_path"; /bin/pwd) 
+    if [ $USE_ABS = "y" ]; then
+        echo $(cd "$relative_path"; /bin/pwd) 
+    else
+        echo $1
+    fi
 }
 
 to_abs_paths() {
@@ -24,7 +29,11 @@ add_cscope_search_path() {
         fi
     done
     if [ ! -f "$cscope_list" ]; then
-        echo `pwd` > $cscope_list;
+        if [ $USE_ABS = "y" ]; then
+            echo `pwd` > $cscope_list;
+        else
+            echo "./" > $cscope_list;
+        fi
     fi
     echo -e "Current cscope search path:\n`cat $cscope_list`"
 }
@@ -50,9 +59,8 @@ append_to_cscope_files() {
     local file=$1
     local here=`pwd`
     if [ -f $cscope_list ]; then
-        cd /
+        #find `cat $here/$cscope_list` -type f -name "$file" | grep -v svn
         find `cat $here/$cscope_list` -type f -name "$file" | grep -v svn >> $here/$cscope_files 2> /dev/null
-        cd - > /dev/null
     else
         echo "Error: Failed to find $cscope_list"
         exit
