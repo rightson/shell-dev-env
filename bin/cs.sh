@@ -1,12 +1,12 @@
 #!/bin/bash
 
-export cscope_list=./cscope.list
-export cscope_files=./cscope.files
+export CSCOPE_LIST=./cscope.list
+export CSCOPE_FILES=./cscope.files
 export USE_ABS=n
 
 to_abs_path() {
     local relative_path=$1
-    if [ $USE_ABS = "y" ]; then
+    if [  $USE_ABS = "y" ]; then
         echo $(cd "$relative_path"; /bin/pwd) 
     else
         echo $1
@@ -23,86 +23,85 @@ add_cscope_search_path() {
     shift 1
     for param in "$@"; do 
         if [ "$param" != "" ]; then 
-            to_abs_path "$param" >> $cscope_list
-            cat $cscope_list | sort | uniq > $cscope_list.tmp
-            mv $cscope_list.tmp $cscope_list
+            to_abs_path "$param" >> $CSCOPE_LIST
+            cat $CSCOPE_LIST | sort | uniq > $CSCOPE_LIST.tmp
+            mv $CSCOPE_LIST.tmp $CSCOPE_LIST
         fi
     done
-    if [ ! -f "$cscope_list" ]; then
-        if [ $USE_ABS = "y" ]; then
-            echo `pwd` > $cscope_list;
+    if [ ! -f "$CSCOPE_LIST" ]; then
+        if [  $USE_ABS = "y" ]; then
+            echo `pwd` > $CSCOPE_LIST;
         else
-            echo "./" > $cscope_list;
+            echo "./" > $CSCOPE_LIST;
         fi
     fi
-    echo -e "Current cscope search path:\n`cat $cscope_list`"
+    echo -e "Current cscope search path:\n`cat $CSCOPE_LIST`"
 }
 
-print_cscope_list() {
+print_CSCOPE_LIST() {
     echo "Cscope search path:"
-    test -f $cscope_list && cat $cscope_list
+    test -f $CSCOPE_LIST && cat $CSCOPE_LIST
 }
 
-remove_cscope_files() {
+remove_CSCOPE_FILES() {
     rm -rf cscope.*
 }
 
-clear_cscope_list() {
-    remove_cscope_files
+clear_CSCOPE_LIST() {
+    remove_CSCOPE_FILES
 }
 
 size_of_file() {
     du -h $1| awk '{print $1}'
 }
 
-append_to_cscope_files() {
+append_to_CSCOPE_FILES() {
     local file=$1
     local here=`pwd`
-    if [ -f $cscope_list ]; then
-        #find `cat $here/$cscope_list` -type f -name "$file" | grep -v svn
-        find `cat $here/$cscope_list` -type f -name "$file" | grep -v svn >> $here/$cscope_files 2> /dev/null
+    if [ -f $CSCOPE_LIST ]; then
+        find `cat $here/$CSCOPE_LIST` -type f -name "$file" | grep -v svn >> $here/$CSCOPE_FILES 2> /dev/null
     else
-        echo "Error: Failed to find $cscope_list"
+        echo "Error: Failed to find $CSCOPE_LIST"
         exit
     fi
 }
 
-generate_cscope_files() {
+generate_CSCOPE_FILES() {
     local here=`pwd`
-    if [ -f $cscope_list ]; then
-        echo -n "Generating cscope.file (from $cscope_list)..."
-        rm -f $here/$cscope_files
-        append_to_cscope_files "Makefile"
-        append_to_cscope_files "*.h"
-        append_to_cscope_files "*.hpp"
-        append_to_cscope_files "*.c"
-        append_to_cscope_files "*.cpp"
-        append_to_cscope_files "*.cc"
-        append_to_cscope_files "*.sh"
-        append_to_cscope_files "*.S"
-        append_to_cscope_files "*.equ"
-        append_to_cscope_files "*.py"
-        append_to_cscope_files "*.pl"
-        append_to_cscope_files "*.rb"
-        append_to_cscope_files "*.php"
-        append_to_cscope_files "*.java"
-        append_to_cscope_files "*.js"
-        append_to_cscope_files "*.html"
-        append_to_cscope_files "*.xml"
-        echo "Done (`size_of_file $here/$cscope_files`)"
+    if [ -f $CSCOPE_LIST ]; then
+        echo -n "Generating cscope.file (from $CSCOPE_LIST)..."
+        rm -f $here/$CSCOPE_FILES
+        append_to_CSCOPE_FILES "Makefile"
+        append_to_CSCOPE_FILES "*.h"
+        append_to_CSCOPE_FILES "*.hpp"
+        append_to_CSCOPE_FILES "*.c"
+        append_to_CSCOPE_FILES "*.cpp"
+        append_to_CSCOPE_FILES "*.cc"
+        append_to_CSCOPE_FILES "*.sh"
+        append_to_CSCOPE_FILES "*.S"
+        append_to_CSCOPE_FILES "*.equ"
+        append_to_CSCOPE_FILES "*.py"
+        append_to_CSCOPE_FILES "*.pl"
+        append_to_CSCOPE_FILES "*.rb"
+        append_to_CSCOPE_FILES "*.php"
+        append_to_CSCOPE_FILES "*.java"
+        append_to_CSCOPE_FILES "*.js"
+        append_to_CSCOPE_FILES "*.html"
+        append_to_CSCOPE_FILES "*.xml"
+        echo "Done (`size_of_file $here/$CSCOPE_FILES`)"
     else
-        echo "Error: Failed to find $cscope_list"
+        echo "Error: Failed to find $CSCOPE_LIST"
         exit
     fi
 }
 
 generate_cscope_out() {
-    if [ -f $cscope_files ]; then
+    if [ -f $CSCOPE_FILES ]; then
         echo -n "Generating cscope.out ("
         echo -n "cscope -b -k)..." && cscope -b -k 
         echo "Done (`size_of_file ./cscope.out`)"
     else
-        echo "Error: Failed to find $cscope_files"
+        echo "Error: Failed to find $CSCOPE_FILES"
         exit
         #echo -n "cscope -R -b -k)..." && cscope -R -b -k
     fi
@@ -110,8 +109,8 @@ generate_cscope_out() {
 
 usage() {
     echo "Usage:"
-    echo "  `basename $0` add <dir>     add dir to cscope search path (relative)"
-    echo "  `basename $0` abs <dir>     add dir to cscope search path (absolute)"
+    echo "  `basename $0` add <dir>     add dir to cscope search relative path"
+    echo "  `basename $0` abs <dir>     add dir to cscope search absolute path"
     echo "  `basename $0` update        update cscope db"
     echo "  `basename $0` list          list cscope search path"
     echo "  `basename $0` clean         clean cscope files"
@@ -120,24 +119,13 @@ usage() {
 
 control_c() {
     echo -e "\nControl-C captured\n"
-    remove_cscope_files
+    remove_CSCOPE_FILES
     exit;
 }
 
 cs_add() {
     add_cscope_search_path $@
-    generate_cscope_files
-    generate_cscope_out
-}
-
-custom_add() {
-    local paths=`cat Makefile | grep BUILD_DEP_MODULE | grep -v '#' | cut -d " " -f 3`
-    local abs_paths=
-    for each in $paths; do
-        abs_paths="$abs_paths ../$each"
-    done
-    add_cscope_search_path $abs_paths
-    generate_cscope_files
+    generate_CSCOPE_FILES
     generate_cscope_out
 }
 
@@ -151,22 +139,19 @@ case "$1" in
         USE_ABS=y
         cs_add $@
         ;;
-    custom)
-        custom_add $@
-        ;;
     up)
-        generate_cscope_files
+        generate_CSCOPE_FILES
         generate_cscope_out
         ;;
     update)
-        generate_cscope_files
+        generate_CSCOPE_FILES
         generate_cscope_out
         ;;
     list) 
-        print_cscope_list
+        print_CSCOPE_LIST
         ;;
     clean) 
-        clear_cscope_list       
+        clear_CSCOPE_LIST       
         ;;
     *)
         usage
