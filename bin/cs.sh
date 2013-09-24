@@ -30,15 +30,17 @@ add_cscope_search_path() {
     done
     if [ ! -f "$CSCOPE_LIST" ]; then
         if [  $USE_ABS = "y" ]; then
+            echo -n "Search absolute path: "
             echo `pwd` > $CSCOPE_LIST;
         else
+            echo -n "Search relative path: "
             echo "./" > $CSCOPE_LIST;
         fi
     fi
-    echo -e "Current cscope search path:\n`cat $CSCOPE_LIST`"
+    echo "`cat $CSCOPE_LIST`"
 }
 
-print_CSCOPE_LIST() {
+print_cscope_list() {
     echo "Cscope search path:"
     test -f $CSCOPE_LIST && cat $CSCOPE_LIST
 }
@@ -47,7 +49,7 @@ remove_CSCOPE_FILES() {
     rm -rf cscope.*
 }
 
-clear_CSCOPE_LIST() {
+clear_cscope_list() {
     remove_CSCOPE_FILES
 }
 
@@ -66,7 +68,7 @@ append_to_CSCOPE_FILES() {
     fi
 }
 
-generate_CSCOPE_FILES() {
+generate_cscope_files() {
     local here=`pwd`
     if [ -f $CSCOPE_LIST ]; then
         echo -n "Generating cscope.file (from $CSCOPE_LIST)..."
@@ -108,12 +110,14 @@ generate_cscope_out() {
 }
 
 usage() {
+    echo "Cscope Index File (cscope.out) Generator"
+    echo ""
     echo "Usage:"
-    echo "  `basename $0` add <dir>     add dir to cscope search relative path"
-    echo "  `basename $0` abs <dir>     add dir to cscope search absolute path"
-    echo "  `basename $0` update        update cscope db"
-    echo "  `basename $0` list          list cscope search path"
-    echo "  `basename $0` clean         clean cscope files"
+    echo "  `basename $0` add [dir]     generate cscope.out (relative search path)"
+    echo "  `basename $0` abs [dir]     generate cscope.out (absolute search path)"
+    echo "  `basename $0` update        update cscope.out"
+    echo "  `basename $0` list          list added cscope search path"
+    echo "  `basename $0` clean         clean all cscope related index files"
     echo "  `basename $0` help          show this help"
 }
 
@@ -125,7 +129,7 @@ control_c() {
 
 cs_add() {
     add_cscope_search_path $@
-    generate_CSCOPE_FILES
+    generate_cscope_files
     generate_cscope_out
 }
 
@@ -140,18 +144,18 @@ case "$1" in
         cs_add $@
         ;;
     up)
-        generate_CSCOPE_FILES
+        generate_cscope_files
         generate_cscope_out
         ;;
     update)
-        generate_CSCOPE_FILES
+        generate_cscope_files
         generate_cscope_out
         ;;
     list) 
-        print_CSCOPE_LIST
+        print_cscope_list
         ;;
     clean) 
-        clear_CSCOPE_LIST       
+        clear_cscope_list       
         ;;
     *)
         usage
