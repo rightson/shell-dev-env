@@ -1,0 +1,24 @@
+# .cshrc
+
+# User specific aliases and functions
+set txtred = "%{\e[31;1m%}"
+set txtgrn = "%{\e[32;1m%}"
+set txtylw = "%{\e[33;1m%}"
+set txtblu = "%{\e[34;1m%}"
+set txtpur = "%{\e[35;1m%}"
+set txtwht = "%{\e[37m%}"
+set txtrst = "%{\e[0m%}"
+set who    = "${txtred}`whoami`"
+set host   = "$txtblu%M"
+set apwd   = "$txtgrn%~"
+set date   = "$txtpur%p"
+set at     = "$txtwht@"
+set prompt = "${who}${at}${host}:${apwd}[${date}]\n$txtrst# "
+
+alias rm        'rm -i'
+alias cp        'cp -i'
+alias mv        'mv -i'
+alias grep      'grep --color'
+alias virc      'vim ~/.cashrc'
+alias so        'source ~/.cshrc'
+
