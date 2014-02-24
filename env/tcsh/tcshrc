@@ -19,6 +19,6 @@ alias rm        'rm -i'
 alias cp        'cp -i'
 alias mv        'mv -i'
 alias grep      'grep --color'
-alias virc      'vim ~/.cashrc'
+alias virc      'vim ~/.cshrc'
 alias so        'source ~/.cshrc'
-
+alias du1       'du -h --max-depth 1'
