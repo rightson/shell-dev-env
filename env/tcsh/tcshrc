@@ -8,11 +8,12 @@ set txtblu = "%{\e[34;1m%}"
 set txtpur = "%{\e[35;1m%}"
 set txtwht = "%{\e[37m%}"
 set txtrst = "%{\e[0m%}"
-set who    = "${txtred}`whoami`"
-set host   = "$txtblu%M"
-set apwd   = "$txtgrn%~"
-set date   = "$txtpur%p"
-set at     = "$txtwht@"
+
+set who    = "$txtred`whoami`$txtrst"
+set at     = "$txtwht@$txtrst"
+set host   = "$txtblu%M$txtrst"
+set apwd   = "$txtgrn%~$txtrst"
+set date   = "$txtpur%p$txtrst"
 set prompt = "${who}${at}${host}:${apwd}[${date}]\n$txtrst# "
 
 alias rm        'rm -i'
