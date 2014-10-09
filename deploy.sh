@@ -1,10 +1,11 @@
-#!/bin/bash
+#!/bin/sh
 
 SCRIPT_LOCATION=$(cd `dirname ${BASH_SOURCE[0]}` && pwd)
 SCRIPT_LOC_ESCAPED=$(echo $SCRIPT_LOCATION | sed -e 's/\\/\\\\/g' -e 's/\//\\\//g' -e 's/*/\\\&/g')
 
 RC_TEMPLATE_LOC=$SCRIPT_LOCATION/rc
 BASHRC=$HOME/.bash_profile
+ZSHRC=$HOME/.zshrc
 UNAME=`uname`
 if [ $UNAME = "Linux" ]; then
     BASHRC=$HOME/.bashrc
@@ -12,7 +13,7 @@ fi
 VIMRC=$HOME/.vimrc
 SCREENRC=$HOME/.screenrc
 TMUXCFG=$HOME/.tmux.conf
-RC_FILES=("$BASHRC|bashrc" "$VIMRC|vimrc" "$SCREENRC|screenrc" "$TMUXCFG|tmux.conf")
+RC_FILES=("$BASHRC|bashrc" "$VIMRC|vimrc" "$SCREENRC|screenrc" "$TMUXCFG|tmux.conf" $ZSHRC|zshrc)
 
 IDENTIFIER='Added by shell-dev-env.'
 
