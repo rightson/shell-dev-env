@@ -24,7 +24,7 @@ get_ipaddr()
 }
 
 username=%n
-hostname=%M
+hostname=%m
 cwd=%~
 
 root="%{$fg[red]%}$username%{$reset_color%}"
@@ -40,7 +40,7 @@ ps1_root() {
 }
 
 ps1_pretty() {
-    PS1="${user}${at}${host}:${rpwd}[${date}]"$'\n'"\$ "
+    PS1="${user}${at}${host}:${rpwd}[${date}]"$'\n'"➜ "
 }
 
 ps1_relative() {
