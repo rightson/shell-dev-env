@@ -12,53 +12,19 @@ export SVN_TOOL_PATH=$ENV_PATH/bin
 export SIMPLE_HTTP='python -m SimpleHTTPServer 8000'
 
 
-# Create dynamic aliases
+# Create dynamic aliases in $DEV_PATH
 if [ -d ${DEV_PATH} ]; then
-    LS=/bin/ls
-    PROJECTS=`${LS} ${DEV_PATH}`
-    for item in ${PROJECTS[@]}; do
-        dest=${DEV_PATH}/${item}
-        if [ ! -z "${item}" ]; then
-            if [ "${item:0:1}" = "L" ]; then
-                build=pkg-odm_adps_full_features-20110916/ast2300_evb_build
-                apps=$build/apps
-                ipmi=$apps/ipmi
-                tm5=$ipmi/platform/evb
-                dir1="${dest}/SourceCode/"
-                dir2="${dest}/"
-                dev_dir=
-                if [ -d "${dir1}" ]; then
-                    dev_dir=$dir1
-                elif [ -d "${dir2}" ]; then
-                    dev_dir=$dir2
-                fi
-                alias 2${item}-="cd $dev_dir"
-                alias 2${item}-build="cd $dev_dir/$build"
-                alias 2${item}-apps="cd $dev_dir/$apps"
-                alias 2${item}-ipmi="cd $dev_dir/$ipmi"
-                alias 2${item}-tm5="cd $dev_dir/$tm5"
-            else
-                alias 2${item}="cd ${dest}"
-            fi
-        fi
+    for folder in $DEV_PATH/*; do
+        alias cd-`basename $folder`="cd $folder"
     done
-    unset LS PROJECTS
 fi
 
-
+# Create dynamic aliases in $VIRTUALENV_PATH
 if [ -d ${VIRTUALENV_PATH} ]; then
-    FIND=/usr/bin/find
-    INSTANCES=`${FIND} $VIRTUALENV_PATH -mindepth 1 -maxdepth 1 -type d`
-    if [ ! -z "${INSTANCES}" ]; then
-        for item in ${INSTANCES[@]}; do
-            item=${item##*/}
-            activate="${VIRTUALENV_PATH}/${item}/bin/activate"
-            alias so-$item=". $activate"
-            #alias 2${item}="cd ${DEV_PATH}/${item}; so-${item}"
-        done
-        unset item activate
-    fi
-    unset FIND INSTANCES
+    for env in $VIRTUALENV_PATH/*; do
+        activate="$env/bin/activate"
+        alias so-virtualenv-$item=". $activate"
+    done
 fi
 
 
