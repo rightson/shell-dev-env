@@ -1,6 +1,6 @@
 
 # Added by shell-dev-env.
 # =Begin= 
-source S_LOC/env/zsh/aliases.sh
+source S_LOC/env/zsh/settings.zsh
+source S_LOC/env/zsh/aliases.zsh
 # =End=
-

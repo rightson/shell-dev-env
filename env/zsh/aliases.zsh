@@ -77,13 +77,13 @@ alias svnup="find . -type d | grep -v .svn | xargs svn up"
 
 # Platform dependent arguments
 if [[ `uname` = 'Linux' ]]; then
-    export BASH_RCFILE='~/.zshrc'
+    export PROFILE='~/.zshrc'
 
     alias ls='ls --color'
     alias grep='grep --color'
     alias du1='sudo du -h --max-depth 1'
 else # Darwin
-    export BASH_RCFILE='~/.zshrc'
+    export PROFILE='~/.zshrc'
 
     alias ls='ls -G'
     alias grep='grep --color'
@@ -112,15 +112,9 @@ alias 755='sudo chmod -R 755'
 alias py=python
 alias simple-http="echo $SIMPLE_HTTP; $SIMPLE_HTTP"
 alias ka='while [ 1 ]; do echo -ne "\rKeeping Connection Alive (`date`)" ; sleep 10; done'
-alias so=". ${BASH_RCFILE}"
+alias so=". ${PROFILE}"
 alias virc="vim ${ENV_PATH}/env"
-alias vibash="vim ${ENV_PATH}/bashrc"
-alias vivim="vim ${ENV_PATH}/vimrc"
-alias viscreen="vim ${ENV_PATH}/screenrc"
-alias vitmuxrc="vim ${ENV_PATH}/tmux.conf"
-alias kill-vnc='vncserver -kill'
-alias kill-ssh='killall -9 ssh'
-alias clean-swp='rm -f .*.swp'
+alias rm-swp='rm -f .*.swp'
 
 alias ainstall='sudo apt-get install -y'
 alias asearch='sudo apt-cache search'
