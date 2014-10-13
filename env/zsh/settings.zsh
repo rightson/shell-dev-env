@@ -11,5 +11,12 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
-#autoload -U colors && colors
-#PS1="%{$fg[red]%}%n%{$reset_color%}@%{$fg[blue]%}%m %{$fg[yellow]%}%~ %{$reset_color%}%% "
+vimode() {
+    bindkey -v
+    bindkey '^P' up-history
+    bindkey '^N' down-history
+    bindkey '^A' vi-beginning-of-line
+    bindkey '^E' vi-end-of-line
+    bindkey '^U' kill-whole-line
+}
+vimode

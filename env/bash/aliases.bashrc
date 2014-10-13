@@ -76,7 +76,7 @@ alias svnup="find . -type d | grep -v .svn | xargs svn up"
 
 
 # Platform dependent arguments
-if [ `uname` == 'Linux' ]; then
+if [ `uname` = 'Linux' ]; then
     export BASH_RCFILE='~/.bashrc'
 
     alias ls='ls --color'

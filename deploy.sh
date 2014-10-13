@@ -13,7 +13,7 @@ fi
 VIMRC=$HOME/.vimrc
 SCREENRC=$HOME/.screenrc
 TMUXCFG=$HOME/.tmux.conf
-RC_FILES=("$BASHRC|bashrc" "$VIMRC|vimrc" "$SCREENRC|screenrc" "$TMUXCFG|tmux.conf" $ZSHRC|zshrc)
+RC_FILES=("$BASHRC|bashrc" "$VIMRC|vimrc" "$SCREENRC|screenrc" "$TMUXCFG|tmux.conf" "$ZSHRC|zshrc")
 
 IDENTIFIER='Added by shell-dev-env.'
 

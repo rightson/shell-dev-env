@@ -10,21 +10,20 @@ get_ipaddr()
     for i in `seq 0 1 10`; do
         if [ `uname` = 'Linux' ]; then
             interface="eth${i}"
-            ip=`/sbin/ifconfig | grep -A1 -e "^$interface" | tail -n 1` 
+            ip=`/sbin/ifconfig | grep -A1 -e "^$interface" | tail -n 1 | awk '{print $2}' | sed 's/addr://g'`
         else
             interface="en${i}"
             ip=`/sbin/ifconfig | grep -A3 -e "^$interface" | tail -n 1 | awk '{print $2}'` 
         fi
-        if [[ $ip =~ ([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}) ]]; then 
-            echo ${BASH_REMATCH[1]};
-            return
-        fi
+        echo $ip
+        return
     done
     echo 'localhost'
 }
 
 username=%n
-hostname=%m
+#hostname=%m
+hostname=`get_ipaddr`
 cwd=%~
 
 root="%{$fg[red]%}$username%{$reset_color%}"
@@ -32,7 +31,7 @@ user="%{$fg[red]%}$username%{$reset_color%}"
 host="%{$fg[blue]%}$hostname%{$reset_color%}"
 rpwd="%{$fg[yellow]%}%/%{$reset_color%}"
 opwd="%{$fg[yellow]%}$cwd%{$reset_color%}"
-date="%{$fg[green]%}%t%{$reset_color%}"
+date="%{$fg[green]%}%*%{$reset_color%}"
 at="@"
 
 ps1_root() {
@@ -41,6 +40,7 @@ ps1_root() {
 
 ps1_pretty() {
     PS1="${user}${at}${host}:${rpwd}[${date}]"$'\n'"➜  "
+    #PS1="${user}${at}${host}:${rpwd}"$'\n'"[${date}] ➜  "
 }
 
 ps1_relative() {
