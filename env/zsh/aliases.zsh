@@ -86,7 +86,9 @@ alias ainstall='sudo apt-get install -y'
 alias asearch='sudo apt-cache search'
 alias yinstall='sudo yum install -y'
 
-alias go-test-server='ssh mtk06137@172.22.72.64'
+grep2() {
+    grep $1 | grep -v grep | grep --color $1
+}
 
 # Unset variables
 unset SIMPLE_HTTP
