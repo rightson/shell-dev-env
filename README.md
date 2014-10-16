@@ -9,8 +9,6 @@ It can help developers to configure and organize rc files for Bash, Csh, Zsh, vi
 Installation
 ===================
 
-Three steps:
-
 1. `git clone https://github.com/rightson/shell-dev-env.git ~/.env`
 
 2.  run the deployment script:
@@ -61,7 +59,7 @@ In command line, type `s`, list-svn-diff.sh will inspect you code change in subv
 
 If there are some changes in your SVN working copy, you will see some messages like:
 
-    alias s1='svn diff --diff-cmd ~/.shell-dev-env/bin/svn-diff.sh lowlevel_init.S '
+    alias s1='svn diff --diff-cmd ~/.env/bin/svn-diff.sh lowlevel_init.S '
 
 Then you can use the alias `s1` to invoke svn diff command which will use `vimdiff` to start your diff process.
 
