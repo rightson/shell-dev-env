@@ -1,36 +1,39 @@
 Introduction
 ===================
 
-`shell-dev-env` is a configurable shell environment framework for Linux/OSX Shells (Bash).
-It help developers to configure and organize bashrc, vimrc, screerc as well as other custom binaries in a simple way: easy to install and easy to use.
+`shell-dev-env` is a configurable shell environment framework for Linux/OSX.
+
+It can help developers to configure and organize rc files for Bash, Csh, Zsh, vimrc, screerc, tmux.conf in a simple way.
+
 
 Installation
 ===================
 
-There are only 3 steps to install this pacakge:
+Three steps:
 
-Step 1, get the package - clone the package to your home folder:
+1. `git clone https://github.com/rightson/shell-dev-env.git ~/.env`
 
-	git clone https://github.com/rightson/shell-dev-env.git ~/.shell-dev-env
+2.  run the deployment script:
 
-Step 2, deploy the package - run the deployment script:
-
-	bash ~/.shell-dev-env/deploy.sh	all
+	`bash ~/.shell-dev-env/deploy.sh all`
 	
-Step 3, use the package - run `source ~/.bashrc` or `source ~/.bash_profile` command.
+3. source rc file. 
 
-Enjoy it!	
+  - bash on Linux: `source ~/.bashrc` 
+  - bash on Mac:   `source ~/.bash_profile`
+  - tcsh or C shell: `source ~/.cshrc` 
+  - zsh: source ~/.zshrc
+	
 
 ### Tips
 
-1. Use `git pull` in `~/.shell-dev-env` to get the latest version of the package.
-2. The package is relocatable, if you don't like the name `~/.shell-dev-env`, you can rename it and run `deploy.sh relocate` to re-deploy it.
-3. Vundle can be enabled in ~/.vimrc file, but you need to clone a vundle first.
-4. Bashrc, vimrc, and screenrc can be found in ~/.shell-dev-env/env/.
- 
+The package is relocatable , if you don't like the name `~/.env`, 
+you can rename it as you like and then run `deploy.sh relocate` to re-deploy it!
+
+Vundle can be enabled in ~/.vimrc file, but you need to clone a vundle first.
 
 
-Handy Utilities
+Handy Utilities (old-school)
 ===================
 
 There'are some useful utilities included in your PATH after installed, you can try to use them happily:
