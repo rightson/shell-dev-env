@@ -1,9 +1,9 @@
 Introduction
 ===================
 
-`shell-dev-env` is a configurable shell environment framework for Linux/OSX.
+`shell-dev-env` is a configurable shell environment framework for Unix-like environment such as Linux and OSX.
 
-It can help developers to configure and organize rc files for Bash, Csh, Zsh, vimrc, screerc, tmux.conf in a simple way.
+It can help developers to configure and organize rc files for Bash (.bashrc), Csh , Zsh, .vimrc, .screerc and tmux.conf in a simple but structural way.
 
 
 Installation
@@ -13,7 +13,7 @@ Installation
 
 2.  run the deployment script:
 
-	`bash ~/.shell-dev-env/deploy.sh all`
+	`bash ~/.env/deploy.sh all`
 	
 3. source rc file. 
 
