@@ -39,7 +39,9 @@ ps1_root() {
 }
 
 ps1_pretty() {
-    PS1="${user}${at}${host}:${rpwd}[${date}]"$'\n'"➜  "
+    RPROMPT="[${date}]"
+    PROMPT="${user}${at}${host}:${rpwd}"$'\n'"➜  "
+    #PS1="${user}${at}${host}:${rpwd}[${date}]"$'\n'"➜  "
     #PS1="${user}${at}${host}:${rpwd}"$'\n'"[${date}] ➜  "
 }
 
