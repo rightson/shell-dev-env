@@ -53,6 +53,13 @@ ps1_absolute() {
     PS1="[$rpwd]$ "
 }
 
+function term_title() {
+    echo -e "\033];$USER - `basename $PWD`\007"
+}
+
+autoload -U add-zsh-hook
+add-zsh-hook precmd term_title
+
 if [ "`id -u`" -eq 0 ]; then
     ps1_root
 else
