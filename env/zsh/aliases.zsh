@@ -23,7 +23,10 @@ fi
 if [ -d ${VIRTUALENV_PATH} ]; then
     for env in $VIRTUALENV_PATH/*; do
         activate="$env/bin/activate"
-        alias so-virtualenv-$item=". $activate"
+        name=`basename $env`
+        if [ -n $name ]; then
+            alias so-virtualenv-$name=". $activate"
+        fi
     done
 fi
 
