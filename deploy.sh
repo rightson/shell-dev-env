@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 SCRIPT_LOCATION=$(cd `dirname ${BASH_SOURCE[0]}` && pwd)
 SCRIPT_LOC_ESCAPED=$(echo $SCRIPT_LOCATION | sed -e 's/\\/\\\\/g' -e 's/\//\\\//g' -e 's/*/\\\&/g')
