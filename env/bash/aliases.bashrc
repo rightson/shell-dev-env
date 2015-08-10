@@ -3,9 +3,9 @@
 
 
 # Set your paths
-export ENV_PATH=/home/scott/.shell-dev-env
-export DEV_PATH=~/Workspace
-export VIRTUALENV_PATH=~/Virtualenv
+export ENV_PATH=$(HOME)/.shell-dev-env
+export DEV_PATH=$(HOME)/Workspace
+export VIRTUALENV_PATH=$(HOME)/Virtualenv
 export SVN_TOOL_PATH=$ENV_PATH/bin
 
 # Cmds
