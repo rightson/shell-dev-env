@@ -3,9 +3,9 @@
 
 
 # Set your paths
-export ENV_PATH=/Users/rightson/.env
-export DEV_PATH=~/development
-export VIRTUALENV_PATH=~/.virtualenv
+export ENV_PATH=$(HOME)/.env
+export DEV_PATH=$(HOME)/development
+export VIRTUALENV_PATH=$(HOME)/.virtualenv
 export SVN_TOOL_PATH=$ENV_PATH/bin
 
 # Cmds
