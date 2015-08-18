@@ -4,7 +4,7 @@
 
 # Set your paths
 export ENV_PATH=$HOME/.env
-export DEV_PATH=$HOME/development
+export DEV_PATH=$HOME/workspace
 export VIRTUALENV_PATH=$HOME/.virtualenv
 export SVN_TOOL_PATH=$ENV_PATH/bin
 
