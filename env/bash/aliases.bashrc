@@ -3,8 +3,8 @@
 
 
 # Set your paths
-export ENV_PATH=$HOME/.shell-dev-env
-export DEV_PATH=$HOME/Workspace
+export ENV_PATH=$HOME/.env
+export DEV_PATH=$HOME/workspace
 export VIRTUALENV_PATH=$HOME/Virtualenv
 export SVN_TOOL_PATH=$ENV_PATH/bin
 
