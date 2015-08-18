@@ -1,41 +1,40 @@
 " Vundle Simple Sample
+set nocompatible              " be iMproved, required
+filetype off                  " required
 
-set nocompatible               " be iMproved
-syntax on
-filetype off                   " required!
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
 
-" let Vundle manage Vundle, required! 
-Bundle 'gmarik/vundle'
+Plugin 'Lokaltog/vim-powerline'
 
+"Plugin 'vim-scripts/gtags.vim'
+"Plugin 'vim-scripts/simple-pairs'
+"Plugin 'vim-scripts/cscope.vim'
+"Plugin 'vim-scripts/ctags.vim'
+"Plugin 'vim-scripts/taglist.vim'
 
-" Vim Repos
-Bundle 'vim-scripts/gtags.vim'
-"Bundle 'vim-scripts/simple-pairs'
-"Bundle 'vim-scripts/cscope.vim'
-"Bundle 'vim-scripts/ctags.vim'
-"Bundle 'vim-scripts/taglist.vim'
+"Plugin 'tpope/vim-fugitive'
+"Plugin 'git://git.wincent.com/command-t.git'
+"Plugin 'scrooloose/nerdtree'
+"Plugin 'Lokaltog/vim-easymotion'
+"Plugin 'http://github.com/gmarik/vim-visual-star-search.git'
+"Plugin 'Markdown'
+"Plugin 'pyflakes.vim'
+"Plugin 'python.vim'
+"Plugin 'jQuery'
+"Plugin 'tpope/vim-rails'
+"Plugin 'clang-complete'
+"Plugin 'airblade/vim-gitgutter'
 
-
-" Other Repos 
-Bundle "Lokaltog/vim-powerline"
-Bundle 'git://git.wincent.com/command-t.git'
-"Bundle 'scrooloose/nerdtree'
-"Bundle 'Lokaltog/vim-easymotion'
-"Bundle 'http://github.com/gmarik/vim-visual-star-search.git'
-"Bundle 'Markdown'
-"Bundle 'pyflakes.vim'
-"Bundle 'python.vim'
-"Bundle 'jQuery'
-"Bundle 'tpope/vim-rails'
-"Bundle 'clang-complete'
-"Bundle 'airblade/vim-gitgutter'
-
-
-" Settings
-filetype plugin indent on     " required!
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
 
 set t_Co=256
 "let g:Powerline_symbols = 'fancy'
