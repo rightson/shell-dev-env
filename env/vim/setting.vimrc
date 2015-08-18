@@ -15,6 +15,7 @@ set clipboard=unnamed
 set pastetoggle=<F7>
 
 " Display
+set number
 set mouse=a
 set background=dark
 set ruler
