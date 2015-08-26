@@ -18,5 +18,14 @@ vimode() {
     bindkey '^A' vi-beginning-of-line
     bindkey '^E' vi-end-of-line
     bindkey '^U' kill-whole-line
+
+    bindkey '^p' up-history
+    bindkey '^n' down-history
+    bindkey '^a' vi-beginning-of-line
+    bindkey '^e' vi-end-of-line
+    bindkey '^u' kill-whole-line
 }
 vimode
+
+export ENV_PATH=$HOME/.env
+export PATH=$ENV_PATH/bin:$PATH

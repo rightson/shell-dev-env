@@ -1,11 +1,10 @@
-#!/bin/bash
 # create handy aliases
 
 
 # Set your paths
 export ENV_PATH=$HOME/.env
 export DEV_PATH=$HOME/workspace
-export VIRTUALENV_PATH=$HOME/Virtualenv
+export VIRTUALENV_PATH=$HOME/.virtualenv
 export SVN_TOOL_PATH=$ENV_PATH/bin
 
 # Cmds
@@ -125,6 +124,8 @@ alias clean-swp='rm -f .*.swp'
 alias ainstall='sudo apt-get install -y'
 alias asearch='sudo apt-cache search'
 alias yinstall='sudo yum install -y'
+
+alias go-test-server='ssh mtk06137@172.22.72.64'
 
 # Unset variables
 unset SIMPLE_HTTP

@@ -84,10 +84,10 @@ alias ka='while [ 1 ]; do echo -ne "\rKeeping Connection Alive (`date`)" ; sleep
 alias so=". ${PROFILE}"
 alias virc="vim ${ENV_PATH}/env"
 alias rm-swp='rm -f .*.swp'
-
-alias ainstall='sudo apt-get install -y'
-alias asearch='sudo apt-cache search'
-alias yinstall='sudo yum install -y'
+alias py=python
+alias py3=python3
+alias ka9='killall -9'
+alias k9='kill -9'
 
 grep2() {
     grep $1 | grep -v grep | grep --color $1

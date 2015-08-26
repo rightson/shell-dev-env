@@ -1,6 +1,6 @@
 #/bin/bash
 
-export ENV_PATH=/home/scott/.shell-dev-env
+export ENV_PATH=$HOME/.env
 export DIFF_WRAPPER=$ENV_PATH/bin/svn-diff.sh
 export SVNDIFF="svn diff --diff-cmd ${DIFF_WRAPPER}"
 export RM="sudo rm -rf"
