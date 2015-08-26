@@ -11,7 +11,21 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
+if has("gui_running")
 Plugin 'Lokaltog/vim-powerline'
+endif
+
+Plugin 'wincent/command-t.git'
+Plugin 'easymotion/vim-easymotion'
+Plugin 'scrooloose/nerdtree'
+
+Plugin 'eshion/vim-sftp-sync'
+Plugin 'eshion/vim-sync'
+
+Plugin 'moll/vim-node'
+Plugin 'jelera/vim-javascript-syntax'
+Plugin 'maksimr/vim-jsbeautify'
+Plugin 'marijnh/tern_for_vim'
 
 "Plugin 'vim-scripts/gtags.vim'
 "Plugin 'vim-scripts/simple-pairs'
@@ -20,17 +34,14 @@ Plugin 'Lokaltog/vim-powerline'
 "Plugin 'vim-scripts/taglist.vim'
 
 "Plugin 'tpope/vim-fugitive'
-"Plugin 'git://git.wincent.com/command-t.git'
-"Plugin 'scrooloose/nerdtree'
-"Plugin 'Lokaltog/vim-easymotion'
 "Plugin 'http://github.com/gmarik/vim-visual-star-search.git'
-"Plugin 'Markdown'
+Plugin 'Markdown'
 "Plugin 'pyflakes.vim'
 "Plugin 'python.vim'
 "Plugin 'jQuery'
 "Plugin 'tpope/vim-rails'
 "Plugin 'clang-complete'
-"Plugin 'airblade/vim-gitgutter'
+Plugin 'airblade/vim-gitgutter'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
