@@ -2,30 +2,33 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
-" set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
-
-" let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
-
-if has("gui_running")
 Plugin 'Lokaltog/vim-powerline'
-endif
+Plugin 'scrooloose/nerdtree'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'easymotion/vim-easymotion'
+Plugin 'dyng/ctrlsf.vim'
 
 Plugin 'wincent/command-t.git'
-Plugin 'easymotion/vim-easymotion'
-Plugin 'scrooloose/nerdtree'
-
-Plugin 'eshion/vim-sftp-sync'
-Plugin 'eshion/vim-sync'
+Plugin 'tpope/vim-fugitive'
 
 Plugin 'moll/vim-node'
 Plugin 'jelera/vim-javascript-syntax'
+Plugin 'othree/yajs.vim'
 Plugin 'maksimr/vim-jsbeautify'
 Plugin 'marijnh/tern_for_vim'
+Plugin 'majutsushi/tagbar'
+Plugin 'vim-scripts/Rename2'
+Plugin 'Markdown'
+
+Plugin 'eshion/vim-sftp-sync'
+Plugin 'eshion/vim-sync'
+Plugin 'dkprice/vim-easygrep'
+Plugin 'xolox/vim-easytags'
+Plugin 'xolox/vim-misc'
+
 
 "Plugin 'vim-scripts/gtags.vim'
 "Plugin 'vim-scripts/simple-pairs'
@@ -35,13 +38,11 @@ Plugin 'marijnh/tern_for_vim'
 
 "Plugin 'tpope/vim-fugitive'
 "Plugin 'http://github.com/gmarik/vim-visual-star-search.git'
-Plugin 'Markdown'
 "Plugin 'pyflakes.vim'
 "Plugin 'python.vim'
 "Plugin 'jQuery'
 "Plugin 'tpope/vim-rails'
 "Plugin 'clang-complete'
-Plugin 'airblade/vim-gitgutter'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required

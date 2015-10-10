@@ -6,6 +6,8 @@ set history=512
 set timeoutlen=250
 set showcmd
 
+set autochdir
+
 " File save/load
 set autoread
 set autowrite
@@ -24,6 +26,7 @@ set foldenable
 set foldmethod=marker
 set foldlevel=100
 set foldopen=block,hor,mark,percent,quickfix,tag
+set colorcolumn=80
 
 " For power line
 set t_Co=256
@@ -83,7 +86,7 @@ autocmd BufReadPost *
 
 if has("gui_running")
     "set guifont=AR\ PL\ UMing\ TW:h16
-    set guifont=AR\ PL\ UMing\ TW\ Light\ 11
+    "set guifont=AR\ PL\ UMing\ TW\ Light\ 11
     "set guifont=Monaco:h12.00
     "set guifont=Menlo:h14.00
     set lines=120 columns=160
@@ -105,4 +108,5 @@ function! LoadCscope()
   endif
 endfunction
 au BufEnter /* call LoadCscope()
+autocmd BufEnter * silent! lcd %:p:h
 

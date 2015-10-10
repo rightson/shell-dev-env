@@ -82,12 +82,13 @@ alias py=python
 alias simple-http="echo $SIMPLE_HTTP; $SIMPLE_HTTP"
 alias ka='while [ 1 ]; do echo -ne "\rKeeping Connection Alive (`date`)" ; sleep 10; done'
 alias so=". ${PROFILE}"
-alias virc="vim ${ENV_PATH}/env"
-alias rm-swp='rm -f .*.swp'
+alias vircenv="vim ${ENV_PATH}/env"
+alias vivi="vim ${ENV_PATH}/env/vim"
 alias py=python
 alias py3=python3
 alias ka9='killall -9'
 alias k9='kill -9'
+alias rm-rf='rm -rf'
 
 grep2() {
     grep $1 | grep -v grep | grep --color $1
