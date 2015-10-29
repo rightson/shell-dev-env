@@ -7,6 +7,7 @@
 
 :noremap <F5> :mks! session.vim<CR> :source ~/.vimrc<CR> :diffupdate<CR> :!cs<CR> :cs reset<CR> :f<CR>
 :noremap <F6> :%!xxd
+:noremap <F8> :TagbarToggle<CR>
 :noremap <F9> :if &mouse == 'a' \| set mouse= \| else \| set mouse=a \| endif<CR><CR>
 :noremap <F12> :set nu!<CR>
 
