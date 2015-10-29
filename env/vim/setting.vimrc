@@ -26,7 +26,7 @@ set foldenable
 set foldmethod=marker
 set foldlevel=100
 set foldopen=block,hor,mark,percent,quickfix,tag
-set colorcolumn=80
+"set colorcolumn=80
 
 " For power line
 set t_Co=256
@@ -40,6 +40,11 @@ au BufNewFile,BufRead *.json set ft=javascript
 au Filetype html,xml,htm,xsl set expandtab tabstop=4 shiftwidth=4 softtabstop=4
 au FileType make set noexpandtab
 "au FileType python set noexpandtab
+
+" Enable folding
+set foldmethod=syntax
+set foldcolumn=1
+set foldlevel=99
 
 " Search 
 set incsearch hlsearch
@@ -85,14 +90,10 @@ autocmd BufReadPost *
 "colo pablo 
 
 if has("gui_running")
-    "set guifont=AR\ PL\ UMing\ TW:h16
-    "set guifont=AR\ PL\ UMing\ TW\ Light\ 11
-    "set guifont=Monaco:h12.00
-    "set guifont=Menlo:h14.00
     set lines=120 columns=160
     "set vb
     set guioptions-=T
-    set transparency=15
+    set transparency=2
     colo torte
 endif
 
