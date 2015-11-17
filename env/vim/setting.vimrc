@@ -22,10 +22,14 @@ set mouse=a
 set background=dark
 set ruler
 set nowrap
+
+" Enable folding
 set foldenable
-set foldmethod=marker
-set foldlevel=100
 set foldopen=block,hor,mark,percent,quickfix,tag
+set foldmethod=syntax
+set foldcolumn=3
+set foldlevel=99
+
 "set colorcolumn=80
 
 " For power line
@@ -40,11 +44,6 @@ au BufNewFile,BufRead *.json set ft=javascript
 au Filetype html,xml,htm,xsl set expandtab tabstop=4 shiftwidth=4 softtabstop=4
 au FileType make set noexpandtab
 "au FileType python set noexpandtab
-
-" Enable folding
-set foldmethod=syntax
-set foldcolumn=1
-set foldlevel=99
 
 " Search 
 set incsearch hlsearch

@@ -29,6 +29,7 @@ Plugin 'dkprice/vim-easygrep'
 Plugin 'xolox/vim-easytags'
 Plugin 'xolox/vim-misc'
 
+Plugin 'tmhedberg/SimpylFold'
 
 "Plugin 'vim-scripts/gtags.vim'
 "Plugin 'vim-scripts/simple-pairs'
