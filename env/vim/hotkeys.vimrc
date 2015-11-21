@@ -9,7 +9,7 @@
 :noremap <F6> :%!xxd
 :noremap <F8> :TagbarToggle<CR>
 :noremap <F9> :if &mouse == 'a' \| set mouse= \| else \| set mouse=a \| endif<CR><CR>
-:noremap <F12> :set nu!<CR>
+:noremap <F12> :set nu!<CR>:if &foldcolumn == 0 \| set foldcolumn=3 \| else \| set foldcolumn=0 \| endif<CR><CR>
 
 ":noremap <F2> :cclose
 ":noremap <F3> :GtagsCursor<CR>
