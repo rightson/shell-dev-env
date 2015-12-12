@@ -28,4 +28,4 @@ vimode() {
 vimode
 
 export ENV_PATH=$HOME/.env
-export PATH=$ENV_PATH/bin:$PATH
+export PATH=/usr/local/bin:/usr/local/sbin:$ENV_PATH/bin:$PATH
