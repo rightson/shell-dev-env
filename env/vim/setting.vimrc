@@ -43,6 +43,7 @@ set expandtab tabstop=4 shiftwidth=4 softtabstop=4
 au BufNewFile,BufRead *.json set ft=javascript
 au Filetype html,xml,htm,xsl set expandtab tabstop=4 shiftwidth=4 softtabstop=4
 au FileType make set noexpandtab
+au FileType c,c++,h,hpp set cindent autoindent smartindent
 "au FileType python set noexpandtab
 
 " Search 
