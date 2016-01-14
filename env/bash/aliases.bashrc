@@ -7,10 +7,6 @@ export DEV_PATH=$HOME/workspace
 export VIRTUALENV_PATH=$HOME/.virtualenv
 export SVN_TOOL_PATH=$ENV_PATH/bin
 
-# Cmds
-export SIMPLE_HTTP='python -m SimpleHTTPServer 8000'
-
-
 # Create dynamic aliases
 if [ -d ${DEV_PATH} ]; then
     LS=/bin/ls
@@ -76,13 +72,13 @@ alias svnup="find . -type d | grep -v .svn | xargs svn up"
 
 # Platform dependent arguments
 if [ `uname` = 'Linux' ]; then
-    export BASH_RCFILE='~/.bashrc'
+    export PROFILE='~/.bashrc'
 
     alias ls='ls --color'
     alias grep='grep --color'
     alias du1='sudo du -h --max-depth 1'
 else # Darwin
-    export BASH_RCFILE='~/.bash_profile'
+    export PROFILE='~/.bash_profile'
 
     alias ls='ls -G'
     alias grep='grep --color'
@@ -111,21 +107,18 @@ alias 755='sudo chmod -R 755'
 alias py=python
 alias simple-http="echo $SIMPLE_HTTP; $SIMPLE_HTTP"
 alias ka='while [ 1 ]; do echo -ne "\rKeeping Connection Alive (`date`)" ; sleep 10; done'
-alias so="unalias -a ; . ${BASH_RCFILE}"
-alias virc="vim ${ENV_PATH}/env"
-alias vibash="vim ${ENV_PATH}/bashrc"
-alias vivim="vim ${ENV_PATH}/vimrc"
-alias viscreen="vim ${ENV_PATH}/screenrc"
-alias vitmuxrc="vim ${ENV_PATH}/tmux.conf"
-alias kill-vnc='vncserver -kill'
-alias kill-ssh='killall -9 ssh'
-alias clean-swp='rm -f .*.swp'
+alias so=". ${PROFILE}"
+alias shrc="vim ${PROFILE}"
+alias vimrc="vim ~/.vimrc"
+alias py=python
+alias py3=python3
+alias ka9='killall -9'
+alias k9='kill -9'
+alias rm-rf='rm -rf'
 
-alias ainstall='sudo apt-get install -y'
-alias asearch='sudo apt-cache search'
-alias yinstall='sudo yum install -y'
-
-alias go-test-server='ssh mtk06137@172.22.72.64'
+grep2() {
+    grep $1 | grep -v grep | grep --color $1
+}
 
 # Unset variables
 unset SIMPLE_HTTP

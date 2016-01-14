@@ -8,10 +8,6 @@ export DEV_PATH=$HOME/workspace
 export VIRTUALENV_PATH=$HOME/.virtualenv
 export SVN_TOOL_PATH=$ENV_PATH/bin
 
-# Cmds
-export SIMPLE_HTTP='python -m SimpleHTTPServer 8000'
-
-
 # Create dynamic aliases in $DEV_PATH
 if [ -d ${DEV_PATH} ]; then
     for folder in $DEV_PATH/*; do
