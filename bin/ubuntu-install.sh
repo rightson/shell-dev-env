@@ -4,6 +4,7 @@ apt-get upgrade
 apt-get install -y vim vim-gnome ctags cscope
 apt-get install -y openssh-server
 apt-get install -y git
+git config --global url."https://".insteadOf git://
 apt-get install -y zsh
 apt-get install -y build-essential
 apt-get install -y screen tmux
