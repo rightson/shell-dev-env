@@ -22,8 +22,8 @@ get_ipaddr()
 }
 
 username=%n
-#hostname=%m
-hostname=`get_ipaddr`
+hostname=%m
+#hostname=`get_ipaddr`
 cwd=%~
 
 root="%{$fg[red]%}$username%{$reset_color%}"

@@ -92,8 +92,8 @@ autocmd BufReadPost *
 if has("gui_running")
     set lines=120 columns=160
     "set vb
-    set guioptions-=T
-    set transparency=2
+    "set guioptions-=T
+    "set transparency=2
     colo torte
 endif
 
