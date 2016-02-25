@@ -10,8 +10,8 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
-#zstyle ':completion*' completer _complete _ignored _files
-zstyle ':completion*' completer _files
+zstyle ':completion*' completer _complete _ignored _files
+#zstyle ':completion*' completer _files
 
 vimode() {
     bindkey -v
