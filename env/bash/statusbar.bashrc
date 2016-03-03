@@ -58,7 +58,8 @@ function get_ipaddr()
 
 root="$txtred\u$txtrst"
 user="$txtred\u$txtrst"
-host="$txtblu`get_ipaddr`$txtrst"
+#host="$txtblu`get_ipaddr`$txtrst"
+host="$txtblu\h$txtrst"
 rpwd="$txtgrn\w$txtrst"
 opwd="$txtgrn\W$txtrst"
 date="$txtpur\t$txtrst"
