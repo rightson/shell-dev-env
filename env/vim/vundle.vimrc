@@ -27,6 +27,7 @@ Plugin 'eshion/vim-sftp-sync'
 Plugin 'eshion/vim-sync'
 Plugin 'dkprice/vim-easygrep'
 Plugin 'xolox/vim-easytags'
+Plugin 'xolox/vim-session'
 Plugin 'xolox/vim-misc'
 
 Plugin 'tmhedberg/SimpylFold'
