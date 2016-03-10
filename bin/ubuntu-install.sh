@@ -1,16 +1,19 @@
 #!/bin/bash
 
+APT_GET="sudo apt-get"
+INSTALL="$APT_GET install -y"
+
 essential() {
-    apt-get install -y git
-    apt-get install -y vim
-    apt-get install -y ctags 
-    apt-get install -y cscope
-    apt-get install -y tree
-    apt-get install -y openssh-server
-    apt-get install -y build-essential
-    apt-get install -y zsh
-    apt-get install -y tmux
-    apt-get install -y screen tmux
+    $INSTALL git
+    $INSTALL vim
+    $INSTALL ctags 
+    $INSTALL cscope
+    $INSTALL tree
+    $INSTALL openssh-server
+    $INSTALL build-essential
+    $INSTALL zsh
+    $INSTALL tmux
+    $INSTALL screen tmux
 }
 
 my_git() {
@@ -19,26 +22,26 @@ my_git() {
 }
 
 kernel() {
-    apt-get build-dep -y linux-image-$(uname -r)
+    $APT_GET build-dep -y linux-image-$(uname -r)
 }
 
 desktop() {
-    apt-get install -y terminator
-    apt-get install -y ibus-chewing
-    apt-get install -y easystroke
+    $INSTALL terminator
+    $INSTALL ibus-chewing
+    $INSTALL easystroke
 }
 
 desktop_more() {
-    apt-get install -y vim-gnome 
-    apt-get install -y openjdk-7-jre
-    apt-get install -y openjdk-8-jre
-    apt-get install -y xdotool terminator
-    apt-get install -y virt-viewer
-    apt-get install -y samba samba-common system-config-samba
-    apt-get install -y mongodb-server mongodb-clients
-    apt-get install -y filezilla
+    $INSTALL vim-gnome 
+    $INSTALL openjdk-7-jre
+    $INSTALL openjdk-8-jre
+    $INSTALL xdotool terminator
+    $INSTALL virt-viewer
+    $INSTALL samba samba-common system-config-samba
+    $INSTALL mongodb-server mongodb-clients
+    $INSTALL filezilla
     add-apt-repository -y ppa:graphics-drivers/ppa
-    apt-get install -y nvidia-358
+    $INSTALL nvidia-358
     apt-get -f install
 }
 
