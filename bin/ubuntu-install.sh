@@ -19,7 +19,7 @@ my_git() {
 }
 
 kernel() {
-    apt-get build-dep linux-image-$(uname -r)
+    apt-get build-dep -y linux-image-$(uname -r)
 }
 
 desktop() {
@@ -46,7 +46,6 @@ desktop_more() {
 if [ -z $1 ]; then 
     echo "Usage: $0 essential|kernel|desktop|desktop_more"
 else
-    apt-get update
     $1
 fi
 
