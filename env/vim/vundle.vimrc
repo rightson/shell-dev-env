@@ -5,43 +5,57 @@ filetype off                  " required
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
+
+" status bar
 Plugin 'Lokaltog/vim-powerline'
-Plugin 'scrooloose/nerdtree'
+
+" side bar
 Plugin 'airblade/vim-gitgutter'
-Plugin 'easymotion/vim-easymotion'
-Plugin 'dyng/ctrlsf.vim'
-
-Plugin 'wincent/command-t.git'
 Plugin 'tpope/vim-fugitive'
+Plugin 'tmhedberg/SimpylFold'
 
-Plugin 'moll/vim-node'
-Plugin 'jelera/vim-javascript-syntax'
-Plugin 'othree/yajs.vim'
-Plugin 'maksimr/vim-jsbeautify'
-Plugin 'marijnh/tern_for_vim'
+" navgation/search
+Plugin 'scrooloose/nerdtree'
+
+" code tracer
+Plugin 'vim-scripts/cscope_macros.vim'
 Plugin 'majutsushi/tagbar'
-Plugin 'vim-scripts/Rename2'
-Plugin 'Markdown'
 
-Plugin 'eshion/vim-sftp-sync'
-Plugin 'eshion/vim-sync'
-Plugin 'dkprice/vim-easygrep'
-Plugin 'xolox/vim-easytags'
+" session
 Plugin 'xolox/vim-session'
 Plugin 'xolox/vim-misc'
 
-Plugin 'tmhedberg/SimpylFold'
+" in-place file rename
+Plugin 'vim-scripts/Rename2'
 
+" JavaScript
+Plugin 'othree/es.next.syntax.vim'
+Plugin 'othree/yajs.vim'
+Plugin 'moll/vim-node'
+Plugin 'jelera/vim-javascript-syntax'
+Plugin 'maksimr/vim-jsbeautify'
+
+" Python
+Plugin 'python.vim'
+
+" Markdown
+Plugin 'Markdown'
+
+" Other plugins
+"Plugin 'easymotion/vim-easymotion'
+"Plugin 'wincent/command-t.git'
+"Plugin 'marijnh/tern_for_vim'
+"Plugin 'eshion/vim-sftp-sync'
+"Plugin 'eshion/vim-sync'
+"Plugin 'dkprice/vim-easygrep'
+"Plugin 'xolox/vim-easytags'
 "Plugin 'vim-scripts/gtags.vim'
 "Plugin 'vim-scripts/simple-pairs'
 "Plugin 'vim-scripts/cscope.vim'
+"Plugin 'vim-scripts/autoload_cscope.vim'
 "Plugin 'vim-scripts/ctags.vim'
 "Plugin 'vim-scripts/taglist.vim'
-
-"Plugin 'tpope/vim-fugitive'
 "Plugin 'http://github.com/gmarik/vim-visual-star-search.git'
-"Plugin 'pyflakes.vim'
-"Plugin 'python.vim'
 "Plugin 'jQuery'
 "Plugin 'tpope/vim-rails'
 "Plugin 'clang-complete'
