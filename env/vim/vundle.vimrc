@@ -19,6 +19,7 @@ Plugin 'scrooloose/nerdtree'
 
 " code tracer
 Plugin 'vim-scripts/cscope_macros.vim'
+Plugin 'vim-scripts/autoload_cscope.vim'
 Plugin 'majutsushi/tagbar'
 
 " session
@@ -52,7 +53,6 @@ Plugin 'Markdown'
 "Plugin 'vim-scripts/gtags.vim'
 "Plugin 'vim-scripts/simple-pairs'
 "Plugin 'vim-scripts/cscope.vim'
-"Plugin 'vim-scripts/autoload_cscope.vim'
 "Plugin 'vim-scripts/ctags.vim'
 "Plugin 'vim-scripts/taglist.vim'
 "Plugin 'http://github.com/gmarik/vim-visual-star-search.git'

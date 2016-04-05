@@ -27,7 +27,7 @@ set nowrap
 set foldenable
 set foldopen=block,hor,mark,percent,quickfix,tag
 set foldmethod=syntax
-set foldcolumn=3
+"set foldcolumn=3
 set foldlevel=99
 
 "set colorcolumn=80
@@ -97,17 +97,6 @@ if has("gui_running")
     colo torte
 endif
 
+"autocmd BufEnter * silent! lcd %:p:h
 "let generate_tags = 1
-function! LoadCscope()
-  let db = findfile("cscope.out", ".;")
-  if (!empty(db))
-    let path = strpart(db, 0, match(db, "/cscope.out$"))
-    set nocscopeverbose " suppress 'duplicate connection' error
-    exe "cs add " . db . " " . path
-    set cscopeverbose
-    set cscopetag
-  endif
-endfunction
-au BufEnter /* call LoadCscope()
-autocmd BufEnter * silent! lcd %:p:h
-
+let g:session_autosave = 'no'
