@@ -6,7 +6,7 @@ set history=512
 set timeoutlen=250
 set showcmd
 
-set autochdir
+"set autochdir
 
 " File save/load
 set autoread
@@ -19,6 +19,7 @@ set pastetoggle=<F7>
 " Display
 set number
 set mouse=a
+set ttymouse=xterm2
 set background=dark
 set ruler
 set nowrap
