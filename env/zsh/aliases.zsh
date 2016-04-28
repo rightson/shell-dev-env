@@ -72,6 +72,7 @@ alias ll='ls -l'
 alias lh='ls -lh'
 alias lj='ls -lh ~/jobs'
 alias al='alias'
+alias hi='history'
 alias steal='sudo chown -R `id -u`:`id -g`'
 alias 755='sudo chmod -R 755'
 alias py=python
