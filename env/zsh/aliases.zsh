@@ -81,6 +81,7 @@ alias ka='while [ 1 ]; do echo -ne "\rKeeping Connection Alive (`date`)" ; sleep
 alias so=". ${PROFILE}"
 alias shrc="vim ${PROFILE}"
 alias vimrc="vim ~/.vimrc"
+alias tmuxrc="vim ~/.tmux.conf"
 alias py=python
 alias py3=python3
 alias ka9='killall -9'
