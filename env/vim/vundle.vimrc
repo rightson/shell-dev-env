@@ -12,29 +12,35 @@ Plugin 'Lokaltog/vim-powerline'
 " side bar
 Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-fugitive'
-Plugin 'tmhedberg/SimpylFold'
+"Plugin 'tmhedberg/SimpylFold'
 
 " navgation/search
 Plugin 'scrooloose/nerdtree'
+Plugin 'ctrlpvim/ctrlp.vim'
 
 " code tracer
 Plugin 'vim-scripts/cscope_macros.vim'
 Plugin 'vim-scripts/autoload_cscope.vim'
-Plugin 'majutsushi/tagbar'
+Plugin 'ludovicchabant/vim-gutentags'
+"Plugin 'majutsushi/tagbar'
+
+" white spaces
+Plugin 'ntpeters/vim-better-whitespace'
 
 " session
-Plugin 'xolox/vim-session'
-Plugin 'xolox/vim-misc'
+"Plugin 'xolox/vim-session'
+"Plugin 'xolox/vim-misc'
+"Plugin 'xolox/vim-easytags'
 
 " in-place file rename
 Plugin 'vim-scripts/Rename2'
 
 " JavaScript
 Plugin 'othree/es.next.syntax.vim'
-Plugin 'othree/yajs.vim'
-Plugin 'moll/vim-node'
-Plugin 'jelera/vim-javascript-syntax'
-Plugin 'maksimr/vim-jsbeautify'
+"Plugin 'othree/yajs.vim'
+"Plugin 'moll/vim-node'
+"Plugin 'jelera/vim-javascript-syntax'
+"Plugin 'maksimr/vim-jsbeautify'
 
 " Python
 Plugin 'python.vim'
@@ -43,13 +49,12 @@ Plugin 'python.vim'
 Plugin 'Markdown'
 
 " Other plugins
+"Plugin 'dkprice/vim-easygrep'
 "Plugin 'easymotion/vim-easymotion'
 "Plugin 'wincent/command-t.git'
 "Plugin 'marijnh/tern_for_vim'
 "Plugin 'eshion/vim-sftp-sync'
 "Plugin 'eshion/vim-sync'
-"Plugin 'dkprice/vim-easygrep'
-"Plugin 'xolox/vim-easytags'
 "Plugin 'vim-scripts/gtags.vim'
 "Plugin 'vim-scripts/simple-pairs'
 "Plugin 'vim-scripts/cscope.vim'
