@@ -14,6 +14,9 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-fugitive'
 "Plugin 'tmhedberg/SimpylFold'
 
+" editconfig
+Plugin 'editorconfig/editorconfig-vim'
+
 " navgation/search
 Plugin 'scrooloose/nerdtree'
 Plugin 'ctrlpvim/ctrlp.vim'
@@ -25,7 +28,7 @@ Plugin 'ludovicchabant/vim-gutentags'
 "Plugin 'majutsushi/tagbar'
 
 " white spaces
-Plugin 'ntpeters/vim-better-whitespace'
+"Plugin 'ntpeters/vim-better-whitespace'
 
 " session
 "Plugin 'xolox/vim-session'

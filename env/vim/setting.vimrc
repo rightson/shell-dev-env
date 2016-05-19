@@ -28,7 +28,7 @@ set nowrap
 set foldenable
 set foldopen=block,hor,mark,percent,quickfix,tag
 set foldmethod=syntax
-"set foldcolumn=3
+set foldcolumn=0
 set foldlevel=99
 
 "set colorcolumn=80
