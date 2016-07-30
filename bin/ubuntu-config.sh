@@ -45,10 +45,26 @@ desktop_more() {
     apt-get -f install
 }
 
+vundle() {
+    git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+}
+
+tpm() {
+    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+}
+
+ohmyzsh() {
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+}
+
+dev_common() {
+    vundle
+    tpm
+    ohmyzsh
+}
 
 if [ -z $1 ]; then 
-    echo "Usage: $0 essential|kernel|desktop|desktop_more"
+    echo "Usage: $0 essential|kernel|desktop|desktop_more|vundle|tpm|ohmyzsh|dev_common"
 else
     $1
 fi
-
