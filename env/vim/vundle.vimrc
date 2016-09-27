@@ -7,7 +7,9 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 " status bar
-Plugin 'Lokaltog/vim-powerline'
+"Plugin 'Lokaltog/vim-powerline'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 
 " side bar
 Plugin 'airblade/vim-gitgutter'
