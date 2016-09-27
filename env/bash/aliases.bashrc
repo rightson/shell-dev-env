@@ -93,6 +93,14 @@ grep2() {
     grep $1 | grep -v grep | grep --color $1
 }
 
+gopath() {
+    if [ ! -z $1 ]; then
+        export GOPATH=`cd $1 && pwd`
+        export PATH=$GOPATH/bin:$PATH
+    fi
+    echo $GOPATH
+}
+
 # Unset variables
 unset SIMPLE_HTTP
 unset ENV_PATH SVN_TOOL_PATH DEV_PATH
