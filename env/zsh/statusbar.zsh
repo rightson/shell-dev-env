@@ -35,7 +35,7 @@ date="%{$fg[green]%}%*%{$reset_color%}"
 at="@"
 
 ps1_root() {
-    PS1="${root}@${host}[\w]# "
+    PS1="${root}@${host}[${cwd}]# "
 }
 
 ps1_pretty() {
