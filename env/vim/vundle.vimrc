@@ -32,6 +32,9 @@ Plugin 'ludovicchabant/vim-gutentags'
 " white spaces
 "Plugin 'ntpeters/vim-better-whitespace'
 
+" json
+Plugin 'elzr/vim-json'
+
 " session
 "Plugin 'xolox/vim-session'
 "Plugin 'xolox/vim-misc'
