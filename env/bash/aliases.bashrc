@@ -88,6 +88,11 @@ alias py3=python3
 alias ka9='killall -9'
 alias k9='kill -9'
 alias rm-rf='rm -rf'
+alias gau='git add -u'
+alias activate-venv='source venv/bin/activate'
+alias so-venv='source venv/bin/activate'
+alias sai='sudo apt-get install'
+alias hig='history | grep'
 
 grep2() {
     grep $1 | grep -v grep | grep --color $1
