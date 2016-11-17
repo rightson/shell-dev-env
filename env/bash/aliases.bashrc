@@ -2,7 +2,8 @@
 
 
 # Set your paths
-export ENV_PATH=$HOME/.env
+export __DIR__="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+export ENV_PATH=$__DIR__/../..
 export DEV_PATH=$HOME/workspace
 export VIRTUALENV_PATH=$HOME/.virtualenv
 export SVN_TOOL_PATH=$ENV_PATH/bin
@@ -93,6 +94,19 @@ alias activate-venv='source venv/bin/activate'
 alias so-venv='source venv/bin/activate'
 alias sai='sudo apt-get install'
 alias hig='history | grep'
+
+# git aliases
+
+alias ga='git add
+alias gco='git checkout'
+alias gst='git status'
+alias gd='git diff'
+alias gdca='git diff --cached'
+alias glgp='git log --stat -p'
+alias glo='git log --oneline --decorate'
+alias glol='git log --graph --pretty='\''%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'\'' --abbrev-commit'
+alias gcmsg='git commit -m'
+alias gb='git branch'
 
 grep2() {
     grep $1 | grep -v grep | grep --color $1
