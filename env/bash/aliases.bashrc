@@ -98,7 +98,8 @@ alias known_host='vim ~/.ssh/known_hosts'
 
 # git aliases
 
-alias ga='git add
+alias ga='git add'
+alias ga='git add -u'
 alias gco='git checkout'
 alias gst='git status'
 alias gd='git diff'
