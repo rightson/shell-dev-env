@@ -94,6 +94,7 @@ alias activate-venv='source venv/bin/activate'
 alias so-venv='source venv/bin/activate'
 alias sai='sudo apt-get install'
 alias hig='history | grep'
+alias known_host='vim ~/.ssh/known_hosts'
 
 # git aliases
 
