@@ -80,8 +80,15 @@ dev_common() {
     ohmyzsh
 }
 
+update() {
+    sudo apt-get update 
+    sudo apt-get -y upgrade 
+    sudo apt-get -y dist-upgrade 
+    sudo apt autoremove -y
+}
+
 if [ -z $1 ]; then 
-    echo "Usage: $0 essential|kernel|desktop|desktop_more|vundle|tpm|ohmyzsh|nvm|yarn|mongodb"
+    echo "Usage: $0 essential|kernel|desktop|desktop_more|vundle|tpm|ohmyzsh|nvm|yarn|mongodb|update"
 else
     $*
 fi
