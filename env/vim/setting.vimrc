@@ -87,7 +87,7 @@ autocmd BufReadPost *
 "colo torte
 "colo slate
 "colo koehler
-colo murphy
+"colo murphy
 "colo pablo
 
 if has("gui_running")
