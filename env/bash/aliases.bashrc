@@ -3,7 +3,7 @@
 
 # Set your paths
 export __DIR__="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-export ENV_PATH=$__DIR__/../..
+export ENV_PATH=$HOME/.env
 export DEV_PATH=$HOME/workspace
 export VIRTUALENV_PATH=$HOME/.virtualenv
 export SVN_TOOL_PATH=$ENV_PATH/bin
