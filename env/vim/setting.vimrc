@@ -95,7 +95,7 @@ if has("gui_running")
   "set vb
   "set guioptions-=T
   "set transparency=2
-  "
+  colo torte 
   function! ScreenFilename()
     if has('amiga')
       return "s:.vimsize"
