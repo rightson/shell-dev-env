@@ -17,4 +17,4 @@ if ( "$gitrev" != "" ) then
 else
     set prompt = "${who}${at}${host}:${apwd}[${date}]\n$txtrst# "
 endif
-alias precmd "source `/usr/sbin/lsof +p $$ | grep -oE /.\*prompt.csh`"
+alias precmd "source `lsof +p $$ | grep -oE /.\*prompt.csh`"
