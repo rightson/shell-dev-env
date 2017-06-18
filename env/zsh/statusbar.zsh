@@ -27,11 +27,11 @@ hostname=%m
 cwd=%~
 
 root="%{$fg[red]%}$username%{$reset_color%}"
-user="%{$fg[red]%}$username%{$reset_color%}"
-host="%{$fg[blue]%}$hostname%{$reset_color%}"
+user="%{$fg[green]%}$username%{$reset_color%}"
+host="%{$fg[green]%}$hostname%{$reset_color%}"
 rpwd="%{$fg[yellow]%}%/%{$reset_color%}"
 opwd="%{$fg[yellow]%}$cwd%{$reset_color%}"
-date="%{$fg[green]%}%*%{$reset_color%}"
+date="%{$fg[red]%}%*%{$reset_color%}"
 at="@"
 
 ps1_root() {
@@ -39,8 +39,8 @@ ps1_root() {
 }
 
 ps1_pretty() {
+    PROMPT="${user}${at}${host}:${rpwd} ${RPROMPT}"$'\n'"# "
     RPROMPT="[${date}]"
-    PROMPT="${user}${at}${host}:${rpwd}"$'\n'"# "
     #PROMPT="${user}${at}${host}:${rpwd}"$'\n'"➜  "
     #PS1="${user}${at}${host}:${rpwd}[${date}]"$'\n'"➜  "
     #PS1="${user}${at}${host}:${rpwd}"$'\n'"[${date}] ➜  "
