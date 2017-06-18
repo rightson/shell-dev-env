@@ -59,18 +59,22 @@ function get_ipaddr()
 root="$txtred\u$txtrst"
 user="$txtred\u$txtrst"
 #host="$txtblu`get_ipaddr`$txtrst"
-host="$txtblu\h$txtrst"
+host="$txtylw\h$txtrst"
 rpwd="$txtgrn\w$txtrst"
 opwd="$txtgrn\W$txtrst"
 date="$txtpur\t$txtrst"
 at="$txtwht@$txtrst"
+
+parse_git_branch() {
+    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+}
 
 ps1_root() {
     PS1="${root}@${host}[\w]# "
 }
 
 ps1_pretty() {
-    PS1="${user}${at}${host}:${rpwd}[${date}]\n\$ "
+    PS1="${user}${at}${host}:${rpwd}\$(parse_git_branch) [${date}]\n\$ "
 }
 
 ps1_relative() {
