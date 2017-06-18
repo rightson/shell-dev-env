@@ -49,7 +49,8 @@ Plug 'editorconfig/editorconfig-vim'
 
 " navgation/search
 Plug 'scrooloose/nerdtree'
-Plug 'ctrlpvim/ctrlp.vim'
+"Plug 'ctrlpvim/ctrlp.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 
 " code tracer
 Plug 'vim-scripts/cscope_macros.vim'
