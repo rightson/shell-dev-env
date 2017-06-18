@@ -156,6 +156,7 @@ endif
 "autocmd BufEnter * silent! lcd %:p:h
 
 " NERDTree
-autocmd BufWinEnter * if (exists(":NERDTree")) | NERDTreeFind | endif
-autocmd VimEnter * if (exists(":NERDTree")) | wincmd p | endif
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+"autocmd BufWinEnter * if (exists(":NERDTree")) | NERDTreeFind | endif
+"autocmd VimEnter * if (exists(":NERDTree")) | wincmd p | endif
+"autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+

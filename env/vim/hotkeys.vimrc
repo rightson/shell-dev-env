@@ -32,3 +32,5 @@ nmap <C-w>t :tabnew %<CR>
 ":noremap <s-z> :tabprev<CR>
 ":noremap <c-tab> :tabnex<CR>
 ":noremap <c-s-tab> :tabprev<CR>
+
+nmap <C-a> :ZoomWin<CR>

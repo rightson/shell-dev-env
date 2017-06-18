@@ -16,8 +16,11 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-fugitive'
 "Plugin 'tmhedberg/SimpylFold'
 
+" window
+Plugin 'maciej-ka/ZoomWin'
+
 " editconfig
-Plugin 'editorconfig/editorconfig-vim'
+"Plugin 'editorconfig/editorconfig-vim'
 
 " navgation/search
 Plugin 'scrooloose/nerdtree'
@@ -29,10 +32,11 @@ Plugin 'vim-scripts/autoload_cscope.vim'
 Plugin 'ludovicchabant/vim-gutentags'
 "Plugin 'majutsushi/tagbar'
 
-" white spaces
+" editing"
+Plugin 'Townk/vim-autoclose'
 "Plugin 'ntpeters/vim-better-whitespace'
 
-" json
+" JSON 
 Plugin 'elzr/vim-json'
 
 " session
@@ -64,8 +68,6 @@ Plugin 'Markdown'
 "Plugin 'eshion/vim-sftp-sync'
 "Plugin 'eshion/vim-sync'
 "Plugin 'vim-scripts/gtags.vim'
-Plugin 'jiangmiao/auto-pairs'
-"Plugin 'vim-scripts/simple-pairs'
 "Plugin 'vim-scripts/cscope.vim'
 "Plugin 'vim-scripts/ctags.vim'
 "Plugin 'vim-scripts/taglist.vim'
@@ -73,6 +75,7 @@ Plugin 'jiangmiao/auto-pairs'
 "Plugin 'jQuery'
 "Plugin 'tpope/vim-rails'
 "Plugin 'clang-complete'
+Plugin 'vim-latex/vim-latex'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
