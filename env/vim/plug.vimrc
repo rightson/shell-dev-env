@@ -66,6 +66,9 @@ Plug 'elzr/vim-json'
 " file rename
 Plug 'vim-scripts/Rename2'
 
+" Golang
+Plug 'fatih/vim-go'
+
 " JavaScript
 Plug 'othree/es.next.syntax.vim'
 Plug 'pangloss/vim-javascript'
