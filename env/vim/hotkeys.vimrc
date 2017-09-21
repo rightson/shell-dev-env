@@ -37,9 +37,9 @@ noremap <C-a> :ZoomWin<CR>
 noremap <C-p> :FZF<CR>
 
 noremap <silent> <Leader>w :call ToggleWrap()<CR>
-function ToggleWrap()
+function! ToggleWrap()
   if &wrap
-    echo "Wrap OFF"
+    echo "Line Wrap OFF"
     setlocal nowrap
     set virtualedit=all
     silent! nunmap <buffer> <Up>
@@ -50,8 +50,12 @@ function ToggleWrap()
     silent! iunmap <buffer> <Down>
     silent! iunmap <buffer> <Home>
     silent! iunmap <buffer> <End>
+    silent! nunmap <buffer> <silent> k gk
+    silent! nunmap <buffer> <silent> j gj
+    silent! nunmap <buffer> <silent> 0 g0
+    silent! nunmap <buffer> <silent> $ g$
   else
-    echo "Wrap ON"
+    echo "Line Wrap ON"
     setlocal wrap linebreak nolist
     set virtualedit=
     setlocal display+=lastline
@@ -63,5 +67,9 @@ function ToggleWrap()
     inoremap <buffer> <silent> <Down> <C-o>gj
     inoremap <buffer> <silent> <Home> <C-o>g<Home>
     inoremap <buffer> <silent> <End>  <C-o>g<End>
+    noremap  <buffer> <silent> k gk
+    noremap  <buffer> <silent> j gj
+    noremap  <buffer> <silent> 0 g0
+    noremap  <buffer> <silent> $ g$
   endif
 endfunction
