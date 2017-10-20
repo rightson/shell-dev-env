@@ -6,6 +6,7 @@
 :noremap <F4> :cs find e
 
 :noremap <F5> :!cs update<CR>:cs reset<CR>
+:noremap <C-F5> :source ~/.vimrc<CR>:PlugInstall<CR>:q<CR>
 :noremap <F6> :%!xxd
 :noremap <F8> :TagbarToggle<CR>
 :noremap <F9> :if &mouse == 'a' \| set mouse= \| else \| set mouse=a \| endif<CR><CR>
