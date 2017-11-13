@@ -10,7 +10,8 @@ Plug 'junegunn/vim-easy-align'
 Plug 'https://github.com/junegunn/vim-github-dashboard.git'
 
 " Multiple Plug commands can be written in a single line using | separators
-Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+"Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets' 
+Plug 'Valloric/YouCompleteMe'
 
 " On-demand loading
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
@@ -57,7 +58,7 @@ Plug 'vim-scripts/cscope_macros.vim'
 Plug 'vim-scripts/autoload_cscope.vim'
 
 " editing"
-Plug 'Townk/vim-autoclose'
+"Plug 'Townk/vim-autoclose'
 "Plug 'ntpeters/vim-better-whitespace'
 
 " JSON 
@@ -76,6 +77,8 @@ Plug 'pangloss/vim-javascript'
 " LaTex 
 Plug 'vim-latex/vim-latex'
 
+" Django
+Plug 'tweekmonster/django-plus.vim'
 
 " Unmanaged plugin (manually installed and updated)
 
