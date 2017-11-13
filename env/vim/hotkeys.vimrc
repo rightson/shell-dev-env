@@ -5,9 +5,11 @@
 :noremap <F3> :cs find s <C-R>=expand("<cword>")<CR><CR>
 :noremap <F4> :cs find e
 
-:noremap <F5> :!cs update<CR>:cs reset<CR>
+":noremap <F5> :!cs update<CR>:cs reset<CR>
+:noremap <F5> :!find . -iname '*.c' -o -iname '*.cpp' -o -iname '*.h' -o -iname '*.hpp' > cscope.files<CR> :!cscope -b -i cscope.files -f cscope.out<CR>:cs reset<CR>
 :noremap <C-F5> :source ~/.vimrc<CR>:PlugInstall<CR>:q<CR>
-:noremap <F6> :%!xxd
+:noremap <F6> :%s/\s\+$//g<CR>
+:noremap <C-F6> :%!xxd
 :noremap <F8> :TagbarToggle<CR>
 :noremap <F9> :if &mouse == 'a' \| set mouse= \| else \| set mouse=a \| endif<CR><CR>
 :noremap <F12> :set nu!<CR>
