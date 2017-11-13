@@ -38,6 +38,9 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
+" tabbar
+Plug 'mkitt/tabline.vim'
+
 " side bar
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
