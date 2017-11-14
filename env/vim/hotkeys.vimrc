@@ -1,20 +1,19 @@
 " vim hotkeys
 
-":noremap <F2> :qa!
-
+:noremap <F2> :!find . -iname '*.c' -o -iname '*.cpp' -o -iname '*.h' -o -iname '*.hpp' -o -iname '*.js' -o -iname '*.py' > cscope.files<CR> :!cscope -b -i cscope.files -f cscope.out<CR>:cs reset<CR>
 :noremap <F3> :cs find s <C-R>=expand("<cword>")<CR><CR>
 :noremap <F4> :cs find e
 
-":noremap <F5> :!cs update<CR>:cs reset<CR>
-:noremap <F5> :!find . -iname '*.c' -o -iname '*.cpp' -o -iname '*.h' -o -iname '*.hpp' > cscope.files<CR> :!cscope -b -i cscope.files -f cscope.out<CR>:cs reset<CR>
-:noremap <C-F5> :source ~/.vimrc<CR>:PlugInstall<CR>:q<CR>
-:noremap <F6> :%s/\s\+$//g<CR>
-:noremap <C-F6> :%!xxd
-:noremap <F8> :TagbarToggle<CR>
+:noremap <F5> :source ~/.vimrc<CR>
+:noremap <F6> :NERDTree<CR>
+:noremap <F8> :ZoomWin<CR>
 :noremap <F9> :if &mouse == 'a' \| set mouse= \| else \| set mouse=a \| endif<CR><CR>
+:noremap <F10> :%!xxd
 :noremap <F12> :set nu!<CR>
 
 :noremap <C-G> <Esc>:echo expand('%:p')<Return>
+
+:noremap <C-k> :%s/\s\+$//g<CR>
 
 ":noremap <F2> :cclose
 ":noremap <F3> :GtagsCursor<CR>
@@ -25,7 +24,7 @@
 ":noremap <C-]> :GtagsCursor<CR>
 
 ":noremap <F6> :%!xxd
-"":noremap <F8> :%!python -m json.tool<CR><CR>
+":noremap <F8> :TagbarToggle<CR>
 
 " Tab operations
 nmap <C-w>t :tabnew %<CR>
@@ -36,7 +35,8 @@ nmap <C-w>t :tabnew %<CR>
 ":noremap <c-tab> :tabnex<CR>
 ":noremap <c-s-tab> :tabprev<CR>
 
-noremap <C-a> :ZoomWin<CR>
+"noremap <C-a> :ZoomWin<CR>
+noremap <C-j> :!python -m json.tool<CR>
 noremap <C-p> :FZF<CR>
 
 noremap <silent> <Leader>w :call ToggleWrap()<CR>

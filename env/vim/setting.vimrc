@@ -177,7 +177,7 @@ function! UpdateTags()
   let cmd = 'ctags -a -f ' . tagfilename . ' --c++-kinds=+p --fields=+iaS --extra=+q ' . '"' . f . '"'
   call DelTagOfFile(f)
   let resp = system(cmd)
-  let cmd = "find . -iname '*.c' -o -iname '*.cpp' -o -iname '*.h' -o -iname '*.hpp' > cscope.files"
+  let cmd = "find . -iname '*.c' -o -iname '*.cpp' -o -iname '*.h' -o -iname '*.hpp' -o -iname '*.js' -o -iname '*.py' > cscope.files"
   let resp = system(cmd)
   let cmd = "cscope -b -i cscope.files -f cscope.out"
   let resp = system(cmd)
