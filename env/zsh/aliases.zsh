@@ -90,9 +90,13 @@ alias rm-rf='rm -rf'
 alias gau='git add -u'
 alias activate-venv='source venv/bin/activate'
 alias so-venv='source venv/bin/activate'
+alias mk-venv='python3 -m venv venv; venv/bin/pip install --upgrade pip'
 alias sai='sudo apt-get install'
 alias hig='history | grep'
 alias known_host='vim ~/.ssh/known_hosts'
+alias tl='tmux ls'
+alias tn='tmux new -S'
+alias ta='tmux attach -t'
 
 grep2() {
     grep $1 | grep -v grep | grep --color $1

@@ -31,3 +31,4 @@ vimode
 
 export ENV_PATH=$HOME/.env
 export PATH=/usr/local/bin:/usr/local/sbin:$ENV_PATH/bin:$PATH
+export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE=fg=cyan

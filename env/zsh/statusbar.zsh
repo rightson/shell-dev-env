@@ -11,6 +11,7 @@ get_ipaddr()
         if [ `uname` = 'Linux' ]; then
             interface="eth${i}"
             ip=`/sbin/ifconfig | grep -A1 -e "^$interface" | tail -n 1 | awk '{print $2}' | sed 's/addr://g'`
+            ip=`ip addr show dynamic | grep inet | awk '{print $2}' | sed 's/\/[0-9]*//g'`
         else
             interface="en${i}"
             ip=`/sbin/ifconfig | grep -A3 -e "^$interface" | tail -n 1 | awk '{print $2}'` 
@@ -22,8 +23,8 @@ get_ipaddr()
 }
 
 username=%n
-hostname=%m
-#hostname=`get_ipaddr`
+#hostname=%m
+hostname=`get_ipaddr`
 cwd=%~
 
 root="%{$fg[red]%}$username%{$reset_color%}"
@@ -31,15 +32,17 @@ user="%{$fg[green]%}$username%{$reset_color%}"
 host="%{$fg[green]%}$hostname%{$reset_color%}"
 rpwd="%{$fg[yellow]%}%/%{$reset_color%}"
 opwd="%{$fg[yellow]%}$cwd%{$reset_color%}"
-date="%{$fg[red]%}%*%{$reset_color%}"
+date="%{$fg[cyan]%}%*%{$reset_color%}"
 at="@"
+gitbranch=$(git rev-parse --abbrev-ref HEAD)
+gb="%{$fg[red]%}$gitbranch%{$reset_color%}"
 
 ps1_root() {
     PS1="${root}@${host}[${cwd}]# "
 }
 
 ps1_pretty() {
-    PROMPT="${user}${at}${host}:${rpwd} ${RPROMPT}"$'\n'"# "
+    PROMPT="${user}${at}${host}:${rpwd} [${gb}]"$'\n'"# "
     RPROMPT="[${date}]"
     #PROMPT="${user}${at}${host}:${rpwd}"$'\n'"➜  "
     #PS1="${user}${at}${host}:${rpwd}[${date}]"$'\n'"➜  "
