@@ -95,7 +95,7 @@ alias sai='sudo apt-get install'
 alias hig='history | grep'
 alias known_host='vim ~/.ssh/known_hosts'
 alias tl='tmux ls'
-alias tn='tmux new -S'
+alias tn='tmux new -s'
 alias ta='tmux attach -t'
 
 grep2() {
