@@ -2,7 +2,7 @@
 
 :noremap <F2> :!find . -iname '*.c' -o -iname '*.cpp' -o -iname '*.h' -o -iname '*.hpp' -o -iname '*.js' -o -iname '*.py' > cscope.files<CR> :!cscope -b -i cscope.files -f cscope.out<CR>:cs reset<CR>
 :noremap <F3> :cs find s <C-R>=expand("<cword>")<CR><CR>
-:noremap <F4> :cs find e
+:noremap <F4> :qa<CR>
 
 :noremap <F5> :source ~/.vimrc<CR>
 :noremap <F6> :NERDTree<CR>
