@@ -11,7 +11,7 @@ get_ipaddr()
         if [ `uname` = 'Linux' ]; then
             interface="eth${i}"
             ip=`/sbin/ifconfig | grep -A1 -e "^$interface" | tail -n 1 | awk '{print $2}' | sed 's/addr://g'`
-            ip=`ip addr show dynamic | grep inet | awk '{print $2}' | sed 's/\/[0-9]*//g'`
+            ip=`ip addr show dynamic | grep inet | head -n 1 | awk '{print $2}' | sed 's/\/[0-9]*//g'`
         else
             interface="en${i}"
             ip=`/sbin/ifconfig | grep -A3 -e "^$interface" | tail -n 1 | awk '{print $2}'` 
