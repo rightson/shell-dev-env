@@ -34,15 +34,15 @@ rpwd="%{$fg[yellow]%}%/%{$reset_color%}"
 opwd="%{$fg[yellow]%}$cwd%{$reset_color%}"
 date="%{$fg[cyan]%}%*%{$reset_color%}"
 at="@"
-gitbranch=$(git rev-parse --abbrev-ref HEAD)
-gb="%{$fg[red]%}$gitbranch%{$reset_color%}"
+#gitbranch=$(git rev-parse --abbrev-ref HEAD)
+#gb="%{$fg[red]%}$gitbranch%{$reset_color%}"
 
 ps1_root() {
     PS1="${root}@${host}[${cwd}]# "
 }
 
 ps1_pretty() {
-    PROMPT="${user}${at}${host}:${rpwd} [${gb}]"$'\n'"# "
+    PROMPT="${user}${at}${host}:${rpwd}"$'\n'"# "
     RPROMPT="[${date}]"
     #PROMPT="${user}${at}${host}:${rpwd}"$'\n'"➜  "
     #PS1="${user}${at}${host}:${rpwd}[${date}]"$'\n'"➜  "

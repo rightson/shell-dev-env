@@ -38,7 +38,7 @@ set t_Co=256
 let g:Powerline_symbols = 'unicode'
 
 " Indentation
-"set cindent autoindent smartindent
+set cindent autoindent smartindent
 set autoindent smartindent
 set expandtab tabstop=4 shiftwidth=4 softtabstop=4
 au BufNewFile,BufRead *.json set ft=javascript
@@ -183,6 +183,5 @@ function! UpdateTags()
   let resp = system(cmd)
   cs reset
 endfunction
-"autocmd BufWritePost,BufReadPost *.cpp,*.hpp,*.h,*.c silent! call UpdateTags()
 autocmd BufWritePost,BufReadPost *.cpp,*.hpp,*.h,*.c silent! call UpdateTags()
-call UpdateTags()
+
