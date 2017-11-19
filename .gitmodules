@@ -1,0 +1,3 @@
+[submodule "ubuntu-utils"]
+	path = ubuntu-utils
+	url = https://github.com/rightson/ubuntu-utils

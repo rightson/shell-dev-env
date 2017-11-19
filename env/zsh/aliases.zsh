@@ -94,9 +94,12 @@ alias mk-venv='python3 -m venv venv; venv/bin/pip install --upgrade pip'
 alias sai='sudo apt-get install'
 alias hig='history | grep'
 alias known_host='vim ~/.ssh/known_hosts'
+alias t='tmux'
 alias tl='tmux ls'
 alias tn='tmux new -s'
-alias ta='tmux attach -t'
+alias ta='tmux attach'
+alias tat='tmux attach -t'
+alias clr='rm -f cscope.* ncscope.* tags'
 
 grep2() {
     grep $1 | grep -v grep | grep --color $1
