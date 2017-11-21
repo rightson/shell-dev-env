@@ -183,5 +183,5 @@ function! UpdateTags()
   let resp = system(cmd)
   cs reset
 endfunction
-autocmd BufWritePost,BufReadPost *.cpp,*.hpp,*.h,*.c silent! call UpdateTags()
+"autocmd BufWritePost,BufReadPost *.cpp,*.hpp,*.h,*.c silent! call UpdateTags()
 
