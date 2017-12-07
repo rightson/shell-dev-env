@@ -96,6 +96,10 @@ if has("gui_running")
   "set guioptions-=T
   "set transparency=2
   colo torte 
+endif
+
+if has("gui_running")
+  " restore screen size and position
   function! ScreenFilename()
     if has('amiga')
       return "s:.vimsize"
