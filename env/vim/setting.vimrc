@@ -13,7 +13,7 @@ set autoread
 set autowrite
 
 " Clipboard
-set clipboard=unnamed
+set clipboard=unnamedplus
 set pastetoggle=<F7>
 
 " Display
