@@ -1,6 +1,6 @@
 
 # Added by shell-dev-env.
-# =Begin= 
-source S_LOC/env/screen/statusbar.screenrc
+# =Begin=
+source $ENV_ROOT/env/screen/statusbar.screenrc
 # =End=
 

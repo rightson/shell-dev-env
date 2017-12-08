@@ -7,7 +7,7 @@
 
 
 # Export global variables
-export ENV_PATH=$HOME/.env
+export ENV_PATH=/home/rightson/.env
 export PATH=/usr/local/bin:/sbin:/usr/sbin:/usr/local/sbin:$PATH
 export PATH=$ENV_PATH/bin:$PATH
 export VIM_BIN=/usr/bin/vim

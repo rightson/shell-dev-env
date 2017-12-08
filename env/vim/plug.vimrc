@@ -91,7 +91,7 @@ Plug 'davidhalter/jedi-vim'
 Plug 'ervandew/supertab'
 
 " Parathensis closing
-Plug 'Townk/vim-autoclose'
+"Plug 'Townk/vim-autoclose'
 Plug 'alvan/vim-closetag'
 
 " Themes

@@ -1,8 +1,8 @@
 
 # Added by shell-dev-env.
-# =Begin= 
-source S_LOC/env/bash/statusbar.bashrc
-source S_LOC/env/bash/aliases.bashrc
-source S_LOC/env/bash/variables.bashrc
+# =Begin=
+source $ENV_ROOT/env/bash/statusbar.bashrc
+source $ENV_ROOT/env/bash/aliases.bashrc
+source $ENV_ROOT/env/bash/variables.bashrc
 # =End=
 

@@ -1,4 +1,1 @@
-bashrc
-screenrc
-tmux.conf
-vimrc
+rc-deployed/**

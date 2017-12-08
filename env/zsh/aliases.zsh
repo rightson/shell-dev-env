@@ -79,6 +79,7 @@ alias py=python
 alias simple-http="echo $SIMPLE_HTTP; $SIMPLE_HTTP"
 alias ka='while [ 1 ]; do echo -ne "\rKeeping Connection Alive (`date`)" ; sleep 10; done'
 alias so=". ${PROFILE}"
+alias env-reload="$ENV_PATH/deploy.sh all"
 alias shrc="vim ${PROFILE}"
 alias vimrc="vim ~/.vimrc"
 alias tmuxrc="vim ~/.tmux.conf"

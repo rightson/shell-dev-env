@@ -27,11 +27,14 @@ set pastetoggle=<F7>
 " Display: basic
 set number
 set mouse=a
+set vb t_vb=
 set ttymouse=xterm2
 set background=dark
 set ruler
 set nowrap
 set colorcolumn=120
+let &colorcolumn=join(range(120,999),",")
+highlight ColorColumn ctermbg=235 guibg=#2c2d27
 
 
 " Display: power line
@@ -139,7 +142,6 @@ endfunction
 " GUI: appearance
 if has("gui_running")
   set lines=100 columns=60
-  set vb t_vb=
   set guioptions-=T
   "set transparency=2
   colo monokai
