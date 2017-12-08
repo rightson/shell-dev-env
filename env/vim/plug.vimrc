@@ -54,15 +54,16 @@ Plug 'editorconfig/editorconfig-vim'
 " navgation/search
 Plug 'scrooloose/nerdtree'
 "Plug 'ctrlpvim/ctrlp.vim'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 
 " code tracer
 Plug 'vim-scripts/cscope_macros.vim'
 Plug 'vim-scripts/autoload_cscope.vim'
 
 " editing"
-"Plug 'Townk/vim-autoclose'
-"Plug 'ntpeters/vim-better-whitespace'
+Plug 'ntpeters/vim-better-whitespace'
+
+" cursor movement
+Plug 'easymotion/vim-easymotion'
 
 " JSON
 Plug 'elzr/vim-json'
@@ -83,11 +84,25 @@ Plug 'vim-latex/vim-latex'
 " Django
 Plug 'tweekmonster/django-plus.vim'
 
-" Jedi VIM
+" Python
 Plug 'davidhalter/jedi-vim'
 
 " Tab completion
 Plug 'ervandew/supertab'
+
+" Parathensis closing
+Plug 'Townk/vim-autoclose'
+Plug 'alvan/vim-closetag'
+
+" Themes
+Plug 'tomasr/molokai'
+Plug 'sickill/vim-monokai'
+Plug 'trusktr/seti.vim'
+Plug 'NLKNguyen/papercolor-theme'
+Plug 'chriskempson/base16-vim'
+Plug 'morhetz/gruvbox'
+Plug 'dracula/dracula-theme'
+
 
 " Unmanaged plugin (manually installed and updated)
 

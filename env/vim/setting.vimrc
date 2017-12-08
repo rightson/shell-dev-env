@@ -1,57 +1,76 @@
 " Scott Chen's VIM setting
+" Syntax
 syntax on
+au BufRead,BufNewFile jquery.*.js set ft=javascript syntax=jquery
+au BufRead,BufNewFile *.tss set ft=css
+au BufRead,BufNewFile {*.md,*.mkd,*.markdown} set ft=markdown
+au BufRead,BufNewFile {COMMIT_EDITMSG}  set ft=gitcommit
+
 
 " Command mode
 set history=512
 set timeoutlen=250
 set showcmd
+set wildmode=longest:list,full
 
-"set autochdir
 
 " File save/load
 set autoread
 set autowrite
 
+
 " Clipboard
 set clipboard=unnamedplus
 set pastetoggle=<F7>
 
-" Display
+
+" Display: basic
 set number
 set mouse=a
 set ttymouse=xterm2
 set background=dark
 set ruler
 set nowrap
+set colorcolumn=120
 
-" Enable folding
-set foldenable
-set foldopen=block,hor,mark,percent,quickfix,tag
-set foldmethod=syntax
-set foldcolumn=0
-set foldlevel=99
 
-"set colorcolumn=80
-
-" For power line
+" Display: power line
 set t_Co=256
 let g:Powerline_symbols = 'unicode'
 
-" Indentation
+
+" Display: color schemes
+" colo torte
+" colo slate
+" colo koehler
+" colo murphy
+" colo pablo
+
+
+" Display: folding
+set foldenable
+set foldmethod=indent
+set foldcolumn=0
+set foldlevel=99
+set foldopen=block,hor,mark,percent,quickfix,tag
+
+
+" Display: indentation
 set cindent autoindent smartindent
-set autoindent smartindent
 set expandtab tabstop=4 shiftwidth=4 softtabstop=4
 au BufNewFile,BufRead *.json set ft=javascript
 au Filetype html,xml,htm,xsl set expandtab tabstop=4 shiftwidth=4 softtabstop=4
 au FileType make set noexpandtab
 au FileType c,c++,h,hpp set cindent autoindent smartindent
-"au FileType python set noexpandtab
+au FileType GNUMakefile,Makefile,makefile,mk set noexpandtab
 
-" Search 
+
+" Search
 set incsearch hlsearch
 set backspace=indent,eol,start
 
-" Auto-complete
+
+" Editing: Auto-complete
 set omnifunc=htmlcomplete#CompleteTags
 set omnifunc=javascriptcomplete#CompleteJS
 set omnifunc=pythoncomplete#Complete
@@ -59,45 +78,75 @@ set omnifunc=phpcomplete#CompletePHP
 au FileType html,html set omnifunc=htmlcomplete#CompleteTags
 au FileType javascript,json set omnifunc=javascriptcomplete#CompleteJS
 
-" Syntax
-"au Filetype htm,html,xml,xsl source ~/.vim/scripts/closetag.vim 
-au BufRead,BufNewFile jquery.*.js set ft=javascript syntax=jquery
-au BufRead,BufNewFile *.tss set ft=css
-au BufRead,BufNewFile {*.md,*.mkd,*.markdown} set ft=markdown
-au BufRead,BufNewFile {COMMIT_EDITMSG}  set ft=gitcommit
-
 
 " Status bar
 set laststatus=2
 
-" Jump to last cursor position
+
+" Restore: cursor of last cursor position
 autocmd BufReadPost *
 \ if line("'\"") > 0 && line ("'\"") <= line("$") |
     \ exe "normal g'\"" |
 \ endif
 
-" function! RestoreSession()
-"   if argc() == 0 "vim called without arguments
-"     "execute 'source ~/session.vim'
-"   end
-" endfunction
+" Restore: entire session
+function! RestoreSession()
+  if argc() == 0 "vim called without arguments
+    execute 'source ~/session.vim'
+  end
+endfunction
 " autocmd VimEnter * call RestoreSession()
 
-" Color scheme
-"colo torte
-"colo slate
-"colo koehler
-"colo murphy
-"colo pablo
 
+" Directory
+"set autochdir
+"autocmd BufEnter * silent! lcd %:p:h
+
+
+" Directory: NERDTree
+"autocmd BufWinEnter * if (exists(":NERDTree")) | NERDTreeFind | endif
+"autocmd VimEnter * if (exists(":NERDTree")) | wincmd p | endif
+"autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+
+" Tags: ctags/cscope generation
+function! DelTagOfFile(file)
+  let fullpath = a:file
+  let cwd = getcwd()
+  let tagfilename = cwd . "/tags"
+  let f = substitute(fullpath, cwd . "/", "", "")
+  let f = escape(f, './')
+  let cmd = 'sed -i "/' . f . '/d" "' . tagfilename . '"'
+  let resp = system(cmd)
+endfunction
+
+function! UpdateTags()
+  let f = expand("%:p")
+  let cwd = getcwd()
+  let tagfilename = cwd . "/tags"
+  let cmd = 'ctags -a -f ' . tagfilename . ' --c++-kinds=+p --fields=+iaS --extra=+q ' . '"' . f . '"'
+  call DelTagOfFile(f)
+  let resp = system(cmd)
+  let cmd = "find . -iname '*.c' -o -iname '*.cpp' -o -iname '*.h' -o -iname '*.hpp' -o -iname '*.js' -o -iname '*.py' > cscope.files"
+  let resp = system(cmd)
+  let cmd = "cscope -b -i cscope.files -f cscope.out"
+  let resp = system(cmd)
+  cs reset
+endfunction
+"autocmd BufWritePost,BufReadPost *.cpp,*.hpp,*.h,*.c silent! call UpdateTags()
+
+
+" GUI: appearance
 if has("gui_running")
-  set lines=120 columns=160
-  "set vb
-  "set guioptions-=T
+  set lines=100 columns=60
+  set vb t_vb=
+  set guioptions-=T
   "set transparency=2
-  colo torte 
+  colo monokai
 endif
 
+
+" GUI: default position
 if has("gui_running")
   " restore screen size and position
   function! ScreenFilename()
@@ -156,36 +205,4 @@ if has("gui_running")
   autocmd VimEnter * if g:screen_size_restore_pos == 1 | call ScreenRestore() | endif
   autocmd VimLeavePre * if g:screen_size_restore_pos == 1 | call ScreenSave() | endif
 endif
-
-"autocmd BufEnter * silent! lcd %:p:h
-
-" NERDTree
-"autocmd BufWinEnter * if (exists(":NERDTree")) | NERDTreeFind | endif
-"autocmd VimEnter * if (exists(":NERDTree")) | wincmd p | endif
-"autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-
-function! DelTagOfFile(file)
-  let fullpath = a:file
-  let cwd = getcwd()
-  let tagfilename = cwd . "/tags"
-  let f = substitute(fullpath, cwd . "/", "", "")
-  let f = escape(f, './')
-  let cmd = 'sed -i "/' . f . '/d" "' . tagfilename . '"'
-  let resp = system(cmd)
-endfunction
-
-function! UpdateTags()
-  let f = expand("%:p")
-  let cwd = getcwd()
-  let tagfilename = cwd . "/tags"
-  let cmd = 'ctags -a -f ' . tagfilename . ' --c++-kinds=+p --fields=+iaS --extra=+q ' . '"' . f . '"'
-  call DelTagOfFile(f)
-  let resp = system(cmd)
-  let cmd = "find . -iname '*.c' -o -iname '*.cpp' -o -iname '*.h' -o -iname '*.hpp' -o -iname '*.js' -o -iname '*.py' > cscope.files"
-  let resp = system(cmd)
-  let cmd = "cscope -b -i cscope.files -f cscope.out"
-  let resp = system(cmd)
-  cs reset
-endfunction
-"autocmd BufWritePost,BufReadPost *.cpp,*.hpp,*.h,*.c silent! call UpdateTags()
 
