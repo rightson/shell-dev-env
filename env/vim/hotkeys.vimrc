@@ -8,7 +8,7 @@
 
 :noremap <F5> :source ~/.vimrc<CR>
 
-:noremap <F6> :NERDTree<CR>
+:noremap <F6> :NERDTreeToggle<CR>
 
 :noremap <F8> :ZoomWin<CR>
 
@@ -20,8 +20,14 @@
 
 :noremap <C-G> <Esc>:echo expand('%:p')<Return>
 
-:noremap <C-k> :%s/\s\+$//g<CR>
+" strip space
+nmap <C-k>t :%s/\s\+$//g<CR>
 
+" sidebar toggle (sublime style
+nmap <C-k>b :NERDTreeToggle<CR>
+nmap <C-k>f :NERDTreeFind<CR>
+
+nmap <C-k>r :!ctags -R .<CR>:!find . -iname '*.c' -o -iname '*.cpp' -o -iname '*.h' -o -iname '*.hpp' -o -iname '*.js' -o -iname '*.py' > cscope.files<CR> :!cscope -b -i cscope.files -f cscope.out<CR>:cs reset<CR>
 
 " tab
 nmap <C-w>t :tabnew %<CR>
@@ -35,6 +41,12 @@ nmap <C-w>t :tabnew %<CR>
 
 " json
 noremap <C-j> :!python -m json.tool<CR>
+
+
+" grep/search
+:nnoremap GG :!clear<CR>:!grep "\<<cword>\>" * -rn --color<CR>
+:nnoremap GR :grep "\<<cword>\>" %:p:h/*<CR><CR>
+:nnoremap GW :grep "\<<cword>\>" * -rn --color<CR>:copen 10<CR>
 
 
 " fuzzy search
