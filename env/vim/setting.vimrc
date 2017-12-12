@@ -141,7 +141,7 @@ endfunction
 
 " GUI: appearance
 if has("gui_running")
-  set lines=100 columns=60
+  set lines=30 columns=120
   set guioptions-=T
   "set transparency=2
   colo monokai
