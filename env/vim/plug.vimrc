@@ -86,6 +86,7 @@ Plug 'tweekmonster/django-plus.vim'
 
 " Python
 Plug 'davidhalter/jedi-vim'
+Plug 'tell-k/vim-autopep8'
 
 " Tab completion
 Plug 'ervandew/supertab'
