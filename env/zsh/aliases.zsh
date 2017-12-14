@@ -82,6 +82,7 @@ alias so=". ${PROFILE}"
 alias env-reload="$ENV_PATH/deploy.sh all"
 alias shrc="vim ${PROFILE}"
 alias vimrc="vim ~/.vimrc"
+alias gvimrc="gvim ~/.gvimrc"
 alias tmuxrc="vim ~/.tmux.conf"
 alias py=python
 alias py3=python3
