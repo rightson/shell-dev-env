@@ -35,7 +35,7 @@ set nowrap
 set colorcolumn=120
 let &colorcolumn=join(range(120,999),",")
 highlight ColorColumn ctermbg=235 guibg=#2c2d27
-
+set fillchars+=vert:\ 
 
 " Display: power line
 set t_Co=256
@@ -141,10 +141,12 @@ endfunction
 
 " GUI: appearance
 if has("gui_running")
-  set lines=30 columns=120
+  set lines=60 columns=120
   set guioptions-=T
   "set transparency=2
-  colo monokai
+  colo PaperColor
+  set linespace=2
+  set guitablabel=%N:\ %M%t
 endif
 
 
