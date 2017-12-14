@@ -1,33 +1,39 @@
 " vim hotkeys
 
-:noremap <F2> :qa<CR>
+noremap <F2> :qa<CR>
 
-:noremap <F3> :cs find s <C-R>=expand("<cword>")<CR><CR>
+noremap <F3> :cs find s <C-R>=expand("<cword>")<CR><CR>
 
-:noremap <F4> :!ctags -R .<CR>:!find . -iname '*.c' -o -iname '*.cpp' -o -iname '*.h' -o -iname '*.hpp' -o -iname '*.js' -o -iname '*.py' > cscope.files<CR> :!cscope -b -i cscope.files -f cscope.out<CR>:cs reset<CR>
+noremap <F4> :!ctags -R .<CR>:!find . -iname '*.c' -o -iname '*.cpp' -o -iname '*.h' -o -iname '*.hpp' -o -iname '*.js' -o -iname '*.py' > cscope.files<CR> :!cscope -b -i cscope.files -f cscope.out<CR>:cs reset<CR>
 
-:noremap <F5> :source ~/.vimrc<CR>
+noremap <F5> :source ~/.vimrc<CR>
 
-:noremap <F6> :NERDTreeToggle<CR>
+noremap <F6> :NERDTreeToggle<CR>
 
-:noremap <F8> :ZoomWin<CR>
+noremap <F8> :ZoomWin<CR>
 
-:noremap <F9> :if &mouse == 'a' \| set mouse= \| else \| set mouse=a \| endif<CR><CR>
+noremap <F9> :if &mouse == 'a' \| set mouse= \| else \| set mouse=a \| endif<CR><CR>
 
-:noremap <F10> :%!xxd
+noremap <F10> :%!xxd
 
-:noremap <F12> :set nu!<CR>
+noremap <F12> :set nu!<CR>
 
-:noremap <C-G> <Esc>:echo expand('%:p')<Return>
+noremap <C-G> <Esc>:echo expand('%:p')<Return>
+
+" search and replace
+nnoremap <Leader><Leader>r :%s/\<<C-r><C-w>\>/
 
 " strip space
-nmap <C-k>t :%s/\s\+$//g<CR>
+noremap <C-k>t :%s/\s\+$//g<CR>
 
 " sidebar toggle (sublime style
-nmap <C-k>b :NERDTreeToggle<CR>
-nmap <C-k>f :NERDTreeFind<CR>
+noremap <C-k>b :NERDTreeToggle<CR>
+noremap <C-k>f :NERDTreeFind<CR>
 
-nmap <C-k>r :!ctags -R .<CR>:!find . -iname '*.c' -o -iname '*.cpp' -o -iname '*.h' -o -iname '*.hpp' -o -iname '*.js' -o -iname '*.py' > cscope.files<CR> :!cscope -b -i cscope.files -f cscope.out<CR>:cs reset<CR>
+noremap <C-k>r :!ctags -R .<CR>:!find . -iname '*.c' -o -iname '*.cpp' -o -iname '*.h' -o -iname '*.hpp' -o -iname '*.js' -o -iname '*.py' > cscope.files<CR> :!cscope -b -i cscope.files -f cscope.out<CR>:cs reset<CR>
+
+" autopep8
+noremap <C-a>8 :Autopep8<CR>
 
 " tab
 nmap <C-w>t :tabnew %<CR>
@@ -44,9 +50,9 @@ noremap <C-j> :!python -m json.tool<CR>
 
 
 " grep/search
-:nnoremap GG :!clear<CR>:!grep "\<<cword>\>" * -rn --color<CR>
-:nnoremap GR :grep "\<<cword>\>" %:p:h/*<CR><CR>
-:nnoremap GW :grep "\<<cword>\>" * -rn --color<CR>:copen 10<CR>
+nnoremap GG :!clear<CR>:!grep "\<<cword>\>" * -rn --color<CR>
+nnoremap GR :grep "\<<cword>\>" %:p:h/*<CR><CR>
+nnoremap GW :grep "\<<cword>\>" * -rn --color<CR>:copen 10<CR>
 
 
 " fuzzy search
