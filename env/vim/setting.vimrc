@@ -147,6 +147,7 @@ if has("gui_running")
   colo PaperColor
   set linespace=2
   set guitablabel=%N:\ %M%t
+  set noeb vb t_vb=
 endif
 
 
