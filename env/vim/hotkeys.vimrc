@@ -27,8 +27,8 @@ nnoremap <Leader><Leader>r :%s/\<<C-r><C-w>\>/
 noremap <C-k>t :%s/\s\+$//g<CR>
 
 " sidebar toggle (sublime style
-noremap <C-k>b :NERDTreeToggle<CR>
-noremap <C-k>f :NERDTreeFind<CR>
+noremap <C-k>b :NERDTreeToggle %<CR>
+noremap <C-k>f :NERDTreeFind %<CR>
 
 noremap <C-k>r :!ctags -R .<CR>:!find . -iname '*.c' -o -iname '*.cpp' -o -iname '*.h' -o -iname '*.hpp' -o -iname '*.js' -o -iname '*.py' > cscope.files<CR> :!cscope -b -i cscope.files -f cscope.out<CR>:cs reset<CR>
 
@@ -37,12 +37,18 @@ noremap <C-a>8 :Autopep8<CR>
 
 " tab
 nmap <C-w>t :tabnew %<CR>
+noremap <Tab> :tabnext<CR>
+noremap <S-Tab> :tabprev<CR>
 ":noremap <c-w>t :tabnew<CR>:o ./<CR>
 ":noremap <s-t> :tabnew<CR>:o ./<CR>
 ":noremap <s-x> :tabnex<CR>
 ":noremap <s-z> :tabprev<CR>
 ":noremap <c-tab> :tabnex<CR>
 ":noremap <c-s-tab> :tabprev<CR>
+
+" buffers
+set hidden
+nnoremap <C-N> :bnext<CR>
 
 
 " json
