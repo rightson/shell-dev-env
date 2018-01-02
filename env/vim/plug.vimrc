@@ -105,6 +105,9 @@ Plug 'morhetz/gruvbox'
 Plug 'dracula/dracula-theme'
 
 
+" Console
+Plug 'vim-scripts/Conque-Shell'
+
 " Unmanaged plugin (manually installed and updated)
 
 
