@@ -14,6 +14,16 @@ case $(basename $SHELL) in
     *)
         SHELL_RC_NAME=bashrc;;
 esac
+if [ -z $PROFILE ]; then
+    case `basename $SHELL` in
+        zsh)
+            export PROFILE=~/.zshrc;;
+        csh|tcsh)
+            export PROFILE=~/.cshrc;;
+        *)
+            export PROFILE=~/.bashrc;;
+    esac
+fi
 SHELLRC=${PROFILE/#\~/$HOME}
 VIMRC=$HOME/.vimrc
 SCREENRC=$HOME/.screenrc
