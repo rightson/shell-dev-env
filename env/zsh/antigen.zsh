@@ -1,4 +1,8 @@
-source ~/.antigen.zsh
+ANTIGEN=~/.antigen.zsh
+if [ ! -f $ANTIGEN ]; then
+    curl -L git.io/antigen > $ANTIGEN
+fi
+source $ANTIGEN
 
 antigen use oh-my-zsh
 

@@ -50,7 +50,10 @@ deploy_rc_files() {
         fi
 
         echo "Patching RC file [$rc_file] ..."
-        sed -i "s/\$ENV_ROOT/$ENV_ROOT_ESCAPED/g" $rc_file
+        if [ `uname -s` = Darwin ]; then
+            TMP=tmp
+        fi
+        sed -i $TMP "s/\$ENV_ROOT/$ENV_ROOT_ESCAPED/g" $rc_file
 
         local rc_reverse_link=${RC_DEPLOYED}/$rc_tmpl_name
         if [ ! -f $rc_reverse_link ]; then
