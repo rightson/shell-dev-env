@@ -14,6 +14,10 @@ antigen bundle git
 antigen bundle npm
 antigen bundle pip
 antigen bundle colorize
+if [ `uname -s` = Darwin ]; then
+antigen theme apple
+else
 antigen theme robbyrussell
+fi
 antigen apply
 
