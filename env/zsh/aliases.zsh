@@ -102,6 +102,8 @@ alias tn='tmux new -s'
 alias ta='tmux attach'
 alias tat='tmux attach -t'
 alias clr='rm -f cscope.* ncscope.* tags'
+alias sus='sudo ufw status'
+alias ai='sudo apt install'
 
 grep2() {
     grep $1 | grep -v grep | grep --color $1
