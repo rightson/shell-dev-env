@@ -52,7 +52,7 @@ let g:Powerline_symbols = 'unicode'
 
 " Display: folding
 set foldenable
-set foldmethod=indent
+"set foldmethod=indent
 set foldcolumn=0
 set foldlevel=99
 set foldopen=block,hor,mark,percent,quickfix,tag
@@ -143,6 +143,7 @@ endfunction
 if has("gui_running")
   set lines=60 columns=120
   set guioptions-=T
+  set guioptions-=r
   "set transparency=2
   colo PaperColor
   set linespace=2
