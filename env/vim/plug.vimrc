@@ -77,6 +77,7 @@ Plug 'fatih/vim-go'
 " JavaScript
 Plug 'othree/es.next.syntax.vim'
 Plug 'pangloss/vim-javascript'
+Plug 'posva/vim-vue'
 
 " LaTex
 Plug 'vim-latex/vim-latex'
