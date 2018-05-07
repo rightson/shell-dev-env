@@ -54,6 +54,7 @@ colo monokai
 " Display: folding
 set foldenable
 "set foldmethod=indent
+setlocal foldmethod=syntax
 set foldcolumn=0
 set foldlevel=99
 set foldopen=block,hor,mark,percent,quickfix,tag
