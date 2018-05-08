@@ -15,16 +15,15 @@ Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 
 " On-demand loading
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 
 " Using a non-master branch
-Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
+"Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
 
 " Using a tagged release; wildcard allowed (requires git 1.9.2 or above)
-Plug 'fatih/vim-go', { 'tag': '*' }
+"Plug 'fatih/vim-go', { 'tag': '*' }
 
 " Plugin options
-Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
+"Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
 
 " Plugin outside ~/.vim/plugged with post-update hook
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -36,7 +35,7 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 " status bar
 "Plug 'Lokaltog/vim-powerline'
 Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+"Plug 'vim-airline/vim-airline-themes'
 
 " tabbar
 Plug 'mkitt/tabline.vim'
@@ -46,13 +45,13 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 
 " window
-Plug 'maciej-ka/ZoomWin'
+"Plug 'maciej-ka/ZoomWin'
 
 " editconfig
 Plug 'editorconfig/editorconfig-vim'
 
 " navgation/search
-Plug 'scrooloose/nerdtree'
+"Plug 'scrooloose/nerdtree'
 "Plug 'ctrlpvim/ctrlp.vim'
 
 " code tracer
@@ -61,6 +60,7 @@ Plug 'vim-scripts/autoload_cscope.vim'
 
 " editing"
 Plug 'ntpeters/vim-better-whitespace'
+"Plug 'ervandew/supertab'
 
 " indent
 Plug 'nathanaelkane/vim-indent-guides'
@@ -70,48 +70,45 @@ Plug 'nathanaelkane/vim-indent-guides'
 Plug 'easymotion/vim-easymotion'
 
 " JSON
-Plug 'elzr/vim-json'
+"Plug 'elzr/vim-json'
 
 " file rename
 Plug 'vim-scripts/Rename2'
 
 " Golang
-Plug 'fatih/vim-go'
+"Plug 'fatih/vim-go'
 
 " JavaScript
-Plug 'othree/es.next.syntax.vim'
-Plug 'pangloss/vim-javascript'
+"Plug 'othree/es.next.syntax.vim'
+"Plug 'pangloss/vim-javascript'
 Plug 'posva/vim-vue'
 
 " LaTex
-Plug 'vim-latex/vim-latex'
+"Plug 'vim-latex/vim-latex'
 
 " Django
-Plug 'tweekmonster/django-plus.vim'
+"Plug 'tweekmonster/django-plus.vim'
 
 " Python
-Plug 'davidhalter/jedi-vim'
+"Plug 'davidhalter/jedi-vim'
 Plug 'tell-k/vim-autopep8'
-
-" Tab completion
-Plug 'ervandew/supertab'
 
 " Parathensis closing
 "Plug 'Townk/vim-autoclose'
 Plug 'alvan/vim-closetag'
 
 " Themes
-Plug 'tomasr/molokai'
+"Plug 'tomasr/molokai'
 Plug 'sickill/vim-monokai'
-Plug 'trusktr/seti.vim'
-Plug 'NLKNguyen/papercolor-theme'
-Plug 'chriskempson/base16-vim'
-Plug 'morhetz/gruvbox'
-Plug 'dracula/dracula-theme'
+"Plug 'trusktr/seti.vim'
+"Plug 'NLKNguyen/papercolor-theme'
+"Plug 'chriskempson/base16-vim'
+"Plug 'morhetz/gruvbox'
+"Plug 'dracula/dracula-theme'
 
 
 " Console
-Plug 'vim-scripts/Conque-Shell'
+"Plug 'vim-scripts/Conque-Shell'
 
 " Unmanaged plugin (manually installed and updated)
 
