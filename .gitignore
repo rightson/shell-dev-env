@@ -1,2 +1,8 @@
 rc-deployed/**
 *.zwc
+*.swp
+bashrc
+screenrc
+tmux.conf
+vimrc
+zshrc
