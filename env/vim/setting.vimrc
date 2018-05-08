@@ -62,12 +62,12 @@ set foldopen=block,hor,mark,percent,quickfix,tag
 
 " Display: indentation
 set cindent autoindent smartindent
-set expandtab tabstop=4 shiftwidth=4 softtabstop=4
+set expandtab
+set tabstop=4 shiftwidth=4 softtabstop=4
 au BufNewFile,BufRead *.json set ft=javascript
 au Filetype html,xml,htm,xsl set expandtab tabstop=4 shiftwidth=4 softtabstop=4
-au FileType make set noexpandtab
-au FileType c,c++,h,hpp set cindent autoindent smartindent
-au FileType GNUMakefile,Makefile,makefile,mk set noexpandtab
+au FileType c,cpp,c++,h,hpp set cindent autoindent smartindent expandtab
+au FileType GNUMakefile,Makefile,makefile,make,mk set noexpandtab
 
 
 " Search

@@ -62,6 +62,10 @@ Plug 'vim-scripts/autoload_cscope.vim'
 " editing"
 Plug 'ntpeters/vim-better-whitespace'
 
+" indent
+Plug 'nathanaelkane/vim-indent-guides'
+"Plug 'Yggdroot/indentLine'
+
 " cursor movement
 Plug 'easymotion/vim-easymotion'
 
