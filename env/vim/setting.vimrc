@@ -141,6 +141,12 @@ endfunction
 "autocmd BufWritePost,BufReadPost *.cpp,*.hpp,*.h,*.c silent! call UpdateTags()
 
 
+" Auto track session during editing
+autocmd BufWritePost * execute ':mksession! Session.vim'
+autocmd BufWinEnter * execute ':mksession! Session.vim'
+autocmd BufWinLeave * execute '!\rm -f Session.vim'
+
+
 " GUI: appearance
 if has("gui_running")
   set lines=60 columns=120
