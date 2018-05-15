@@ -84,6 +84,7 @@ alias glol='git log --graph --pretty='\''%Cred%h%Creset -%C(yellow)%d%Creset %s 
 alias gcmsg='git commit -m'
 alias gb='git branch'
 alias grv='git remote -v'
+alias gpob='git push origin $(git rev-parse --abbrev-ref HEAD)'
 
 # svn aliases
 export SVN_TOOL_PATH=$ENV_PATH/bin
