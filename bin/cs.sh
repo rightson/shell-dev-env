@@ -90,6 +90,7 @@ generate_cscope_files() {
         append_to_CSCOPE_FILES "*.js"
         append_to_CSCOPE_FILES "*.html"
         append_to_CSCOPE_FILES "*.xml"
+        append_to_CSCOPE_FILES "*.p4"
         echo "Done (`size_of_file $here/$CSCOPE_FILES`)"
     else
         echo "Error: Failed to find $CSCOPE_LIST"
