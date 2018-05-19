@@ -1,5 +1,6 @@
 # common aliases
 alias al='alias'
+alias aliasrc='vim ~/.env/env/aliases.sh'
 
 # add common parameter
 alias mv='mv -i'
@@ -64,9 +65,10 @@ alias ta='tmux attach'
 alias tat='tmux attach -t'
 
 # apt aliases
+alias sau='sudo apt update'
 alias sai='sudo apt install'
 alias sas='sudo apt search'
-alias sau='sudo apt upgrade'
+alias saug='sudo apt upgrade'
 alias sadu='sudo apt dist-upgrade'
 
 # git aliases
