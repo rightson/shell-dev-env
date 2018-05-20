@@ -96,7 +96,12 @@ Plug 'posva/vim-vue'
 "Plug 'davidhalter/jedi-vim'
 Plug 'tell-k/vim-autopep8'
 
+" P4 language
 Plug 'rightson/vim-p4-syntax'
+
+" Markdown
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
 
 " Parathensis closing
 "Plug 'Townk/vim-autoclose'
