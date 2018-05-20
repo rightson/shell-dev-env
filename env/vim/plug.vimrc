@@ -96,6 +96,8 @@ Plug 'posva/vim-vue'
 "Plug 'davidhalter/jedi-vim'
 Plug 'tell-k/vim-autopep8'
 
+Plug 'TakeshiTseng/vim-language-p4'
+
 " Parathensis closing
 "Plug 'Townk/vim-autoclose'
 Plug 'alvan/vim-closetag'
