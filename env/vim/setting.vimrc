@@ -142,9 +142,9 @@ endfunction
 
 
 " Auto track session during editing
-autocmd BufWritePost * execute ':mksession! Session.vim'
-autocmd BufWinEnter * execute ':mksession! Session.vim'
-autocmd BufWinLeave * execute '!\rm -f Session.vim'
+" autocmd BufWritePost * execute ':mksession! Session.vim'
+" autocmd BufWinEnter * execute ':mksession! Session.vim'
+" autocmd BufWinLeave * execute '!\rm -f Session.vim'
 
 
 " GUI: appearance
