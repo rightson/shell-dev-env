@@ -46,7 +46,7 @@ print_cscope_list() {
 }
 
 remove_CSCOPE_FILES() {
-    rm -rf cscope.*
+    rm -rf cscope.* ncscope.out
 }
 
 clear_cscope_list() {
