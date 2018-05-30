@@ -104,9 +104,17 @@ relocate_env_path() {
     echo ''
 }
 
+deploy_vim_deps() {
+    if [ ! -f ~/.vim/autoload/plug.vim ]; then
+        curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+            https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    fi
+}
+
 patch_everything() {
     echo "Deoplying $ENV_ROOT ..."
     deploy_rc_files
+    deploy_vim_deps
     #relocate_env_path
 }
 
