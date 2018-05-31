@@ -115,29 +115,29 @@ endfunction
 
 
 " Tags: ctags/cscope generation
-function! DelTagOfFile(file)
-  let fullpath = a:file
-  let cwd = getcwd()
-  let tagfilename = cwd . "/tags"
-  let f = substitute(fullpath, cwd . "/", "", "")
-  let f = escape(f, './')
-  let cmd = 'sed -i "/' . f . '/d" "' . tagfilename . '"'
-  let resp = system(cmd)
-endfunction
-
-function! UpdateTags()
-  let f = expand("%:p")
-  let cwd = getcwd()
-  let tagfilename = cwd . "/tags"
-  let cmd = 'ctags -a -f ' . tagfilename . ' --c++-kinds=+p --fields=+iaS --extra=+q ' . '"' . f . '"'
-  call DelTagOfFile(f)
-  let resp = system(cmd)
-  let cmd = "find . -iname '*.c' -o -iname '*.cpp' -o -iname '*.h' -o -iname '*.hpp' -o -iname '*.js' -o -iname '*.py' > cscope.files"
-  let resp = system(cmd)
-  let cmd = "cscope -b -i cscope.files -f cscope.out"
-  let resp = system(cmd)
-  cs reset
-endfunction
+"function! DelTagOfFile(file)
+"  let fullpath = a:file
+"  let cwd = getcwd()
+"  let tagfilename = cwd . "/tags"
+"  let f = substitute(fullpath, cwd . "/", "", "")
+"  let f = escape(f, './')
+"  let cmd = 'sed -i "/' . f . '/d" "' . tagfilename . '"'
+"  let resp = system(cmd)
+"endfunction
+"
+"function! UpdateTags()
+"  let f = expand("%:p")
+"  let cwd = getcwd()
+"  let tagfilename = cwd . "/tags"
+"  let cmd = 'ctags -a -f ' . tagfilename . ' --c++-kinds=+p --fields=+iaS --extra=+q ' . '"' . f . '"'
+"  call DelTagOfFile(f)
+"  let resp = system(cmd)
+"  let cmd = "find . -iname '*.c' -o -iname '*.cpp' -o -iname '*.h' -o -iname '*.hpp' -o -iname '*.js' -o -iname '*.py' > cscope.files"
+"  let resp = system(cmd)
+"  let cmd = "cscope -b -i cscope.files -f cscope.out"
+"  let resp = system(cmd)
+"  cs reset
+"endfunction
 "autocmd BufWritePost,BufReadPost *.cpp,*.hpp,*.h,*.c silent! call UpdateTags()
 
 
