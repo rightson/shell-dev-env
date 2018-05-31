@@ -104,9 +104,26 @@ relocate_env_path() {
     echo ''
 }
 
+install_vim_plug() {
+    echo "Configuring vim plug"
+    if [ ! -f ~/.vim/autoload/plug.vim ]; then
+        curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+            https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    fi
+}
+
+install_fzf() {
+    if [ ! -f ~/.fzf/install ]; then
+        git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+    fi
+    ~/.fzf/install
+}
+
 patch_everything() {
     echo "Deoplying $ENV_ROOT ..."
     deploy_rc_files
+    install_vim_plug
+    #install_fzf
     #relocate_env_path
 }
 

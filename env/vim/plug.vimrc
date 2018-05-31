@@ -48,7 +48,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 
 " window
-"Plug 'maciej-ka/ZoomWin'
+Plug 'maciej-ka/ZoomWin'
 
 " editconfig
 Plug 'editorconfig/editorconfig-vim'
