@@ -64,25 +64,6 @@ deploy_rc_files() {
     echo "Deployment Completed"
 }
 
-undeploy_rc_files() {
-    echo "Restoring the settings ..."
-    for each in ${RC_FILES[@]}; do
-        local rc_file=`echo $each | cut -d "|" -f 1`
-        if [ ! -z "`grep \"$IDENTIFIER\" $rc_file`" ]; then
-            local offsets=(`cat $rc_file | grep -E 'Added by shell-dev-env|=End=|=Begin' -n | cut -d ':' -f 1`)
-            if [ $((${offsets[0]} + 1)) -eq ${offsets[1]} ]; then
-                echo -n "    Restoring $rc_file..."
-                if [ $UNAME = "Linux" ]; then
-                    sed "$((${offsets[0]}-1)),$((${offsets[2]}+1))d" -i $rc_file
-                else
-                    sed -i "" "$((${offsets[0]}-1)),$((${offsets[2]}+1))d" $rc_file
-                fi
-                echo " done"
-            fi
-        fi
-    done
-}
-
 relocate_env_path() {
     local _BASH_RC=$ENV_ROOT/env/bash/*.bashrc
     local _BINARY=$ENV_ROOT/bin/list-svn-diff.sh
@@ -134,24 +115,8 @@ patch_everything() {
     #relocate_env_path
 }
 
-relocate_deployment() {
-    echo "Relocating $ENV_ROOT ..."
-    undeploy_rc_files
-    deploy_rc_files
-    #relocate_env_path
-}
-
 case $1 in
-    #restore)
-    #    undeploy_rc_files
-    #    ;;
-    #relocate)
-    #    relocate_deployment
-    #    ;;
-    #all)
-    #    ;;
     *)
-        #usage
         patch_everything
         ;;
 esac
