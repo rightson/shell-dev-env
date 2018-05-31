@@ -112,18 +112,25 @@ install_vim_plug() {
     fi
 }
 
+install_tmux_tpm() {
+    if [ ! -d ~/.tmux/plugins/tpm ]; then
+        git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+    fi
+}
+
 install_fzf() {
     if [ ! -f ~/.fzf/install ]; then
         git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+        ~/.fzf/install
     fi
-    ~/.fzf/install
 }
 
 patch_everything() {
     echo "Deoplying $ENV_ROOT ..."
     deploy_rc_files
     install_vim_plug
-    #install_fzf
+    install_tmux_tpm
+    install_fzf
     #relocate_env_path
 }
 
