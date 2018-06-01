@@ -56,6 +56,7 @@ Plug 'editorconfig/editorconfig-vim'
 " navgation/search
 "Plug 'scrooloose/nerdtree'
 "Plug 'ctrlpvim/ctrlp.vim'
+Plug 'dkprice/vim-easygrep'
 
 " code tracer
 Plug 'vim-scripts/cscope_macros.vim'
