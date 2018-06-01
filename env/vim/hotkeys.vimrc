@@ -4,8 +4,6 @@ noremap <F2> :qa<CR>
 
 noremap <F3> :cs find s <C-R>=expand("<cword>")<CR><CR>
 
-noremap <F4> :!ctags -R .<CR>:!find . -iname '*.c' -o -iname '*.cpp' -o -iname '*.h' -o -iname '*.hpp' -o -iname '*.js' -o -iname '*.py' > cscope.files<CR> :!cscope -b -i cscope.files -f cscope.out<CR>:cs reset<CR>
-
 noremap <F5> :source ~/.vimrc<CR>
 
 noremap <F6> :NERDTreeToggle<CR>
@@ -48,7 +46,7 @@ noremap <S-Tab> :tabprev<CR>
 
 " buffers
 set hidden
-nnoremap <C-N> :bnext<CR>
+nnoremap <Leader>n :bnext<CR>
 
 
 " json
