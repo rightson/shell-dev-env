@@ -16,4 +16,4 @@ export VISUAL=$VIM_BIN
 export GREP_COLOR="1;33"
 export HISTCONTROL=ignoreboth
 export TERM=xterm-256color
-
+export LC_ALL=${LANG}
