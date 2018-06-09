@@ -70,6 +70,7 @@ alias sai='sudo apt install'
 alias sas='sudo apt search'
 alias saug='sudo apt upgrade'
 alias sadu='sudo apt dist-upgrade'
+alias sarm='sudo apt autoremove'
 
 # git aliases
 alias gau='git add -u'
