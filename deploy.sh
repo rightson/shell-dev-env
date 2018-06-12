@@ -99,6 +99,19 @@ install_tmux_tpm() {
     fi
 }
 
+install_fd_for_ubuntu() {
+    distro=`cat /etc/os-release | grep '^NAME=' | awk -F '=' '{print $2 }'`
+    if [ "$distro" != "\"Ubuntu\"" ]; then
+        echo "Not ubuntu, please install fd from https://github.com/sharkdp/fd/ manually"
+        return
+    fi
+    fd=https://github.com/sharkdp/fd/releases/download/v7.0.0/fd-musl_7.0.0_amd64.deb
+    wget $fd
+    fdpkg=./`basename $fd`
+    sudo apt install -y $fdpkg
+    \rm -f $fdpkg
+}
+
 install_fzf() {
     if [ ! -f ~/.fzf/install ]; then
         git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
@@ -111,6 +124,7 @@ patch_everything() {
     deploy_rc_files
     install_vim_plug
     install_tmux_tpm
+    install_fd_for_ubuntu
     install_fzf
     #relocate_env_path
 }
