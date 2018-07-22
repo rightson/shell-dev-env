@@ -31,4 +31,4 @@ fi
 source $ENV_PATH/env/aliases.sh
 
 # Unset variables
-unset ENV_PATH DEV_PATH
+unset DEV_PATH
