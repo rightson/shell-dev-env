@@ -94,6 +94,8 @@ alias sus='sudo ufw status'
 alias sen='sudo ufw enable'
 alias srm='sudo ufw remove'
 
+alias vbm='VBoxManage'
+
 # svn aliases
 export SVN_TOOL_PATH=$ENV_PATH/bin
 if [ -d ${SVN_TOOL_PATH} ]; then
