@@ -42,7 +42,8 @@ ps1_root() {
 }
 
 ps1_pretty() {
-    PROMPT="${user}${at}${host}:${rpwd}"$'\n'"# "
+    #PROMPT="${user}${at}${host}:${rpwd}"$'\n'"# "
+    PROMPT="${user}${at}${host}:${opwd}"$'\n'"# "
     RPROMPT="[${date}]"
     #PROMPT="${user}${at}${host}:${rpwd}"$'\n'"➜  "
     #PS1="${user}${at}${host}:${rpwd}[${date}]"$'\n'"➜  "
