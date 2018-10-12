@@ -88,6 +88,8 @@ alias gcmsg='git commit -m'
 alias gb='git branch'
 alias grv='git remote -v'
 alias gpob='git push origin $(git rev-parse --abbrev-ref HEAD)'
+alias gbc='git rev-parse --abbrev-ref HEAD'
+alias gmnf='git merge --no-ff'
 
 # alias ufw
 alias sus='sudo ufw status'
