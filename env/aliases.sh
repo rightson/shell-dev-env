@@ -49,6 +49,8 @@ alias vimrc="vim ~/.vimrc"
 alias gvimrc="gvim ~/.gvimrc"
 alias tmuxrc="vim ~/.tmux.conf"
 
+alias public-ip='curl ipinfo.io/ip'
+
 # python aliases
 alias py=python
 alias py3=python3
