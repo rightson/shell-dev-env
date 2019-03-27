@@ -32,6 +32,7 @@ set ttymouse=xterm2
 set background=dark
 set ruler
 set nowrap
+set linebreak
 set colorcolumn=120
 let &colorcolumn=join(range(120,999),",")
 highlight ColorColumn ctermbg=235 guibg=#2c2d27
