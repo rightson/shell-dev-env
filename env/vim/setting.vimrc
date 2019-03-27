@@ -83,6 +83,10 @@ set omnifunc=phpcomplete#CompletePHP
 au FileType html,html set omnifunc=htmlcomplete#CompleteTags
 au FileType javascript,json set omnifunc=javascriptcomplete#CompleteJS
 
+au FileType txt,tex,md set wrap
+au FileType txt,tex,md noremap <silent> k gk
+au FileType txt,tex,md noremap <silent> j gj
+au FileType txt,tex,md noremap <silent> $ g$
 
 " Status bar
 set laststatus=2
