@@ -157,6 +157,7 @@ if has("gui_running")
   set lines=60 columns=120
   set guioptions-=T
   set guioptions-=r
+  set guioptions-=L
   "set transparency=2
   colo PaperColor
   set linespace=2
