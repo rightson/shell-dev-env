@@ -84,7 +84,8 @@ Plug 'vim-scripts/Rename2'
 
 " JavaScript
 "Plug 'othree/es.next.syntax.vim'
-"Plug 'pangloss/vim-javascript'
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
 Plug 'posva/vim-vue'
 
 " LaTex
