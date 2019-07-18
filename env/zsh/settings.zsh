@@ -29,6 +29,29 @@ vimode() {
 }
 vimode
 
+export MY_GW_IP=$HOME/.cache/my-gw-ip
+
+function rs () {
+    local ip=
+    vared -p "Enter desired gateway IP => " ip
+    echo $ip > $MY_GW_IP
+}
+function ra () {
+    local gwip=`cat $MY_GW_IP`
+    local exists=`route -n | head -n 3 | grep $gwip`
+    if [ -z "$exists" ]; then
+        local cmd="sudo route add -net default gw $gwip metric 1"
+        echo $cmd; eval $cmd;
+    fi
+    route -n | grep $gwip
+}
+function rc () {
+    local gwip=`cat $MY_GW_IP`
+    local cmd='sudo route del -net default gw $gwip metric 1'
+    echo $cmd; eval $cmd;
+    route -n
+}
+
 export ENV_PATH=$HOME/.env
 export PATH=$HOME/local/bin:$ENV_PATH/bin:/usr/local/sbin:/usr/local/bin:$PATH
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE=fg=cyan
