@@ -87,6 +87,8 @@ Plug 'vim-scripts/Rename2'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'posva/vim-vue'
+"Plug 'pangloss/vim-javascript'
+Plug 'mattn/emmet-vim'
 
 " LaTex
 "Plug 'vim-latex/vim-latex'
