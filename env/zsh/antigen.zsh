@@ -20,7 +20,7 @@ if [ -z `command -v antigen` ]; then
     if [ `uname -s` = Darwin ]; then
         antigen theme apple
     else
-        antigen theme bira
+        antigen theme candy
     fi
     antigen apply
 fi
