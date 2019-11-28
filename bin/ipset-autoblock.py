@@ -48,7 +48,7 @@ def block_new_illegal_ip(illegal_list):
     CMD_IPSET_ADD = ['sudo', 'ipset', 'add']
     for ip in illegal_list:
         cmd = CMD_IPSET_ADD + ['blacklist', ip]
-        exec(CMD)
+        exec(cmd)
 
 illegal_list = get_new_illegal_ip()
 block_new_illegal_ip(illegal_list)
