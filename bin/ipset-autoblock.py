@@ -42,13 +42,16 @@ def get_new_illegal_ip():
     for ip in invalid_ip_list:
         if ip not in whitelist and ip not in blacklist:
             illegal_list.append(ip)
-    return illegal_list
+    return [x for x in set(illegal_list)]
 
 def block_new_illegal_ip(illegal_list):
     CMD_IPSET_ADD = ['sudo', 'ipset', 'add']
     for ip in illegal_list:
         cmd = CMD_IPSET_ADD + ['blacklist', ip]
-        exec(cmd)
+        try:
+            exec(cmd)
+        finally:
+            pass
 
 illegal_list = get_new_illegal_ip()
 block_new_illegal_ip(illegal_list)
