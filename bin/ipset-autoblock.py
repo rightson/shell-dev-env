@@ -4,11 +4,16 @@ import subprocess
 import re
 
 IP_V4_PATTERN = re.compile(r'(([01]?[0-9]?[0-9]|2[0-4][0-9]|2[5][0-5])\.){3}([01]?[0-9]?[0-9]|2[0-4][0-9]|2[5][0-5])')
+IPLIST_NAME = 'blacklist'
 
 def exec(cmd):
     print('run> ', ' '.join(cmd))
     stdout = subprocess.check_output(cmd).decode('utf-8')
     return [line for line in stdout.splitlines()]
+
+def get_ipset_list():
+    CMD_IPSET_LIST = ['sudo', 'ipset', 'list']
+    return exec(CMD_IPSET_LIST)
 
 def get_ipset_blacklist():
     CMD_IPSET_LIST = ['sudo', 'ipset', 'list']
@@ -16,12 +21,13 @@ def get_ipset_blacklist():
     return exec(CMD_IPSET_LIST)[IP_MEMBERS_INDEX:]
 
 def get_invalid_auth():
-    LOG_AUTH = '/var/log/auth.log'
-    auth_log = open(LOG_AUTH).read().splitlines()
+    LOG_AUTHS = ['/var/log/auth.log'] + ['/var/log/auth.log.%s' % x for x in range(1, 5)]
     ip_list = []
-    for line in auth_log:
-        if 'Invalid' in line:
-            ip_list.append(line.split(' ')[-1])
+    for LOG_AUTH in LOG_AUTHS:
+        auth_log = open(LOG_AUTH).read().splitlines()
+        for line in auth_log:
+            if 'Invalid' in line:
+                ip_list.append(line.split(' ')[-1])
     return ip_list
 
 def get_ufw_whitelist():
@@ -44,15 +50,30 @@ def get_new_illegal_ip():
             illegal_list.append(ip)
     return [x for x in set(illegal_list)]
 
+def create_ipset_or_skip():
+    ret = get_ipset_list()
+    if not ret:
+        CMD_IPSET_CREATE_BLACKLIST = ['sudo', 'ipset', 'create', IPLIST_NAME, 'hash:net']
+        return exec(CMD_IPSET_CREATE_BLACKLIST)
+    return []
+
+def saveload_blacklist(op):
+    cmd = ['sudo', 'ipset', op or 'restore', '-f', '/etc/ipset.conf']
+    try:
+        exec(cmd)
+    finally:
+        pass
+
 def block_new_illegal_ip(illegal_list):
     CMD_IPSET_ADD = ['sudo', 'ipset', 'add']
     for ip in illegal_list:
-        cmd = CMD_IPSET_ADD + ['blacklist', ip]
+        cmd = CMD_IPSET_ADD + [IPLIST_NAME, ip]
         try:
             exec(cmd)
         finally:
             pass
+    saveload_blacklist('save')
 
+create_ipset_or_skip()
 illegal_list = get_new_illegal_ip()
 block_new_illegal_ip(illegal_list)
-
