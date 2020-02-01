@@ -62,7 +62,7 @@ user="$txtred\u$txtrst"
 host="$txtylw\h$txtrst"
 rpwd="$txtgrn\w$txtrst"
 opwd="$txtgrn\W$txtrst"
-date="$txtpur\t$txtrst"
+date="$txtpur\t \D{%d-%m-%Y}$txtrst"
 at="$txtwht@$txtrst"
 
 parse_git_branch() {
