@@ -27,8 +27,6 @@ hostname=%m
 #hostname=`get_ipaddr`
 cwd=%~
 
-autoload -Uz vcs_info
-precmd() { vcs_info }
 
 root="%{$fg[red]%}$username%{$reset_color%}"
 user="%{$fg[red]%}$username%{$reset_color%}"
@@ -42,16 +40,26 @@ date="%{$fg[red]%}%D{%Y/%m/%d}%{$reset_color%}"
 datetime="%{$fg[magenta]%}[%* %D{%Y/%m/%d}]%{$reset_color%}"
 at="%{$fg[white]%}@%{$reset_color%}"
 
-prompt2=$'\n'"%{$fg[blue]%}->%{$fg_bold[blue]%} %#%{$reset_color%} "
-#gitbranch=$(git rev-parse --abbrev-ref HEAD)
-#gb="%{$fg[red]%}$gitbranch%{$reset_color%}"
+setopt prompt_subst
+autoload -Uz vcs_info
+zstyle ':vcs_info:*' enable git cvs svn
+vcs_info_wrapper() {
+  	vcs_info
+  	if [ -n "$vcs_info_msg_0_" ]; then
+  	  	echo "%{$fg[blue]%}${vcs_info_msg_0_}%{$reset_color%}$del"
+  	else
+		echo "%{$fg[black]%}%{$reset_color%}"
+  	fi
+}
+
+promptLine2=$'\n'"%{$fg[blue]%}->%{$fg_bold[blue]%} %#%{$reset_color%} "
 
 ps1_root() {
     PS1="${root}${at}${host}[${cwd}]# "
 }
 
 ps1_pretty() {
-    PROMPT="${user}${at}${host}:${opwd} ${datetime}${prompt2}"
+    PROMPT='${user}${at}${host}:${opwd}$(vcs_info_wrapper) ${datetime}${promptLine2}'
     #PROMPT="${user}${at}${host}:${rpwd}"$'\n'"➜  "
     #RPROMPT="${date}"
 }
