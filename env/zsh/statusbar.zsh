@@ -43,6 +43,7 @@ at="%{$fg[white]%}@%{$reset_color%}"
 setopt prompt_subst
 autoload -Uz vcs_info
 zstyle ':vcs_info:*' enable git cvs svn
+zstyle ':vcs_info:git*' formats " (%b)"
 vcs_info_wrapper() {
   	vcs_info
   	if [ -n "$vcs_info_msg_0_" ]; then
