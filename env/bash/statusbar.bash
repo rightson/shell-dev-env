@@ -62,7 +62,8 @@ user="$txtred\u$txtrst"
 host="$txtylw\h$txtrst"
 rpwd="$txtgrn\w$txtrst"
 opwd="$txtgrn\W$txtrst"
-date="$txtpur\t \D{%d-%m-%Y}$txtrst"
+time="$txtpur\t$txtrst"
+date="$txtpur\D{%Y/%m/%d}$txtrst"
 at="$txtwht@$txtrst"
 
 parse_git_branch() {
@@ -74,7 +75,7 @@ ps1_root() {
 }
 
 ps1_pretty() {
-    PS1="${user}${at}${host}:${rpwd}\$(parse_git_branch) [${date}]\n\$ "
+    PS1="${user}${at}${host}:${rpwd}\$(parse_git_branch) [${time} ${date}]\n\$ "
 }
 
 ps1_relative() {

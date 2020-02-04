@@ -3,6 +3,7 @@
 # =Begin=
 source $ENV_ROOT/env/bash/statusbar.bash
 source $ENV_ROOT/env/bash/aliases.bash
+source $ENV_ROOT/env/bash/git-aliases.bash
 source $ENV_ROOT/env/bash/variables.bash
 source $ENV_ROOT/env/util.sh
 # =End=
