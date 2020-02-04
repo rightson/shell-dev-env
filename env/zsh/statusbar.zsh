@@ -14,7 +14,7 @@ get_ipaddr()
             ip=`ip addr show dynamic | grep inet | head -n 1 | awk '{print $2}' | sed 's/\/[0-9]*//g'`
         else
             interface="en${i}"
-            ip=`/sbin/ifconfig | grep -A3 -e "^$interface" | tail -n 1 | awk '{print $2}'` 
+            ip=`/sbin/ifconfig | grep -A3 -e "^$interface" | tail -n 1 | awk '{print $2}'`
         fi
         echo $ip
         return
@@ -23,39 +23,37 @@ get_ipaddr()
 }
 
 username=%n
-#hostname=%m
-hostname=`get_ipaddr`
+hostname=%m
+#hostname=`get_ipaddr`
 cwd=%~
 
+autoload -Uz vcs_info
+precmd() { vcs_info }
+
 root="%{$fg[red]%}$username%{$reset_color%}"
-user="%{$fg[green]%}$username%{$reset_color%}"
-
+user="%{$fg[red]%}$username%{$reset_color%}"
 user_at_host="%{$fg_bold[green]%}%n@%m"
-
-host="%{$fg[green]%}$hostname%{$reset_color%}"
-rpwd="%{$fg[yellow]%}%/%{$reset_color%}"
-opwd="%{$fg[yellow]%}$cwd%{$reset_color%}"
-get_cwd="%{$fg[white]%}[%~]%{$reset_color%}"
-get_now="%{$fg[blue]%}%D{[%X]}%{$reset_color%}"
+host="%{$fg[yellow]%}$hostname%{$reset_color%}"
+rpwd="%{$fg[green]%}%/%{$reset_color%}"
+opwd="%{$fg[green]%}$cwd%{$reset_color%}"
+get_cwd="%{$fg[blue]%}[%~]%{$reset_color%}"
+get_now="%{$fg[purple]%}%D{[%X]}%{$reset_color%}"
 date="%{$fg[red]%}%D{%Y/%m/%d}%{$reset_color%}"
-time="%{$fg[cyan]%}%*%{$reset_color%}"
-at="@"
+datetime="%{$fg[magenta]%}[%* %D{%Y/%m/%d}]%{$reset_color%}"
+at="%{$fg[white]%}@%{$reset_color%}"
 
-get_prompt=$'\n'"%{$fg[blue]%}->%{$fg_bold[blue]%} %#%{$reset_color%} "
-
+prompt2=$'\n'"%{$fg[blue]%}->%{$fg_bold[blue]%} %#%{$reset_color%} "
 #gitbranch=$(git rev-parse --abbrev-ref HEAD)
 #gb="%{$fg[red]%}$gitbranch%{$reset_color%}"
 
 ps1_root() {
-    PS1="${root}@${host}[${cwd}]# "
+    PS1="${root}${at}${host}[${cwd}]# "
 }
 
 ps1_pretty() {
-    #PROMPT="${user_at_host} ${get_now} ${get_cwd} $(git_prompt_info) ${date} ${get_prompt}"
-    RPROMPT="<${date}>"
-    #PROMPT="${user}${at}${host}:${rpwd}"$'\n'"# "
-    #PROMPT="${user}${at}${host}:${opwd}"$'\n'"# "
+    PROMPT="${user}${at}${host}:${opwd} ${datetime}${prompt2}"
     #PROMPT="${user}${at}${host}:${rpwd}"$'\n'"➜  "
+    #RPROMPT="${date}"
 }
 
 ps1_relative() {

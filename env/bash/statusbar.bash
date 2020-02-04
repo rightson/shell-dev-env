@@ -43,12 +43,12 @@ function get_ipaddr()
     for i in `seq 0 1 10`; do
         if [ `uname` = 'Linux' ]; then
             interface="eth${i}"
-            ip=`/sbin/ifconfig | grep -A1 -e "^$interface" | tail -n 1` 
+            ip=`/sbin/ifconfig | grep -A1 -e "^$interface" | tail -n 1`
         else
             interface="en${i}"
-            ip=`/sbin/ifconfig | grep -A3 -e "^$interface" | tail -n 1 | awk '{print $2}'` 
+            ip=`/sbin/ifconfig | grep -A3 -e "^$interface" | tail -n 1 | awk '{print $2}'`
         fi
-        if [[ $ip =~ ([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}) ]]; then 
+        if [[ $ip =~ ([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}) ]]; then
             echo ${BASH_REMATCH[1]};
             return
         fi
@@ -64,6 +64,7 @@ rpwd="$txtgrn\w$txtrst"
 opwd="$txtgrn\W$txtrst"
 time="$txtpur\t$txtrst"
 date="$txtpur\D{%Y/%m/%d}$txtrst"
+datetime="$txtpur[$time $date]$txtrst"
 at="$txtwht@$txtrst"
 
 parse_git_branch() {
@@ -75,7 +76,7 @@ ps1_root() {
 }
 
 ps1_pretty() {
-    PS1="${user}${at}${host}:${rpwd}\$(parse_git_branch) [${time} ${date}]\n\$ "
+    PS1="${user}${at}${host}:${rpwd}${txtblu}\$(parse_git_branch)${txtrst} ${datetime}]\n\$ "
 }
 
 ps1_relative() {
@@ -90,5 +91,5 @@ if [ "`id -u`" -eq 0 ]; then
     ps1_root
 else
     ps1_pretty
-fi 
+fi
 

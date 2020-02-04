@@ -1,8 +1,8 @@
 
 # Added by shell-dev-env.
 # =Begin=
-source $ENV_ROOT/env/zsh/statusbar.zsh
 source $ENV_ROOT/env/zsh/antigen.zsh
+source $ENV_ROOT/env/zsh/statusbar.zsh
 source $ENV_ROOT/env/zsh/settings.zsh
 source $ENV_ROOT/env/zsh/aliases.zsh
 source $ENV_ROOT/env/util.sh
