@@ -35,12 +35,9 @@ user_at_host="%{$fg_bold[green]%}%n@%m"
 host="%{$fg[green]%}$hostname%{$reset_color%}"
 rpwd="%{$fg[yellow]%}%/%{$reset_color%}"
 opwd="%{$fg[yellow]%}$cwd%{$reset_color%}"
-
 get_cwd="%{$fg[white]%}[%~]%{$reset_color%}"
-
 get_now="%{$fg[blue]%}%D{[%X]}%{$reset_color%}"
-
-date="%{$fg[red]%}<%D>%{$reset_color%}"
+date="%{$fg[red]%}%D{%Y/%m/%d}%{$reset_color%}"
 time="%{$fg[cyan]%}%*%{$reset_color%}"
 at="@"
 
@@ -55,12 +52,10 @@ ps1_root() {
 
 ps1_pretty() {
     #PROMPT="${user_at_host} ${get_now} ${get_cwd} $(git_prompt_info) ${date} ${get_prompt}"
-    RPROMPT="${date}"
+    RPROMPT="<${date}>"
     #PROMPT="${user}${at}${host}:${rpwd}"$'\n'"# "
     #PROMPT="${user}${at}${host}:${opwd}"$'\n'"# "
     #PROMPT="${user}${at}${host}:${rpwd}"$'\n'"➜  "
-    #PS1="${user}${at}${host}:${rpwd}[${date}]"$'\n'"➜  "
-    #PS1="${user}${at}${host}:${rpwd}"$'\n'"[${date}] ➜  "
 }
 
 ps1_relative() {
