@@ -130,6 +130,10 @@ patch_everything() {
 }
 
 case $1 in
+    minimal)
+        echo "Deoplying minimal $ENV_ROOT ..."
+        deploy_rc_files
+        ;;
     *)
         patch_everything
         ;;
