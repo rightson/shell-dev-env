@@ -27,3 +27,19 @@ function registerPathAndLibrary {
     registerLibrary $1/lib
 }
 
+function ufw_allow() {
+    local ip=$1
+    local port=$2
+    sudo ufw allow from $ip to any port $port
+}
+
+function ufw_delete_allow() {
+    local ip=$1
+    local port=$2
+    sudo ufw delete allow from $ip to any port $port
+}
+
+function get_current_ip() {
+    curl -s https://ipinfo.io | python3 -c "import sys, json; print(json.load(sys.stdin)['ip'])"
+}
+
