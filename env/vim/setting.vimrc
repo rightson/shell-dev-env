@@ -49,7 +49,7 @@ let g:Powerline_symbols = 'unicode'
 " colo koehler
 " colo murphy
 " colo pablo
-colo monokai
+" colo monokai
 
 
 " Display: folding
