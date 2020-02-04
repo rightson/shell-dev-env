@@ -64,7 +64,7 @@ rpwd="$txtgrn\w$txtrst"
 opwd="$txtgrn\W$txtrst"
 time="$txtpur\t$txtrst"
 date="$txtpur\D{%Y/%m/%d}$txtrst"
-datetime="$txtpur[$time $date]$txtrst"
+datetime="$txtpur[\t \D{%Y/%m/%d}]$txtrst"
 at="$txtwht@$txtrst"
 
 parse_git_branch() {
@@ -76,7 +76,7 @@ ps1_root() {
 }
 
 ps1_pretty() {
-    PS1="${user}${at}${host}:${rpwd}${txtblu}\$(parse_git_branch)${txtrst} ${datetime}]\n\$ "
+    PS1="${user}${at}${host}:${rpwd}${txtblu}\$(parse_git_branch)${txtrst} ${datetime}\n\$ "
 }
 
 ps1_relative() {
