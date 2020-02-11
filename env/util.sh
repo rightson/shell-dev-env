@@ -43,6 +43,27 @@ function get_current_ip() {
     curl -s https://ipinfo.io | python3 -c "import sys, json; print(json.load(sys.stdin)['ip'])"
 }
 
+function remote_ufw_status () {
+    local remote=$1
+    ssh $remote sudo ufw status
+}
+
+function remote_ufw_allow_rdp() {
+    local remote=$1
+    local ip=$2
+    if [ -z $ip ]; then ip=`get_current_ip`; fi
+    echo "ssh $remote sudo ufw allow from $ip to any port 3389"
+    ssh $remote sudo ufw allow from $ip to any port 3389
+}
+
+function remote_ufw_delete_allow_rdp() {
+    local remote=$1
+    local ip=$2
+    if [ -z $ip ]; then ip=`get_current_ip`; fi
+    echo "ssh $remote sudo ufw delete allow from $ip to any port 3389"
+    ssh $remote sudo ufw delete allow from $ip to any port 3389
+}
+
 export MY_GW_IP=$HOME/.cache/my-gw-ip
 
 function rs () {
