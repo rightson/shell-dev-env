@@ -3,6 +3,11 @@ export EXIT_SUCCESS=0
 export EXIT_FAILURE=-1
 export RDP_PORT=3389
 
+function die() {
+    echo $@
+    exit $EXIT_FAILURE
+}
+
 function get_current_ip() {
     local temp=`mktemp`
     curl --insecure -s https://ipinfo.io > $temp
@@ -13,6 +18,7 @@ function get_current_ip() {
 }
 
 export MY_GW_IP=$HOME/.cache/my-gw-ip
+export MY_RDP_CACHE=$HOME/.cache/my-rdp-cache
 export CURRENT_IP=`get_current_ip`
 
 function registerPath() {
@@ -75,25 +81,56 @@ function ufw_delete_allow() {
     sudo ufw delete allow from $ip to any port $port
 }
 
-function remote_ufw_status () {
+function get_rdp_cache() {
     local remote=$1
+    if [ -n "$remote" ]; then
+        echo $remote
+        return
+    fi
+    if [ -z "$remote" ] && [ -s $MY_RDP_CACHE ]; then
+        cat $MY_RDP_CACHE
+        return
+    fi
+    die "Please specify SSH address"
+}
+
+function set_rdp_cache() {
+    local remote=$1
+    if [ -n "$remote" ]; then
+        mkdir -p `dirname $MY_RDP_CACHE`
+        echo $remote > $MY_RDP_CACHE;
+    fi
+}
+
+function clean_rdp_cache() {
+    echo "" > $MY_RDP_CACHE;
+}
+
+function remote_ufw_status() {
+    local remote=`get_rdp_cache $1`
+    if [ -z "$remote" ]; then echo "Please specify SSH address"; return; fi
     ssh $remote sudo ufw status
+    set_rdp_cache $remote
 }
 
 function remote_ufw_allow_rdp() {
-    local remote=$1
+    local remote=`get_rdp_cache $1`
     local ip=$2
+    if [ -z "$remote" ]; then echo "Please specify SSH address"; return; fi
     if [ -z $ip ]; then ip=`get_current_ip`; fi
     echo "ssh $remote sudo ufw allow from $ip to any port $RDP_PORT"
     ssh -n $remote sudo ufw allow from $ip to any port $RDP_PORT;
+    set_rdp_cache $remote
 }
 
 function remote_ufw_delete_allow_rdp() {
-    local remote=$1
+    local remote=`get_rdp_cache $1`
     local ip=$2
+    if [ -z "$remote" ]; then echo "Please specify SSH address"; return; fi
     if [ -z $ip ]; then ip=`get_current_ip`; fi
     echo "ssh $remote sudo ufw delete allow from $ip to any port $RDP_PORT"
     ssh -n $remote sudo ufw delete allow from $ip to any port $RDP_PORT;
+    set_rdp_cache $remote
 }
 
 function is_gw_good () {
