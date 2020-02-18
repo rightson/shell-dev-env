@@ -1,3 +1,20 @@
+
+export EXIT_SUCCESS=0
+export EXIT_FAILURE=-1
+export RDP_PORT=3389
+
+function get_current_ip() {
+    local temp=`mktemp`
+    curl --insecure -s https://ipinfo.io > $temp
+    if [ -s $temp ]; then
+        cat $temp | python3 -c "import sys, json; print(json.load(sys.stdin)['ip'])"
+    fi
+    rm -f $temp
+}
+
+export MY_GW_IP=$HOME/.cache/my-gw-ip
+export CURRENT_IP=`get_current_ip`
+
 function registerPath() {
     if [ -z $1 ]; then
         echo "Error: failed to register PATH: path not specified"
@@ -27,6 +44,25 @@ function registerPathAndLibrary {
     registerLibrary $1/lib
 }
 
+function insert_unique_line_to_file () {
+    local line=$1
+    local file=$2
+    if [ -n "$line" ]; then
+        grep $line $file > /dev/null 2>&1
+        if [ $? -ne 0 ]; then
+            echo $line >> $file
+        fi
+    fi
+}
+
+function remove_line_from_file () {
+    local line=$1
+    local file=$2
+    if [ -n "$line" ]; then
+        grep -v $line $file | tee $file > /dev/null
+    fi
+}
+
 function ufw_allow() {
     local ip=$1
     local port=$2
@@ -39,10 +75,6 @@ function ufw_delete_allow() {
     sudo ufw delete allow from $ip to any port $port
 }
 
-function get_current_ip() {
-    curl -s https://ipinfo.io | python3 -c "import sys, json; print(json.load(sys.stdin)['ip'])"
-}
-
 function remote_ufw_status () {
     local remote=$1
     ssh $remote sudo ufw status
@@ -52,19 +84,27 @@ function remote_ufw_allow_rdp() {
     local remote=$1
     local ip=$2
     if [ -z $ip ]; then ip=`get_current_ip`; fi
-    echo "ssh $remote sudo ufw allow from $ip to any port 3389"
-    ssh $remote sudo ufw allow from $ip to any port 3389
+    echo "ssh $remote sudo ufw allow from $ip to any port $RDP_PORT"
+    ssh -n $remote sudo ufw allow from $ip to any port $RDP_PORT;
 }
 
 function remote_ufw_delete_allow_rdp() {
     local remote=$1
     local ip=$2
     if [ -z $ip ]; then ip=`get_current_ip`; fi
-    echo "ssh $remote sudo ufw delete allow from $ip to any port 3389"
-    ssh $remote sudo ufw delete allow from $ip to any port 3389
+    echo "ssh $remote sudo ufw delete allow from $ip to any port $RDP_PORT"
+    ssh -n $remote sudo ufw delete allow from $ip to any port $RDP_PORT;
 }
 
-export MY_GW_IP=$HOME/.cache/my-gw-ip
+function is_gw_good () {
+    route -n | head -n 3 | tail -n 1 | grep `cat $MY_GW_IP` > /dev/null 2>&1
+    if [ $? -ne 0 ]; then
+        echo $EXIT_FAILURE
+    else
+        echo $EXIT_SUCCESS
+    fi
+}
+
 
 function rs () {
     local ip=
