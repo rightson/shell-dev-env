@@ -132,10 +132,10 @@ alias rc='route_del'
 function get_ssh_target_cache() {
     local remote=$1
     if [ -n "$remote" ]; then
-        echo $remote; return
+        echo $remote; return;
     fi
     if [ -z "$remote" ] && [ -s $MY_SSH_TARGET_CACHG ]; then
-        cat $MY_SSH_TARGET_CACHG; return
+        cat $MY_SSH_TARGET_CACHG; return;
     fi
     die "Please specify remote address"
 }
@@ -205,18 +205,18 @@ function remote_ufw_delete_allow() {
 
 function add_rdp_rule() {
     if [ -z $TARGET_SSH_URL ]; then
-        echo "Please set value to \$TARGET_SSH_URL"; return
+        echo "Please set value to \$TARGET_SSH_URL"; return;
     fi
     if [ -z $TARGET_RDP_CMD ]; then
-        echo "Please set value to \$TARGET_RDP_CMD"; return
+        echo "Please set value to \$TARGET_RDP_CMD"; return;
     fi
     if [ `is_gw_good` -ne $EXIT_SUCCESS ]; then
-        echo "No good gateway available"; return
+        echo "No good gateway available"; return;
     fi
     if [ -s $MY_RDP_IP_CACHE ]; then
         grep `get_current_ip` $MY_RDP_IP_CACHE
         if [ $? -ne 0 ]; then
-            echo "Rule already installed to remote's firewall"; return
+            echo "Rule already installed to remote's firewall"; return;
         fi
     fi
     insert_unique_line_to_file `get_current_ip` $MY_RDP_IP_CACHE
@@ -226,13 +226,13 @@ function add_rdp_rule() {
 
 function remove_rdp_rules() {
     if [ -z $TARGET_SSH_URL ]; then
-        echo "Please set value to \$TARGET_SSH_URL"; return
+        echo "Please set value to \$TARGET_SSH_URL"; return;
     fi
     if [ -z $TARGET_RDP_CMD ]; then
-        echo "Please set value to \$TARGET_RDP_CMD"; return
+        echo "Please set value to \$TARGET_RDP_CMD"; return;
     fi
     if [ `is_gw_good` -ne $EXIT_SUCCESS ]; then
-        echo "No good gateway available"; return
+        echo "No good gateway available"; return;
     fi
     if [ -s $MY_RDP_IP_CACHE ]; then
         cat $MY_RDP_IP_CACHE | while read line; do
