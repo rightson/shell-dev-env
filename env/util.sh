@@ -1,46 +1,49 @@
+#!/bin/bash
 
+### Variables ###
+
+# general
 export EXIT_SUCCESS=0
 export EXIT_FAILURE=-1
-export RDP_PORT=3389
+# for route
+export MY_GW_IP_CACHE=$HOME/.cache/my-gw-ip
+# for ssh
+export MY_SSH_TARGET_CACHG=$HOME/.cache/my-ssh-target-cache
+# for ufw
+# for rdp
+export MY_RDP_PORT=3389
+export MY_RDP_REF_COUNT=0
+export MY_RDP_IP_CACHE=$HOME/.cache/my-rdp-ip-cache
+
+
+### General ###
 
 function die() {
-    echo $@
-    exit $EXIT_FAILURE
+    echo $@;
+    exit $EXIT_FAILURE;
 }
 
-function get_current_ip() {
-    local temp=`mktemp`
-    curl --insecure -s https://ipinfo.io > $temp
-    if [ -s $temp ]; then
-        cat $temp | python3 -c "import sys, json; print(json.load(sys.stdin)['ip'])"
-    fi
-    rm -f $temp
+function execho() {
+    echo $@;
+    eval $@;
 }
-
-export MY_GW_IP=$HOME/.cache/my-gw-ip
-export MY_RDP_CACHE=$HOME/.cache/my-rdp-cache
-export CURRENT_IP=`get_current_ip`
 
 function registerPath() {
     if [ -z $1 ]; then
-        echo "Error: failed to register PATH: path not specified"
-        return
+        echo "Error: failed to register PATH: path not specified"; return;
     fi
     if [ ! -d $1 ]; then
-        echo "Error: failed to register $1 to PATH: path $1 not existed"
-        return
+        echo "Error: failed to register $1 to PATH: path $1 not existed"; return;
     fi
     export PATH=$1:$PATH
 }
 
 function registerLibrary() {
     if [ -z $1 ]; then
-        echo "Error: failed to register LD_LIBRARY_PATH: path not specified"
-        return
+        echo "Error: failed to register LD_LIBRARY_PATH: path not specified"; return;
     fi
     if [ ! -d $1 ]; then
-        echo "Error: failed to register $1 to LD_LIBRARY_PATH: path $1 not existed"
-        return
+        echo "Error: failed to register $1 to LD_LIBRARY_PATH: path $1 not existed"; return;
     fi
     export LD_LIBRARY_PATH=$1:$LD_LIBRARY_PATH
 }
@@ -69,72 +72,20 @@ function remove_line_from_file () {
     fi
 }
 
-function ufw_allow() {
-    local ip=$1
-    local port=$2
-    sudo ufw allow from $ip to any port $port
-}
-
-function ufw_delete_allow() {
-    local ip=$1
-    local port=$2
-    sudo ufw delete allow from $ip to any port $port
-}
-
-function get_rdp_cache() {
-    local remote=$1
-    if [ -n "$remote" ]; then
-        echo $remote
-        return
+function get_current_ip() {
+    local temp=`mktemp`
+    curl --insecure -s https://ipinfo.io > $temp
+    if [ -s $temp ]; then
+        cat $temp | python3 -c "import sys, json; print(json.load(sys.stdin)['ip'])"
     fi
-    if [ -z "$remote" ] && [ -s $MY_RDP_CACHE ]; then
-        cat $MY_RDP_CACHE
-        return
-    fi
-    die "Please specify SSH address"
+    rm -f $temp
 }
 
-function set_rdp_cache() {
-    local remote=$1
-    if [ -n "$remote" ]; then
-        mkdir -p `dirname $MY_RDP_CACHE`
-        echo $remote > $MY_RDP_CACHE;
-    fi
-}
 
-function clean_rdp_cache() {
-    echo "" > $MY_RDP_CACHE;
-}
+### For route ###
 
-function remote_ufw_status() {
-    local remote=`get_rdp_cache $1`
-    if [ -z "$remote" ]; then echo "Please specify SSH address"; return; fi
-    ssh $remote sudo ufw status
-    set_rdp_cache $remote
-}
-
-function remote_ufw_allow_rdp() {
-    local remote=`get_rdp_cache $1`
-    local ip=$2
-    if [ -z "$remote" ]; then echo "Please specify SSH address"; return; fi
-    if [ -z $ip ]; then ip=`get_current_ip`; fi
-    echo "ssh $remote sudo ufw allow from $ip to any port $RDP_PORT"
-    ssh -n $remote sudo ufw allow from $ip to any port $RDP_PORT;
-    set_rdp_cache $remote
-}
-
-function remote_ufw_delete_allow_rdp() {
-    local remote=`get_rdp_cache $1`
-    local ip=$2
-    if [ -z "$remote" ]; then echo "Please specify SSH address"; return; fi
-    if [ -z $ip ]; then ip=`get_current_ip`; fi
-    echo "ssh $remote sudo ufw delete allow from $ip to any port $RDP_PORT"
-    ssh -n $remote sudo ufw delete allow from $ip to any port $RDP_PORT;
-    set_rdp_cache $remote
-}
-
-function is_gw_good () {
-    route -n | head -n 3 | tail -n 1 | grep `cat $MY_GW_IP` > /dev/null 2>&1
+function is_gw_good() {
+    route -n | head -n 3 | tail -n 1 | grep `cat $MY_GW_IP_CACHE` > /dev/null 2>&1
     if [ $? -ne 0 ]; then
         echo $EXIT_FAILURE
     else
@@ -142,8 +93,7 @@ function is_gw_good () {
     fi
 }
 
-
-function rs () {
+function add_gw_ip() {
     local ip=
     local msg="Enter desired gateway IP => "
     if [ -n "$ZSH_VERSION" ]; then
@@ -151,24 +101,167 @@ function rs () {
     else
         read -p "$msg" ip
     fi
-
-    echo $ip > $MY_GW_IP
+    echo $ip > $MY_GW_IP_CACHE
 }
-function ra () {
-    local gwip=`cat $MY_GW_IP`
+
+function route_add() {
+    local gwip=`cat $MY_GW_IP_CACHE`
     local exists=`route -n | head -n 3 | grep $gwip`
     if [ -z "$exists" ]; then
         local cmd="sudo route add -net default gw $gwip metric 1"
-        echo $cmd; eval $cmd;
+        execho $cmd;
     fi
     route -n | grep $gwip
 }
 
-function rc () {
-    local gwip=`cat $MY_GW_IP`
+function route_del() {
+    local gwip=`cat $MY_GW_IP_CACHE`
     local cmd='sudo route del -net default gw $gwip metric 1'
-    echo $cmd; eval $cmd;
+    execho $cmd;
     route -n
 }
 
 alias rn='route -n'
+alias rs='add_gw_ip'
+alias ra='route_add'
+alias rc='route_del'
+
+
+### For SSH ###
+
+function get_ssh_target_cache() {
+    local remote=$1
+    if [ -n "$remote" ]; then
+        echo $remote; return
+    fi
+    if [ -z "$remote" ] && [ -s $MY_SSH_TARGET_CACHG ]; then
+        cat $MY_SSH_TARGET_CACHG; return
+    fi
+    die "Please specify remote address"
+}
+
+function set_ssh_target_cache() {
+    local remote=$1
+    if [ -n "$remote" ]; then
+        mkdir -p `dirname $MY_SSH_TARGET_CACHG`
+        echo $remote > $MY_SSH_TARGET_CACHG;
+    fi
+}
+
+function clean_ssh_target_cache() {
+    echo "" > $MY_SSH_TARGET_CACHG;
+}
+
+
+### For UFW ###
+
+function ufw_status() {
+    execho sudo ufw status
+}
+
+function ufw_allow() {
+    local ip=$1
+    local port=$2
+    execho sudo ufw allow from $ip to any port $port
+}
+
+function ufw_delete_allow() {
+    local ip=$1
+    local port=$2
+    execho sudo ufw delete allow from $ip to any port $port
+}
+
+function remote_ufw_status() {
+    local remote=`get_ssh_target_cache $1`
+    if [ -z "$remote" ]; then echo "Please specify remote address"; return; fi
+    execho ssh $remote sudo ufw status
+    set_ssh_target_cache $remote
+}
+
+function remote_ufw_allow() {
+    local remote=`get_ssh_target_cache $1`
+    local ip=$2
+    local port=$3
+    if [ -z "$remote" ]; then echo "Please specify SSH address"; return; fi
+    if [ -z $ip ]; then ip=`get_current_ip`; fi
+    if [ -z $port ]; then echo "Please specify port to allow"; return; fi
+    execho ssh -n $remote sudo ufw allow from $ip to any port $port;
+    set_ssh_target_cache $remote
+}
+
+function remote_ufw_delete_allow() {
+    local remote=`get_ssh_target_cache $1`
+    local ip=$2
+    local port=$3
+    if [ -z "$remote" ]; then echo "Please specify SSH address"; return; fi
+    if [ -z $ip ]; then ip=`get_current_ip`; fi
+    if [ -z $port ]; then echo "Please specify port to allow"; return; fi
+    execho ssh -n $remote sudo ufw delete allow from $ip to any port $port;
+    set_ssh_target_cache $remote
+}
+
+
+### For RDP ###
+
+function add_rdp_rule() {
+    if [ -z $TARGET_SSH_URL ]; then
+        echo "Please set value to \$TARGET_SSH_URL"; return
+    fi
+    if [ -z $TARGET_RDP_CMD ]; then
+        echo "Please set value to \$TARGET_RDP_CMD"; return
+    fi
+    if [ `is_gw_good` -ne $EXIT_SUCCESS ]; then
+        echo "No good gateway available"; return
+    fi
+    if [ -s $MY_RDP_IP_CACHE ]; then
+        grep `get_current_ip` $MY_RDP_IP_CACHE
+        if [ $? -ne 0 ]; then
+            echo "Rule already installed to remote's firewall"; return
+        fi
+    fi
+    insert_unique_line_to_file `get_current_ip` $MY_RDP_IP_CACHE
+    remote_ufw_allow_rdp $TARGET_SSH_URL
+    export MY_RDP_REF_COUNT=$(($MY_RDP_REF_COUNT + 1))
+}
+
+function remove_rdp_rules() {
+    if [ -z $TARGET_SSH_URL ]; then
+        echo "Please set value to \$TARGET_SSH_URL"; return
+    fi
+    if [ -z $TARGET_RDP_CMD ]; then
+        echo "Please set value to \$TARGET_RDP_CMD"; return
+    fi
+    if [ `is_gw_good` -ne $EXIT_SUCCESS ]; then
+        echo "No good gateway available"; return
+    fi
+    if [ -s $MY_RDP_IP_CACHE ]; then
+        cat $MY_RDP_IP_CACHE | while read line; do
+            if [ -z "$line" ]; then continue; fi
+            remote_ufw_delete_allow_rdp $TARGET_SSH_URL $line
+            export MY_RDP_REF_COUNT=$(($MY_RDP_REF_COUNT - 1))
+            remove_line_from_file $line $MY_RDP_IP_CACHE
+        done
+        remote_ufw_status $TARGET_SSH_URL
+    fi
+}
+
+function remote_ufw_allow_rdp() {
+    local remote=`get_ssh_target_cache $1`
+    local ip=$2
+    if [ -z "$ip" ]; then
+        ip=`get_current_ip`;
+    fi
+    remote_ufw_allow $remote $ip $MY_RDP_PORT
+    set_ssh_target_cache $remote
+}
+
+function remote_ufw_delete_allow_rdp() {
+    local remote=`get_ssh_target_cache $1`
+    local ip=$2
+    if [ -z "$ip" ]; then
+        ip=`get_current_ip`;
+    fi
+    remote_ufw_delete_allow $remote $ip $MY_RDP_PORT
+    set_ssh_target_cache $remote
+}
+
