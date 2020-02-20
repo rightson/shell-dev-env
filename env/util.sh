@@ -23,7 +23,7 @@ function die() {
     exit $EXIT_FAILURE;
 }
 
-function execho() {
+function run() {
     echo $@;
     eval $@;
 }
@@ -108,16 +108,14 @@ function route_add() {
     local gwip=`cat $MY_GW_IP_CACHE`
     local exists=`route -n | head -n 3 | grep $gwip`
     if [ -z "$exists" ]; then
-        local cmd="sudo route add -net default gw $gwip metric 1"
-        execho $cmd;
+        run sudo route add -net default gw $gwip metric 1
     fi
     route -n | grep $gwip
 }
 
 function route_del() {
     local gwip=`cat $MY_GW_IP_CACHE`
-    local cmd='sudo route del -net default gw $gwip metric 1'
-    execho $cmd;
+    run sudo route del -net default gw $gwip metric 1
     route -n
 }
 
@@ -156,25 +154,25 @@ function clean_ssh_target_cache() {
 ### For UFW ###
 
 function ufw_status() {
-    execho sudo ufw status
+    run sudo ufw status
 }
 
 function ufw_allow() {
     local ip=$1
     local port=$2
-    execho sudo ufw allow from $ip to any port $port
+    run sudo ufw allow from $ip to any port $port
 }
 
 function ufw_delete_allow() {
     local ip=$1
     local port=$2
-    execho sudo ufw delete allow from $ip to any port $port
+    run sudo ufw delete allow from $ip to any port $port
 }
 
 function remote_ufw_status() {
     local remote=`get_ssh_target_cache $1`
     if [ -z "$remote" ]; then echo "Please specify remote address"; return; fi
-    execho ssh $remote sudo ufw status
+    run ssh $remote sudo ufw status
     set_ssh_target_cache $remote
 }
 
@@ -185,7 +183,7 @@ function remote_ufw_allow() {
     if [ -z "$remote" ]; then echo "Please specify SSH address"; return; fi
     if [ -z $ip ]; then ip=`get_current_ip`; fi
     if [ -z $port ]; then echo "Please specify port to allow"; return; fi
-    execho ssh -n $remote sudo ufw allow from $ip to any port $port;
+    run ssh -n $remote sudo ufw allow from $ip to any port $port;
     set_ssh_target_cache $remote
 }
 
@@ -196,7 +194,7 @@ function remote_ufw_delete_allow() {
     if [ -z "$remote" ]; then echo "Please specify SSH address"; return; fi
     if [ -z $ip ]; then ip=`get_current_ip`; fi
     if [ -z $port ]; then echo "Please specify port to allow"; return; fi
-    execho ssh -n $remote sudo ufw delete allow from $ip to any port $port;
+    run ssh -n $remote sudo ufw delete allow from $ip to any port $port;
     set_ssh_target_cache $remote
 }
 
