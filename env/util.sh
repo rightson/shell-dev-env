@@ -12,7 +12,6 @@ export MY_SSH_TARGET_CACHG=$HOME/.cache/my-ssh-target-cache
 # for ufw
 # for rdp
 export MY_RDP_PORT=3389
-export MY_RDP_REF_COUNT=0
 export MY_RDP_IP_CACHE=$HOME/.cache/my-rdp-ip-cache
 
 
@@ -219,7 +218,6 @@ function add_rdp_rule() {
     fi
     insert_unique_line_to_file `get_current_ip` $MY_RDP_IP_CACHE
     remote_ufw_allow_rdp $TARGET_SSH_URL
-    export MY_RDP_REF_COUNT=$(($MY_RDP_REF_COUNT + 1))
 }
 
 function remove_rdp_rules() {
@@ -236,7 +234,6 @@ function remove_rdp_rules() {
         cat $MY_RDP_IP_CACHE | while read line; do
             if [ -z "$line" ]; then continue; fi
             remote_ufw_delete_allow_rdp $TARGET_SSH_URL $line
-            export MY_RDP_REF_COUNT=$(($MY_RDP_REF_COUNT - 1))
             remove_line_from_file $line $MY_RDP_IP_CACHE
         done
         remote_ufw_status $TARGET_SSH_URL
@@ -262,4 +259,11 @@ function remote_ufw_delete_allow_rdp() {
     remote_ufw_delete_allow $remote $ip $MY_RDP_PORT
     set_ssh_target_cache $remote
 }
+
+alias us='ufw_status'
+alias ua='ufw_allow_rdp'
+alias ud='ufw_delete_allow_rdp'
+alias rus='remote_ufw_status'
+alias rua='remote_ufw_allow_rdp'
+alias rud='remote_ufw_delete_allow_rdp'
 
