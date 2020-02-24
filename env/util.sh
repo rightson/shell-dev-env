@@ -72,7 +72,7 @@ function remove_line_from_file () {
 }
 
 function get_current_ip() {
-    local temp=`mktemp`
+    local temp=`mktemp`;
     curl --insecure -s https://ipinfo.io > $temp
     if [ -s $temp ]; then
         cat $temp | python3 -c "import sys, json; print(json.load(sys.stdin)['ip'])"
@@ -132,9 +132,10 @@ function get_ssh_target_cache() {
         echo $remote; return;
     fi
     if [ -z "$remote" ] && [ -s $MY_SSH_TARGET_CACHG ]; then
-        cat $MY_SSH_TARGET_CACHG; return;
+        cat $MY_SSH_TARGET_CACHG;
+    else
+        die "Please specify remote address";
     fi
-    die "Please specify remote address"
 }
 
 function set_ssh_target_cache() {
@@ -202,33 +203,34 @@ function remote_ufw_delete_allow() {
 
 function add_rdp_rule() {
     if [ -z $TARGET_SSH_URL ]; then
-        echo "Please set value to \$TARGET_SSH_URL"; return;
+        echo "Please set value to \$TARGET_SSH_URL"; return $EXIT_FAILURE;
     fi
     if [ -z $TARGET_RDP_CMD ]; then
-        echo "Please set value to \$TARGET_RDP_CMD"; return;
+        echo "Please set value to \$TARGET_RDP_CMD"; return $EXIT_FAILURE;
     fi
     if [ `is_gw_good` -ne $EXIT_SUCCESS ]; then
-        echo "No good gateway available"; return;
+        echo "No good gateway available"; return $EXIT_FAILURE;
     fi
     if [ -s $MY_RDP_IP_CACHE ]; then
         grep `get_current_ip` $MY_RDP_IP_CACHE
         if [ $? -ne 0 ]; then
-            echo "Rule already installed to remote's firewall"; return;
+            echo "Rule already installed to remote's firewall"; return $EXIT_SUCCESS;
         fi
     fi
     insert_unique_line_to_file `get_current_ip` $MY_RDP_IP_CACHE
     remote_ufw_allow_rdp $TARGET_SSH_URL
+    return $EXIT_SUCCESS;
 }
 
 function remove_rdp_rules() {
     if [ -z $TARGET_SSH_URL ]; then
-        echo "Please set value to \$TARGET_SSH_URL"; return;
+        echo "Please set value to \$TARGET_SSH_URL"; return $EXIT_FAILURE;
     fi
     if [ -z $TARGET_RDP_CMD ]; then
-        echo "Please set value to \$TARGET_RDP_CMD"; return;
+        echo "Please set value to \$TARGET_RDP_CMD"; return $EXIT_FAILURE;
     fi
     if [ `is_gw_good` -ne $EXIT_SUCCESS ]; then
-        echo "No good gateway available"; return;
+        echo "No good gateway available"; return $EXIT_FAILURE;
     fi
     if [ -s $MY_RDP_IP_CACHE ]; then
         cat $MY_RDP_IP_CACHE | while read line; do
@@ -238,6 +240,7 @@ function remove_rdp_rules() {
         done
         remote_ufw_status $TARGET_SSH_URL
     fi
+    return $EXIT_SUCCESS;
 }
 
 function remote_ufw_allow_rdp() {
@@ -248,6 +251,7 @@ function remote_ufw_allow_rdp() {
     fi
     remote_ufw_allow $remote $ip $MY_RDP_PORT
     set_ssh_target_cache $remote
+    return $EXIT_SUCCESS;
 }
 
 function remote_ufw_delete_allow_rdp() {
@@ -258,6 +262,7 @@ function remote_ufw_delete_allow_rdp() {
     fi
     remote_ufw_delete_allow $remote $ip $MY_RDP_PORT
     set_ssh_target_cache $remote
+    return $EXIT_SUCCESS;
 }
 
 alias us='ufw_status'
