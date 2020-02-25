@@ -44,7 +44,7 @@ function start_my_rdp() {
     fi
 
     local options="$option_user $option_basic $option_display $option_lowbw $option_sound"
-    unset $option_user $option_basic $option_display $option_lowbw $option_sound
+    unset option_user option_basic option_display option_lowbw option_sound
     local cmd="xfreerdp /v:$host /u:$user /p:$password $options $*"
     local cmd_prompt=`echo $cmd | sed "s/${password}/********/g"`
     local prefix=/tmp/xfreerdp.$USER.$host
