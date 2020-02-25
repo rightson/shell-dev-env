@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -x
 
 ### Variables ###
 
@@ -25,31 +25,42 @@ function die() {
 function run() {
     echo $@;
     eval $@;
+    return $?
 }
 
 function registerPath() {
     if [ -z $1 ]; then
-        echo "Error: failed to register PATH: path not specified"; return;
+        echo "Error: failed to register PATH: path not specified";
+        return $EXIT_FAILURE;
     fi
     if [ ! -d $1 ]; then
-        echo "Error: failed to register $1 to PATH: path $1 not existed"; return;
+        echo "Error: failed to register $1 to PATH: path $1 not existed";
+        return $EXIT_FAILURE;
     fi
     export PATH=$1:$PATH
 }
 
 function registerLibrary() {
     if [ -z $1 ]; then
-        echo "Error: failed to register LD_LIBRARY_PATH: path not specified"; return;
+        echo "Error: failed to register LD_LIBRARY_PATH: path not specified";
+        return $EXIT_FAILURE;
     fi
     if [ ! -d $1 ]; then
-        echo "Error: failed to register $1 to LD_LIBRARY_PATH: path $1 not existed"; return;
+        echo "Error: failed to register $1 to LD_LIBRARY_PATH: path $1 not existed";
+        return $EXIT_FAILURE;
     fi
     export LD_LIBRARY_PATH=$1:$LD_LIBRARY_PATH
 }
 
 function registerPathAndLibrary {
     registerPath $1/bin
+    if [ $? -ne $EXIT_SUCCESS ]; then
+        return $EXIT_FAILURE;
+    fi
     registerLibrary $1/lib
+    if [ $? -ne $EXIT_SUCCESS ]; then
+        return $EXIT_FAILURE;
+    fi
 }
 
 function insert_unique_line_to_file () {
@@ -59,8 +70,10 @@ function insert_unique_line_to_file () {
         grep $line $file > /dev/null 2>&1
         if [ $? -ne 0 ]; then
             echo $line >> $file
+            return $EXIT_SUCCESS;
         fi
     fi
+    return $EXIT_FAILURE;
 }
 
 function remove_line_from_file () {
@@ -68,7 +81,9 @@ function remove_line_from_file () {
     local file=$2
     if [ -n "$line" ]; then
         grep -v $line $file | tee $file > /dev/null
+        return $EXIT_SUCCESS;
     fi
+    return $EXIT_FAILURE;
 }
 
 function get_current_ip() {
@@ -77,7 +92,13 @@ function get_current_ip() {
     if [ -s $temp ]; then
         cat $temp | python3 -c "import sys, json; print(json.load(sys.stdin)['ip'])"
     fi
+    local ret=`test -s $temp`
     rm -f $temp
+    if [ -n "$ret" ]; then
+        return $EXIT_SUCCESS;
+    else
+        return $EXIT_FAILURE;
+    fi
 }
 
 
@@ -129,13 +150,15 @@ alias rc='route_del'
 function get_ssh_target_cache() {
     local remote=$1
     if [ -n "$remote" ]; then
-        echo $remote; return;
+        echo $remote;
+        return $EXIT_FAILURE;
     fi
     if [ -z "$remote" ] && [ -s $MY_SSH_TARGET_CACHG ]; then
         cat $MY_SSH_TARGET_CACHG;
     else
         die "Please specify remote address";
     fi
+    return $EXIT_SUCCESS;
 }
 
 function set_ssh_target_cache() {
@@ -143,7 +166,9 @@ function set_ssh_target_cache() {
     if [ -n "$remote" ]; then
         mkdir -p `dirname $MY_SSH_TARGET_CACHG`
         echo $remote > $MY_SSH_TARGET_CACHG;
+        return $EXIT_SUCCESS;
     fi
+    return $EXIT_FAILURE;
 }
 
 function clean_ssh_target_cache() {
@@ -161,30 +186,34 @@ function ufw_allow() {
     local ip=$1
     local port=$2
     run sudo ufw allow from $ip to any port $port
+    return $?;
 }
 
 function ufw_delete_allow() {
     local ip=$1
     local port=$2
     run sudo ufw delete allow from $ip to any port $port
+    return $?;
 }
 
 function remote_ufw_status() {
     local remote=`get_ssh_target_cache $1`
-    if [ -z "$remote" ]; then echo "Please specify remote address"; return; fi
+    if [ -z "$remote" ]; then echo "Please specify remote address"; return $EXIT_FAILURE; fi
     run ssh $remote sudo ufw status
     set_ssh_target_cache $remote
+    return $?;
 }
 
 function remote_ufw_allow() {
     local remote=`get_ssh_target_cache $1`
     local ip=$2
     local port=$3
-    if [ -z "$remote" ]; then echo "Please specify SSH address"; return; fi
+    if [ -z "$remote" ]; then echo "Please specify SSH address"; return $EXIT_FAILURE; fi
     if [ -z $ip ]; then ip=`get_current_ip`; fi
-    if [ -z $port ]; then echo "Please specify port to allow"; return; fi
+    if [ -z $port ]; then echo "Please specify port to allow"; return $EXIT_FAILURE; fi
     run ssh -n $remote sudo ufw allow from $ip to any port $port;
     set_ssh_target_cache $remote
+    return $?;
 }
 
 function remote_ufw_delete_allow() {
@@ -196,6 +225,7 @@ function remote_ufw_delete_allow() {
     if [ -z $port ]; then echo "Please specify port to allow"; return; fi
     run ssh -n $remote sudo ufw delete allow from $ip to any port $port;
     set_ssh_target_cache $remote
+    return $?;
 }
 
 
@@ -203,34 +233,43 @@ function remote_ufw_delete_allow() {
 
 function add_rdp_rule() {
     if [ -z $TARGET_SSH_URL ]; then
-        echo "Please set value to \$TARGET_SSH_URL"; return $EXIT_FAILURE;
+        echo "Please set value to \$TARGET_SSH_URL";
+        return $EXIT_FAILURE;
     fi
     if [ -z $TARGET_RDP_CMD ]; then
-        echo "Please set value to \$TARGET_RDP_CMD"; return $EXIT_FAILURE;
+        echo "Please set value to \$TARGET_RDP_CMD";
+        return $EXIT_FAILURE;
     fi
     if [ `is_gw_good` -ne $EXIT_SUCCESS ]; then
-        echo "No good gateway available"; return $EXIT_FAILURE;
+        echo "No good gateway available";
+        return $EXIT_FAILURE;
     fi
     if [ -s $MY_RDP_IP_CACHE ]; then
-        grep `get_current_ip` $MY_RDP_IP_CACHE
-        if [ $? -ne 0 ]; then
-            echo "Rule already installed to remote's firewall"; return $EXIT_SUCCESS;
+        local ip=`get_current_ip`
+        if [ "`grep -w $ip $MY_RDP_IP_CACHE`" = "$ip" ]; then
+            if [ $? -ne 0 ]; then
+                echo "Rule already installed to remote's firewall";
+                return $EXIT_SUCCESS;
+            fi
         fi
     fi
     insert_unique_line_to_file `get_current_ip` $MY_RDP_IP_CACHE
     remote_ufw_allow_rdp $TARGET_SSH_URL
-    return $EXIT_SUCCESS;
+    return $?;
 }
 
 function remove_rdp_rules() {
     if [ -z $TARGET_SSH_URL ]; then
-        echo "Please set value to \$TARGET_SSH_URL"; return $EXIT_FAILURE;
+        echo "Please set value to \$TARGET_SSH_URL";
+        return $EXIT_FAILURE;
     fi
     if [ -z $TARGET_RDP_CMD ]; then
-        echo "Please set value to \$TARGET_RDP_CMD"; return $EXIT_FAILURE;
+        echo "Please set value to \$TARGET_RDP_CMD";
+        return $EXIT_FAILURE;
     fi
-    if [ `is_gw_good` -ne $EXIT_SUCCESS ]; then
-        echo "No good gateway available"; return $EXIT_FAILURE;
+    if [ "`is_gw_good`" -ne "$EXIT_SUCCESS" ]; then
+        echo "No good gateway available";
+        return $EXIT_FAILURE;
     fi
     if [ -s $MY_RDP_IP_CACHE ]; then
         cat $MY_RDP_IP_CACHE | while read line; do
@@ -249,9 +288,9 @@ function remote_ufw_allow_rdp() {
     if [ -z "$ip" ]; then
         ip=`get_current_ip`;
     fi
-    remote_ufw_allow $remote $ip $MY_RDP_PORT
+    remote_ufw_allow $remote $ip $MY_RDP_PORT || true;
     set_ssh_target_cache $remote
-    return $EXIT_SUCCESS;
+    return $?;
 }
 
 function remote_ufw_delete_allow_rdp() {
@@ -262,7 +301,7 @@ function remote_ufw_delete_allow_rdp() {
     fi
     remote_ufw_delete_allow $remote $ip $MY_RDP_PORT
     set_ssh_target_cache $remote
-    return $EXIT_SUCCESS;
+    return $?;
 }
 
 alias us='ufw_status'
