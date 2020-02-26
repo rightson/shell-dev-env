@@ -33,16 +33,6 @@ if [ -z "$option_lowbw" ]; then
 fi
 
 function start_my_rdp() {
-    local util=$HOME/.env/env/util.sh
-    if [ -f $util ]; then
-        source $util
-    fi;
-
-    if [ `is_gw_good` -ne "$EXIT_SUCCESS" ]; then
-        echo "No good gateway available";
-        return $EXIT_FAILURE;
-    fi
-
     local options="$option_user $option_basic $option_display $option_lowbw $option_sound"
     unset option_user option_basic option_display option_lowbw option_sound
     local cmd="xfreerdp /v:$host /u:$user /p:$password $options $*"
