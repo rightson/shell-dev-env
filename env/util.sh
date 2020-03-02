@@ -282,6 +282,11 @@ function remove_rdp_rules() {
     return $EXIT_SUCCESS;
 }
 
+function update_rdp_rules() {
+    remove_rdp_rules $@
+    add_rdp_rule $@
+}
+
 function remote_ufw_allow_rdp() {
     local remote=`get_ssh_target_cache $1`
     local ip=$2
