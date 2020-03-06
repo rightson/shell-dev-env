@@ -1,7 +1,9 @@
 
 # Added by shell-dev-env.
-# =Begin= 
-source S_LOC/env/zsh/statusbar.zsh
-source S_LOC/env/zsh/settings.zsh
-source S_LOC/env/zsh/aliases.zsh
+# =Begin=
+source $ENV_ROOT/env/zsh/antigen.zsh
+source $ENV_ROOT/env/zsh/statusbar.zsh
+source $ENV_ROOT/env/zsh/settings.zsh
+source $ENV_ROOT/env/zsh/aliases.zsh
+source $ENV_ROOT/env/util.sh
 # =End=

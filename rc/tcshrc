@@ -1,6 +1,6 @@
 
 # Added by shell-dev-env.
-# =Begin= 
-source S_LOC/env/tcsh/tcshrc
+# =Begin=
+source $ENV_ROOT/env/tcsh/tcshrc
 # =End=
 
