@@ -37,14 +37,14 @@ function start_my_rdp() {
     unset option_user option_basic option_display option_lowbw option_sound
     local cmd="xfreerdp /v:$host /u:$user /p:$password $options $*"
     local cmd_prompt=`echo $cmd | sed "s/${password}/********/g"`
-    local prefix=/tmp/xfreerdp.$USER.$host
-    local my_rdp_pid_file=$prefix.pid
-
-    set -m
+    # local prefix=/tmp/xfreerdp.$USER.$host
+    # local my_rdp_pid_file=$prefix.pid
+    # set -m
     echo $cmd_prompt;
-    $cmd &
-    echo $! > $my_rdp_pid_file
-    echo "pid=`cat $my_rdp_pid_file` ($my_rdp_pid_file)"
-    fg > /dev/null
-    rm $my_rdp_pid_file
+    eval $cmd
+    # $cmd &
+    # echo $! > $my_rdp_pid_file
+    # echo "pid=`cat $my_rdp_pid_file` ($my_rdp_pid_file)"
+    # fg > /dev/null
+    # rm $my_rdp_pid_file
 }
