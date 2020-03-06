@@ -116,3 +116,6 @@ alias glum	'git pull upstream master'
 
 alias gwch	'git whatchanged -p --abbrev-commit --pretty	medium'
 alias gwip	'git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit -m "--wip--"'
+
+alias gd.vim    'git vimdiff'
+alias gdca.vim  'git vimdiff --cached'
