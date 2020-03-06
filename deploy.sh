@@ -64,25 +64,6 @@ deploy_rc_files() {
     echo "Deployment Completed"
 }
 
-undeploy_rc_files() {
-    echo "Restoring the settings ..."
-    for each in ${RC_FILES[@]}; do
-        local rc_file=`echo $each | cut -d "|" -f 1`
-        if [ ! -z "`grep \"$IDENTIFIER\" $rc_file`" ]; then
-            local offsets=(`cat $rc_file | grep -E 'Added by shell-dev-env|=End=|=Begin' -n | cut -d ':' -f 1`)
-            if [ $((${offsets[0]} + 1)) -eq ${offsets[1]} ]; then
-                echo -n "    Restoring $rc_file..."
-                if [ $UNAME = "Linux" ]; then
-                    sed "$((${offsets[0]}-1)),$((${offsets[2]}+1))d" -i $rc_file
-                else
-                    sed -i "" "$((${offsets[0]}-1)),$((${offsets[2]}+1))d" $rc_file
-                fi
-                echo " done"
-            fi
-        fi
-    done
-}
-
 relocate_env_path() {
     local _BASH_RC=$ENV_ROOT/env/bash/*.bashrc
     local _BINARY=$ENV_ROOT/bin/list-svn-diff.sh
@@ -104,30 +85,56 @@ relocate_env_path() {
     echo ''
 }
 
+install_vim_plug() {
+    echo "Configuring vim plug"
+    if [ ! -f ~/.vim/autoload/plug.vim ]; then
+        curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+            https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    fi
+}
+
+install_tmux_tpm() {
+    if [ ! -d ~/.tmux/plugins/tpm ]; then
+        git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+    fi
+}
+
+install_fd_for_ubuntu() {
+    distro=`cat /etc/os-release | grep '^NAME=' | awk -F '=' '{print $2 }'`
+    if [ "$distro" != "\"Ubuntu\"" ]; then
+        echo "Not ubuntu, please install fd from https://github.com/sharkdp/fd/ manually"
+        return
+    fi
+    fd=https://github.com/sharkdp/fd/releases/download/v7.0.0/fd-musl_7.0.0_amd64.deb
+    wget $fd
+    fdpkg=./`basename $fd`
+    sudo apt install -y $fdpkg
+    \rm -f $fdpkg
+}
+
+install_fzf() {
+    if [ ! -f ~/.fzf/install ]; then
+        git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+        ~/.fzf/install
+    fi
+}
+
 patch_everything() {
     echo "Deoplying $ENV_ROOT ..."
     deploy_rc_files
-    #relocate_env_path
-}
-
-relocate_deployment() {
-    echo "Relocating $ENV_ROOT ..."
-    undeploy_rc_files
-    deploy_rc_files
+    install_vim_plug
+    install_tmux_tpm
+    install_fd_for_ubuntu
+    install_fzf
     #relocate_env_path
 }
 
 case $1 in
-    #restore)
-    #    undeploy_rc_files
-    #    ;;
-    #relocate)
-    #    relocate_deployment
-    #    ;;
-    #all)
-    #    ;;
+    minimal)
+        echo "Deoplying minimal $ENV_ROOT ..."
+        deploy_rc_files
+        ;;
     *)
-        #usage
         patch_everything
         ;;
 esac

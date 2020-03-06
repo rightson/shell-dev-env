@@ -15,11 +15,12 @@ if [ -z `command -v antigen` ]; then
     antigen bundle npm
     antigen bundle pip
     antigen bundle colorize
+    antigen bundle docker
 
     if [ `uname -s` = Darwin ]; then
         antigen theme apple
     else
-        antigen theme bira
+        antigen theme candy
     fi
     antigen apply
 fi

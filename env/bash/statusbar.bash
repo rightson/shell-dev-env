@@ -43,12 +43,12 @@ function get_ipaddr()
     for i in `seq 0 1 10`; do
         if [ `uname` = 'Linux' ]; then
             interface="eth${i}"
-            ip=`/sbin/ifconfig | grep -A1 -e "^$interface" | tail -n 1` 
+            ip=`/sbin/ifconfig | grep -A1 -e "^$interface" | tail -n 1`
         else
             interface="en${i}"
-            ip=`/sbin/ifconfig | grep -A3 -e "^$interface" | tail -n 1 | awk '{print $2}'` 
+            ip=`/sbin/ifconfig | grep -A3 -e "^$interface" | tail -n 1 | awk '{print $2}'`
         fi
-        if [[ $ip =~ ([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}) ]]; then 
+        if [[ $ip =~ ([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}) ]]; then
             echo ${BASH_REMATCH[1]};
             return
         fi
@@ -62,8 +62,12 @@ user="$txtred\u$txtrst"
 host="$txtylw\h$txtrst"
 rpwd="$txtgrn\w$txtrst"
 opwd="$txtgrn\W$txtrst"
-date="$txtpur\t$txtrst"
+time="$txtpur\t$txtrst"
+date="$txtpur\D{%Y/%m/%d}$txtrst"
+datetime="$txtpur[\t \D{%Y/%m/%d}]$txtrst"
 at="$txtwht@$txtrst"
+#sh_in_use=`ps | grep --color=none $$ | awk '{print $(NF)}'`
+sh_in_use=`echo $0 | sed 's/-//'`
 
 parse_git_branch() {
     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
@@ -74,7 +78,7 @@ ps1_root() {
 }
 
 ps1_pretty() {
-    PS1="${user}${at}${host}:${rpwd}\$(parse_git_branch) [${date}]\n\$ "
+    PS1="${user}${at}${host}:${rpwd}${txtblu}\$(parse_git_branch)${txtrst} ${datetime} (${sh_in_use})\n\$ "
 }
 
 ps1_relative() {
@@ -89,5 +93,5 @@ if [ "`id -u`" -eq 0 ]; then
     ps1_root
 else
     ps1_pretty
-fi 
+fi
 

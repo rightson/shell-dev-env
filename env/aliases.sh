@@ -1,5 +1,6 @@
 # common aliases
 alias al='alias'
+alias aliasrc='vim $HOME/.env/env/aliases.sh'
 
 # add common parameter
 alias mv='mv -i'
@@ -48,6 +49,8 @@ alias vimrc="vim ~/.vimrc"
 alias gvimrc="gvim ~/.gvimrc"
 alias tmuxrc="vim ~/.tmux.conf"
 
+alias public-ip='curl ipinfo.io/ip'
+
 # python aliases
 alias py=python
 alias py3=python3
@@ -64,10 +67,12 @@ alias ta='tmux attach'
 alias tat='tmux attach -t'
 
 # apt aliases
+alias sau='sudo apt update'
 alias sai='sudo apt install'
 alias sas='sudo apt search'
-alias sau='sudo apt upgrade'
+alias saug='sudo apt upgrade'
 alias sadu='sudo apt dist-upgrade'
+alias sarm='sudo apt autoremove'
 
 # git aliases
 alias gau='git add -u'
@@ -76,12 +81,29 @@ alias gco='git checkout'
 alias gst='git status'
 alias gd='git diff'
 alias gdca='git diff --cached'
+alias gd.vim='git vimdiff'
+alias gdca.vim='git vimdiff --cached'
+alias gd.np='git --no-pager diff'
+alias gdca.np='git --no-pager diff --cached'
+alias glg='git log --stat'
+alias glgga='git log --graph --decorate --all'
+alias glg='git log --stat'
 alias glgp='git log --stat -p'
 alias glo='git log --oneline --decorate'
 alias glol='git log --graph --pretty='\''%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'\'' --abbrev-commit'
 alias gcmsg='git commit -m'
 alias gb='git branch'
 alias grv='git remote -v'
+alias gpob='git push origin $(git rev-parse --abbrev-ref HEAD)'
+alias gbc='git rev-parse --abbrev-ref HEAD'
+alias gmnf='git merge --no-ff'
+
+# alias ufw
+alias sus='sudo ufw status'
+alias sen='sudo ufw enable'
+alias srm='sudo ufw remove'
+
+alias vbm='VBoxManage'
 
 # svn aliases
 export SVN_TOOL_PATH=$ENV_PATH/bin

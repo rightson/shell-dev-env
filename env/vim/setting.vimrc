@@ -32,6 +32,7 @@ set ttymouse=xterm2
 set background=dark
 set ruler
 set nowrap
+set linebreak
 set colorcolumn=120
 let &colorcolumn=join(range(120,999),",")
 highlight ColorColumn ctermbg=235 guibg=#2c2d27
@@ -48,11 +49,13 @@ let g:Powerline_symbols = 'unicode'
 " colo koehler
 " colo murphy
 " colo pablo
+" colo monokai
 
 
 " Display: folding
 set foldenable
-set foldmethod=indent
+"set foldmethod=indent
+setlocal foldmethod=syntax
 set foldcolumn=0
 set foldlevel=99
 set foldopen=block,hor,mark,percent,quickfix,tag
@@ -60,12 +63,12 @@ set foldopen=block,hor,mark,percent,quickfix,tag
 
 " Display: indentation
 set cindent autoindent smartindent
-set expandtab tabstop=4 shiftwidth=4 softtabstop=4
+set expandtab
+set tabstop=4 shiftwidth=4 softtabstop=4
 au BufNewFile,BufRead *.json set ft=javascript
 au Filetype html,xml,htm,xsl set expandtab tabstop=4 shiftwidth=4 softtabstop=4
-au FileType make set noexpandtab
-au FileType c,c++,h,hpp set cindent autoindent smartindent
-au FileType GNUMakefile,Makefile,makefile,mk set noexpandtab
+au FileType c,cpp,c++,h,hpp set cindent autoindent smartindent expandtab
+au FileType GNUMakefile,Makefile,makefile,make,mk set noexpandtab
 
 
 " Search
@@ -81,6 +84,10 @@ set omnifunc=phpcomplete#CompletePHP
 au FileType html,html set omnifunc=htmlcomplete#CompleteTags
 au FileType javascript,json set omnifunc=javascriptcomplete#CompleteJS
 
+au FileType txt,tex,md set wrap
+au FileType txt,tex,md noremap <silent> k gk
+au FileType txt,tex,md noremap <silent> j gj
+au FileType txt,tex,md noremap <silent> $ g$
 
 " Status bar
 set laststatus=2
@@ -113,36 +120,44 @@ endfunction
 
 
 " Tags: ctags/cscope generation
-function! DelTagOfFile(file)
-  let fullpath = a:file
-  let cwd = getcwd()
-  let tagfilename = cwd . "/tags"
-  let f = substitute(fullpath, cwd . "/", "", "")
-  let f = escape(f, './')
-  let cmd = 'sed -i "/' . f . '/d" "' . tagfilename . '"'
-  let resp = system(cmd)
-endfunction
-
-function! UpdateTags()
-  let f = expand("%:p")
-  let cwd = getcwd()
-  let tagfilename = cwd . "/tags"
-  let cmd = 'ctags -a -f ' . tagfilename . ' --c++-kinds=+p --fields=+iaS --extra=+q ' . '"' . f . '"'
-  call DelTagOfFile(f)
-  let resp = system(cmd)
-  let cmd = "find . -iname '*.c' -o -iname '*.cpp' -o -iname '*.h' -o -iname '*.hpp' -o -iname '*.js' -o -iname '*.py' > cscope.files"
-  let resp = system(cmd)
-  let cmd = "cscope -b -i cscope.files -f cscope.out"
-  let resp = system(cmd)
-  cs reset
-endfunction
+"function! DelTagOfFile(file)
+"  let fullpath = a:file
+"  let cwd = getcwd()
+"  let tagfilename = cwd . "/tags"
+"  let f = substitute(fullpath, cwd . "/", "", "")
+"  let f = escape(f, './')
+"  let cmd = 'sed -i "/' . f . '/d" "' . tagfilename . '"'
+"  let resp = system(cmd)
+"endfunction
+"
+"function! UpdateTags()
+"  let f = expand("%:p")
+"  let cwd = getcwd()
+"  let tagfilename = cwd . "/tags"
+"  let cmd = 'ctags -a -f ' . tagfilename . ' --c++-kinds=+p --fields=+iaS --extra=+q ' . '"' . f . '"'
+"  call DelTagOfFile(f)
+"  let resp = system(cmd)
+"  let cmd = "find . -iname '*.c' -o -iname '*.cpp' -o -iname '*.h' -o -iname '*.hpp' -o -iname '*.js' -o -iname '*.py' > cscope.files"
+"  let resp = system(cmd)
+"  let cmd = "cscope -b -i cscope.files -f cscope.out"
+"  let resp = system(cmd)
+"  cs reset
+"endfunction
 "autocmd BufWritePost,BufReadPost *.cpp,*.hpp,*.h,*.c silent! call UpdateTags()
+
+
+" Auto track session during editing
+" autocmd BufWritePost * execute ':mksession! Session.vim'
+" autocmd BufWinEnter * execute ':mksession! Session.vim'
+" autocmd BufWinLeave * execute '!\rm -f Session.vim'
 
 
 " GUI: appearance
 if has("gui_running")
   set lines=60 columns=120
   set guioptions-=T
+  set guioptions-=r
+  set guioptions-=L
   "set transparency=2
   colo PaperColor
   set linespace=2
