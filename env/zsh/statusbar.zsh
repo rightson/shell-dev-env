@@ -1,5 +1,4 @@
 #!/bin/zsh
-# prettfy PS1 in bash
 
 autoload -U colors && colors
 
@@ -39,7 +38,7 @@ get_now="%{$fg[purple]%}%D{[%X]}%{$reset_color%}"
 date="%{$fg[red]%}%D{%Y/%m/%d}%{$reset_color%}"
 datetime="%{$fg[magenta]%}[%* %D{%Y/%m/%d}]%{$reset_color%}"
 at="%{$fg[white]%}@%{$reset_color%}"
-sh_in_use=`ps | grep --color=none $$ | awk '{print $(NF)}'`
+sh_in_use="%{$fg[blue]%}(`ps | grep --color=none $$ | awk '{print $(NF)}'`)%{$reset_color%}"
 #sh_in_use=`echo $0 | sed 's/-//'`
 
 setopt prompt_subst
@@ -47,12 +46,12 @@ autoload -Uz vcs_info
 zstyle ':vcs_info:*' enable git cvs svn
 zstyle ':vcs_info:git*' formats " (%b)"
 vcs_info_wrapper() {
-  	vcs_info
-  	if [ -n "$vcs_info_msg_0_" ]; then
-  	  	echo "%{$fg[blue]%}${vcs_info_msg_0_}%{$reset_color%}$del"
-  	else
-		echo "%{$fg[black]%}%{$reset_color%}"
-  	fi
+    vcs_info
+    if [ -n "$vcs_info_msg_0_" ]; then
+        echo "%{$fg[cyan]%}${vcs_info_msg_0_}%{$reset_color%}$del"
+    else
+        echo "%{$fg[black]%}%{$reset_color%}"
+    fi
 }
 
 promptLine2=$'\n'"%{$fg[blue]%}->%{$fg_bold[blue]%} %#%{$reset_color%} "
@@ -62,7 +61,7 @@ ps1_root() {
 }
 
 ps1_pretty() {
-    PROMPT='${user}${at}${host}:${opwd}$(vcs_info_wrapper) ${datetime} (${sh_in_use})${promptLine2}'
+    PROMPT='${user}${at}${host}:${opwd}$(vcs_info_wrapper) ${datetime} ${sh_in_use} ${promptLine2}'
     #PROMPT="${user}${at}${host}:${rpwd}"$'\n'"➜  "
     #RPROMPT="${date}"
 }
