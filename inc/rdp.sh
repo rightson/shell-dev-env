@@ -11,6 +11,7 @@ function parse_rdp_options() {
                 add_rdp_option +clipboard
                 add_rdp_option +compression /compression-level:2
                 add_rdp_option /sound
+                add_rdp_option /f
                 shift;;
             --pretty)
                 add_rdp_option +aero +menu-anims +fonts +wallpaper +themes +window-drag /rfx
