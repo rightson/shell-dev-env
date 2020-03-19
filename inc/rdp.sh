@@ -15,6 +15,9 @@ function parse_rdp_options() {
             --pretty)
                 add_rdp_option +aero +menu-anims +fonts +wallpaper +themes +window-drag /rfx
                 shift;;
+            --slow)
+                add_rdp_option -aero -menu-anims -fonts -wallpaper -themes -window-drag -decorations /rfx
+                shift;;
             --hidpi)
                 set_scale_ratio 180
                 shift;;
