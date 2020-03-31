@@ -4,6 +4,11 @@ function add_rdp_option() {
     export rdp_options="${rdp_options} $@"
 }
 
+function set_scale_ratio() {
+    local ratio=$1
+    add_rdp_option /scale:$ratio /scale-desktop:$ratio /scale-device:$ratio
+}
+
 function parse_rdp_options() {
     while (("$#")); do
         case $1 in
@@ -27,8 +32,7 @@ function parse_rdp_options() {
                 shift;;
             --set-scale)
                 shift;
-                local ratio=$1
-                add_rdp_option /scale:$ratio /scale-desktop:$ratio /scale-device:$ratio
+                set_scale_ratio $1
                 shift;;
             --dry-run)
                 local dry_run=1
