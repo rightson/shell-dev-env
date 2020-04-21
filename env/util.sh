@@ -236,10 +236,6 @@ function add_rdp_rule() {
         echo "Please set value to \$TARGET_SSH_URL";
         return $EXIT_FAILURE;
     fi
-    if [ -z $TARGET_RDP_CMD ]; then
-        echo "Please set value to \$TARGET_RDP_CMD";
-        return $EXIT_FAILURE;
-    fi
     if [ `is_gw_good` -ne $EXIT_SUCCESS ]; then
         echo "No good gateway available";
         return $EXIT_FAILURE;
@@ -261,10 +257,6 @@ function add_rdp_rule() {
 function remove_rdp_rules() {
     if [ -z $TARGET_SSH_URL ]; then
         echo "Please set value to \$TARGET_SSH_URL";
-        return $EXIT_FAILURE;
-    fi
-    if [ -z $TARGET_RDP_CMD ]; then
-        echo "Please set value to \$TARGET_RDP_CMD";
         return $EXIT_FAILURE;
     fi
     if [ "`is_gw_good`" -ne "$EXIT_SUCCESS" ]; then
