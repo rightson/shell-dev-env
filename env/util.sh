@@ -142,7 +142,9 @@ function route_del() {
 alias rn='route -n'
 alias rs='add_gw_ip'
 alias ra='route_add'
+alias ra.='route_add > /dev/null && echo $?'
 alias rc='route_del'
+alias rc.='route_del > /dev/null && echo $?'
 
 
 ### For SSH ###
