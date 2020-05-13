@@ -117,7 +117,7 @@ Plug 'sickill/vim-monokai'
 "Plug 'trusktr/seti.vim'
 Plug 'NLKNguyen/papercolor-theme'
 "Plug 'chriskempson/base16-vim'
-"Plug 'morhetz/gruvbox'
+Plug 'morhetz/gruvbox'
 "Plug 'dracula/dracula-theme'
 
 
