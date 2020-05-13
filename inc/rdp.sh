@@ -17,12 +17,13 @@ function parse_rdp_options() {
                 add_rdp_option +compression /compression-level:2
                 add_rdp_option /sound
                 add_rdp_option /f
+                set_scale_ratio 100
                 shift;;
             --pretty)
                 add_rdp_option +aero +menu-anims +fonts +wallpaper +themes +window-drag /rfx
                 shift;;
             --slow)
-                add_rdp_option -aero -menu-anims -fonts -wallpaper -themes -window-drag -decorations /rfx
+                add_rdp_option -aero -menu-anims -fonts -wallpaper -themes -window-drag -decorations
                 shift;;
             --hidpi)
                 set_scale_ratio 180
