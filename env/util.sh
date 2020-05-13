@@ -105,9 +105,13 @@ function get_current_ip() {
 ### For route ###
 
 function is_gw_good() {
-    route -n | head -n 3 | tail -n 1 | grep `cat $MY_GW_IP_CACHE` > /dev/null 2>&1
-    if [ $? -ne 0 ]; then
-        echo $EXIT_FAILURE
+    if [ -f $MY_GW_IP_CACHE ]; then
+        route -n | head -n 3 | tail -n 1 | grep `cat $MY_GW_IP_CACHE` > /dev/null 2>&1
+        if [ $? -ne 0 ]; then
+            echo $EXIT_FAILURE
+        else
+            echo $EXIT_SUCCESS
+        fi
     else
         echo $EXIT_SUCCESS
     fi
