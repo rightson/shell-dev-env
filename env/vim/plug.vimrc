@@ -60,7 +60,7 @@ Plug 'dkprice/vim-easygrep'
 
 " code tracer
 Plug 'vim-scripts/cscope_macros.vim'
-Plug 'vim-scripts/autoload_cscope.vim'
+"Plug 'vim-scripts/autoload_cscope.vim' " doesn't work as expected
 
 " editing"
 Plug 'ntpeters/vim-better-whitespace'
