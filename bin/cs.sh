@@ -46,6 +46,7 @@ print_cscope_list() {
 }
 
 remove_CSCOPE_FILES() {
+    set -x
     rm -rf cscope.* ncscope.out tags
 }
 
@@ -111,7 +112,7 @@ generate_cscope_out() {
 }
 
 generate_ctags() {
-    ctags -R $@
+    ctags -R `cat ${CSCOPE_LIST}`
 }
 
 usage() {
@@ -136,7 +137,13 @@ cs_add() {
     add_cscope_search_path $@
     generate_cscope_files
     generate_cscope_out
-    ctags -R $@
+    generate_ctags
+}
+
+cs_update() {
+    generate_cscope_files
+    generate_cscope_out
+    generate_ctags
 }
 
 trap control_c SIGINT SIGTERM
@@ -149,13 +156,8 @@ case "$1" in
         USE_ABS=y
         cs_add $@
         ;;
-    up)
-        generate_cscope_files
-        generate_cscope_out
-        ;;
-    update)
-        generate_cscope_files
-        generate_cscope_out
+    up|update)
+        cs_update
         ;;
     list)
         print_cscope_list
