@@ -85,7 +85,10 @@ Plug 'vim-scripts/Rename2'
 " JavaScript
 "Plug 'othree/es.next.syntax.vim'
 Plug 'pangloss/vim-javascript'
-Plug 'mxw/vim-jsx'
+Plug 'yuezk/vim-js'
+Plug 'maxmellon/vim-jsx-pretty'
+let g:vim_jsx_pretty_highlight_close_tag = 1
+
 Plug 'posva/vim-vue'
 "Plug 'pangloss/vim-javascript'
 Plug 'mattn/emmet-vim'
