@@ -102,6 +102,14 @@ function get_current_ip() {
 }
 
 
+### Docker
+function get_container_id() {
+    local name=$1
+    if [ -n "$name" ]; then
+        echo $(docker ps | grep $name | awk '{ printf $1 }')
+    fi
+}
+
 ### For route ###
 
 function is_gw_good() {
