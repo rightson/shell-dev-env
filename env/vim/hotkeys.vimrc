@@ -14,6 +14,7 @@ noremap <F9> :if &mouse == 'a' \| set mouse= \| else \| set mouse=a \| endif<CR>
 
 noremap <F10> :%!xxd
 
+noremap <S-F11> :Goyo<CR>:source ~/.vimrc<CR>
 noremap <F12> :set nu!<CR>
 
 noremap <C-G> <Esc>:echo expand('%:p')<Return>

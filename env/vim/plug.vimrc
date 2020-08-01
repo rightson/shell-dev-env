@@ -35,6 +35,9 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 " My settings
 "
 
+" Distraction free mode
+Plug 'junegunn/goyo.vim'
+
 " status bar
 "Plug 'Lokaltog/vim-powerline'
 Plug 'vim-airline/vim-airline'
@@ -91,7 +94,7 @@ Plug 'posva/vim-vue'
 Plug 'mattn/emmet-vim'
 
 " LaTex
-"Plug 'vim-latex/vim-latex'
+Plug 'vim-latex/vim-latex'
 
 " Django
 "Plug 'tweekmonster/django-plus.vim'
