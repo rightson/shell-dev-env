@@ -1,6 +1,6 @@
 # common aliases
 alias al='alias'
-alias aliasrc='vim ~/.env/env/aliases.sh'
+alias aliasrc='vim $HOME/.env/env/aliases.sh'
 
 # add common parameter
 alias mv='mv -i'
@@ -84,7 +84,9 @@ alias gdca='git diff --cached'
 alias gd.vim='git vimdiff'
 alias gdca.vim='git vimdiff --cached'
 alias gd.np='git --no-pager diff'
+alias gd.wd='git diff --word-diff'
 alias gdca.np='git --no-pager diff --cached'
+alias gdca.wd='git diff --word-diff --cached'
 alias glg='git log --stat'
 alias glgga='git log --graph --decorate --all'
 alias glg='git log --stat'

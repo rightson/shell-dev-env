@@ -105,6 +105,10 @@ install_fd_for_ubuntu() {
         echo "Not ubuntu, please install fd from https://github.com/sharkdp/fd/ manually"
         return
     fi
+    dpkg -s fd-musl | grep installed > /dev/null
+    if [ $? -eq 0 ]; then
+        return
+    fi
     fd=https://github.com/sharkdp/fd/releases/download/v7.0.0/fd-musl_7.0.0_amd64.deb
     wget $fd
     fdpkg=./`basename $fd`
@@ -119,9 +123,21 @@ install_fzf() {
     fi
 }
 
+patch_git_vim_diff() {
+    git config --global diff.tool vimdiff
+    git config --global difftool.prompt false
+    git config --global alias.vimdiff difftool
+}
+
+patch_minimal_things() {
+    deploy_rc_files
+    patch_git_vim_diff
+}
+
 patch_everything() {
     echo "Deoplying $ENV_ROOT ..."
     deploy_rc_files
+    patch_git_vim_diff
     install_vim_plug
     install_tmux_tpm
     install_fd_for_ubuntu
@@ -130,9 +146,13 @@ patch_everything() {
 }
 
 case $1 in
-    minimal)
+    min*)
         echo "Deoplying minimal $ENV_ROOT ..."
-        deploy_rc_files
+        patch_minimal_things
+        ;;
+    func)
+        shift;
+        $1;
         ;;
     *)
         patch_everything

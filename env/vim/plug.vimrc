@@ -63,7 +63,7 @@ Plug 'dkprice/vim-easygrep'
 
 " code tracer
 Plug 'vim-scripts/cscope_macros.vim'
-Plug 'vim-scripts/autoload_cscope.vim'
+"Plug 'vim-scripts/autoload_cscope.vim' " doesn't work as expected
 
 " editing"
 Plug 'ntpeters/vim-better-whitespace'
@@ -88,7 +88,10 @@ Plug 'vim-scripts/Rename2'
 " JavaScript
 "Plug 'othree/es.next.syntax.vim'
 Plug 'pangloss/vim-javascript'
-Plug 'mxw/vim-jsx'
+Plug 'yuezk/vim-js'
+Plug 'maxmellon/vim-jsx-pretty'
+let g:vim_jsx_pretty_highlight_close_tag = 1
+
 Plug 'posva/vim-vue'
 "Plug 'pangloss/vim-javascript'
 Plug 'mattn/emmet-vim'
@@ -120,7 +123,7 @@ Plug 'sickill/vim-monokai'
 "Plug 'trusktr/seti.vim'
 Plug 'NLKNguyen/papercolor-theme'
 "Plug 'chriskempson/base16-vim'
-"Plug 'morhetz/gruvbox'
+Plug 'morhetz/gruvbox'
 "Plug 'dracula/dracula-theme'
 
 

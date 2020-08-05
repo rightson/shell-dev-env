@@ -113,9 +113,13 @@ function get_container_id() {
 ### For route ###
 
 function is_gw_good() {
-    route -n | head -n 3 | tail -n 1 | grep `cat $MY_GW_IP_CACHE` > /dev/null 2>&1
-    if [ $? -ne 0 ]; then
-        echo $EXIT_FAILURE
+    if [ -f $MY_GW_IP_CACHE ]; then
+        route -n | head -n 3 | tail -n 1 | grep `cat $MY_GW_IP_CACHE` > /dev/null 2>&1
+        if [ $? -ne 0 ]; then
+            echo $EXIT_FAILURE
+        else
+            echo $EXIT_SUCCESS
+        fi
     else
         echo $EXIT_SUCCESS
     fi
@@ -150,7 +154,9 @@ function route_del() {
 alias rn='route -n'
 alias rs='add_gw_ip'
 alias ra='route_add'
+alias ra.='route_add > /dev/null && echo $?'
 alias rc='route_del'
+alias rc.='route_del > /dev/null && echo $?'
 
 
 ### For SSH ###
@@ -244,10 +250,6 @@ function add_rdp_rule() {
         echo "Please set value to \$TARGET_SSH_URL";
         return $EXIT_FAILURE;
     fi
-    if [ -z $TARGET_RDP_CMD ]; then
-        echo "Please set value to \$TARGET_RDP_CMD";
-        return $EXIT_FAILURE;
-    fi
     if [ `is_gw_good` -ne $EXIT_SUCCESS ]; then
         echo "No good gateway available";
         return $EXIT_FAILURE;
@@ -269,10 +271,6 @@ function add_rdp_rule() {
 function remove_rdp_rules() {
     if [ -z $TARGET_SSH_URL ]; then
         echo "Please set value to \$TARGET_SSH_URL";
-        return $EXIT_FAILURE;
-    fi
-    if [ -z $TARGET_RDP_CMD ]; then
-        echo "Please set value to \$TARGET_RDP_CMD";
         return $EXIT_FAILURE;
     fi
     if [ "`is_gw_good`" -ne "$EXIT_SUCCESS" ]; then

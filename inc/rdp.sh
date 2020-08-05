@@ -1,50 +1,69 @@
 #!/bin/bash
 
-if [[ $_ == $0 ]]; then
-    read -p "Host name: " host
-    read -p "User name: " user
-    read -sp "Password: " password
-fi
+function add_rdp_option() {
+    export rdp_options="${rdp_options} $@"
+}
 
-if [ -z "$option_basic" ]; then
-    export option_basic="+clipboard"
-else
-    export option_basic="+clipboard $option_basic"
-fi
+function set_scale_ratio() {
+    local ratio=$1
+    add_rdp_option /scale:$ratio /scale-desktop:$ratio /scale-device:$ratio
+}
 
-if [ -z "$scale_ratio" ]; then
-    export scale_ratio=180
-fi
+function parse_rdp_options() {
+    while (("$#")); do
+        case $1 in
+            --default)
+                add_rdp_option +clipboard
+                add_rdp_option +compression /compression-level:2
+                add_rdp_option /sound
+                add_rdp_option /f
+                set_scale_ratio 100
+                shift;;
+            --pretty)
+                add_rdp_option +aero +menu-anims +fonts +wallpaper +themes +window-drag /rfx
+                shift;;
+            --slow)
+                add_rdp_option -aero -menu-anims -fonts -wallpaper -themes -window-drag -decorations
+                shift;;
+            --hidpi)
+                set_scale_ratio 180
+                shift;;
+            --async)
+                add_rdp_option +async-input +async-update
+                shift;;
+            --set-scale)
+                shift;
+                set_scale_ratio $1
+                shift;;
+            --dry-run)
+                local dry_run=1
+                shift;;
+            *)
+                add_rdp_option $1
+                shift;;
+        esac
+    done
+}
 
-if [ -z "$option_display" ]; then
-    export option_display="/dynamic-resolution /scale:$scale_ratio /scale-desktop:$scale_ratio /scale-device:$scale_ratio +fonts"
-    #export option_display="/scale:$scale_ratio /scale-desktop:$scale_ratio /scale-device:$scale_ratio +fonts"
-fi
-if [ -z "$option_sound" ]; then
-    export option_sound="/sound"
-fi
-if [ -z "$option_async" ]; then
-    #export option_async="+async-input +async-update"
-    #export option_async="+async-update"
-    export option_async=""
-fi
-if [ -z "$option_lowbw" ]; then
-    export option_lowbw="$option_async -wallpaper -themes +compression /compression-level:2"
-fi
+function ask_credential() {
+    if [ -z "$host" ]; then
+        read -p "Host name: " host
+    fi
+    if [ -z "$user" ]; then
+        read -p "User name: " user
+    fi
+    if [ -z "$password" ]; then
+        read -sp "Password: " password
+    fi
+}
 
 function start_my_rdp() {
-    local options="$option_user $option_basic $option_display $option_lowbw $option_sound"
-    unset option_user option_basic option_display option_lowbw option_sound
-    local cmd="xfreerdp /v:$host /u:$user /p:$password $options $*"
-    local cmd_prompt=`echo $cmd | sed "s/${password}/********/g"`
-    # local prefix=/tmp/xfreerdp.$USER.$host
-    # local my_rdp_pid_file=$prefix.pid
-    # set -m
-    echo $cmd_prompt;
-    eval $cmd
-    # $cmd &
-    # echo $! > $my_rdp_pid_file
-    # echo "pid=`cat $my_rdp_pid_file` ($my_rdp_pid_file)"
-    # fg > /dev/null
-    # rm $my_rdp_pid_file
+    parse_rdp_options $@
+    ask_credential
+    local cmd="xfreerdp /v:$host /u:$user /p:$password $rdp_options"
+    local prompt=`echo $cmd | sed "s/${password}/********/g"`
+    echo $prompt;
+    if [ "$dry_run" != "1" ]; then
+        eval $cmd
+    fi
 }
