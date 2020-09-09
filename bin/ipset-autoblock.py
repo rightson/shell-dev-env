@@ -2,6 +2,7 @@
 
 import subprocess
 import re
+import os
 
 IP_V4_PATTERN = re.compile(r'(([01]?[0-9]?[0-9]|2[0-4][0-9]|2[5][0-5])\.){3}([01]?[0-9]?[0-9]|2[0-4][0-9]|2[5][0-5])')
 IPLIST_NAME = 'blacklist'
@@ -24,6 +25,8 @@ def get_invalid_auth():
     LOG_AUTHS = ['/var/log/auth.log'] + ['/var/log/auth.log.%s' % x for x in range(1, 5)]
     ip_list = []
     for LOG_AUTH in LOG_AUTHS:
+        if not os.path.exists(LOG_AUTH):
+            continue
         auth_log = open(LOG_AUTH).read().splitlines()
         for line in auth_log:
             if 'Invalid' in line:
