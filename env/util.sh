@@ -13,6 +13,7 @@ export MY_SSH_TARGET_CACHG=$HOME/.cache/my-ssh-target-cache
 # for rdp
 export MY_RDP_PORT=3389
 export MY_RDP_IP_CACHE=$HOME/.cache/my-rdp-ip-cache
+export MY_METRIC=100
 
 
 ### General ###
@@ -140,14 +141,14 @@ function route_add() {
     local gwip=`cat $MY_GW_IP_CACHE`
     local exists=`route -n | head -n 3 | grep $gwip`
     if [ -z "$exists" ]; then
-        run sudo route add -net default gw $gwip metric 1
+        run sudo route add -net default gw $gwip metric $MY_METRIC
     fi
     route -n | grep $gwip
 }
 
 function route_del() {
     local gwip=`cat $MY_GW_IP_CACHE`
-    run sudo route del -net default gw $gwip metric 1
+    run sudo route del -net default gw $gwip metric $MY_METRIC
     route -n
 }
 
