@@ -323,3 +323,5 @@ alias rus='remote_ufw_status'
 alias rua='remote_ufw_allow_rdp'
 alias rud='remote_ufw_delete_allow_rdp'
 
+alias xopen='xdg-open'
+
