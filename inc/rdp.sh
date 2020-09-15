@@ -9,27 +9,58 @@ function set_scale_ratio() {
     add_rdp_option /scale:$ratio /scale-desktop:$ratio /scale-device:$ratio
 }
 
+function enable_compression() {
+    add_rdp_option +compression /compression-level:2
+}
+
+function default_env() {
+    add_rdp_option /sound
+    add_rdp_option /f
+    add_rdp_option /jpeg
+    add_rdp_option /gdi:hw
+    #add_rdp_option /sec:nla
+    add_rdp_option +fonts
+    add_rdp_option +clipboard
+    add_rdp_option +bitmap-cache
+    set_scale_ratio 100
+}
+
+function for_slow_env() {
+    add_rdp_option -aero -menu-anims -wallpaper -themes -window-drag -decorations
+}
+
+function for_fast_env() {
+    add_rdp_option +aero +menu-anims +wallpaper +themes +window-drag /rfx /video
+}
+
+function enable_cache() {
+    add_rdp_option +gfx-small-cache +glyph-cache +offscreen-cache
+}
+
+function enable_async() {
+    add_rdp_option +async-channels +async-input +async-update
+}
+
 function parse_rdp_options() {
     while (("$#")); do
         case $1 in
             --default)
-                add_rdp_option +clipboard
-                add_rdp_option +compression /compression-level:2
-                add_rdp_option /sound
-                add_rdp_option /f
-                set_scale_ratio 100
+                default_env
                 shift;;
-            --pretty)
-                add_rdp_option +aero +menu-anims +fonts +wallpaper +themes +window-drag /rfx
+            --fast|--pretty)
+                for_fast_env
                 shift;;
             --slow)
-                add_rdp_option -aero -menu-anims -fonts -wallpaper -themes -window-drag -decorations
+                for_slow_env
+                shift;;
+            --cache)
+                enable_cache
+                shift;;
+            --async)
+                enable_async
                 shift;;
             --hidpi)
                 set_scale_ratio 180
-                shift;;
-            --async)
-                add_rdp_option +async-input +async-update
                 shift;;
             --set-scale)
                 shift;
