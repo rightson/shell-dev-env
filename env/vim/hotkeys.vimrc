@@ -36,8 +36,8 @@ noremap <C-a>8 :Autopep8<CR>
 
 " tab
 nmap <C-w>t :tabnew %<CR>
-noremap <Tab> :tabnext<CR>
-noremap <S-Tab> :tabprev<CR>
+"noremap <Tab> :tabnext<CR>
+"noremap <S-Tab> :tabprev<CR>
 ":noremap <c-w>t :tabnew<CR>:o ./<CR>
 ":noremap <s-t> :tabnew<CR>:o ./<CR>
 ":noremap <s-x> :tabnex<CR>
