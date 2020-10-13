@@ -20,7 +20,7 @@ set autowrite
 
 
 " Clipboard
-set clipboard=unnamedplus
+set clipboard^=unnamed,unnamedplus
 set pastetoggle=<F7>
 
 
