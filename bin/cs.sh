@@ -62,7 +62,12 @@ append_to_CSCOPE_FILES() {
     local file=$1
     local here=`pwd`
     if [ -f $CSCOPE_LIST ]; then
-        find `cat $here/$CSCOPE_LIST` -type f -name "$file" | grep -v svn >> $here/$CSCOPE_FILES 2> /dev/null
+        echo "Scanning $1"
+        find `cat $here/$CSCOPE_LIST` -type f -name "$file" \
+            -not -path "*.git/*" \
+            -not -path "*./node_modules/*" \
+            -not -path "*.svn/*" \
+            >> $here/$CSCOPE_FILES 2> /dev/null
     else
         echo "Error: Failed to find $CSCOPE_LIST"
         exit
@@ -112,7 +117,11 @@ generate_cscope_out() {
 }
 
 generate_ctags() {
-    ctags -R `cat ${CSCOPE_LIST}`
+    ctags -R \
+        --exclude=.git \
+        --exclude=node_modules \
+        --exclude=.svn \
+        `cat ${CSCOPE_LIST}`
 }
 
 usage() {
