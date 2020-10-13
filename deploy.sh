@@ -99,6 +99,18 @@ install_tmux_tpm() {
     fi
 }
 
+deb_download_and_install() {
+    if [ "$distro" = "\"Ubuntu\"" ]; then
+        url=$1
+        wget $url
+        pkg=./`basename $url`
+        sudo apt install -y $pkg
+        \rm -f $pkg
+    else
+        echo "Disable deb was downloaded (not Ubuntu)"
+    fi
+}
+
 install_fd_for_ubuntu() {
     distro=`cat /etc/os-release | grep '^NAME=' | awk -F '=' '{print $2 }'`
     if [ "$distro" != "\"Ubuntu\"" ]; then
@@ -109,17 +121,24 @@ install_fd_for_ubuntu() {
     if [ $? -eq 0 ]; then
         return
     fi
-    fd=https://github.com/sharkdp/fd/releases/download/v7.0.0/fd-musl_7.0.0_amd64.deb
-    wget $fd
-    fdpkg=./`basename $fd`
-    sudo apt install -y $fdpkg
-    \rm -f $fdpkg
+    if [ "`which fd`" != ""  ]; then
+        deb_download_and_install https://github.com/sharkdp/fd/releases/download/v7.0.0/fd-musl_7.0.0_amd64.deb
+    fi
 }
 
 install_fzf() {
     if [ ! -f ~/.fzf/install ]; then
         git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
         ~/.fzf/install
+    fi
+}
+
+install_rg() {
+    distro=`cat /etc/os-release | grep '^NAME=' | awk -F '=' '{print $2 }'`
+    if [ "`which brew`" != ""  ]; then
+        brew install ripgrep
+    elif [ "`which rg`" = "" ] && [ "$distro" = "\"Ubuntu\"" ]; then
+        deb_download_and_install =https://github.com/BurntSushi/ripgrep/releases/download/11.0.2/ripgrep_11.0.2_amd64.deb
     fi
 }
 
@@ -142,6 +161,7 @@ patch_everything() {
     install_tmux_tpm
     install_fd_for_ubuntu
     install_fzf
+    install_rg
     #relocate_env_path
 }
 
@@ -158,4 +178,3 @@ case $1 in
         patch_everything
         ;;
 esac
-

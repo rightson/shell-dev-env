@@ -96,6 +96,9 @@ Plug 'posva/vim-vue'
 "Plug 'pangloss/vim-javascript'
 Plug 'mattn/emmet-vim'
 
+" grep
+Plug 'jremmen/vim-ripgrep'
+
 " LaTex
 Plug 'vim-latex/vim-latex'
 
