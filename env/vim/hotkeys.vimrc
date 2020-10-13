@@ -34,8 +34,15 @@ noremap <C-k>r :!ctags -R .<CR>:!find . -iname '*.c' -o -iname '*.cpp' -o -iname
 " autopep8
 noremap <C-a>8 :Autopep8<CR>
 
+" session
+noremap <C-s> :mksession! ~/.session.vim<CR>
+
 " tab
-nmap <C-w>t :tabnew %<CR>
+" unable to overwrite built-in combination 
+"noremap <C-w>t :tabnew %<CR>
+" so we add a new helper which can keep origin pane in the original tab:
+noremap <C-w>p :tabnew %<CR>
+
 if has("gui_running")
     :noremap <A-1> 1gt<CR>
     :noremap <A-2> 2gt<CR>
