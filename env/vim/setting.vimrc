@@ -152,6 +152,12 @@ endfunction
 " autocmd BufWinLeave * execute '!\rm -f Session.vim'
 
 
+" Strip tailing white space
+function StripTrailingWhitespace()
+  %s/\s*$//
+endfunction
+
+
 " GUI: appearance
 if has("gui_running")
     set lines=60 columns=120
