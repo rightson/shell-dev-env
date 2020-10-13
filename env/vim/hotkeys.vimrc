@@ -36,8 +36,23 @@ noremap <C-a>8 :Autopep8<CR>
 
 " tab
 nmap <C-w>t :tabnew %<CR>
-"noremap <Tab> :tabnext<CR>
-"noremap <S-Tab> :tabprev<CR>
+if has("gui_running")
+    :noremap <A-1> 1gt<CR>
+    :noremap <A-2> 2gt<CR>
+    :noremap <A-3> 3gt<CR>
+    :noremap <A-4> 4gt<CR>
+    :noremap <A-5> 5gt<CR>
+    :noremap <A-6> 6gt<CR>
+    :noremap <A-7> 6gt<CR>
+    :noremap <A-8> 8gt<CR>
+    :noremap <A-9> 9gt<CR>
+    :noremap <A-0> 0gt<CR>
+endif
+
+"Tab conflicts ctrl-i, so please use gt/gT instead
+":noremap <Tab> :tabnext<CR>
+":noremap <S-Tab> :tabprev<CR>
+
 ":noremap <c-w>t :tabnew<CR>:o ./<CR>
 ":noremap <s-t> :tabnew<CR>:o ./<CR>
 ":noremap <s-x> :tabnex<CR>
