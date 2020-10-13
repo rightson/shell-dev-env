@@ -34,8 +34,8 @@ noremap <C-k>r :!ctags -R .<CR>:!find . -iname '*.c' -o -iname '*.cpp' -o -iname
 " autopep8
 noremap <C-a>8 :Autopep8<CR>
 
-" session
-noremap <C-s> :mksession! ~/.session.vim<CR>
+" session: overwrite software flow control function
+noremap <C-s> :wa<CR> :mksession! ~/.session.vim<CR>
 
 " tab
 " unable to overwrite built-in combination 
