@@ -165,7 +165,7 @@ if has("gui_running")
     set guioptions-=r
     set guioptions-=L
     "set transparency=2
-    colo PaperColor
+    colo monokai
     set linespace=2
     set guitablabel=%N:\ %M%t
     set noeb vb t_vb=
@@ -197,6 +197,7 @@ if has("gui_running")
                 if len(sizepos) == 5 && sizepos[0] == vim_instance
                     silent! execute "set columns=".sizepos[1]." lines=".sizepos[2]
                     silent! execute "winpos ".sizepos[3]." ".sizepos[4]
+                    normal<C-w><C-=>
                     return
                 endif
             endfor
