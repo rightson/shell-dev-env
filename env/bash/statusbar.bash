@@ -78,7 +78,7 @@ ps1_root() {
 }
 
 ps1_pretty() {
-    PS1="${user}${at}${host}:${rpwd}${txtcyn}\$(parse_git_branch)${txtrst} ${datetime} ${sh_in_use}\n\$ "
+    PS1="${user}${at}${host}:${rpwd}${txtcyn}`parse_git_branch`${txtrst} ${datetime} ${sh_in_use}\n\$ "
 }
 
 ps1_relative() {
