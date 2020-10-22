@@ -69,16 +69,12 @@ at="$txtwht@$txtrst"
 #sh_in_use=`ps | grep --color=none $$ | awk '{print $(NF)}'`
 sh_in_use="$txtblu(`echo $0 | sed 's/-//'`)$txtrst"
 
-parse_git_branch() {
-    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
-}
-
 ps1_root() {
     PS1="${root}@${host}[\w]# "
 }
 
 ps1_pretty() {
-    PS1="${user}${at}${host}:${rpwd}${txtcyn}`parse_git_branch`${txtrst} ${datetime} ${sh_in_use}\n\$ "
+    PS1="${user}${at}${host}:${rpwd}${txtcyn}"'`__git_ps1`'"${txtrst} ${datetime} ${sh_in_use}\n\$ "
 }
 
 ps1_relative() {
