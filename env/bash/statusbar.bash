@@ -1,6 +1,7 @@
 #!/bin/bash
 # prettfy PS1 in bash
 
+[ -f ./git-prompt.sh ] && . git-prompt.sh
 
 txtblk='\e[0;30m' # Black - Regular
 txtred='\e[0;31m' # Red
