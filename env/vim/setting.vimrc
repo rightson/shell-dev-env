@@ -38,6 +38,10 @@ let &colorcolumn=join(range(120,999),",")
 highlight ColorColumn ctermbg=235 guibg=#2c2d27
 set fillchars+=vert:\ 
 
+set cursorline
+highlight cursorLine cterm=bold ctermbg=DarkGrey gui=bold guibg=DarkGrey
+highlight CursorLineNr term=bold cterm=bold ctermbg=DarkGrey gui=bold
+
 " Display: power line
 set t_Co=256
 let g:Powerline_symbols = 'unicode'
