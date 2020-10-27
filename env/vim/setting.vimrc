@@ -37,6 +37,8 @@ set colorcolumn=120
 let &colorcolumn=join(range(120,999),",")
 highlight ColorColumn ctermbg=235 guibg=#2c2d27
 set fillchars+=vert:\ 
+set cursorline
+highlight cursorLine cterm=NONE ctermbg=darkred ctermfg=white
 
 " Display: power line
 set t_Co=256
