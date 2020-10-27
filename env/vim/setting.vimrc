@@ -157,7 +157,7 @@ endfunction
 
 
 " Strip tailing white space
-function StripTrailingWhitespace()
+function! StripTrailingWhitespace()
   %s/\s*$//
 endfunction
 
