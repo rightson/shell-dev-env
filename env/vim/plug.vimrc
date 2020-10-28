@@ -22,7 +22,6 @@ let g:vim_jsx_pretty_highlight_close_tag = 1
 Plug 'alvan/vim-closetag'
 
 Plug 'plasticboy/vim-markdown'
-Plug 'mattn/emmet-vim'
 "Plug 'davidhalter/jedi-vim'
 Plug 'tell-k/vim-autopep8'
 
