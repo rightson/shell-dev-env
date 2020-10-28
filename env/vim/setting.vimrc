@@ -33,10 +33,13 @@ set background=dark
 set ruler
 set nowrap
 set linebreak
-set colorcolumn=120
-let &colorcolumn=join(range(120,999),",")
-highlight ColorColumn ctermbg=235 guibg=#2c2d27
-set fillchars+=vert:\ 
+
+function! HighlightColumn()
+    set colorcolumn=120
+    let &colorcolumn=join(range(120,999),",")
+    highlight ColorColumn ctermbg=235 guibg=#2c2d27
+    set fillchars+=vert:\ 
+endfunction
 
 
 function! ShowCursorLine()
@@ -56,7 +59,7 @@ let g:Powerline_symbols = 'unicode'
 " colo koehler
 " colo murphy
 " colo pablo
-colo monokai
+" colo monokai
 
 
 " Display: folding
