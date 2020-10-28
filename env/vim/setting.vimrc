@@ -38,9 +38,12 @@ let &colorcolumn=join(range(120,999),",")
 highlight ColorColumn ctermbg=235 guibg=#2c2d27
 set fillchars+=vert:\ 
 
-set cursorline
-highlight cursorLine cterm=bold ctermbg=DarkGrey gui=bold guibg=DarkGrey
-highlight CursorLineNr term=bold cterm=bold ctermbg=DarkGrey gui=bold
+
+function! ShowCursorLine()
+    set cursorline
+    highlight cursorLine cterm=bold ctermbg=DarkGrey gui=bold guibg=DarkGrey
+    highlight CursorLineNr term=bold cterm=bold ctermbg=DarkGrey gui=bold
+endfunction
 
 " Display: power line
 set t_Co=256
@@ -103,14 +106,6 @@ autocmd BufReadPost *
             \ exe "normal g'\"" |
             \ endif
 
-" Restore: entire session
-function! RestoreSession()
-    if argc() == 0 "vim called without arguments
-        execute 'source ~/session.vim'
-    end
-endfunction
-" autocmd VimEnter * call RestoreSession()
-
 
 " Directory
 "set autochdir
@@ -123,38 +118,6 @@ endfunction
 "autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 
-" Tags: ctags/cscope generation
-"function! DelTagOfFile(file)
-"  let fullpath = a:file
-"  let cwd = getcwd()
-"  let tagfilename = cwd . "/tags"
-"  let f = substitute(fullpath, cwd . "/", "", "")
-"  let f = escape(f, './')
-"  let cmd = 'sed -i "/' . f . '/d" "' . tagfilename . '"'
-"  let resp = system(cmd)
-"endfunction
-"
-"function! UpdateTags()
-"  let f = expand("%:p")
-"  let cwd = getcwd()
-"  let tagfilename = cwd . "/tags"
-"  let cmd = 'ctags -a -f ' . tagfilename . ' --c++-kinds=+p --fields=+iaS --extra=+q ' . '"' . f . '"'
-"  call DelTagOfFile(f)
-"  let resp = system(cmd)
-"  let cmd = "find . -iname '*.c' -o -iname '*.cpp' -o -iname '*.h' -o -iname '*.hpp' -o -iname '*.js' -o -iname '*.py' > cscope.files"
-"  let resp = system(cmd)
-"  let cmd = "cscope -b -i cscope.files -f cscope.out"
-"  let resp = system(cmd)
-"  cs reset
-"endfunction
-"autocmd BufWritePost,BufReadPost *.cpp,*.hpp,*.h,*.c silent! call UpdateTags()
-
-
-" Auto track session during editing
-" autocmd BufWritePost * execute ':mksession! Session.vim'
-" autocmd BufWinEnter * execute ':mksession! Session.vim'
-" autocmd BufWinLeave * execute '!\rm -f Session.vim'
-
 
 " Strip tailing white space
 function! StripTrailingWhitespace()
@@ -164,12 +127,12 @@ endfunction
 
 " GUI: appearance
 if has("gui_running")
+    colo monokai
     set lines=60 columns=120
     set guioptions-=T
     set guioptions-=r
     set guioptions-=L
     "set transparency=2
-    colo monokai
     set linespace=2
     set guitablabel=%N:\ %M%t
     set noeb vb t_vb=
