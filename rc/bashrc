@@ -1,7 +1,7 @@
 
 # Added by shell-dev-env.
 # =Begin=
-source $ENV_ROOT/env/bash/git-prompt.bash
+source $ENV_ROOT/env/bash/git-prompt.sh
 source $ENV_ROOT/env/bash/statusbar.bash
 source $ENV_ROOT/env/bash/aliases.bash
 source $ENV_ROOT/env/bash/git-aliases.bash
