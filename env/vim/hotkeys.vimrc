@@ -42,7 +42,10 @@ noremap <C-s> :wa<CR> :mksession! session.vim<CR>
 "noremap <C-w>t :tabnew %<CR>
 " so we add a new helper which can keep origin pane in the original tab:
 noremap <C-w>p :tabnew %<CR>
-
+noremap <A-[> :tabmove -1<CR>
+noremap <A-]> :tabmove +1<CR>
+noremap <A-j> gt<CR>
+noremap <A-k> gT<CR>
 if has("gui_running")
     :noremap <A-1> 1gt<CR>
     :noremap <A-2> 2gt<CR>
