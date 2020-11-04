@@ -46,6 +46,9 @@ noremap <A-[> :tabmove -1<CR>
 noremap <A-]> :tabmove +1<CR>
 noremap <A-j> gt<CR>
 noremap <A-k> gT<CR>
+ca tn tabnew
+ca th tabp
+ca tl tabn
 if has("gui_running")
     :noremap <A-1> 1gt<CR>
     :noremap <A-2> 2gt<CR>
