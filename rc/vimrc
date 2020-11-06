@@ -2,6 +2,7 @@
 " Added by shell-dev-env.
 " =Begin=
 source $ENV_ROOT/env/vim/plug.vimrc
+source $ENV_ROOT/env/vim/helpers.vimrc
 source $ENV_ROOT/env/vim/hotkeys.vimrc
 source $ENV_ROOT/env/vim/setting.vimrc
 " =End=
