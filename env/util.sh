@@ -17,8 +17,10 @@ export MY_METRIC=100
 
 if [ -f "`which rg 2> /dev/null`" ]; then
     export FZF_CTRL_T_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*" --glob "!node_modules/*" --glob "!vendor/*" 2> /dev/null'
+    export FZF_DEFAULT_COMMAND=$FZF_CTRL_T_COMMAND
 elif [ -f "`which fd 2> /dev/null`" ]; then
     export FZF_CTRL_T_COMMAND='fd --type f --hidden --follow --exclude .node_modules'
+    export FZF_DEFAULT_COMMAND=$FZF_CTRL_T_COMMAND
 fi
 
 ### General ###
