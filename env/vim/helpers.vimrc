@@ -74,13 +74,13 @@ endfunction
 
 
 function! CscopeAdd()
-    silent !cs add
+    !cs add
     cs add cscope.out
 endfunction
 
 
 function! CscopeUpdate()
-    silent !cs update
+    !cs update
     cs reset
 endfunction
 

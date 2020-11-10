@@ -1,10 +1,13 @@
 " vim hotkeys
 
-"noremap <F2> :qa<CR>
+" turn on in the future
+noremap <F2> :call CscopeUpdate()<CR><CR>
+noremap <S-F2> :call CscopeAdd()<CR>
 
 noremap <F3> :cs find s <C-R>=expand("<cword>")<CR><CR>
-noremap <S-F3> :call CscopeAdd()<CR>
+noremap <S-F3> :cs find e <C-R>=expand("<cword>")<CR><CR>
 
+" similar to alt-F4 / ctrl-F4
 noremap <F4> :qa<CR>
 
 noremap <F5> :source ~/.vimrc<CR>
