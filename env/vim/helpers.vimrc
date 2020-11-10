@@ -1,3 +1,58 @@
+function! ToggleGuiMenu()
+    if has("gui_running") 
+        if !exists('g:toggle_gui_menu')
+            let g:toggle_gui_menu = 1
+        endif
+        if (g:toggle_gui_menu == 1)
+            set guioptions-=m
+            let g:toggle_gui_menu = 0
+        else
+            set guioptions+=m
+            let g:toggle_gui_menu = 1
+        endif
+    endif
+endfunction
+
+
+function! ToggleGuiToolbar()
+    if has("gui_running") 
+        if !exists('g:toggle_gui_toolbar')
+            let g:toggle_gui_toolbar = 1
+        endif
+        if (g:toggle_gui_toolbar == 1)
+            set guioptions-=T
+            let g:toggle_gui_toolbar = 0
+        else
+            set guioptions+=T
+            let g:toggle_gui_toolbar = 1
+        endif
+    endif
+endfunction
+
+
+function! ToggleMouse()
+    if &mouse == 'a' 
+        set mouse= 
+    else 
+        set mouse=a 
+    endif
+endfunction
+
+
+function! ToggleLineNumber()
+    if &nu == 'nonumber' 
+        set nu
+    else
+        set nonu
+    endif
+endfunction
+
+
+function! ToggleDrawCentered()
+    Goyo
+endfunction
+
+
 function! HighlightColumn()
     set colorcolumn=120
     let &colorcolumn=join(range(120,999),",")
@@ -19,13 +74,13 @@ endfunction
 
 
 function! CscopeAdd()
-    !cs add
+    silent !cs add
     cs add cscope.out
 endfunction
 
 
 function! CscopeUpdate()
-    !cs update
+    silent !cs update
     cs reset
 endfunction
 

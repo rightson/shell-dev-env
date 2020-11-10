@@ -4,7 +4,7 @@ Plug 'tpope/vim-obsession'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'vim-airline/vim-airline'
-Plug 'vim-scripts/cscope_macros.vim'
+"Plug 'vim-scripts/cscope_macros.vim'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'jremmen/vim-ripgrep'
 Plug 'easymotion/vim-easymotion'

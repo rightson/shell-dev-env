@@ -1,21 +1,26 @@
 " vim hotkeys
 
-noremap <F2> :qa<CR>
+"noremap <F2> :qa<CR>
 
 noremap <F3> :cs find s <C-R>=expand("<cword>")<CR><CR>
+noremap <S-F3> :call CscopeAdd()<CR>
+
+noremap <F4> :qa<CR>
 
 noremap <F5> :source ~/.vimrc<CR>
 
 noremap <F6> :NERDTreeToggle<CR>
 
-noremap <F8> :ZoomWin<CR>
+noremap <F8> :call ToggleGuiToolbar()<CR>
 
-noremap <F9> :if &mouse == 'a' \| set mouse= \| else \| set mouse=a \| endif<CR><CR>
+noremap <F9> :call ToggleGuiMenu()<CR>
 
 noremap <F10> :%!xxd
 
-noremap <S-F11> :Goyo<CR>:source ~/.vimrc<CR>
-noremap <F12> :set nu!<CR>
+noremap <S-F11> :call ToggleDrawCentered()<CR>
+
+noremap <F12> :call ToggleMouse()<CR>
+noremap <S-F12> :call ToggleLineNumber()<CR>
 
 noremap <C-G> <Esc>:echo expand('%:p')<Return>
 
@@ -29,7 +34,7 @@ noremap <C-k>t :%s/\s\+$//g<CR>
 noremap <C-k>b :NERDTreeToggle %<CR>
 noremap <C-k>f :NERDTreeFind %<CR>
 
-noremap <C-k>r :!ctags -R .<CR>:!find . -iname '*.c' -o -iname '*.cpp' -o -iname '*.h' -o -iname '*.hpp' -o -iname '*.js' -o -iname '*.py' > cscope.files<CR> :!cscope -b -i cscope.files -f cscope.out<CR>:cs reset<CR>
+noremap <C-k>r call CscopeAdd()<CR>
 
 " autopep8
 noremap <C-a>8 :Autopep8<CR>

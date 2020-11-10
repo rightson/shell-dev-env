@@ -114,7 +114,8 @@ autocmd BufReadPost *
 " GUI: appearance
 if has("gui_running")
     colo monokai
-    set lines=60 columns=120
+    set clipboard=unnamed
+    "set lines=60 columns=120
     set guioptions-=T
     set guioptions-=r
     set guioptions-=L
