@@ -15,8 +15,10 @@ export MY_RDP_PORT=3389
 export MY_RDP_IP_CACHE=$HOME/.cache/my-rdp-ip-cache
 export MY_METRIC=100
 
-if [ -f "`which fd 2> /dev/null`" ]; then
-    export FZF_CTRL_T_COMMANDS='fd --type f --hidden --follow --exclude .node_modules'
+if [ -f "`which rg 2> /dev/null`" ]; then
+    export FZF_CTRL_T_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*" --glob "!node_modules/*" --glob "!vendor/*" 2> /dev/null'
+elif [ -f "`which fd 2> /dev/null`" ]; then
+    export FZF_CTRL_T_COMMAND='fd --type f --hidden --follow --exclude .node_modules'
 fi
 
 ### General ###
