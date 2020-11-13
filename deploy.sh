@@ -6,7 +6,7 @@ ENV_ROOT_ESCAPED=$(echo $ENV_ROOT | sed -e 's/\\/\\\\/g' -e 's/\//\\\//g' -e 's/
 RC_ROOT=$ENV_ROOT/rc
 RC_DEPLOYED=$ENV_ROOT/rc-deployed
 
-case $(basename $SHELL) in
+case $(basename $shell) in
     zsh)
         SHELL_RC_NAME=zshrc;;
     tcsh)
@@ -15,7 +15,7 @@ case $(basename $SHELL) in
         SHELL_RC_NAME=bashrc;;
 esac
 if [ -z $PROFILE ]; then
-    case `basename $SHELL` in
+    case `basename $shell` in
         zsh)
             export PROFILE=~/.zshrc;;
         csh|tcsh)

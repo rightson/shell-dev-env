@@ -108,7 +108,7 @@ alias srm='sudo ufw remove'
 alias vbm='VBoxManage'
 
 # svn aliases
-export SVN_TOOL_PATH=$ENV_PATH/bin
+export SVN_TOOL_PATH=$ENV_ROOT/bin
 if [ -d ${SVN_TOOL_PATH} ]; then
     alias svndiff="svn di --diff-cmd ${SVN_TOOL_PATH}/svn-diff.sh"
     alias s=".  ${SVN_TOOL_PATH}/list-svn-diff.sh set"

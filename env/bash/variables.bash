@@ -7,8 +7,8 @@
 
 
 # Export global variables
-export ENV_PATH=$HOME/.env
-export PATH=$HOME/local/bin:$HOME/.local/bin:$ENV_PATH/bin:$PATH
+export ENV_ROOT=$HOME/.env
+export PATH=$HOME/local/bin:$HOME/.local/bin:$ENV_ROOT/bin:$PATH
 export PATH=/usr/local/sbin:/usr/local/bin:$PATH
 export VIM_BIN=/usr/bin/vim
 export EDITOR=$VIM_BIN

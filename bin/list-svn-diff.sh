@@ -1,7 +1,7 @@
 #/bin/bash
 
-export ENV_PATH=$HOME/.env
-export DIFF_WRAPPER=$ENV_PATH/bin/svn-diff.sh
+export ENV_ROOT=$HOME/.env
+export DIFF_WRAPPER=$ENV_ROOT/bin/svn-diff.sh
 export SVNDIFF="svn diff --diff-cmd ${DIFF_WRAPPER}"
 export RM="sudo rm -rf"
 export TMPFILE=/tmp/svn_diff.list.$$
@@ -52,4 +52,4 @@ else
     echo -e "    source <this_file> reset\n"
 fi
 
-unset ENV_PATH DIFF_WRAPPER SVNDIFF RM TMPFILE
+unset ENV_ROOT DIFF_WRAPPER SVNDIFF RM TMPFILE
