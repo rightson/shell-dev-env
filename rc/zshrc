@@ -1,5 +1,5 @@
 
 # Added by shell-dev-env.
 # =Begin=
-source $ENV_ROOT/env/env/env.zsh
+source $ENV_ROOT/env/env.zsh
 # =End=
