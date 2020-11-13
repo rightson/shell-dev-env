@@ -6,24 +6,27 @@ ENV_ROOT_ESCAPED=$(echo $ENV_ROOT | sed -e 's/\\/\\\\/g' -e 's/\//\\\//g' -e 's/
 RC_ROOT=$ENV_ROOT/rc
 RC_DEPLOYED=$ENV_ROOT/rc-deployed
 
-case $(basename $shell) in
+shell=`ps -p$PPID | tail -1 | awk '{print $NF}'`
+echo $shell
+case $shell in
+    csh)
+        SHELL_RC_NAME=tcshrc
+        PROFILE=~/.cshrc
+        ;;
+    bash)
+        SHELL_RC_NAME=bashrc
+        PROFILE=~/.bashrc
+        ;;
     zsh)
-        SHELL_RC_NAME=zshrc;;
-    tcsh)
-        SHELL_RC_NAME=tcshrc;;
+        SHELL_RC_NAME=zshrc
+        PROFILE=~/.zshrc
+        ;;
     *)
-        SHELL_RC_NAME=bashrc;;
+        echo "Unsupported shell"
+        exit -1
+        ;;
 esac
-if [ -z $PROFILE ]; then
-    case `basename $shell` in
-        zsh)
-            export PROFILE=~/.zshrc;;
-        csh|tcsh)
-            export PROFILE=~/.cshrc;;
-        *)
-            export PROFILE=~/.bashrc;;
-    esac
-fi
+
 SHELLRC=${PROFILE/#\~/$HOME}
 VIMRC=$HOME/.vimrc
 SCREENRC=$HOME/.screenrc
@@ -161,7 +164,7 @@ patch_everything() {
     install_tmux_tpm
     install_fd_for_ubuntu
     install_fzf
-    install_rg
+    #install_rg
     #relocate_env_path
 }
 
