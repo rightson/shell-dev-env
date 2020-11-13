@@ -68,14 +68,14 @@ relocate_env_path() {
     local _BASH_RC=$ENV_ROOT/env/bash/*.bashrc
     local _BINARY=$ENV_ROOT/bin/list-svn-diff.sh
 
-    echo "Locating the ENV_PATH to $ENV_ROOT..."
+    echo "Locating the ENV_ROOT to $ENV_ROOT..."
     echo "    Processing $_BASH_RC... done"
     echo "    Processing $_BINARY... done"
 
     if [ $UNAME = "Linux" ]; then
-        sed "s/export ENV_PATH=.*$/export ENV_PATH=$(echo $ENV_ROOT_ESCAPED)/g" -i $_BASH_RC $_BINARY
+        sed "s/export ENV_ROOT=.*$/export ENV_ROOT=$(echo $ENV_ROOT_ESCAPED)/g" -i $_BASH_RC $_BINARY
     else
-        sed -i "" "s/export ENV_PATH=.*$/export ENV_PATH=$(echo $ENV_ROOT_ESCAPED)/g" $_BASH_RC $_BINARY
+        sed -i "" "s/export ENV_ROOT=.*$/export ENV_ROOT=$(echo $ENV_ROOT_ESCAPED)/g" $_BASH_RC $_BINARY
     fi
 
     echo ''
