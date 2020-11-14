@@ -115,6 +115,9 @@ deb_download_and_install() {
 }
 
 install_fd_for_ubuntu() {
+    if [ "$OSTYPE" != "linux-gnu" ]; then
+        return
+    fi
     distro=`cat /etc/os-release | grep '^NAME=' | awk -F '=' '{print $2 }'`
     if [ "$distro" != "\"Ubuntu\"" ]; then
         echo "Not ubuntu, please install fd from https://github.com/sharkdp/fd/ manually"
