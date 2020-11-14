@@ -9,15 +9,15 @@ RC_DEPLOYED=$ENV_ROOT/rc-deployed
 shell=`ps -p$PPID | tail -1 | awk '{print $NF}'`
 echo $shell
 case $shell in
-    csh)
+    *csh)
         SHELL_RC_NAME=tcshrc
         PROFILE=~/.cshrc
         ;;
-    bash)
+    *bash)
         SHELL_RC_NAME=bashrc
         PROFILE=~/.bashrc
         ;;
-    zsh)
+    *zsh)
         SHELL_RC_NAME=zshrc
         PROFILE=~/.zshrc
         ;;
