@@ -338,3 +338,16 @@ function acroRd32() {
     local bin=/mnt/c/Program\ Files\ \(x86\)/Adobe/Acrobat\ Reader\ DC/Reader/AcroRd32.exe
     "$bin" $winpath &
 }
+
+function install_chrome_from_deb() {
+    local file=google-chrome-stable_current_amd64.deb
+    local url=https://dl.google.com/linux/direct/$file
+    if [ -f ./$file ]; then
+        rm -f ./$file
+    fi
+    wget $url
+    if [ $? -eq 0 ]; then
+        sudo apt install -y ./$file
+        rm -f ./$file
+    fi
+}
