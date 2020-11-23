@@ -4,7 +4,7 @@ if [ -z "$MY_DEV_ROOT" ]; then
     export MY_DEV_ROOT=$HOME/workspace
 fi
 if [ -z "$MY_VIRTUALENV_ROOT" ]; then
-    export MY_VIRTUALENV_ROOT=$HOME/.virtualenv
+    export MY_VIRTUALENV_ROOT=$HOME/.virtualenvs
 fi
 
 if [[ `uname` = 'Linux' ]]; then
