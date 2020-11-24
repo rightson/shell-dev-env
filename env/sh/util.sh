@@ -351,3 +351,43 @@ function install_chrome_from_deb() {
         rm -f ./$file
     fi
 }
+
+# Virtualenv
+
+if [ -z "$MY_DEV_ROOT" ]; then
+    export MY_DEV_ROOT=$HOME/workspace
+fi
+
+if [ -z "$MY_VIRTUALENV_ROOT" ]; then
+    export MY_VIRTUALENV_ROOT=$HOME/.virtualenvs
+fi
+
+function create_venv() {
+    local venv_name=$1
+    if [ -z "$venv_name" ]; then
+        echo "Usage: create_venv <venv_name>"
+        return
+    fi
+    if [ -z "$MY_VIRTUALENV_ROOT" ]; then
+        export MY_VIRTUALENV_ROOT=$HOME/.virtualenvs
+    fi
+    cd $MY_VIRTUALENV_ROOT;
+    python3 -m venv $venv_name;
+    $MY_VIRTUALENV_ROOT/$venv_name/bin/pip install --upgrade pip
+}
+
+function list_venv() {
+    if [ -z "$MY_VIRTUALENV_ROOT" ]; then
+        export MY_VIRTUALENV_ROOT=$HOME/.virtualenvs
+    fi
+    cd $MY_VIRTUALENV_ROOT;
+    ls -d | grep -v .
+}
+
+if [ -d $MY_DEV_ROOT ]; then
+    generate_dev_aliases
+fi
+
+if [ -d $MY_VIRTUALENV_ROOT ]; then
+    generate_venv_aliases
+fi
