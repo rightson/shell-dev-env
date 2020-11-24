@@ -1,9 +1,10 @@
 # Lines configured by zsh-newuser-install
-HISTFILE=~/.histfile
-HISTSIZE=10000
-SAVEHIST=10000
+export HISTFILE=~/.histfile
+export HISTSIZE=10000
+export SAVEHIST=10000
 bindkey -e
 # End of lines configured by zsh-newuser-install
+#
 # The following lines were added by compinstall
 zstyle :compinstall filename "$HOME/.zshrc"
 autoload -Uz compinit
@@ -27,9 +28,6 @@ vimode() {
     bindkey '^e' vi-end-of-line
     bindkey '^u' kill-whole-line
 }
+
 vimode
 
-export ENV_PATH=$HOME/.env
-export PATH=$HOME/local/bin:$HOME/.local/bin:$ENV_PATH/bin:/usr/local/sbin:/usr/local/bin:$PATH
-export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE=fg=cyan
-export LC_ALL=${LANG}
