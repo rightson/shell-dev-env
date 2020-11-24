@@ -371,6 +371,9 @@ function create_venv() {
     if [ -z "$MY_VIRTUALENV_ROOT" ]; then
         export MY_VIRTUALENV_ROOT=$HOME/.virtualenvs
     fi
+    if [ ! -d "$MY_VIRTUALENV_ROOT" ]; then
+        mkdir -p $MY_VIRTUALENV_ROOT;
+    fi
     cd $MY_VIRTUALENV_ROOT;
     python3 -m venv $venv_name;
     $MY_VIRTUALENV_ROOT/$venv_name/bin/pip install --upgrade pip
