@@ -3,7 +3,7 @@ Shell Development Environment
 
 *** Breaking changes ***
 
-Please note that the shell-dev-env is almost rewritten entirely.
+Please note that the shell-dev-env was rewritten entirely.
 For those who wants to update to latest version but still using the legacy versions,
 please remove legacy patched from existing rc files (~/.bashrc, ~/.zshrc, ~/.vimrc ...) manually.
 
