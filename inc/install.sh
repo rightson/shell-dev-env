@@ -104,10 +104,10 @@ function patch_rc_files() {
     local shell=$2
     local profile=`get_target_profile $shell_name`
 
-    local IDENTIFIER='Added by shell-env.sh.'
-    if [ "`grep \"$IDENTIFIER\" $profile 2> /dev/null`" = "" ]; then
+    local IDENTIFIER_NEW='Added by shell-env.sh utility'
+    if [ "`grep \"$IDENTIFIER_NEW\" $profile 2> /dev/null`" = "" ]; then
         echo "Patching $profile ... "
-        echo -e "\n# $IDENTIFIER" >> $profile
+        echo -e "\n# $IDENTIFIER_NEW" >> $profile
         echo "# =Begin=" >> $profile
         echo "export ENV_ROOT=$ENV_ROOT" >> $profile
         echo "source \$ENV_ROOT/inc/env.${shell_name}" >> $profile
@@ -117,9 +117,9 @@ function patch_rc_files() {
     fi
 
     local vimrc=$HOME/.vimrc
-    if [ "`grep \"$IDENTIFIER\" $vimrc 2> /dev/null`" = "" ]; then
+    if [ "`grep \"$IDENTIFIER_NEW\" $vimrc 2> /dev/null`" = "" ]; then
         echo "Patching $vimrc ..."
-        echo -e "\n\" $IDENTIFIER" >> $vimrc
+        echo -e "\n\" $IDENTIFIER_NEW" >> $vimrc
         echo "\" =Begin=" >> $vimrc
         echo "source $ENV_ROOT/vim/plug.vimrc" >> $vimrc
         echo "source $ENV_ROOT/vim/helpers.vimrc" >> $vimrc
@@ -130,8 +130,8 @@ function patch_rc_files() {
         echo "$vimrc already patched" 
     fi
 
-    local tmuxrc=$HOME/.tmuxrc
-    if [ "`grep \"$IDENTIFIER\" $tmuxrc 2> /dev/null`" = "" ]; then
+    local tmuxrc=$HOME/.tmux.conf
+    if [ "`grep \"$IDENTIFIER_NEW\" $tmuxrc 2> /dev/null`" = "" ]; then
         echo "Patching $tmuxrc ... "
         cat "${ENV_ROOT}/seeds/tmux.conf" >> $tmuxrc
     else
@@ -140,4 +140,15 @@ function patch_rc_files() {
 
     echo "Please run below command to update your shell setting:"
     echo -e "\n\tsource $profile\n"
+
+    local IDENTIFIER_OLD='Added by shell-dev-env.'
+    if [ "`grep \"$IDENTIFIER_OLD\" $profile 2> /dev/null`" != "" ]; then
+        echo "Please remove the setting in $profile defined in the # $IDENTIFIER_OLD =Begin= ... =End= block"
+    fi
+    if [ "`grep \"$IDENTIFIER_OLD\" $vimrc 2> /dev/null`" != "" ]; then
+        echo "Please remove the setting in $vimrc defined in the \" $IDENTIFIER_OLD =Begin= ... =End= block"
+    fi
+    if [ "`grep \"$IDENTIFIER_OLD\" $tmuxrc 2> /dev/null`" != "" ]; then
+        echo "Please remove the setting in $tmuxrc defined in the # $IDENTIFIER_OLD =Begin= ... =End= block"
+    fi
 }
