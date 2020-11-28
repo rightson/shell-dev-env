@@ -1,6 +1,12 @@
 export ENV_ROOT=$(cd `dirname ${BASH_SOURCE[0]}`/.. && pwd)
 
 source $ENV_ROOT/inc/common.sh
+
+source $ENV_ROOT/inc/bash/variables.bash
+source $ENV_ROOT/inc/bash/util.bash
+source $ENV_ROOT/inc/bash/statusbar.bash
+source $ENV_ROOT/inc/bash/git-aliases.bash
+
 source $ENV_ROOT/inc/env.sh
 source $ENV_ROOT/inc/route.sh
 source $ENV_ROOT/inc/net.sh
@@ -16,8 +22,3 @@ source $ENV_ROOT/inc/launcher.sh
 source $ENV_ROOT/inc/install.sh
 source $ENV_ROOT/inc/settings.sh
 source $ENV_ROOT/inc/aliases.sh
-
-source $ENV_ROOT/inc/bash/variables.bash
-source $ENV_ROOT/inc/bash/util.bash
-source $ENV_ROOT/inc/bash/statusbar.bash
-source $ENV_ROOT/inc/bash/git-aliases.bash

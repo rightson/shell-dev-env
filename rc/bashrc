@@ -1,5 +1,5 @@
 
 # Added by shell-dev-env.
 # =Begin=
-source $ENV_ROOT/inc/env.bash
+source $HOME/.env/inc/env.bash
 # =End=
