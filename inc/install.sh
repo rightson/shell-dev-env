@@ -102,21 +102,20 @@ function patch_rc_files() {
     local profile=`get_target_profile $shell_name`
 
     local IDENTIFIER='Added by shell-dev-env.'
-    echo "Patching $profile ... "
     if [ "`grep \"$IDENTIFIER\" $profile 2> /dev/null`" = "" ]; then
+        echo "Patching $profile ... "
         echo -e "\n# $IDENTIFIER" >> $profile
         echo "# =Begin=" >> $profile
         echo "export ENV_ROOT=$ENV_ROOT" >> $profile
         echo "source \$ENV_ROOT/inc/env.${shell_name}" >> $profile
         echo "# =End=" >> $profile
-        echo "$profile patched" 
     else 
         echo "$profile already patched" 
     fi
 
     local vimrc=$HOME/.vimrc
-    echo "Patching $vimrc ..."
     if [ "`grep \"$IDENTIFIER\" $vimrc 2> /dev/null`" = "" ]; then
+        echo "Patching $vimrc ..."
         echo -e "\n\" $IDENTIFIER" >> $vimrc
         echo "\" =Begin=" >> $vimrc
         echo "source $ENV_ROOT/vim/plug.vimrc" >> $vimrc
@@ -124,17 +123,18 @@ function patch_rc_files() {
         echo "source $ENV_ROOT/vim/hotkeys.vimrc" >> $vimrc
         echo "source $ENV_ROOT/vim/setting.vimrc" >> $vimrc
         echo "\" =END=" >> $vimrc
-        echo "$vimrc patched" 
     else 
         echo "$vimrc already patched" 
     fi
 
     local tmuxrc=$HOME/.tmuxrc
-    echo "Patching $tmuxrc ... "
     if [ "`grep \"$IDENTIFIER\" $tmuxrc 2> /dev/null`" = "" ]; then
+        echo "Patching $tmuxrc ... "
         cat "${ENV_ROOT}/seeds/tmux.conf" >> $tmuxrc
-        echo "$tmuxrc patched" 
     else
         echo "$tmuxrc already patched" 
     fi
+
+    echo "Please run below command to update your shell setting:"
+    echo -e "\n\tsource $profile\n"
 }

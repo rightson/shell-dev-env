@@ -1,9 +1,0 @@
-
-" Added by shell-dev-env.
-" =Begin=
-source $HOME/.env/vim/plug.vimrc
-source $HOME/.env/vim/helpers.vimrc
-source $HOME/.env/vim/hotkeys.vimrc
-source $HOME/.env/vim/setting.vimrc
-" =End=
-
