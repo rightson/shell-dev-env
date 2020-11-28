@@ -10,7 +10,7 @@ else
     export ENV_SHELL=$(which $0)
 fi
 
-ENV_LIB=${ENV_ROOT}/inc/lib.sh
+ENV_LIB=${ENV_ROOT}/inc/install.sh
 [ -f $ENV_LIB ] && . $ENV_LIB
 
 if [ $ENV_RUN_MODE = bash ]; then
@@ -22,7 +22,7 @@ if [ $ENV_RUN_MODE = bash ]; then
             config_git_vim_diff
             ;;
         *)
-            print_usage $0 
+            print_usage $0
             ;;
     esac
     exit 0

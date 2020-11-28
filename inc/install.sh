@@ -1,4 +1,4 @@
-export __DIR__=$(cd `dirname ${BASH_SOURCE[0]}` && pwd)
+# Install
 
 function print_usage() {
     echo "Usages:"
@@ -16,14 +16,14 @@ function install_vim_plug() {
     fi
 }
 
-install_tmux_tpm() {
+function install_tmux_tpm() {
     echo "Installing tmux-tpm"
     if [ ! -d ~/.tmux/plugins/tpm ]; then
         git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
     fi
 }
 
-install_fzf() {
+function install_fzf() {
     echo "Installing fzf"
     if [ ! -f ~/.fzf/install ]; then
         git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
@@ -31,9 +31,22 @@ install_fzf() {
     fi
 }
 
-config_git_vim_diff() {
+function config_git_vim_diff() {
     git config --global diff.tool vimdiff
     git config --global difftool.prompt false
     git config --global alias.vimdiff difftool
+}
+
+function install_chrome_from_deb() {
+    local file=google-chrome-stable_current_amd64.deb
+    local url=https://dl.google.com/linux/direct/$file
+    if [ -f ./$file ]; then
+        rm -f ./$file
+    fi
+    wget $url
+    if [ $? -eq 0 ]; then
+        sudo apt install -y ./$file
+        rm -f ./$file
+    fi
 }
 
