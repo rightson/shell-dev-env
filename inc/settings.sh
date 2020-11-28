@@ -1,5 +1,5 @@
+# Settings
 
-export ENV_ROOT=$HOME/.env
 export PATH=$HOME/local/bin:$HOME/.local/bin:$ENV_ROOT/bin:$PATH
 if [ "NO_USER_LOCAL" != 1 ]; then
     export PATH=/usr/local/sbin:/usr/local/bin:$PATH

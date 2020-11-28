@@ -1,8 +1,0 @@
-
-# Added by shell-dev-env.
-# =Begin=
-source $ENV_ROOT/env/tcsh/aliases.csh
-source $ENV_ROOT/env/tcsh/git.csh
-source $ENV_ROOT/env/tcsh/statusbar.csh
-# =End=
-

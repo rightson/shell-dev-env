@@ -9,7 +9,6 @@ Supported RC files:
    - .bashrc (or .bash_profile)
    - .zshrc
    - .vimrc
-   - .screerc 
    - .tmux.conf 
 
 Installation
@@ -19,7 +18,7 @@ Installation
 
 2.  install RC files:
 
-	`bash ~/.env/deploy.sh`
+	`bash ~/.env/shell-env.sh patch install config`
 	
 3. source rc file. 
 

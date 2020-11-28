@@ -1,6 +1,8 @@
+# Aliases
+
 # common aliases
 alias al='alias'
-alias aliasrc='vim $HOME/.env/env/aliases.sh'
+alias aliasrc="vim $ENV_ROOT/inc/aliases.sh"
 
 # add common parameter
 alias mv='mv -i'
@@ -107,29 +109,8 @@ alias srm='sudo ufw remove'
 
 alias vbm='VBoxManage'
 
-# svn aliases
-export SVN_TOOL_PATH=$ENV_ROOT/bin
-if [ -d ${SVN_TOOL_PATH} ]; then
-    alias svndiff="svn di --diff-cmd ${SVN_TOOL_PATH}/svn-diff.sh"
-    alias s=".  ${SVN_TOOL_PATH}/list-svn-diff.sh set"
-    alias sc=". ${SVN_TOOL_PATH}/list-svn-diff.sh set check"
-    alias sr=". ${SVN_TOOL_PATH}/list-svn-diff.sh reset"
-fi
-alias st='svn status'
-alias stq='svn status -q'
-alias svnup="find . -type d | grep -v .svn | xargs svn up"
-unset SVN_TOOL_PATH
-
-
 grep2() {
     grep $1 | grep -v grep | grep --color $1
 }
 
-gopath() {
-    if [ ! -z $1 ]; then
-        export GOPATH=`cd $1 && pwd`
-        export PATH=$GOPATH/bin:$PATH
-    fi
-    echo $GOPATH
-}
-
+alias xopen='xdg-open'

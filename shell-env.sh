@@ -10,20 +10,38 @@ else
     export ENV_SHELL=$(which $0)
 fi
 
-ENV_LIB=${ENV_ROOT}/inc/lib.sh
+
+ENV_LIB=${ENV_ROOT}/inc/install.sh
 [ -f $ENV_LIB ] && . $ENV_LIB
 
 if [ $ENV_RUN_MODE = bash ]; then
-    case "$1" in
-        install)
-            install_vim_plug
-            install_tmux_tpm
-            install_fzf
-            config_git_vim_diff
-            ;;
-        *)
-            print_usage $0 
-            ;;
-    esac
+    if [ ${#@} -eq 0 ]; then
+        print_usage $0
+    fi
+    for var in "$@"; do
+        case "$var" in
+            patch)
+                patch_rc_files $ENV_RUN_MODE $ENV_SHELL
+                ;;
+            install)
+                install_vim_plug
+                install_tmux_tpm
+                install_fzf
+                ;;
+            config)
+                config_git_vim_diff
+                ;;
+            all)
+                patch_rc_files $ENV_RUN_MODE $ENV_SHELL
+                install_vim_plug
+                install_tmux_tpm
+                install_fzf
+                config_git_vim_diff
+                ;;
+            *)
+                print_usage $0
+                ;;
+        esac
+    done
     exit 0
 fi
