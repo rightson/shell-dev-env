@@ -29,6 +29,7 @@ if [ $ENV_RUN_MODE = bash ]; then
                 install_fzf
                 ;;
             config)
+                config_vim_plug
                 config_git_vim_diff
                 ;;
             all)
@@ -36,6 +37,7 @@ if [ $ENV_RUN_MODE = bash ]; then
                 install_vim_plug
                 install_tmux_tpm
                 install_fzf
+                config_vim_plug
                 config_git_vim_diff
                 ;;
             *)

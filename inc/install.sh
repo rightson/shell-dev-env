@@ -13,7 +13,6 @@ function install_vim_plug() {
     if [ ! -f ~/.vim/autoload/plug.vim ]; then
         curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
             https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-        vim -E -s -u "~/.vimrc" +PlugInstall +qall
         echo "vim-plug installation completed" 
     else
         echo "vim-plug alredy installed"
@@ -39,6 +38,10 @@ function install_fzf() {
     else 
         echo "fzf already installed" 
     fi
+}
+
+function config_vim_plug() {
+    vim -E -s -u "~/.vimrc" +PlugInstall +qall
 }
 
 function config_git_vim_diff() {
@@ -101,7 +104,7 @@ function patch_rc_files() {
     local shell=$2
     local profile=`get_target_profile $shell_name`
 
-    local IDENTIFIER='Added by shell-dev-env.'
+    local IDENTIFIER='Added by shell-env.sh.'
     if [ "`grep \"$IDENTIFIER\" $profile 2> /dev/null`" = "" ]; then
         echo "Patching $profile ... "
         echo -e "\n# $IDENTIFIER" >> $profile
