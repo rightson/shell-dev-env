@@ -50,6 +50,19 @@ function config_git_vim_diff() {
     git config --global alias.vimdiff difftool
 }
 
+function install_nvm() {
+    local nvm_path="`which nvm 2> /dev/null`"
+    if [ -f $nvm_path ]; then
+        echo "nvm already installed"
+        return
+    fi
+    if [ -n "`which curl 2> /dev/null`" ]; then
+        curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
+    else
+        wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
+    fi
+}
+
 function install_chrome_from_deb() {
     local file=google-chrome-stable_current_amd64.deb
     local url=https://dl.google.com/linux/direct/$file
