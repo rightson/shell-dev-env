@@ -18,6 +18,7 @@ source $ENV_ROOT/inc/rdp-remote.sh
 source $ENV_ROOT/inc/docker.sh
 source $ENV_ROOT/inc/launcher.sh
 source $ENV_ROOT/inc/install.sh
+source $ENV_ROOT/inc/config.sh
 source $ENV_ROOT/inc/settings.sh
 source $ENV_ROOT/inc/aliases.sh
 

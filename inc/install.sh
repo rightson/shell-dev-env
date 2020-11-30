@@ -36,16 +36,6 @@ function install_fzf() {
     fi
 }
 
-function config_vim_plug() {
-    vim -E -s -u "~/.vimrc" +PlugInstall +qall
-}
-
-function config_git_vim_diff() {
-    git config --global diff.tool vimdiff
-    git config --global difftool.prompt false
-    git config --global alias.vimdiff difftool
-}
-
 function install_nvm() {
     local nvm_path="`which nvm 2> /dev/null`"
     if [ -f $nvm_path ]; then

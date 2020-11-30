@@ -4,6 +4,7 @@ export ENV_ROOT=$(cd `dirname ${BASH_SOURCE[0]}` && pwd)
 
 source ${ENV_ROOT}/inc/base.sh
 source ${ENV_ROOT}/inc/install.sh
+source ${ENV_ROOT}/inc/config.sh
 
 if [ "$0" = "${BASH_SOURCE[0]}" ]; then
     export SHELL_PATH=$(which `ps -p$PPID | tail -1 | awk '{print $NF}' | xargs basename | tr -cd '[:alnum:]'`)
@@ -28,6 +29,13 @@ for var in "$@"; do
         config)
             config_vim_plug
             config_git_vim_diff
+            config_git_core_editor
+            config_git_cache_timeout
+            ;;
+        config-git)
+            config_git_vim_diff
+            config_git_core_editor
+            config_git_cache_timeout
             ;;
         all)
             patch_rc_files $SHELL_NAME
@@ -36,6 +44,8 @@ for var in "$@"; do
             install_fzf
             config_vim_plug
             config_git_vim_diff
+            config_git_core_editor
+            config_git_cache_timeout
             ;;
         *)
             print_usage $0
