@@ -67,7 +67,7 @@ opwd="$txtgrn\W$txtrst"
 datetime="$txtpur[\t \D{%Y/%m/%d}]$txtrst"
 at="$txtwht@$txtrst"
 #sh_in_use=`ps | grep --color=none $$ | awk '{print $(NF)}'`
-sh_in_use="$txtblu(`echo $0 | sed 's/-//'`)$txtrst"
+sh_in_use="$txtblu(`echo $0 | sed 's/-//' | xargs basename`)$txtrst"
 
 ps1_root() {
     PS1="${root}@${host}[\w]# "
