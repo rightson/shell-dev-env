@@ -1,9 +1,11 @@
-
 alias g='git'
 
 alias ga='git add'
 alias gaa='git add --all'
 alias gapa='git add --patch'
+alias gau='git add -u'
+
+alias gbc='git rev-parse --abbrev-ref HEAD'
 
 alias gb='git branch'
 alias gba='git branch -a'
@@ -36,7 +38,13 @@ alias gcp='git cherry-pick'
 alias gcs='git commit -S'
 
 alias gd='git diff'
+alias gd.vim='git vimdiff'
+alias gd.np='git --no-pager diff'
+alias gd.wd='git diff --word-diff'
 alias gdca='git diff --cached'
+alias gdca.vim='git vimdiff --cached'
+alias gdca.np='git --no-pager diff --cached'
+alias gdca.wd='git diff --word-diff --cached'
 alias gdct='git describe --tags `git rev-list --tags --max-count=1`'
 alias gdt='git diff-tree --no-commit-id --name-only -r'
 gdv() { 
@@ -97,6 +105,7 @@ alias gk='\gitk --all --branches'
 alias gke='\gitk --all $(git log -g --pretty=format:%h)'
 
 alias gl='git pull'
+alias glob='git pull origin $(git rev-parse --abbrev-ref HEAD)'
 alias glg='git log --stat --color'
 alias glgp='git log --stat --color -p'
 alias glgg='git log --graph --color'
@@ -109,6 +118,7 @@ alias glog='git log --oneline --decorate --color --graph'
 alias glp="_git_log_prettily"
 
 alias gm='git merge'
+alias gmnf='git merge --no-ff'
 alias gmom='git merge origin/master'
 alias gmt='git mergetool --no-prompt'
 alias gmtvim='git mergetool --no-prompt --tool=vimdiff'
@@ -117,6 +127,7 @@ alias gmum='git merge upstream/master'
 alias gp='git push'
 alias gpd='git push --dry-run'
 alias gpoat='git push origin --all && git push origin --tags'
+alias gpob='git push origin $(git rev-parse --abbrev-ref HEAD)'
 alias gpu='git push upstream'
 alias gpv='git push -v'
 
