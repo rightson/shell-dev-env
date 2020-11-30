@@ -1,19 +1,20 @@
 # Common
 
+if [ -z "${ENV_ROOT}" ]; then
+    if [ -n "${BASH_SOURCE[0]}" ]; then
+        export ENV_ROOT=$(cd `dirname ${BASH_SOURCE[0]}`/.. && pwd)
+    else
+        export ENV_ROOT=$(cd ${0:a:h}/.. && pwd)
+    fi
+fi
 
-if [ "$0" = "${BASH_SOURCE[0]}" ]; then
-    export ENV_SHELL_PATH=$(which `ps -p$PPID | tail -1 | awk '{print $NF}' | xargs basename | tr -cd '[:alnum:]'`)
+if [ -n "$shell" ]; then
+    export SHELL_PATH=$shell
 else
-    export ENV_SHELL_PATH=$(which $0)
+    export SHELL_PATH=$(which `ps -p$PPID | tail -1 | awk '{print $NF}' | xargs basename | tr -cd '[:alnum:]'`)
 fi
 
-export SHELL_NAME=`basename $ENV_SHELL_PATH`
-
-if [ "$SHELL_NAME" = bash ]; then
-    export ENV_ROOT=$(cd `dirname ${BASH_SOURCE[0]}`/.. && pwd)
-elif [ "$SHELL_NAME" = zsh ]; then
-    export ENV_ROOT=$(cd ${0:a:h}/.. && pwd)
-fi
+export SHELL_NAME=`basename $SHELL_PATH`
 
 export EXIT_SUCCESS=0
 export EXIT_FAILURE=-1

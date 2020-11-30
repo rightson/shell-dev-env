@@ -110,9 +110,9 @@ function get_target_profile() {
 
 function patch_rc_files() {
     local shell_name=$1
-    local shell=$2
+    echo "shell_name=$shell_name"
     local profile=`get_target_profile $shell_name`
-
+    echo "profile=$profile"
     local IDENTIFIER_NEW='Added by shell-env.sh utility'
     if [ "`grep \"$IDENTIFIER_NEW\" $profile 2> /dev/null`" = "" ]; then
         echo "Patching $profile ... "
