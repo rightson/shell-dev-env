@@ -118,7 +118,11 @@ function patch_rc_files() {
         echo "Patching $profile ... "
         echo -e "\n# $IDENTIFIER_NEW" >> $profile
         echo "# =Begin=" >> $profile
-        echo "export ENV_ROOT=$ENV_ROOT" >> $profile
+        if [ $shell_name = tcsh ]; then
+            echo "setenv ENV_ROOT $ENV_ROOT" >> $profile
+        else
+            echo "export ENV_ROOT=$ENV_ROOT" >> $profile
+        fi
         echo "source \$ENV_ROOT/inc/env.${shell_name}" >> $profile
         echo "# =End=" >> $profile
     else 
