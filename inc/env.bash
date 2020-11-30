@@ -1,6 +1,4 @@
-export ENV_ROOT=$(cd `dirname ${BASH_SOURCE[0]}`/.. && pwd)
-
-source $ENV_ROOT/inc/common.sh
+source $ENV_ROOT/inc/base.sh
 
 source $ENV_ROOT/inc/bash/variables.bash
 source $ENV_ROOT/inc/bash/util.bash

@@ -1,11 +1,7 @@
 # Install
 
 function print_usage() {
-    echo "Usages:"
-    echo "  Command line mode:"
-    echo "      $0 patch|install|config|all"
-    echo "  Source mode:"
-    echo "      source $0"
+    echo "Usages: $0 patch|install|config|all"
 }
 
 function install_vim_plug() {

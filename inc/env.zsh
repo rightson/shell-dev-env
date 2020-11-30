@@ -1,6 +1,4 @@
-export ENV_ROOT=$(cd `dirname ${0:a}`/.. && pwd)
-
-source $ENV_ROOT/inc/common.sh
+source $ENV_ROOT/inc/base.sh
 
 source $ENV_ROOT/inc/zsh/variables.zsh
 source $ENV_ROOT/inc/zsh/util.zsh
