@@ -17,8 +17,7 @@ Plug 'mkitt/tabline.vim'
 
 "Plug 'vim-scripts/cscope_macros.vim'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'nathanaelkane/vim-indent-guides'
-let g:indent_guides_auto_colors = 1
+Plug 'Yggdroot/indentLine'
 
 Plug 'vim-syntastic/syntastic'
 Plug 'pangloss/vim-javascript'
