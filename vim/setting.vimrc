@@ -1,5 +1,7 @@
 " Common VIM setting
 
+set shell=/bin/bash
+
 " Syntax
 syntax on
 au BufRead,BufNewFile jquery.*.js set ft=javascript syntax=jquery
@@ -114,7 +116,7 @@ autocmd BufReadPost *
 " GUI: appearance
 if has("gui_running")
     colo monokai
-    set clipboard=unnamed
+    set clipboard=unnamedplus
     "set lines=60 columns=120
     set guioptions-=T
     set guioptions-=r
