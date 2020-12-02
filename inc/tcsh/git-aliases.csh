@@ -69,6 +69,7 @@ alias gke '\gitk --all $(git log -g --pretty format:%h)'
 
 alias gl 'git pull'
 alias glob 'git pull origin `git rev-parse --abbrev-ref HEAD`'
+alias globr 'git pull origin `git rev-parse --abbrev-ref HEAD` --rebase'
 alias glg 'git log --stat --color'
 alias glgp 'git log --stat --color -p'
 alias glgg 'git log --graph --color'
