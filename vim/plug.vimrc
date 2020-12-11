@@ -29,9 +29,8 @@ Plug 'plasticboy/vim-markdown'
 "Plug 'davidhalter/jedi-vim'
 Plug 'tell-k/vim-autopep8'
 
-if v:version >= 800
 Plug 'fatih/vim-go'
-endif
+let  g:go_version_warning = 0
 Plug 'rightson/vim-p4-syntax'
 
 
