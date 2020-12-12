@@ -11,8 +11,8 @@ fi
 if [ -n "$shell" ]; then
     export SHELL_PATH=$shell
 else
-    export SHELL_PATH=`ps -p $$ | tail -1 | awk '{print $NF}' | xargs basename`
-    #export SHELL_PATH=$(which `ps -p$PPID | tail -1 | awk '{print $NF}' | xargs basename | tr -cd '[:alnum:]'`)
+    SHELL_NAME=`ps -p$$ | tail -1 | awk '{print $NF}' | tr -cd '[:alnum:]/' | xargs basename`
+    export SHELL_PATH=$(which $SHELL_NAME)
 fi
 
 export SHELL_NAME=`basename $SHELL_PATH`

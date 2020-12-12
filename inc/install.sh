@@ -99,21 +99,21 @@ function get_target_profile() {
 }
 
 function patch_rc_files() {
-    local shell_name=$1
-    echo "shell_name=$shell_name"
-    local profile=`get_target_profile $shell_name`
+    local SHELL_NAME=$1
+    echo "SHELL_NAME=$SHELL_NAME"
+    local profile=`get_target_profile $SHELL_NAME`
     echo "profile=$profile"
     local IDENTIFIER_NEW='Added by shell-env.sh utility'
     if [ "`grep \"$IDENTIFIER_NEW\" $profile 2> /dev/null`" = "" ]; then
         echo "Patching $profile ... "
         echo -e "\n# $IDENTIFIER_NEW" >> $profile
         echo "# =Begin=" >> $profile
-        if [ $shell_name = tcsh ]; then
+        if [ $SHELL_NAME = tcsh ]; then
             echo "setenv ENV_ROOT $ENV_ROOT" >> $profile
         else
             echo "export ENV_ROOT=$ENV_ROOT" >> $profile
         fi
-        echo "source \$ENV_ROOT/inc/env.${shell_name}" >> $profile
+        echo "source \$ENV_ROOT/inc/env.${SHELL_NAME}" >> $profile
         echo "# =End=" >> $profile
     else 
         echo "$profile already patched" 
