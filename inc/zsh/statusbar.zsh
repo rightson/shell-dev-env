@@ -38,7 +38,7 @@ get_now="%{$fg[purple]%}%D{[%X]}%{$reset_color%}"
 date="%{$fg[red]%}%D{%Y/%m/%d}%{$reset_color%}"
 datetime="%{$fg[magenta]%}[%* %D{%Y/%m/%d}]%{$reset_color%}"
 at="%{$fg[white]%}@%{$reset_color%}"
-sh_in_use="%{$fg[blue]%}(`ps | grep --color=none $$ | awk '{print $(NF)}'`)%{$reset_color%}"
+sh_in_use="%{$fg[blue]%}(`ps -p$$ | tail -1 | awk '{print $NF}' | tr -cd '[:alnum:]/' | xargs basename`)%{$reset_color%}"
 #sh_in_use=`echo $0 | sed 's/-//'`
 
 setopt prompt_subst

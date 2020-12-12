@@ -7,7 +7,8 @@ source ${ENV_ROOT}/inc/install.sh
 source ${ENV_ROOT}/inc/config.sh
 
 if [ "$0" = "${BASH_SOURCE[0]}" ]; then
-    export SHELL_PATH=$(which `ps -p$PPID | tail -1 | awk '{print $NF}' | xargs basename | tr -cd '[:alnum:]'`)
+    SHELL_NAME=`ps -p$PPID | tail -1 | awk '{print $NF}' | tr -cd '[:alnum:]/' | xargs basename`
+    export SHELL_PATH=$(which $SHELL_NAME)
 fi
 export SHELL_NAME=`basename $SHELL_PATH`
 
@@ -40,8 +41,14 @@ function config() {
     config_vim
 }
 
+function default_action() {
+    patch
+    install
+    config
+}
+
 if [ ${#@} -eq 0 ]; then
-    print_usage $0
+    default_action
     exit 0
 fi
 
@@ -57,13 +64,10 @@ for var in "$@"; do
             config_git;;
         config-vim)
             config_vim;;
-        all)
-            patch
-            install
-            config
-            ;;
+        -h|--help|--usage|-H)
+            print_usage $0;;
         *)
-            print_usage $0
+            default_action
             ;;
     esac
 done
