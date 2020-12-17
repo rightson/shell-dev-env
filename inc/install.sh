@@ -9,7 +9,7 @@ function install_vim_plug() {
     if [ ! -f ~/.vim/autoload/plug.vim ]; then
         curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
             https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-        echo "vim-plug installation completed" 
+        echo "vim-plug installation completed"
     else
         echo "vim-plug alredy installed"
     fi
@@ -30,9 +30,9 @@ function install_fzf() {
     if [ ! -f ~/.fzf/install ]; then
         git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
         ~/.fzf/install --all
-        echo "fzf installation completed" 
-    else 
-        echo "fzf already installed" 
+        echo "fzf installation completed"
+    else
+        echo "fzf already installed"
     fi
 }
 
@@ -115,8 +115,8 @@ function patch_rc_files() {
         fi
         echo "source \$ENV_ROOT/inc/env.${SHELL_NAME}" >> $profile
         echo "# =End=" >> $profile
-    else 
-        echo "$profile already patched" 
+    else
+        echo "$profile already patched"
     fi
 
     local vimrc=$HOME/.vimrc
@@ -129,8 +129,8 @@ function patch_rc_files() {
         echo "source $ENV_ROOT/vim/hotkeys.vimrc" >> $vimrc
         echo "source $ENV_ROOT/vim/setting.vimrc" >> $vimrc
         echo "\" =END=" >> $vimrc
-    else 
-        echo "$vimrc already patched" 
+    else
+        echo "$vimrc already patched"
     fi
 
     local tmuxrc=$HOME/.tmux.conf
@@ -138,7 +138,15 @@ function patch_rc_files() {
         echo "Patching $tmuxrc ... "
         cat "${ENV_ROOT}/seeds/tmux.conf" >> $tmuxrc
     else
-        echo "$tmuxrc already patched" 
+        echo "$tmuxrc already patched"
+    fi
+
+    local screenrc=$HOME/.screenrc
+    if [ "`grep \"$IDENTIFIER_NEW\" $screenrc 2> /dev/null`" = "" ]; then
+        echo "Patching $screenrc ... "
+        cat "${ENV_ROOT}/seeds/screenrc" >> $screenrc
+    else
+        echo "$screenrc already patched"
     fi
 
     echo "Please run below command to update your shell setting:"

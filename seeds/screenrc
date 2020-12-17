@@ -7,7 +7,7 @@ startup_message off
 defscrollback 90000
 shell -$SHELL
 shelltitle "% |bash"
-hardstatus alwayslastline "%{=r .kK}%{..r}InScreenNow%{.kK}[%{..5} %c:%s %{.kK}]< %-w%{.gW}%n %t%{-}%+w >{%h} %= %{..K} %{..y} %Y-%m-%d"
+hardstatus alwayslastline "%{=r .kK}%{..r}$STY%{.kK}[%{..5} %c:%s %{.kK}]< %-w%{.gW}%n %t%{-}%+w >{%h} %= %{..K} %{..y} %Y-%m-%d"
 term xterm-color
 termcapinfo xterm-color|rxvt ti@:te@
 
