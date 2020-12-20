@@ -1,0 +1,71 @@
+#!/bin/bash
+
+if [ "$USE_LOCAL_CLIENT" = 1 ]; then
+    __DIR__=$(dirname ${BASH_SOURCE[0]})
+    CLIENT=$__DIR__/PulseClient_x86_64.sh
+else
+    CLIENT=/usr/local/pulse/PulseClient_x86_64.sh
+fi
+CONFIG=$HOME/.pulse-client.conf
+
+function usage () {
+    echo -e "Usage: `basename $0` <options>\noptions:"
+    grep "^function" $0 | sed 's/function/  /g' | sed 's/[{()]//g'
+}
+
+function reset () {
+    echo "" > $CONFIG
+}
+
+function connect () {
+    if [ ! -f $CONFIG ]; then
+        touch $CONFIG
+    fi
+    local host=$(grep host -A 1 $CONFIG | tail -1)
+    local account=$(grep account -A 1 $CONFIG | tail -1)
+    local realm=$(grep realm -A 1 $CONFIG | tail -1)
+    if [ -z $host ]; then
+        read -p "Enter host: " host
+        echo -e "[host]\n$host" >> $CONFIG
+    fi
+    if [ -z $account ]; then
+        read -p "Enter account: " account
+        echo -e "[account]\n$account" >> $CONFIG
+    fi
+    if [ -z $realm ]; then
+        read -p "Enter realm: " realm
+        echo -e "[realm]\n$realm" >> $CONFIG
+    fi
+    read -sp "Enter password: " password
+    echo $CLIENT -u $account -p $password -h $host -r $realm
+    bash -c "$CLIENT -u $account -p $password -h $host -r $realm" &
+    polling_status
+}
+
+polling_status () {
+    while [ 1 ]; do
+        sleep 1
+        clear
+        $CLIENT -S
+        if [ $? -eq 0 ]; then
+            echo "Connected"
+            break
+        fi
+    done
+}
+
+function status () {
+    $CLIENT -S
+}
+
+function disconnect () {
+    $CLIENT -K
+    echo 'Disconnected'
+}
+
+if [ -z "$1" ]; then
+    usage
+else
+    $*
+fi
+
