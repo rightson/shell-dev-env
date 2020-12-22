@@ -46,7 +46,7 @@ alias rm-rf 'rm -rf'
 alias rm-tags 'rm -f cscope.* ncscope.* tags'
 
 # rc aliases
-alias so ". ${PROFILE}"
+alias so "source ${PROFILE}"
 alias shrc "vim ${PROFILE}"
 alias vimrc "vim ~/.vimrc"
 alias gvimrc "gvim ~/.gvimrc"
