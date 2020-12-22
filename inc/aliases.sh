@@ -88,3 +88,11 @@ grep2() {
 }
 
 alias xopen='xdg-open'
+
+function td () {
+    local name=`echo $1 | tr -cd '[:alnum:]'`
+    shift
+    local cmd=$*
+    echo tmux new $name -d ${cmd[@]}
+    tmux new $name -d ${cmd[@]}
+}
