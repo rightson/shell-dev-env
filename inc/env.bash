@@ -22,3 +22,4 @@ source $ENV_ROOT/inc/config.sh
 source $ENV_ROOT/inc/settings.sh
 source $ENV_ROOT/inc/aliases.sh
 source $ENV_ROOT/inc/production.sh
+source $ENV_ROOT/inc/pdf.sh
