@@ -104,8 +104,16 @@ generate_cscope_files() {
     fi
 }
 
+sort_cscope_files() {
+    local tmp=`mktemp`
+    sort $CSCOPE_FILES | uniq > $tmp
+    cp -f $tmp $CSCOPE_FILES
+    rm -f $tmp
+}
+
 generate_cscope_out() {
     if [ -f $CSCOPE_FILES ]; then
+        sort_cscope_files
         echo -n "Generating cscope.out ("
         echo -n "cscope -b -k)..." && cscope -b -k
         echo "Done (`size_of_file ./cscope.out`)"
