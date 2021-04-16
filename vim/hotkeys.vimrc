@@ -31,22 +31,22 @@ noremap <C-G> <Esc>:echo expand('%:p')<Return>
 nnoremap <Leader><Leader>r :%s/\<<C-r><C-w>\>/
 
 " strip space
-noremap <C-k>t :%s/\s\+$//g<CR>
+"noremap <C-k>t :%s/\s\+$//g<CR>
 
 " sidebar toggle (sublime style
 noremap <C-k>b :NERDTreeToggle %<CR>
 noremap <C-k>f :NERDTreeFind %<CR>
 
-noremap <C-k>r call CscopeAdd()<CR>
+"noremap <C-k>r call CscopeAdd()<CR>
 
 " autopep8
-noremap <C-a>8 :Autopep8<CR>
+"noremap <C-a>8 :Autopep8<CR>
 
-" create session (overwrite software flow control) 
-noremap <C-s> :wa<CR> :mksession! session.vim<CR>
+" create session (overwrite software flow control)
+"noremap <C-s> :wa<CR> :mksession! session.vim<CR>
 
 " tab
-" unable to overwrite built-in combination 
+" unable to overwrite built-in combination
 "noremap <C-w>t :tabnew %<CR>
 " so we add a new helper which can keep origin pane in the original tab:
 noremap <C-w>p :tabnew %<CR>
@@ -70,24 +70,13 @@ if has("gui_running")
     :noremap <A-0> 0gt<CR>
 endif
 
-"Tab conflicts ctrl-i, so please use gt/gT instead
-":noremap <Tab> :tabnext<CR>
-":noremap <S-Tab> :tabprev<CR>
-
-":noremap <c-w>t :tabnew<CR>:o ./<CR>
-":noremap <s-t> :tabnew<CR>:o ./<CR>
-":noremap <s-x> :tabnex<CR>
-":noremap <s-z> :tabprev<CR>
-":noremap <c-tab> :tabnex<CR>
-":noremap <c-s-tab> :tabprev<CR>
-
 " buffers
-set hidden
-nnoremap <Leader>n :bnext<CR>
+"set hidden
+"nnoremap <Leader>n :bnext<CR>
 
 
 " json
-noremap <C-j> :!python -m json.tool<CR>
+"noremap <C-j> :!python -m json.tool<CR>
 
 
 " grep/search
@@ -139,18 +128,7 @@ function! ToggleWrap()
   endif
 endfunction
 
-
-" gtags
-":noremap <F2> :cclose
-":noremap <F3> :GtagsCursor<CR>
-":noremap <F4> :Gtags -g<SPACE>
-":noremap <F6> :copen<SPACE>
-":noremap <C-n> :cn<CR>
-":noremap <C-p> :cp<CR>
-":noremap <C-]> :GtagsCursor<CR>
-
-
-" tagbar
-":noremap <F6> :%!xxd
-":noremap <F8> :TagbarToggle<CR>
-
+" buffer
+map <C-j> :bn<CR>
+map <C-k> :bp<CR>
+map <C-l> :ls<CR>

@@ -1,5 +1,5 @@
 function! ToggleGuiMenu()
-    if has("gui_running") 
+    if has("gui_running")
         if !exists('g:toggle_gui_menu')
             let g:toggle_gui_menu = 1
         endif
@@ -15,7 +15,7 @@ endfunction
 
 
 function! ToggleGuiToolbar()
-    if has("gui_running") 
+    if has("gui_running")
         if !exists('g:toggle_gui_toolbar')
             let g:toggle_gui_toolbar = 1
         endif
@@ -31,16 +31,16 @@ endfunction
 
 
 function! ToggleMouse()
-    if &mouse == 'a' 
-        set mouse= 
-    else 
-        set mouse=a 
+    if &mouse == 'a'
+        set mouse=
+    else
+        set mouse=a
     endif
 endfunction
 
 
 function! ToggleLineNumber()
-    if &nu == 'nonumber' 
+    if &nu == 'nonumber'
         set nu
     else
         set nonu
@@ -57,7 +57,7 @@ function! HighlightColumn()
     set colorcolumn=120
     let &colorcolumn=join(range(120,999),",")
     highlight ColorColumn ctermbg=235 guibg=#2c2d27
-    set fillchars+=vert:\ 
+    set fillchars+=vert:\
 endfunction
 
 
