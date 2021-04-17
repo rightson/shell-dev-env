@@ -9,6 +9,9 @@ au BufRead,BufNewFile *.tss set ft=css
 au BufRead,BufNewFile {*.md,*.mkd,*.markdown} set ft=markdown
 au BufRead,BufNewFile {COMMIT_EDITMSG}  set ft=gitcommit
 au BufRead,BufNewFile *.tex Goyo
+au BufRead,BufNewFile *.p4template set syntax=p4
+
+
 
 " Command mode
 set history=512
@@ -88,7 +91,6 @@ au FileType txt,tex,md set wrap
 au FileType txt,tex,md noremap <silent> k gk
 au FileType txt,tex,md noremap <silent> j gj
 au FileType txt,tex,md noremap <silent> $ g$
-
 
 " Status bar
 set laststatus=2
