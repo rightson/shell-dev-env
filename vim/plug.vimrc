@@ -12,6 +12,7 @@ Plug 'jremmen/vim-ripgrep'
 
 Plug 'mhinz/vim-startify'
 Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'airblade/vim-gitgutter'
 Plug 'mkitt/tabline.vim'
 
