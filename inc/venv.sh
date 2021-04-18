@@ -8,7 +8,7 @@ if [ -z "$MY_VIRTUALENV_ROOT" ]; then
     export MY_VIRTUALENV_ROOT=$HOME/.virtualenvs
 fi
 
-function list_venv() {
+function venv_list() {
     if [ -z "$MY_VIRTUALENV_ROOT" ]; then
         export MY_VIRTUALENV_ROOT=$HOME/.virtualenvs
     fi
@@ -16,7 +16,7 @@ function list_venv() {
     ls -d | grep -v .
 }
 
-function create_venv() {
+function venv_create() {
     local venv_name=$1
     if [ -z "$venv_name" ]; then
         venv_name=$(basename `pwd`)
@@ -36,6 +36,18 @@ function create_venv() {
     generate_venv_aliases
     cd - > /dev/null
 }
+
+function venv_source() {
+    if [ -z "$MY_VIRTUALENV_ROOT" ]; then
+        export MY_VIRTUALENV_ROOT=$HOME/.virtualenvs
+    fi
+    local venv_name=$1
+    if [ -z $venv_name ]; then
+        venv_name=$(basename `pwd`)
+    fi
+    source $MY_VIRTUALENV_ROOT/$venv_name/bin/activate
+}
+
 
 if [ -d $MY_DEV_ROOT ]; then
     generate_dev_aliases
