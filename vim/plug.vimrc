@@ -36,7 +36,7 @@ endif
 Plug 'rightson/vim-p4-syntax'
 
 
-Plug 'vim-latex/vim-latex'
+"Plug 'vim-latex/vim-latex'
 Plug 'junegunn/goyo.vim'
 
 Plug 'sickill/vim-monokai'
