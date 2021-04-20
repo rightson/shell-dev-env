@@ -1,6 +1,8 @@
+map <C-p> :FZF<CR>
+
 " buffer
 map <C-k> :bn<CR>
-map <C-l> :ls<CR>
+map <C-x> :ls<CR>
 
 
 " tab

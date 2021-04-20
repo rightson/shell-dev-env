@@ -16,7 +16,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'airblade/vim-gitgutter'
 Plug 'mkitt/tabline.vim'
 
-"Plug 'vim-scripts/cscope_macros.vim'
+Plug 'vim-scripts/cscope_macros.vim'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'Yggdroot/indentLine'
 
