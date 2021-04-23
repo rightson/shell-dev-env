@@ -32,11 +32,12 @@ noremap <F3> :cs find s <C-R>=expand("<cword>")<CR><CR>
 noremap <F4> :qa<CR>
 
 " refresh vimrc
-noremap <F5> :source ~/.vimrc<CR>
+noremap <F5> :cs kill 0<CR> :source ~/.vimrc<CR>
 
 noremap <F6> :NERDTreeToggle<CR>
 
-noremap <S-F11> :call ToggleDrawCentered()<CR>
+noremap <F10> <C-w>\|<C-w>_
+noremap <S-F10> <C-w>=
 
 noremap <F12> :call ToggleLineNumber()<CR>
 
