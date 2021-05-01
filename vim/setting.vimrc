@@ -77,6 +77,7 @@ au FileType GNUMakefile,Makefile,makefile,make,mk set noexpandtab
 " Search
 set incsearch hlsearch
 set backspace=indent,eol,start
+set noignorecase
 
 
 " Editing: Auto-complete
