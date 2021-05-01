@@ -1,12 +1,13 @@
 map <C-p> :FZF<CR>
 
 " buffer
-map <C-n> :bn<CR>
-map <C-b> :ls<CR>
+map <C-j> :bn<CR>
+map <C-k> :bp<CR>
+map <B> :ls<CR>
 
 
 " tab
-map <C-k> gt<CR>
+map <C-h> gt<CR>
 
 
 " tab
