@@ -1,13 +1,14 @@
 map <C-p> :FZF<CR>
 
 " buffer
-map <C-j> :bn<CR>
-map <C-k> :bp<CR>
-map <B> :ls<CR>
+map BN :bn<CR>
+map BP :bp<CR>
+map LS :ls<CR>
 
 
 " tab
-map <C-h> gt<CR>
+map <C-j> gt<CR>
+map <C-k> gT<CR>
 
 
 " tab
@@ -33,7 +34,7 @@ noremap <F3> :cs find s <C-R>=expand("<cword>")<CR><CR>
 noremap <F4> :qa<CR>
 
 " refresh vimrc
-noremap <F5> :silent! cs kill 0<CR> :mapclear<CR> :source ~/.vimrc<CR>
+noremap <F5> :silent! cs kill 0<CR> :mapclear<CR> :source ~/.vimrc<CR> cs add cscope.out<CR>
 
 noremap <F6> :NERDTreeToggle<CR>
 
