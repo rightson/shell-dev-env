@@ -48,7 +48,8 @@ noremap <C-G> <Esc>:echo expand('%:p')<Return>
 
 
 " grep/search
-nnoremap GG :!clear<CR>:!grep "\<<cword>\>" * -rn --color<CR>
-nnoremap GR :grep "\<<cword>\>" %:p:h/*<CR><CR>
-nnoremap GW :grep "\<<cword>\>" * -rn --color<CR>:copen 10<CR>
+"nnoremap GG :!clear<CR>:!grep "\<<cword>\>" * -rn --color<CR>
+"nnoremap GR :grep "\<<cword>\>" %:p:h/*<CR><CR>
+nnoremap GG :grep "\<<cword>\>" * -rn --color<CR>:copen 10<CR>
+nnoremap GC :cclose<CR>
 
