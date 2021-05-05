@@ -70,7 +70,7 @@ at="$txtwht@$txtrst"
 sh_in_use="$txtblu(`echo $0 | sed 's/-//' | xargs basename`)$txtrst"
 
 ps1_root() {
-    PS1="${root}@${host}[\w]# "
+    PS1="${root}@${host}[\w]\n# "
 }
 
 ps1_pretty() {
