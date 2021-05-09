@@ -56,38 +56,14 @@ function get_ipaddr()
     echo 'localhost'
 }
 
-root="$txtred\u$txtrst"
 user="$txtred\u$txtrst"
 #host="$txtblu`get_ipaddr`$txtrst"
 host="$txtylw\h$txtrst"
 rpwd="$txtgrn\w$txtrst"
 opwd="$txtgrn\W$txtrst"
-#time="$txtpur\t$txtrst"
-#date="$txtpur\D{%Y/%m/%d}$txtrst"
 datetime="$txtpur[\t \D{%Y/%m/%d}]$txtrst"
 at="$txtwht@$txtrst"
 #sh_in_use=`ps | grep --color=none $$ | awk '{print $(NF)}'`
 sh_in_use="$txtblu(`echo $0 | sed 's/-//' | xargs basename`)$txtrst"
 
-ps1_root() {
-    PS1="${root}@${host}[\w] ${datetime} \n# "
-}
-
-ps1_pretty() {
-    PS1="${user}${at}${host}:${rpwd}${txtcyn}"'`__git_ps1`'"${txtrst} ${datetime} ${sh_in_use}\n\$ "
-}
-
-ps1_relative() {
-    PS1="[$opwd]$ "
-}
-
-ps1_absolute() {
-    PS1="[$rpwd]$ "
-}
-
-if [ "`id -u`" -eq 0 ]; then
-    ps1_root
-else
-    ps1_pretty
-fi
-
+PS1="${user}${at}${host}:${rpwd}${txtcyn}"'`__git_ps1`'"${txtrst} ${datetime} ${sh_in_use}\n\$ "
