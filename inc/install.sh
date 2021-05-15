@@ -114,6 +114,7 @@ function patch_rc_files() {
             echo "export ENV_ROOT=$ENV_ROOT" >> $profile
         fi
         echo "source \$ENV_ROOT/inc/env.${SHELL_NAME}" >> $profile
+        echo "use_env_all"
         echo "# =End=" >> $profile
     else
         echo "$profile already patched"
