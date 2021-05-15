@@ -64,7 +64,15 @@ alias py3=python3
 # tmux aliases
 alias t='tmux'
 alias tl='tmux ls'
-alias tn='tmux new -s'
+#alias tn='tmux new -s'
+function tn () {
+    local name=$1
+    shift
+    if [ -z "$name" ]; then
+        local name=$(basename `pwd`)
+    fi
+    tmux new -s $name $*
+}
 alias ta='tmux attach'
 alias tat='tmux attach -t'
 
