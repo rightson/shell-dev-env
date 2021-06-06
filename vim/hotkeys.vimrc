@@ -1,9 +1,9 @@
 map <C-p> :FZF<CR>
 
 " buffer
-map BN :bn<CR>
-map BP :bp<CR>
-map LS :ls<CR>
+"map BN :bn<CR>
+"map BP :bp<CR>
+"map LS :ls<CR>
 
 
 " tab
