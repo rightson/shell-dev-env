@@ -43,3 +43,6 @@ function set_go_path() {
     echo $GOPATH
 }
 
+function env_self_update() {
+    cd $ENV_ROOT && git pull && cd -
+}
