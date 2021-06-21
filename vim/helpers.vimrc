@@ -145,3 +145,18 @@ function! ScreenRestore()
     endif
 endfunction
 
+function! DefaultDark()
+    colo default
+    set bg=dark
+    if &diff
+        colo koehler
+    endif
+endfunction
+
+function! DefaultLight()
+    colo default
+    set bg=light
+    if &diff
+        colo light
+    endif
+endfunction

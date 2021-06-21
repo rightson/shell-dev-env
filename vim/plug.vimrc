@@ -13,7 +13,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
 Plug 'airblade/vim-gitgutter'
-Plug 'vim-scripts/cscope_macros.vim'
+"Plug 'vim-scripts/cscope_macros.vim'
 Plug 'editorconfig/editorconfig-vim'
 "Plug 'Yggdroot/indentLine'
 
