@@ -1,15 +1,15 @@
-function use_env_common () {
+function env_use_common () {
     source $ENV_ROOT/inc/base.sh
 }
 
-function use_env_core () {
+function env_use_core () {
     source $ENV_ROOT/inc/bash/variables.bash
     source $ENV_ROOT/inc/bash/util.bash
     source $ENV_ROOT/inc/bash/statusbar.bash
     source $ENV_ROOT/inc/settings.sh
 }
 
-function use_env_basic () {
+function env_use_basic () {
     source $ENV_ROOT/inc/env.sh
     source $ENV_ROOT/inc/net.sh
     source $ENV_ROOT/inc/venv.sh
@@ -17,7 +17,7 @@ function use_env_basic () {
     source $ENV_ROOT/inc/tmux.sh
 }
 
-function use_env_extra () {
+function env_use_extra () {
     source $ENV_ROOT/inc/route.sh
     source $ENV_ROOT/inc/ssh.sh
     source $ENV_ROOT/inc/ufw.sh
@@ -34,15 +34,15 @@ function use_env_extra () {
     source $ENV_ROOT/inc/pdf.sh
 }
 
-function use_env_min () {
-    use_env_common
-    use_env_core
+function env_use_min () {
+    env_use_common
+    env_use_core
 }
 
-function use_env_all () {
-    use_env_common
-    use_env_core
-    use_env_basic
-    use_env_extra
+function env_use_all () {
+    env_use_common
+    env_use_core
+    env_use_basic
+    env_use_extra
 }
 
