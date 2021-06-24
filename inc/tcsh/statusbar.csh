@@ -11,7 +11,8 @@ set host   = "${txtylw}%M${txtrst}"
 set apwd   = "${txtgrn}%~${txtrst}"
 set datetime = "${txtpur}%P %Y/%W/%D${txtrst}"
 set at     = "${txtwht}@${txtrst}"
-set gitrev = `sh -c 'git rev-parse --abbrev-ref HEAD 2> /dev/null'`
+#set gitrev = `sh -c 'git rev-parse --abbrev-ref HEAD 2> /dev/null'`
+set gitrev = `git branch |& grep '*' |& sed 's/^\* *//g' >& /dev/null`
 #set sh_in_use = `ps | grep --color=none $$ | awk '{print $(NF)}'`
 set sh_in_use = "${txtblu}(`echo $0 | sed 's/-//'`)${txtrst}"
 if ( "${gitrev}" != "" ) then
