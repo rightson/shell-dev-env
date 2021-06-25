@@ -14,3 +14,4 @@ echo $cmd
 read -p "Press Enter to continue ..."
 time $cmd
 rmdir $emptydir
+rmdir $dest_dir
