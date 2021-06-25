@@ -60,7 +60,7 @@ function tmux_set_pane_title () {
     local session_name=$1
     local window_name=$2
     local pane_title=$3
-    tmux_send_keys $session_name $window_name {printf '\033]2;%s\033\\' \'$pane_title\'} 
+    tmux_send_keys $session_name $window_name `printf '\033]2;%s\033\\' \'$pane_title\'` 
 }
 
 function tmux_rename_pane() {
