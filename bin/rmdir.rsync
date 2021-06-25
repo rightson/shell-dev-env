@@ -1,0 +1,16 @@
+#!/bin/bash
+
+dest_dir=$1
+shift
+
+if [ -z "$dest_dir" ]; then
+    echo "Usage: `basename $0` dest_dir [rsync-option]"
+    exit 0
+fi
+
+emptydir=`mktemp -d`
+cmd="rsync --delete-before -a $emptydir/ $dest_dir/ $*"
+echo $cmd
+read -p "Press Enter to continue ..."
+time $cmd
+rmdir $emptydir
