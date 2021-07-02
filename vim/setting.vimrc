@@ -115,12 +115,6 @@ autocmd BufReadPost *
 "autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 
-if &background ==# 'dark'
-    if &diff
-        colo koehler
-    endif
-endif
-
 " GUI: appearance
 if has("gui_running")
     colo monokai
