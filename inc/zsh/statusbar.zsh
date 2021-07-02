@@ -35,7 +35,6 @@ rpwd="%{$fg[green]%}%/%{$reset_color%}"
 opwd="%{$fg[green]%}$cwd%{$reset_color%}"
 get_cwd="%{$fg[blue]%}[%~]%{$reset_color%}"
 get_now="%{$fg[purple]%}%D{[%X]}%{$reset_color%}"
-date="%{$fg[red]%}%D{%Y/%m/%d}%{$reset_color%}"
 datetime="%{$fg[magenta]%}[%* %D{%Y/%m/%d}]%{$reset_color%}"
 at="%{$fg[white]%}@%{$reset_color%}"
 sh_in_use="%{$fg[blue]%}(`ps -p$$ | tail -1 | awk '{print $NF}' | tr -cd '[:alnum:]/' | xargs basename`)%{$reset_color%}"
@@ -54,36 +53,5 @@ vcs_info_wrapper() {
     fi
 }
 
-promptLine2=$'\n'"%{$fg[blue]%}->%{$fg_bold[blue]%} %#%{$reset_color%} "
-
-ps1_root() {
-    PS1="${root}${at}${host}[${cwd}]# "
-}
-
-ps1_pretty() {
-    PROMPT='${user}${at}${host}:${opwd}$(vcs_info_wrapper) ${datetime} ${sh_in_use} ${promptLine2}'
-    #PROMPT="${user}${at}${host}:${rpwd}"$'\n'"➜  "
-    #RPROMPT="${date}"
-}
-
-ps1_relative() {
-    PS1="[$opwd]$ "
-}
-
-ps1_absolute() {
-    PS1="[$rpwd]$ "
-}
-
-function term_title() {
-    echo -e "\033];$USER - `basename $PWD`\007"
-}
-
-#autoload -U add-zsh-hook
-#add-zsh-hook precmd term_title
-
-if [ "`id -u`" -eq 0 ]; then
-    ps1_root
-else
-    ps1_pretty
-fi
-
+PROMPT_L2=$'\n'"%{$fg[blue]%}->%{$fg_bold[blue]%} %#%{$reset_color%} "
+PROMPT='${user}${at}${host}:${opwd}$(vcs_info_wrapper) ${datetime} ${sh_in_use} ${PROMPT_L2}'
