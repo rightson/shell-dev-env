@@ -53,5 +53,5 @@ vcs_info_wrapper() {
     fi
 }
 
-PROMPT_L2=$'\n'"%{$fg[blue]%}->%{$fg_bold[blue]%} %#%{$reset_color%} "
+PROMPT_L2=$'\n\r'"%{$fg[blue]%}->%{$fg_bold[blue]%} %#%{$reset_color%} "
 PROMPT='${user}${at}${host}:${opwd}$(vcs_info_wrapper) ${datetime} ${sh_in_use} ${PROMPT_L2}'
