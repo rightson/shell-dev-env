@@ -17,8 +17,8 @@ set gitrev = `git branch |& grep '*' |& sed 's/^\* *//g'`
 set sh_in_use = "${txtblu}(`echo $0 | sed 's/-//'`)${txtrst}"
 if ( "${gitrev}" != "" ) then
     set gitprompt = "${txtcyn}${gitrev}${txtrst}"
-    set prompt = "${who}${at}${host}:${apwd} ($gitprompt) [${datetime}] ${sh_in_use} \n\r# "
+    set prompt = "${who}${at}${host}:${apwd} ($gitprompt) [${datetime}] ${sh_in_use} \n%L%# "
 else
-    set prompt = "${who}${at}${host}:${apwd} [${datetime}] ${sh_in_use} \n\r# "
+    set prompt = "${who}${at}${host}:${apwd} [${datetime}] ${sh_in_use} \n%L%# "
 endif
 alias precmd "source `lsof +p $$ |& grep -oE /.\*statusbar.csh` >& /dev/null"
