@@ -66,4 +66,4 @@ at="$txtwht@$txtrst"
 #sh_in_use=`ps | grep --color=none $$ | awk '{print $(NF)}'`
 sh_in_use="$txtblu(`echo $0 | sed 's/-//' | xargs basename`)$txtrst"
 
-PS1="${user}${at}${host}:${rpwd}${txtcyn}"'`__git_ps1`'"${txtrst} ${datetime} ${sh_in_use}\n\r\$ "
+PS1="${user}${at}${host}:${rpwd}${txtcyn}"'`__git_ps1`'"${txtrst} ${datetime} ${sh_in_use}\r\n\$ "
