@@ -1,5 +1,11 @@
 # Display
 
+
+function wsl2_export_display() {
+    display=$(route -n | grep -E '^0.0.0.0' | head -n 1 | awk '{print $2}')
+    export DISPLAY=$display:0
+}
+
 function wsl_export_display() {
     export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0.0
 }
