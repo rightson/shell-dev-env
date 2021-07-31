@@ -30,6 +30,7 @@ function env_use_extra () {
     source $ENV_ROOT/inc/launcher.sh
     source $ENV_ROOT/inc/install.sh
     source $ENV_ROOT/inc/config.sh
+    source $ENV_ROOT/inc/patch.sh
     source $ENV_ROOT/inc/production.sh
     source $ENV_ROOT/inc/pdf.sh
 }

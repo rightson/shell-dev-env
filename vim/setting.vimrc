@@ -115,9 +115,9 @@ autocmd BufReadPost *
 "autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 
+colo monokai
 " GUI: appearance
 if has("gui_running")
-    colo monokai
     set clipboard=unnamedplus
     "set lines=60 columns=120
     set guioptions-=T

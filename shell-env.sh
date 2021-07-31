@@ -5,6 +5,7 @@ export ENV_ROOT=$(cd `dirname ${BASH_SOURCE[0]}` && pwd)
 source ${ENV_ROOT}/inc/base.sh
 source ${ENV_ROOT}/inc/install.sh
 source ${ENV_ROOT}/inc/config.sh
+source ${ENV_ROOT}/inc/patch.sh
 
 if [ "$0" = "${BASH_SOURCE[0]}" ]; then
     SHELL_NAME=`ps -p$PPID | tail -1 | awk '{print $NF}' | tr -cd '[:alnum:]/' | xargs basename`
