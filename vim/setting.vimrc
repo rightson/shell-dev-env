@@ -96,6 +96,9 @@ au FileType txt,tex,md noremap <silent> $ g$
 " Status bar
 set laststatus=2
 
+if !empty(expand(glob('cscope.out')))
+    cs add cscope.out
+endif
 
 " Restore: cursor of last cursor position
 autocmd BufReadPost *
