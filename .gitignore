@@ -2,3 +2,5 @@
 *.swp
 *.swo
 *.local
+cscope.*
+tags

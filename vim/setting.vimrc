@@ -47,12 +47,7 @@ let g:Powerline_symbols = 'unicode'
 
 
 " Display: color schemes
-" colo torte
-" colo slate
-" colo koehler
-" colo murphy
-" colo pablo
-" colo monokai
+colo PaperColor
 
 
 " Display: folding
@@ -118,7 +113,6 @@ autocmd BufReadPost *
 "autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 
-colo monokai
 " GUI: appearance
 if has("gui_running")
     set clipboard=unnamedplus

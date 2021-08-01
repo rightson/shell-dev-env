@@ -27,6 +27,12 @@ Plug 'tell-k/vim-autopep8'
 if v:version >= 801
 Plug 'fatih/vim-go'
 endif
+if v:version >= 800
+Plug 'skywind3000/asyncrun.vim'
+endif
+
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'skywind3000/gutentags_plus'
 
 Plug 'sickill/vim-monokai'
 Plug 'NLKNguyen/papercolor-theme'
