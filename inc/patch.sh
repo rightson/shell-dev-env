@@ -40,8 +40,15 @@ function get_new_shell_rc() {
     local rc=`get_shell_rc_path $shell_name`
     local begin=`get_line_number "$ENV_BLOCK_HEAD" $rc`
     local end=`get_line_number "$ENV_BLOCK_END" $rc`
-    head -n $begin $rc
-    echo "# $ENV_BLOCK_BEGIN"
+    if [ "$begin" = "" ]; then
+        begin=1
+        echo "# $ENV_BLOCK_HEAD"
+    else
+        head -n $begin $rc
+    fi
+    if [ "$end" = "" ]; then
+        end=`wc -l $rc`
+    fi
     if [ $shell_name = tcsh ]; then
         echo "setenv ENV_ROOT $ENV_ROOT"
     else
@@ -49,7 +56,7 @@ function get_new_shell_rc() {
     fi
     cat $ENV_ROOT/seeds/${shell_name}rc
     echo "# $ENV_BLOCK_END"
-    tail -n +`echo $end+1|bc` $rc|grep -E -v 'env_use_|use_env_'
+    tail -n +$(($end+1)) $rc|grep -E -v 'env_use_|use_env_'
 }
 
 function patch_shell_rc() {
