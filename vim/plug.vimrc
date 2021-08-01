@@ -29,6 +29,7 @@ Plug 'fatih/vim-go'
 endif
 
 Plug 'sickill/vim-monokai'
+Plug 'NLKNguyen/papercolor-theme'
 
 if filereadable($HOME."/.vimrc.plug")
     " Put your local plug here
