@@ -35,7 +35,6 @@ set number
 set mouse=a
 set vb t_vb=
 set ttymouse=xterm2
-set background=dark
 set ruler
 set nowrap
 set linebreak
@@ -47,7 +46,8 @@ let g:Powerline_symbols = 'unicode'
 
 
 " Display: color schemes
-colo PaperColor
+set t_Co=256   " This is may or may not needed.
+colorscheme PaperColor
 
 
 " Display: folding
