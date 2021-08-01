@@ -8,11 +8,15 @@ if [ -z "${ENV_ROOT}" ]; then
     fi
 fi
 
-if [ -n "$shell" ]; then
-    export SHELL_PATH=$shell
-else
-    SHELL_NAME=`ps -p$$ | tail -1 | awk '{print $NF}' | tr -cd '[:alnum:]/' | xargs basename`
-    export SHELL_PATH=$(which $SHELL_NAME)
+if [ -n "$version" ] && [ -n "$shell" ]; then
+    export SHELL_PATH=`which csh`
+    if [ ! -f $SHELL_PATH ]; then
+        export SHELL_PATH=`which tcsh`
+    fi
+elif [ -n "$BASH" ]; then
+    export SHELL_PATH=`which bash`
+elif [ -n "$ZSH_NAME" ]; then
+    export SHELL_PATH=`which zsh`
 fi
 
 export SHELL_NAME=`basename $SHELL_PATH`
