@@ -69,11 +69,11 @@ function git_ps1() {
     # gitcb runs faster than __git_ps1
     local name=`git branch 2> /dev/null | grep '*' 2> /dev/null | cut -d' ' -f2`
     if [ -n "$name" ]; then
-        echo " ($name) "
+        echo "($name)"
     else
         echo ""
     fi
 }
 
 #PS1="${user}${at}${host}:${rpwd}${txtcyn}"'`__git_ps1`'"${txtrst} ${datetime} ${sh_in_use}\r\n\$ "
-PS1="${user}${at}${host}:${rpwd}${txtcyn}"'`git_ps1`'"${txtrst} ${datetime} ${sh_in_use}\r\n\$ "
+PS1="${user}${at}${host}:${rpwd} ${txtcyn}"'`git_ps1`'"${txtrst} ${datetime} ${sh_in_use}\r\n\$ "
