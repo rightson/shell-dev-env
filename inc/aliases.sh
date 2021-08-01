@@ -10,15 +10,15 @@ alias cp='cp -r'
 alias scp='scp -r'
 alias wget='wget -c'
 alias tree='tree -C'
-if [[ `uname` = 'Linux' ]]; then
-    alias ls='ls --color'
-    alias grep='grep --color'
-    alias du1='sudo du -h --max-depth 1'
-else # Darwin
+if [[ `uname` = 'Darwin' ]]; then
     alias ls='ls -G'
     alias grep='grep --color'
     alias du1='sudo du -h -d1'
     alias toggle-hidden-file='defaults write com.apple.Finder AppleShowAllFiles'
+else
+    alias ls='ls --color'
+    alias grep='grep --color'
+    alias du1='sudo du -h --max-depth 1'
 fi
 
 # ls aliases
