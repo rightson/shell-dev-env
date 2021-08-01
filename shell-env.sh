@@ -13,6 +13,10 @@ if [ "$0" = "${BASH_SOURCE[0]}" ]; then
 fi
 export SHELL_NAME=`basename $SHELL_PATH`
 
+function print_usage() {
+    echo "Usages: $0 patch|install|config|all"
+}
+
 function patch() {
     echo 'Patching rc ...'
     patch_rc_files $SHELL_NAME

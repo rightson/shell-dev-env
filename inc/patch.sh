@@ -122,19 +122,14 @@ function patch_rc_files() {
     echo "Please run below command to update your shell setting:"
     echo -e "\n\tsource $rc\n"
 
-    # local USE_ENV_API_OLD='env_use'
-    # if [ "`grep \"$USE_ENV_API_OLD\" $rc 2> /dev/null`" != "" ]; then
-    #     echo "Please remove env_use_* from your $rc" 
-    # fi
-
-    # local IDENTIFIER_OLD='Added by shell-dev-env.'
-    # if [ "`grep \"$IDENTIFIER_OLD\" $rc 2> /dev/null`" != "" ]; then
-    #     echo "Please remove the setting in $rc defined in the # $IDENTIFIER_OLD =Begin= ... =End= block"
-    # fi
-    # if [ "`grep \"$IDENTIFIER_OLD\" $vimrc 2> /dev/null`" != "" ]; then
-    #     echo "Please remove the setting in $vimrc defined in the \" $IDENTIFIER_OLD =Begin= ... =End= block"
-    # fi
-    # if [ "`grep \"$IDENTIFIER_OLD\" $tmuxrc 2> /dev/null`" != "" ]; then
-    #     echo "Please remove the setting in $tmuxrc defined in the # $IDENTIFIER_OLD =Begin= ... =End= block"
-    # fi
+    local IDENTIFIER_OLD='Added by shell-dev-env.'
+    if [ "`grep \"$IDENTIFIER_OLD\" $rc 2> /dev/null`" != "" ]; then
+        echo "Please remove the setting in $rc defined in the # $IDENTIFIER_OLD =Begin= ... =End= block"
+    fi
+    if [ "`grep \"$IDENTIFIER_OLD\" $vimrc 2> /dev/null`" != "" ]; then
+        echo "Please remove the setting in $vimrc defined in the \" $IDENTIFIER_OLD =Begin= ... =End= block"
+    fi
+    if [ "`grep \"$IDENTIFIER_OLD\" $tmuxrc 2> /dev/null`" != "" ]; then
+        echo "Please remove the setting in $tmuxrc defined in the # $IDENTIFIER_OLD =Begin= ... =End= block"
+    fi
 }

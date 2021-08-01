@@ -1,9 +1,5 @@
 # Install
 
-function print_usage() {
-    echo "Usages: $0 patch|install|config|all"
-}
-
 function install_vim_plug() {
     echo "Installing vim-plug"
     if [ ! -f ~/.vim/autoload/plug.vim ]; then
