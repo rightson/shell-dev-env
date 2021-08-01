@@ -76,4 +76,4 @@ function git_ps1() {
 }
 
 #PS1="${user}${at}${host}:${rpwd}${txtcyn}"'`__git_ps1`'"${txtrst} ${datetime} ${sh_in_use}\r\n\$ "
-PS1="${user}${at}${host}:${rpwd}${txtcyn}`git_ps1`${txtrst} ${datetime} ${sh_in_use}\r\n\$ "
+PS1="${user}${at}${host}:${rpwd}${txtcyn}"'`git_ps1`'"${txtrst} ${datetime} ${sh_in_use}\r\n\$ "
