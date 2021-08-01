@@ -1,5 +1,5 @@
 if [[ `uname` = 'Linux' ]]; then
-    export PROFILE='~/.bashrc'
+    export PROFILE=$HOME/.bashrc
 else # Darwin
-    export PROFILE='~/.bash_profile'
+    export PROFILE=$HOME/.bash_profile
 fi
