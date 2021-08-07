@@ -67,7 +67,7 @@ at="$txtwht@$txtrst"
 sh_in_use="$txtblu(`echo $0 | sed 's/-//' | xargs basename`)$txtrst"
 function git_ps1() {
     # gitcb runs faster than __git_ps1
-    local name=`git branch 2> /dev/null | grep '*' 2> /dev/null | cut -d' ' -f2`
+    local name=`git branch 2> /dev/null | grep '*' 2> /dev/null | cut -d' ' -f2-`
     if [ -n "$name" ]; then
         echo "($name)"
     else
