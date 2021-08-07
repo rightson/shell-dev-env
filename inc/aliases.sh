@@ -46,10 +46,11 @@ alias rm-tags='rm -f cscope.* ncscope.* tags'
 
 # rc aliases
 alias so=". ${PROFILE}"
+alias so.tmux="tmux source $HOME/.tmux.conf"
 alias shrc="vim ${PROFILE}"
-alias vimrc="vim ~/.vimrc"
-alias gvimrc="gvim ~/.gvimrc"
-alias tmuxrc="vim ~/.tmux.conf"
+alias vimrc="vim $HOME/.vimrc"
+alias gvimrc="gvim $HOME/.gvimrc"
+alias tmuxrc="vim $HOME/.tmux.conf"
 
 alias public-ip='curl ipinfo.io/ip'
 
