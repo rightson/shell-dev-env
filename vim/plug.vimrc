@@ -11,6 +11,8 @@ endif
 Plug 'mhinz/vim-startify'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#tab_nr_type = 1
 
 Plug 'airblade/vim-gitgutter'
 "Plug 'vim-scripts/cscope_macros.vim'
@@ -25,10 +27,10 @@ Plug 'plasticboy/vim-markdown'
 Plug 'tell-k/vim-autopep8'
 
 if v:version >= 801
-Plug 'fatih/vim-go'
+    Plug 'fatih/vim-go'
 endif
 if v:version >= 800
-Plug 'skywind3000/asyncrun.vim'
+    Plug 'skywind3000/asyncrun.vim'
 endif
 
 "Plug 'ludovicchabant/vim-gutentags'
