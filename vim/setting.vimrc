@@ -15,6 +15,7 @@ au BufRead,BufNewFile *.p4template set syntax=p4
 
 " Command mode
 set history=512
+set hidden
 set timeoutlen=250
 set showcmd
 set wildmode=longest:list,full
