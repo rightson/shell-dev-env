@@ -72,3 +72,27 @@ function tmux_attach () {
     local session_name=$1
     tmux attach -t $session_name
 }
+
+function tmux_get_current_session () {
+    tmux display-message -p '#S'
+}
+
+function tmux_get_current_window () {
+    tmux display-message -p '#W'
+}
+
+function tmux_get_current_pane() {
+    tmux display-message -p '#P'
+}
+
+function tmux_get_current() {
+    tmux display-message -p '#S:#W.#P'
+}
+
+function tmux_send_key () {
+    local target=$1
+    if [ -z "$target" ]; then
+        local target=`tmux_get_current`
+    fi
+    tmux send-keys -t $target "$key" C-m
+}
