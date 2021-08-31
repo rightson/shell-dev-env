@@ -59,15 +59,29 @@ size_of_file() {
 }
 
 append_to_CSCOPE_FILES() {
-    local file=$1
+    local regex=$(printf "\|%s" "$@")
+    regex=${regex:2}
+    regex=".*\.\($regex\)"
     local here=`pwd`
-    if [ -f $CSCOPE_LIST ]; then
-        echo "Scanning $1"
-        find `cat $here/$CSCOPE_LIST` -type f -name "$file" \
+    local ignore='
             -not -path "*.git/*" \
             -not -path "*./node_modules/*" \
+            -not -path "*./node_modules*/*" \
+            -not -path "*./build/*" \
+            -not -path "*./dist/*" \
             -not -path "*.svn/*" \
-            >> $here/$CSCOPE_FILES 2> /dev/null
+    '
+    if [ -f $CSCOPE_LIST ]; then
+        echo -e "\nfind . -type f -regex $regex"
+        find `cat $here/$CSCOPE_LIST` \
+            -not -path "*.git/*" \
+            -not -path "*./node_modules/*" \
+            -not -path "*./node_modules*/*" \
+            -not -path "*./build/*" \
+            -not -path "*./dist/*" \
+            -not -path "*.svn/*" \
+            -type f \
+            -regex "$regex" | tee $here/$CSCOPE_FILES
     else
         echo "Error: Failed to find $CSCOPE_LIST"
         exit
@@ -79,24 +93,24 @@ generate_cscope_files() {
     if [ -f $CSCOPE_LIST ]; then
         echo -n "Generating cscope.file (from $CSCOPE_LIST)..."
         rm -f $here/$CSCOPE_FILES
-        append_to_CSCOPE_FILES "Makefile"
-        append_to_CSCOPE_FILES "*.h"
-        append_to_CSCOPE_FILES "*.hpp"
-        append_to_CSCOPE_FILES "*.c"
-        append_to_CSCOPE_FILES "*.cpp"
-        append_to_CSCOPE_FILES "*.cc"
-        append_to_CSCOPE_FILES "*.sh"
-        append_to_CSCOPE_FILES "*.S"
-        append_to_CSCOPE_FILES "*.equ"
-        append_to_CSCOPE_FILES "*.py"
-        append_to_CSCOPE_FILES "*.pl"
-        append_to_CSCOPE_FILES "*.rb"
-        append_to_CSCOPE_FILES "*.php"
-        append_to_CSCOPE_FILES "*.java"
-        append_to_CSCOPE_FILES "*.js"
-        append_to_CSCOPE_FILES "*.html"
-        append_to_CSCOPE_FILES "*.xml"
-        append_to_CSCOPE_FILES "*.p4"
+        append_to_CSCOPE_FILES \
+             "h" \
+             "hpp" \
+             "c" \
+             "cpp" \
+             "cc" \
+             "sh" \
+             "S" \
+             "equ" \
+             "py" \
+             "pl" \
+             "rb" \
+             "php" \
+             "java" \
+             "js" \
+             "html" \
+             "xml" \
+             "p4"
         echo "Done (`size_of_file $here/$CSCOPE_FILES`)"
     else
         echo "Error: Failed to find $CSCOPE_LIST"
