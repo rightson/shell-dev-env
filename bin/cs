@@ -63,20 +63,13 @@ append_to_CSCOPE_FILES() {
     regex=${regex:2}
     regex=".*\.\($regex\)"
     local here=`pwd`
-    local ignore='
-            -not -path "*.git/*" \
-            -not -path "*./node_modules/*" \
-            -not -path "*./node_modules*/*" \
-            -not -path "*./build/*" \
-            -not -path "*./dist/*" \
-            -not -path "*.svn/*" \
-    '
     if [ -f $CSCOPE_LIST ]; then
         echo -e "\nfind . -type f -regex $regex"
         find `cat $here/$CSCOPE_LIST` \
             -not -path "*.git/*" \
             -not -path "*./node_modules/*" \
             -not -path "*./node_modules*/*" \
+            -not -path "*/node_modules*/*" \
             -not -path "*./build/*" \
             -not -path "*./dist/*" \
             -not -path "*.svn/*" \
