@@ -8,7 +8,6 @@ au BufRead,BufNewFile jquery.*.js set ft=javascript syntax=jquery
 au BufRead,BufNewFile *.tss set ft=css
 au BufRead,BufNewFile {*.md,*.mkd,*.markdown} set ft=markdown
 au BufRead,BufNewFile {COMMIT_EDITMSG}  set ft=gitcommit
-au BufRead,BufNewFile *.tex Goyo
 au BufRead,BufNewFile *.p4template set syntax=p4
 
 
