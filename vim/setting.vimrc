@@ -95,6 +95,10 @@ if !empty(expand(glob('cscope.out')))
     cs add cscope.out
 endif
 
+" Auto wrap line when diff
+autocmd FilterWritePre * if &diff | setlocal wrap< | endif
+
+
 " Restore: cursor of last cursor position
 autocmd BufReadPost *
             \ if line("'\"") > 0 && line ("'\"") <= line("$") |

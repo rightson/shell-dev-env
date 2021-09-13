@@ -18,6 +18,7 @@ alias gapa='git add --patch'
 alias gau='git add -u'
 
 alias gaus='git add -u; git status'
+alias gauw='git add -u; git vimdiff --word-diff --cached; git status'
 
 alias gbc='git rev-parse --abbrev-ref HEAD'
 
