@@ -2,7 +2,13 @@
 
 __dir__=$(cd $(dirname ${BASH_SOURCE[0]}) && pwd)
 postgres=$__dir__/install/bin/postgres
-
+if [ ! -f $postgres ]; then
+    postgres=`which postgres`
+fi
+if [ ! -f $postgres ]; then
+    echo "Error: postgres executable not found"
+    exit
+fi
 data_root=$__dir__/data
 log_path=$__dir__/postgres.log
 pid_path=$__dir__/data/postmaster.pid
