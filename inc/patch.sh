@@ -31,32 +31,23 @@ function get_shell_rc_path() {
     esac
 }
 
-function get_new_shell_rc() {
+function get_patched_rc() {
     if [ "$1" = "" ]; then
-        echo "Usage: get_new_shellrc <snell-name>"
+        echo "Usage: get_patched_rc <snell-name>"
         return
     fi
     local shell_name=$1
     local rc=`get_shell_rc_path $shell_name`
     local begin=`get_line_number "$ENV_BLOCK_HEAD" $rc`
     local end=`get_line_number "$ENV_BLOCK_END" $rc`
-    if [ "$begin" = "" ]; then
-        begin=1
-        echo "# $ENV_BLOCK_HEAD"
-    else
-        head -n $begin $rc
-    fi
-    if [ "$end" = "" ]; then
-        end=`wc -l $rc`
-    fi
+    echo -e "\n# $ENV_BLOCK_HEAD"
     if [ $shell_name = tcsh ]; then
         echo "setenv ENV_ROOT $ENV_ROOT"
     else
         echo "export ENV_ROOT=$ENV_ROOT"
     fi
     cat $ENV_ROOT/seeds/${shell_name}rc
-    echo "# $ENV_BLOCK_END"
-    tail -n +$(($end+1)) $rc|grep -E -v 'env_use_|use_env_'
+    echo -e "# $ENV_BLOCK_END\n"
 }
 
 function patch_shell_rc() {
@@ -66,8 +57,13 @@ function patch_shell_rc() {
     fi
     local shell_name=$1
     local rc=$2
+    if [ "`grep \"$ENV_BLOCK_HEAD\" $rc 2> /dev/null`" != "" ]; then
+        echo "$2 already patched"
+        return
+    fi
     local temp=`mktemp`
-    get_new_shell_rc $shell_name > $temp
+    cat $rc > $temp
+    get_patched_rc $shell_name >> $temp
     mv $rc ${rc}-`date +%F-%H-%M-%S`.bak
     mv $temp $rc
     echo "$rc patched"
