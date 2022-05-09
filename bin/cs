@@ -59,22 +59,45 @@ size_of_file() {
 }
 
 append_to_CSCOPE_FILES() {
-    local regex=$(printf "\|%s" "$@")
-    regex=${regex:2}
-    regex=".*\.\($regex\)"
+    if [ `uname` = Darwin ]; then
+        local regex=$(printf "|%s" "$@")
+        regex=${regex:1}
+        regex=".*\.($regex)"
+    else
+        local regex=$(printf "\|%s" "$@")
+        regex=${regex:2}
+        regex=".*\.\($regex\)"
+    fi
     local here=`pwd`
+    local cscope_list=$here/$CSCOPE_LIST
+    local cscope_files=$here/$CSCOPE_FILES
     if [ -f $CSCOPE_LIST ]; then
-        echo -e "\nfind . -type f -regex $regex"
-        find `cat $here/$CSCOPE_LIST` \
-            -not -path "*.git/*" \
-            -not -path "*./node_modules/*" \
-            -not -path "*./node_modules*/*" \
-            -not -path "*/node_modules*/*" \
-            -not -path "*./build/*" \
-            -not -path "*./dist/*" \
-            -not -path "*.svn/*" \
-            -type f \
-            -regex "$regex" | tee $here/$CSCOPE_FILES
+        if [ `uname` = Darwin ]; then
+            echo -e "\nfind -E . -type f -regex $regex"
+            find -E `cat $cscope_list` \
+                -not -path "*.git/*" \
+                -not -path "*./node_modules/*" \
+                -not -path "*./node_modules*/*" \
+                -not -path "*/node_modules*/*" \
+                -not -path "*./build/*" \
+                -not -path "*./dist/*" \
+                -not -path "*.svn/*" \
+                -type f -regex "$regex" \
+                | tee $cscope_files
+        else
+            echo -e "\nfind . -type f -regex $regex"
+            find `cat $cscope_list` \
+                -not -path "*.git/*" \
+                -not -path "*./node_modules/*" \
+                -not -path "*./node_modules*/*" \
+                -not -path "*/node_modules*/*" \
+                -not -path "*./build/*" \
+                -not -path "*./dist/*" \
+                -not -path "*.svn/*" \
+                -type f \
+                -regex "$regex" \
+                | tee $cscope_files
+        fi
     else
         echo "Error: Failed to find $CSCOPE_LIST"
         exit
