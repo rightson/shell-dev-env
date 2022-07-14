@@ -34,7 +34,7 @@ set pastetoggle=<F7>
 set number
 set mouse=a
 set vb t_vb=
-set ttymouse=xterm2
+" set ttymouse=xterm2
 set ruler
 set nowrap
 set linebreak
