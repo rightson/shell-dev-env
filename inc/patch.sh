@@ -88,11 +88,11 @@ function patch_vim_rc() {
         echo -e "\n\" $ENV_BLOCK_HEAD" >> $vimrc
         echo "\" =Begin=" >> $vimrc
         echo "source $ENV_ROOT/vim/plug.vimrc" >> $vimrc
+        echo "\" Update local Plug at $local_vimrc" >> $vimrc
         echo "source $ENV_ROOT/vim/helpers.vimrc" >> $vimrc
         echo "source $ENV_ROOT/vim/hotkeys.vimrc" >> $vimrc
         echo "source $ENV_ROOT/vim/setting.vimrc" >> $vimrc
         echo "\" =END=" >> $vimrc
-        echo "\" Update local Plug at $local_vimrc" >> $vimrc
 	touch $local_vimrc
     else
         echo "$vimrc already patched"
