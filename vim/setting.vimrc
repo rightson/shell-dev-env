@@ -47,7 +47,7 @@ let g:Powerline_symbols = 'unicode'
 
 " Display: color schemes
 set t_Co=256   " This is may or may not needed.
-colorscheme PaperColor
+" colorscheme PaperColor
 
 
 " Display: folding

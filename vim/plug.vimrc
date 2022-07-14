@@ -36,6 +36,8 @@ endif
 
 "Plug 'ludovicchabant/vim-gutentags'
 "Plug 'skywind3000/gutentags_plus'
+Plug 'vim-scripts/ZoomWin'
+Plug 'tpope/vim-obsession'
 
 Plug 'sickill/vim-monokai'
 Plug 'NLKNguyen/papercolor-theme'
