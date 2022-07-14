@@ -37,6 +37,7 @@ noremap <F4> :qa<CR>
 noremap <F5> :silent! cs kill 0<CR> :mapclear<CR> :source ~/.vimrc<CR> cs add cscope.out<CR>
 
 noremap <F6> :NERDTreeToggle<CR>
+noremap <F8> :TagbarToggle<CR>
 
 noremap <F10> <C-w>\|<C-w>_
 noremap <S-F10> <C-w>=

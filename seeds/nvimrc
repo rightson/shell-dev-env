@@ -1,0 +1,11 @@
+" Added by shell-env.sh utility
+" =Begin=
+source $ENV_ROOT/vim/plug.nvimrc
+" Update local Plug at $HOME/.config/nvim/extra-plug.vim
+source $ENV_ROOT/vim/helpers.vimrc
+source $ENV_ROOT/vim/hotkeys.vimrc
+source $ENV_ROOT/vim/setting.vimrc
+" =END=
+
+set bg=dark
+

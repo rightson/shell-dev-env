@@ -50,6 +50,7 @@ alias so.tmux="tmux source $HOME/.tmux.conf"
 alias shrc="vim ${PROFILE}"
 alias vimrc="vim $HOME/.vimrc"
 alias gvimrc="gvim $HOME/.gvimrc"
+alias nvimrc="nvim $HOME/.config/nvim/init.vim"
 alias tmuxrc="vim $HOME/.tmux.conf"
 
 alias public-ip='curl ipinfo.io/ip'

@@ -1,20 +1,11 @@
-call plug#begin('~/.vim/plugged')
-
-if v:version < 800
+call plug#begin()
+Plug 'roxma/nvim-completion-manager'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-else
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-endif
-
-if v:version >= 800
-    Plug 'skywind3000/asyncrun.vim'
-endif
-
-if v:version >= 801
-    Plug 'fatih/vim-go'
-endif
-
-
+Plug 'skywind3000/asyncrun.vim'
+Plug 'fatih/vim-go'
 Plug 'vim-scripts/Rename2'
 Plug 'mhinz/vim-startify'
 Plug 'vim-airline/vim-airline'
@@ -24,7 +15,7 @@ Plug 'vim-airline/vim-airline-themes'
     let g:airline#extensions#tabline#formatter = 'unique_tail'
 
 Plug 'airblade/vim-gitgutter'
-"Plug 'vim-scripts/cscope_macros.vim'
+Plug 'vim-scripts/cscope_macros.vim'
     set cscopetag
     set csto=1
 
@@ -53,10 +44,8 @@ Plug 'alvan/vim-closetag'
     let g:closetag_xhtml_filetypes = 'xhtml,jsx'
     let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.php,*.jsx"
 
-if filereadable($HOME."/.vimrc.plug")
-    " Put your local plug here
-    source $HOME/.vimrc.plug
+if filereadable($HOME."/.config/nvim/extra-plug.vim")
+    source $HOME/.config/nvim/extra-plug.vim
 endif
 
-" Initialize plugin system
 call plug#end()

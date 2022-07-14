@@ -99,6 +99,28 @@ function patch_vim_rc() {
     fi
 }
 
+function patch_nvim_rc() {
+    local nvimrc=$HOME/.config/nvim/init.vim
+    local local_nvimrc=$HOME/.config/nvim/extra-plug.vim
+    mkdir -p `dirname $nvimrc`;
+    mkdir -p `dirname $local_nvimrc`;
+	touch $local_nvimrc
+    if [ "`grep \"$ENV_BLOCK_HEAD\" $nvimrc 2> /dev/null`" = "" ]; then
+        echo "Patching $nvimrc ..."
+        cat "${ENV_ROOT}/seeds/nvimrc" >> $nvimrc
+        # echo -e "\n\" $ENV_BLOCK_HEAD" >> $nvimrc
+        # echo "\" =Begin=" >> $nvimrc
+        # echo "source $ENV_ROOT/vim/plug.vimrc" >> $nnvimrc
+        # echo "\" Update local Plug at $local_nvimrc" >> $nvimrc
+        # echo "source $ENV_ROOT/vim/helpers.vimrc" >> $nvimrc
+        # echo "source $ENV_ROOT/vim/hotkeys.vimrc" >> $nvimrc
+        # echo "source $ENV_ROOT/vim/setting.vimrc" >> $nvimrc
+        # echo "\" =END=" >> $nvimrc
+    else
+        echo "$nvimrc already patched"
+    fi
+}
+
 function patch_screen_rc() {
     local screenrc=$HOME/.screenrc
     if [ "`grep \"$ENV_BLOCK_HEAD\" $screenrc 2> /dev/null`" = "" ]; then
