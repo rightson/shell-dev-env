@@ -82,6 +82,7 @@ function patch_tmux_rc() {
 
 function patch_vim_rc() {
     local vimrc=$HOME/.vimrc
+    local local_vimrc=$HOME/.vimrc.plug
     if [ "`grep \"$ENV_BLOCK_HEAD\" $vimrc 2> /dev/null`" = "" ]; then
         echo "Patching $vimrc ..."
         echo -e "\n\" $ENV_BLOCK_HEAD" >> $vimrc
@@ -91,6 +92,8 @@ function patch_vim_rc() {
         echo "source $ENV_ROOT/vim/hotkeys.vimrc" >> $vimrc
         echo "source $ENV_ROOT/vim/setting.vimrc" >> $vimrc
         echo "\" =END=" >> $vimrc
+        echo "\" Update local Plug at $local_vimrc" >> $vimrc
+	touch $local_vimrc
     else
         echo "$vimrc already patched"
     fi
