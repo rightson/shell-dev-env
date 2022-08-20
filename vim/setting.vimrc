@@ -32,9 +32,9 @@ set pastetoggle=<F7>
 
 " Display: basic
 set number
+set ttymouse=sgr
 set mouse=a
 set vb t_vb=
-" set ttymouse=xterm2
 set ruler
 set nowrap
 set linebreak
