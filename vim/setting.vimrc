@@ -131,3 +131,5 @@ if has("gui_running")
     autocmd VimLeavePre * if g:screen_size_restore_pos == 1 | call ScreenSave() | endif
 endif
 
+
+autocmd BufWritePre * call StripTrailingWhitespace()
