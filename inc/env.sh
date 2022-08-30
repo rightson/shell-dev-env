@@ -46,3 +46,9 @@ function set_go_path() {
 function env_self_update() {
     cd $ENV_ROOT && git pull && cd -
 }
+
+function get_hw_temp() {
+    paste <(cat /sys/class/thermal/thermal_zone*/type) \
+        <(cat /sys/class/thermal/thermal_zone*/temp) | \
+        column -s $'\t' -t | sed 's/\(.\)..$/.\1°C/'
+}
