@@ -33,8 +33,8 @@ function install_fzf() {
 }
 
 function install_nvm() {
-    local nvm_path="`which nvm 2> /dev/null`"
-    if [ -f $nvm_path ]; then
+    which nvm 2> /dev/null
+    if [ $? -eq 0 ]; then
         echo "nvm already installed"
         return
     fi
