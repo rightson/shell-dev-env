@@ -59,8 +59,8 @@ alias py python
 alias py3 python3
 
 # venv aliasees
-# alias so-venv 'source venv/bin/activate'
-# alias mk-venv 'python3 -m venv venv; venv/bin/pip install --upgrade pip'
+alias venv.create 'python3 -m venv venv; venv/bin/pip install --upgrade pip'
+alias venv.activate 'source venv/bin/activate'
 
 # tmux aliases
 alias t 'tmux'

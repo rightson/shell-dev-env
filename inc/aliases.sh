@@ -60,8 +60,8 @@ alias py=python
 alias py3=python3
 
 # venv aliasees
-alias so-venv='source venv/bin/activate'
-alias mk-venv='python3 -m venv venv; venv/bin/pip install --upgrade pip'
+alias venv.create='python3 -m venv venv; venv/bin/pip install --upgrade pip'
+alias venv.activate='source venv/bin/activate'
 
 # tmux aliases
 alias t='tmux'
@@ -82,8 +82,8 @@ alias tat='tmux attach -t'
 alias sau='sudo apt update'
 alias sai='sudo apt install'
 alias sas='sudo apt search'
-alias saug='sudo apt upgrade'
-alias sadu='sudo apt dist-upgrade'
+alias saug='sudo apt update && sudo apt upgrade'
+alias sadu='sudo apt update && sudo apt dist-upgrade'
 alias sarm='sudo apt autoremove'
 
 # alias ufw
