@@ -17,7 +17,7 @@ Supported RC files:
    - .bashrc (or .bash_profile)
    - .zshrc
    - .vimrc
-   - .tmux.conf 
+   - .tmux.conf
 
 Installation
 ===================
@@ -27,10 +27,10 @@ Installation
 2.  install RC files:
 
 	`bash ~/.env/shell-env.sh patch install config`
-	
-3. source rc file. 
 
-	`source $PROFILE`
+3. source rc file.
+
+	`source $PROFILE_PATH`
 
 Enjoy : )
 

@@ -1,7 +1,7 @@
 if [[ `uname` = 'Linux' ]]; then
-    export PROFILE='~/.zshrc'
+    export PROFILE_PATH='~/.zshrc'
 else # Darwin
-    export PROFILE='~/.zshrc'
+    export PROFILE_PATH='~/.zshrc'
 fi
 
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE=fg=cyan
