@@ -69,9 +69,13 @@ endfunction
 
 
 function! StripTrailingWhitespace()
-  %s/\s*$//
+    " Set a mark ('m') at the current cursor position
+    normal! mm
+    " Do the substitution
+    %s/\s*$//e
+    " Return to the mark ('m')
+    normal! `m
 endfunction
-
 
 function! CscopeAdd()
     !cs add
