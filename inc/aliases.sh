@@ -45,12 +45,12 @@ alias rm-rf='rm -rf'
 alias rm-tags='rm -f cscope.* ncscope.* tags'
 
 # rc aliases
-alias uniqueify_PATH="export PATH=`bash --noprofile --norc $ENV_ROOT/bin/uniq-path.sh PATH`"
-alias uniqueify_LD_LIBRARY_PATH="export LD_LIBRARY_PATH=`bash --noprofile --norc $ENV_ROOT/bin/uniq-path.sh LD_LIBRARY_PATH`"
+alias uniqueify_PATH='export PATH=`bash --noprofile --norc $ENV_ROOT/bin/uniq-path.sh PATH`'
+alias uniqueify_LD_LIBRARY_PATH='export LD_LIBRARY_PATH=`bash --noprofile --norc $ENV_ROOT/bin/uniq-path.sh LD_LIBRARY_PATH`'
 alias so=". ${PROFILE_PATH}; sleep 1; uniqueify_PATH; uniqueify_LD_LIBRARY_PATH;"
 alias so.tmux="tmux source $HOME/.tmux.conf"
-alias path="echo $PATH | sed 's/:/\n/g'"
-alias path.lib="echo $LD_LIBRARY_PATH | sed 's/:/\n/g'"
+alias path='echo $PATH | sed "s/:/\n/g"'
+alias path.lib='echo $LD_LIBRARY_PATH | sed "s/:/\n/g"'
 alias shrc="vim ${PROFILE_PATH}"
 alias vimrc="vim $HOME/.vimrc"
 alias gvimrc="gvim $HOME/.gvimrc"
