@@ -69,12 +69,10 @@ endfunction
 
 
 function! StripTrailingWhitespace()
-    " Set a mark ('m') at the current cursor position
-    normal! mm
-    " Do the substitution
-    %s/\s*$//e
-    " Return to the mark ('m')
-    normal! `m
+    let l = line(".") " Save current line
+    let c = col(".") " Save current column
+    %s/\s\+$//e " Substitute trailing whitespace with nothing
+    call cursor(l, c) " Restore cursor position
 endfunction
 
 function! CscopeAdd()
