@@ -46,7 +46,10 @@ alias rm-rf 'rm -rf'
 alias rm-tags 'rm -f cscope.* ncscope.* tags'
 
 # rc aliases
-alias so "source ${PROFILE}"
+alias uniqueify "/bin/bash --noprofile --norc $ENV_ROOT/bin/uniq-path.sh"
+alias uniqueify_PATH "export PATH=`uniqueify PATH`"
+alias uniqueify_LD_LIBRARY_PATH "export LD_LIBRARY_PATH=`uniqueify LD_LIBRARY_PATH`"
+alias so ". ${PROFILE}; sleep 1; uniqueify_PATH; uniqueify_LD_LIBRARY_PATH;"
 alias shrc "vim ${PROFILE}"
 alias vimrc "vim ~/.vimrc"
 alias gvimrc "gvim ~/.gvimrc"

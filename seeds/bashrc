@@ -1,4 +1,4 @@
-  # common 
+  # common
     source $ENV_ROOT/inc/base.sh
   # core
     source $ENV_ROOT/inc/bash/variables.bash
@@ -25,6 +25,5 @@
     source $ENV_ROOT/inc/rdp-remote.sh
     source $ENV_ROOT/inc/docker.sh
     source $ENV_ROOT/inc/launcher.sh
-    source $ENV_ROOT/inc/settings.sh
     source $ENV_ROOT/inc/production.sh
     source $ENV_ROOT/inc/pdf.sh
