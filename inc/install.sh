@@ -58,3 +58,26 @@ function install_chrome_from_deb() {
     fi
 }
 
+function install_go() {
+    set -x
+    local tarball="https://go.dev/dl/go1.20.7.linux-amd64.tar.gz"
+    local basename=`pwd`/`basename $tarball`
+    if [ ! -f $basename ]; then
+        wget $tarball
+    fi
+    local dest=$HOME/local/opt
+    if [ ! -d $dst/go ]; then
+        mkdir -p $dest
+    else
+        rm -rf $dst/go
+    fi
+    cd $dest
+    tar zxf $basename
+    rm $basename
+
+    local bin=$HOME/local/bin
+    cd $bin
+    ln -fs ../opt/go/bin/go
+    ln -fs ../opt/go/bin/gofmt
+    set +x
+}
