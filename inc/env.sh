@@ -53,7 +53,7 @@ function get_hw_temp() {
         column -s $'\t' -t | sed 's/\(.\)..$/.\1°C/'
 }
 
-function uniqueify_path () {
+function uniqueify_path_bash () {
     env_var_name=$1
 
     old_IFS="$IFS"
@@ -74,4 +74,53 @@ function uniqueify_path () {
     new_env_var=$(IFS=':'; echo "${unique_path_array[*]}")
 
     echo "$new_env_var"
+}
+
+function uniqueify_path_zsh () {
+    env_var_name=$1
+
+    # Save the old IFS value
+    old_IFS="$IFS"
+    IFS=':'
+
+    # This syntax for reading into an array is bash-specific.
+    # In zsh, we'll split the string and read it into an array using a different approach.
+    path_array=("${(@s/:/)${(P)env_var_name}}")
+
+    IFS="$old_IFS"
+
+    # Use an associative array to track unique paths.
+    typeset -A unique_paths
+    unique_path_array=()
+
+    for path in "${path_array[@]}"; do
+        if [ -z "${unique_paths[$path]}" ]; then
+            unique_paths[$path]=1
+            unique_path_array+=("$path")
+        fi
+    done
+
+    # Join the array back into a colon-separated string.
+    new_env_var=$(IFS=':'; echo "${unique_path_array[*]}")
+
+    echo "$new_env_var"
+}
+
+function uniqueify_path() {
+    if [ -n "$ZSH_VERSION" ]; then
+        uniqueify_path_zsh "$@"
+    elif [ -n "$BASH_VERSION" ]; then
+        uniqueify_path_bash "$@"
+    else
+        echo "Unsupported shell. Only zsh and bash are supported."
+        return 1
+    fi
+}
+
+function uniqueify_PATH() {
+    export PATH=`uniqueify_path PATH`
+}
+
+function uniqueify_LD_LIBRARY_PATH() {
+    export LD_LIBRARY_PATH=`uniqueify_path LD_LIBRARY_PATH`
 }
