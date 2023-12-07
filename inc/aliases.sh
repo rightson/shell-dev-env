@@ -95,6 +95,8 @@ alias srm='sudo ufw remove'
 
 alias vbm='VBoxManage'
 
+alias sus='sudo service'
+
 grep2() {
     grep $1 | grep -v grep | grep --color $1
 }

@@ -33,15 +33,14 @@ function install_fzf() {
 }
 
 function install_nvm() {
-    which nvm 2> /dev/null
-    if [ $? -eq 0 ]; then
+    if [ -d ~/.nvm ]; then
         echo "nvm already installed"
         return
     fi
     if [ -n "`which curl 2> /dev/null`" ]; then
-        curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
+        curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
     else
-        wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
+        wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
     fi
 }
 
