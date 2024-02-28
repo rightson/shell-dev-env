@@ -147,6 +147,7 @@ function! ScreenRestore()
     endif
 endfunction
 
+
 function! DefaultDark()
     colo default
     set bg=dark
@@ -155,10 +156,25 @@ function! DefaultDark()
     endif
 endfunction
 
+
 function! DefaultLight()
     colo default
     set bg=light
     if &diff
         colo light
     endif
+endfunction
+
+
+" use <tab> to trigger completion and navigate to the next complete item
+function! CheckBackspace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+function! UseTabForCoc()
+    inoremap <silent><expr> <Tab>
+      \ coc#pum#visible() ? coc#pum#next(1) :
+      \ CheckBackspace() ? "\<Tab>" :
+      \ coc#refresh()
 endfunction
