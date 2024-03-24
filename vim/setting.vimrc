@@ -31,7 +31,7 @@ set pastetoggle=<F7>
 
 
 " Display: basic
-set number
+set relativenumber
 set ttymouse=sgr
 set mouse=a
 set vb t_vb=
@@ -53,7 +53,7 @@ set t_Co=256   " This is may or may not needed.
 " Display: folding
 set foldenable
 "set foldmethod=indent
-setlocal foldmethod=syntax
+setlocal foldmethod=manual
 set foldcolumn=0
 set foldlevel=99
 set foldopen=block,hor,mark,percent,quickfix,tag
