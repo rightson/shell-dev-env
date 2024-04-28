@@ -32,7 +32,9 @@ set pastetoggle=<F7>
 
 " Display: basic
 set relativenumber
+if !has('nvim')
 set ttymouse=sgr
+endif
 set mouse=a
 set vb t_vb=
 set ruler
