@@ -27,8 +27,8 @@ Plug 'vim-airline/vim-airline-themes'
 
 "Plug 'airblade/vim-gitgutter'
 "Plug 'vim-scripts/cscope_macros.vim'
-    set cscopetag
-    set csto=1
+"    set cscopetag
+"    set csto=1
 
 Plug 'editorconfig/editorconfig-vim'
 "Plug 'Yggdroot/indentLine'
