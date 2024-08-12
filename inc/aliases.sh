@@ -1,6 +1,6 @@
 # Aliases
 
-# common aliases
+# common cliases
 alias al='alias'
 alias aliasrc="vim $ENV_ROOT/inc/aliases.sh"
 
@@ -52,7 +52,7 @@ alias path.lib='echo $LD_LIBRARY_PATH | sed "s/:/\n/g"'
 alias shrc="vim ${PROFILE_PATH}"
 alias vimrc="vim $HOME/.vimrc"
 alias gvimrc="gvim $HOME/.gvimrc"
-alias nvimrc="nvim $HOME/.config/nvim/init.vim"
+alias nvimrc="nvim $HOME/.config/nvim/init.lua"
 alias tmuxrc="vim $HOME/.tmux.conf"
 
 alias public-ip='curl ipinfo.io/ip'

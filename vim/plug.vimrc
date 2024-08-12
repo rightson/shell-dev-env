@@ -1,6 +1,8 @@
 call plug#begin('~/.vim/plugged')
 
+if has("nvim")
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+endif
 
 if v:version < 800
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
