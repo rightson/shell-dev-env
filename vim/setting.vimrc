@@ -27,6 +27,7 @@ set autowrite
 
 " Clipboard
 set clipboard^=unnamed,unnamedplus
+set paste
 set pastetoggle=<F7>
 
 
@@ -138,3 +139,7 @@ endif
 
 
 autocmd BufWritePre * call StripTrailingWhitespace()
+
+" Ignore node_modules and .git folder when running fzf
+let $FZF_DEFAULT_COMMAND='find . \( -name node_modules -o -name .git \) -prune -o -print'
+
