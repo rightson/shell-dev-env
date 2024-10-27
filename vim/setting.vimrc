@@ -98,7 +98,7 @@ if &diff
 endif
 
 " Auto wrap line when diff
-autocmd FilterWritePre * if &diff | setlocal wrap< | endif
+autocmd FilterWritePre * if &diff | set wrap | endif
 
 
 " Restore: cursor of last cursor position

@@ -54,3 +54,4 @@ noremap <C-G> <Esc>:echo expand('%:p')<Return>
 nnoremap GG :grep "\<<cword>\>" * -rn --color<CR>:copen 10<CR>
 nnoremap GC :cclose<CR>
 
+nnoremap <leader><leader>ww :windo set wrap!<CR>gg
