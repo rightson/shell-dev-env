@@ -1,5 +1,7 @@
 call plug#begin()
+if has("nvim")
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+endif
 Plug 'roxma/nvim-completion-manager'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
