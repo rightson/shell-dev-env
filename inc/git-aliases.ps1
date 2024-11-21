@@ -61,6 +61,7 @@ function gf { git fetch}
 function gfa { git fetch --all --prune}
 function gfg { param($pattern) git ls-files | Select-String $pattern }
 function gfo { git fetch origin}
+function glob { git pull origin $(git rev-parse --abbrev-ref HEAD) }
 function gp { git push }
 function gpd { git push --dry-run}
 function gpoat { git push origin --all; git push origin --tags }
