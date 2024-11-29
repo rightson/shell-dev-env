@@ -33,7 +33,7 @@ Linux/MacOS:
 
 If you don't wnat to install dependencies, just run
 
-	 bash ~/.env/shell-env.sh patch
+	bash ~/.env/shell-env.sh patch
 
 Windows:
 
