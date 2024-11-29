@@ -25,10 +25,13 @@ Installation
 1. `git clone https://github.com/rightson/shell-dev-env.git ~/.env`
 
 2.  install RC files:
-
+Unix-like (Linux, MacOS):
 	`bash ~/.env/shell-env.sh patch install config`
 
-3. source rc file.
+Windows:
+	`powershell ~\.env\shell-env.ps1`
+
+4. source rc file.
 
 	`source $PROFILE_PATH`
 
