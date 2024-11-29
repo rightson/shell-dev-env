@@ -29,7 +29,11 @@ Installation
 
 Linux/MacOS:
 
-	bash ~/.env/shell-env.sh patch install config
+	bash ~/.env/shell-env.sh
+
+If you don't wnat to install dependencies, just run
+
+	 bash ~/.env/shell-env.sh patch
 
 Windows:
 
