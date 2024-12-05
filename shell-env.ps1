@@ -1,5 +1,5 @@
 # Define the path to the PowerShell profile
-$profilePath = "$HOME\Documents\PowerShell\Microsoft.PowerShell_profile.ps1"
+$profilePath = $PROFILE
 
 # Define the lines we want to add
 $linesToAdd = @(
