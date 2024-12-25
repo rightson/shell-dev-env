@@ -19,8 +19,8 @@ if ( $?VIRTUAL_ENV ) then
 endif
 if ( "${gitrev}" != "" ) then
     set branch = "${txtcyn}${gitrev}${txtrst}"
-    set prompt = "${who}${at}${host}:${apwd} ($branch) [${datetime}] ${sh_in_use} \n%L%# "
+    set prompt = "${venv}${who}${at}${host}:${apwd} ($branch) [${datetime}] ${sh_in_use} \n%L%# "
 else
-    set prompt = "${who}${at}${host}:${apwd} [${datetime}] ${sh_in_use} \n%L%# "
+    set prompt = "${venv}${who}${at}${host}:${apwd} [${datetime}] ${sh_in_use} \n%L%# "
 endif
 alias precmd "source `lsof +p $$ |& grep -oE /.\*statusbar.csh` >& /dev/null"
