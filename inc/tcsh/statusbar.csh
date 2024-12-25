@@ -11,13 +11,15 @@ set host   = "${txtylw}%M${txtrst}"
 set apwd   = "${txtgrn}%~${txtrst}"
 set datetime = "${txtpur}%P %Y/%W/%D${txtrst}"
 set at     = "${txtwht}@${txtrst}"
-#set gitrev = `sh -c 'git rev-parse --abbrev-ref HEAD 2> /dev/null'`
+set venv = ""
 set gitrev = `git branch |& grep '*' |& sed 's/^\* *//g'`
-#set sh_in_use = `ps | grep --color=none $$ | awk '{print $(NF)}'`
 set sh_in_use = "${txtblu}(`echo $0 | sed 's/-//'`)${txtrst}"
+if ( $?VIRTUAL_ENV ) then
+    set venv "[`basename ${VIRTUAL_ENV}] ";
+endif
 if ( "${gitrev}" != "" ) then
-    set gitprompt = "${txtcyn}${gitrev}${txtrst}"
-    set prompt = "${who}${at}${host}:${apwd} ($gitprompt) [${datetime}] ${sh_in_use} \n%L%# "
+    set branch = "${txtcyn}${gitrev}${txtrst}"
+    set prompt = "${who}${at}${host}:${apwd} ($branch) [${datetime}] ${sh_in_use} \n%L%# "
 else
     set prompt = "${who}${at}${host}:${apwd} [${datetime}] ${sh_in_use} \n%L%# "
 endif
