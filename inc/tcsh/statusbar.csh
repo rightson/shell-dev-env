@@ -14,8 +14,8 @@ set at     = "${txtwht}@${txtrst}"
 set venv   = ""
 set gitrev = `git branch |& grep '*' |& sed 's/^\* *//g'`
 set sh_in_use = "${txtblu}(`echo $0 | sed 's/-//'`)${txtrst}"
-if ( $?VIRTUAL_ENV ) then
-    set venv "[`basename ${VIRTUAL_ENV}] ";
+if ( $?VIRTUAL_ENV && "`dirname ${VIRTUAL_ENV}`" == "`pwd`" ) then
+    set venv = "[`basename ${VIRTUAL_ENV}`] "    
 endif
 if ( "${gitrev}" != "" ) then
     set branch = "${txtcyn}${gitrev}${txtrst}"
