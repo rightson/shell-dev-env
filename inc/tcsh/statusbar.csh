@@ -25,4 +25,5 @@ if ( "${gitrev}" != "" ) then
 else
     set prompt = "${venv}${who}${at}${host}:${apwd} [${datetime}] ${sh_in_use} \n%L%# "
 endif
-alias precmd "source `lsof +p $$ |& grep -oE /.\*statusbar.csh` >& /dev/null"
+# alias precmd "source `lsof +p $$ |& grep -oE /.\*statusbar.csh` >& /dev/null"
+alias precmd 'source $ENV_ROOT/inc/tcsh/statusbar.csh >& /dev/null'
