@@ -11,7 +11,7 @@ set host   = "${txtylw}%M${txtrst}"
 set apwd   = "${txtgrn}%~${txtrst}"
 set datetime = "${txtpur}%P %Y/%W/%D${txtrst}"
 set at     = "${txtwht}@${txtrst}"
-set venv = ""
+set venv   = ""
 set gitrev = `git branch |& grep '*' |& sed 's/^\* *//g'`
 set sh_in_use = "${txtblu}(`echo $0 | sed 's/-//'`)${txtrst}"
 if ( $?VIRTUAL_ENV ) then
