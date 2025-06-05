@@ -63,7 +63,7 @@ alias py3 python3
 
 # venv aliasees
 alias venv.create 'python3 -m venv venv; venv/bin/pip install --upgrade pip'
-alias venv.activate 'source venv/bin/activate'
+alias venv.activate 'source venv/bin/activate.csh'
 
 # tmux aliases
 alias t 'tmux'
