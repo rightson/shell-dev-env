@@ -80,3 +80,72 @@ function install_go() {
     ln -fs ../opt/go/bin/gofmt
     set +x
 }
+
+# macOS Cocoa Text KeyBindings helper
+function install_macos_kb_bind() {
+  local kb_dir="$HOME/Library/KeyBindings"
+  local kb_file="$kb_dir/DefaultKeyBinding.dict"
+  local ts="$(date +%Y%m%d-%H%M%S)"
+  local mode="${1:-homeend}"   # homeend | full
+  local cmd="${2:-install}"    # install | show | uninstall
+
+  # contents
+  local content_homeend='{
+    /* Home / End → beginning/end of line (adds mapping, does not override ⌘←/→) */
+    "\UF729" = moveToBeginningOfLine:; // Home
+    "\UF72B" = moveToEndOfLine:;       // End
+  }'
+
+  local content_full='{
+    /* Home / End → beginning/end of line */
+    "\UF729" = moveToBeginningOfLine:; // Home
+    "\UF72B" = moveToEndOfLine:;       // End
+    /* PageUp / PageDown → move cursor with page up/down */
+    "\UF72C" = pageUp:;                // PageUp
+    "\UF72D" = pageDown:;              // PageDown
+  }'
+
+  case "$cmd" in
+    install)
+      mkdir -p "$kb_dir" || { echo "❌ Cannot create directory: $kb_dir"; return 1; }
+      if [ -f "$kb_file" ]; then
+        cp "$kb_file" "$kb_file.bak-$ts" || { echo "❌ Backup failed"; return 1; }
+        echo "🗂 Existing file backed up: $kb_file.bak-$ts"
+      fi
+      if [ "$mode" = "full" ]; then
+        printf "%s\n" "$content_full" > "$kb_file"
+        echo "✅ Installed (Home/End + PageUp/PageDown): $kb_file"
+      else
+        printf "%s\n" "$content_homeend" > "$kb_file"
+        echo "✅ Installed (Home/End only): $kb_file"
+      fi
+      echo "ℹ️ Log out or restart apps for changes to take effect (Cocoa text system only)."
+      ;;
+    show)
+      if [ -f "$kb_file" ]; then
+        echo "📄 Current content: $kb_file"
+        cat "$kb_file"
+      else
+        echo "ℹ️ Not installed (file does not exist): $kb_file"
+      fi
+      ;;
+    uninstall)
+      if [ -f "$kb_file" ]; then
+        mv "$kb_file" "$kb_file.removed-$ts" && \
+        echo "🧹 Removed, backup saved as: $kb_file.removed-$ts" || \
+        { echo "❌ Failed to remove"; return 1; }
+        echo "ℹ️ Log out or restart apps to restore default behavior."
+      else
+        echo "ℹ️ Nothing to remove (file does not exist)."
+      fi
+      ;;
+    *)
+      echo "Usage: install_macos_kb_bind [homeend|full] [install|show|uninstall]"
+      echo "Examples:"
+      echo "   install_macos_kb_bind                   # install Home/End only"
+      echo "   install_macos_kb_bind full install       # install with PageUp/PageDown"
+      echo "   install_macos_kb_bind show               # show current content"
+      echo "   install_macos_kb_bind any uninstall      # remove configuration"
+      ;;
+  esac
+}
