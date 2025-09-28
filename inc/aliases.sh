@@ -70,12 +70,11 @@ alias t='tmux'
 alias tl='tmux ls'
 #alias tn='tmux new -s'
 function tn () {
-    local name=$1
-    shift
-    if [ -z "$name" ]; then
-        local name=$(basename `pwd`)
+    local name="${1:-$(basename "$(pwd)")}"
+    if [ $# -gt 0 ]; then
+        shift
     fi
-    tmux new -s $name $*
+    tmux new -s "$name" "$@"
 }
 alias ta='tmux attach'
 alias tat='tmux attach -t'
