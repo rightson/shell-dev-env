@@ -5,6 +5,7 @@
     source $ENV_ROOT/inc/zsh/util.zsh
     source $ENV_ROOT/inc/zsh/statusbar.zsh
     source $ENV_ROOT/inc/zsh/settings.zsh
+    source $ENV_ROOT/inc/history.sh
   # basic
     source $ENV_ROOT/inc/env.sh
     source $ENV_ROOT/inc/net.sh

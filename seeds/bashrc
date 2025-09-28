@@ -5,6 +5,7 @@
     source $ENV_ROOT/inc/bash/util.bash
     source $ENV_ROOT/inc/bash/statusbar.bash
     source $ENV_ROOT/inc/settings.sh
+    source $ENV_ROOT/inc/history.sh
   # basic
     source $ENV_ROOT/inc/env.sh
     source $ENV_ROOT/inc/net.sh
