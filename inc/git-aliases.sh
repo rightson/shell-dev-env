@@ -63,15 +63,15 @@ alias gdca.np='git --no-pager diff --cached'
 alias gdca.wd='git diff --word-diff --cached'
 alias gdct='git describe --tags `git rev-list --tags --max-count=1`'
 alias gdt='git diff-tree --no-commit-id --name-only -r'
-gdv() { 
-    git diff -w "$@" | view - 
+gdv() {
+    git diff -w "$@" | view -
 }
 alias gdw='git diff --word-diff'
- 
+
  alias gf='git fetch'
  alias gfa='git fetch --all --prune'
-function gfg() { 
-    git ls-files | grep $@ 
+function gfg() {
+    git ls-files | grep $@
 }
 alias gfo='git fetch origin'
 
@@ -135,6 +135,26 @@ alias glog='git log --oneline --decorate --color --graph'
 alias glp="_git_log_prettily"
 
 alias gm='git merge'
+gmb() {
+  # Usage: gmb [--rebase] <target_branch>
+  local r= t=
+  [[ $1 == --rebase ]] && r=--rebase && shift
+  t="$1"
+  [[ -n $t && $t != -h && $t != --help ]] || { echo "Usage: gmb [--rebase] <target_branch>"; return 2; }
+
+  git rev-parse --git-dir >/dev/null 2>&1 || { echo "Not a git repo."; return 2; }
+  git diff --quiet && git diff --cached --quiet || { echo "Working tree not clean."; return 2; }
+
+  local src; src="$(git branch --show-current)"
+  [[ -n $src ]] || { echo "Detached HEAD."; return 2; }
+  [[ $src != "$t" ]] || { echo "Target equals current."; return 2; }
+
+  git show-ref --verify --quiet "refs/heads/$t" || git fetch origin "$t:$t" || { echo "No branch '$t'."; return 2; }
+
+  git checkout "$t" || return
+  [[ -n $r ]] && git pull --rebase || git pull
+  git merge --no-ff "$src" || { echo "Resolve conflicts, then: git merge --continue  (or --abort)"; return 1; }
+}
 alias gmnf='git merge --no-ff'
 alias gmom='git merge origin/master'
 alias gmt='git mergetool --no-prompt'
