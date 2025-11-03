@@ -96,6 +96,16 @@ alias vbm='VBoxManage'
 
 alias sus='sudo service'
 
+# aliases for brew services:
+alias bs='brew services'
+alias sbs='sudo brew services'
+alias bs.list='brew services list'
+alias bs.start='brew services start'
+alias bs.status='brew services status'
+alias bs.stop='brew services stop'
+alias bs.restart='brew services restart'
+alias bs.info='brew services info'
+
 grep2() {
     grep $1 | grep -v grep | grep --color $1
 }
