@@ -228,20 +228,17 @@ export NO_USER_LOCAL=1
 ### Proposed Flags (See PROPOSAL.md)
 
 ```bash
-# Disable Homebrew auto-detection
-export NO_HOMEBREW=1
-
-# Skip language-specific paths (Go, Rust, Node, etc.)
+# Skip language-specific environment variables (Go, Rust, Node, etc.)
 export NO_LANGUAGE_PATHS=1
 
-# Skip modern package managers (snap, flatpak)
-export NO_PKG_MANAGERS=1
-
-# Use minimal PATH only
-export USE_MINIMAL_PATH=1
-
-# Enable XDG Base Directory compliance
+# Enable XDG Base Directory compliance (default: enabled)
 export XDG_COMPLIANCE=1
+
+# Enable PREFIX variable support (default: enabled)
+export PREFIX_SUPPORT=1
+
+# Set custom PREFIX location (default: $HOME/.local)
+export PREFIX=/opt/myapp
 ```
 
 ## Customization
@@ -517,14 +514,14 @@ See [PROPOSAL.md](PROPOSAL.md) for planned improvements and areas where contribu
 
 ## Roadmap
 
-See [PROPOSAL.md](PROPOSAL.md) for the comprehensive improvement plan, including:
+See [PROPOSAL.md](PROPOSAL.md) for the practical, docker-friendly improvement plan, including:
 
-- **XDG Base Directory Specification** support
-- **Dynamic Homebrew detection** for macOS/Linux
-- **Language ecosystem support** (Go, Rust, Node.js, Python, Ruby)
-- **Modern package manager support** (Snap, Flatpak, Nix, AppImage)
-- **Enhanced feature flags** for granular control
-- **Platform-specific optimizations**
+- **XDG Base Directory Specification** support (industry standard, container-friendly)
+- **PREFIX variable support** (build system standard)
+- **Language environment variables** (Go, Rust, Node.js, Python - no auto-detection)
+- **Zero dependencies** - No complex detection logic
+- **100% backward compatible** - All improvements are opt-in via environment variables
+- **Docker-first approach** - Works in containers without modification
 
 ## Breaking Changes
 

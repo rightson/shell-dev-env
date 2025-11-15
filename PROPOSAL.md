@@ -2,7 +2,7 @@
 
 ## Executive Summary
 
-This proposal outlines improvements to `shell-dev-env`'s PATH and environment variable management by leveraging standard default environment variables from various ecosystems. This will make the configuration more portable, standards-compliant, and user-friendly.
+This proposal outlines practical improvements to `shell-dev-env`'s PATH and environment variable management by leveraging **widely-available standard environment variables**. The focus is on docker-friendly, portable defaults that work across containers, development environments, and production systems without complex detection logic.
 
 ## Current State
 
@@ -16,21 +16,216 @@ fi
 ```
 
 ### Issues with Current Approach
-1. **Hardcoded paths** - Does not respect user's custom installation prefixes
-2. **No XDG compliance** - Does not follow XDG Base Directory specification
-3. **Missing language ecosystems** - No support for Go, Rust, Node.js, Ruby, etc.
-4. **Platform-specific paths hardcoded** - Homebrew paths not dynamically detected
-5. **Limited customization** - Only `NO_USER_LOCAL` flag available
-6. **No modern package manager support** - Missing snap, flatpak, appimage paths
+1. **Hardcoded paths** - Does not respect standard environment variables
+2. **No XDG compliance** - Missing industry-standard directory specification
+3. **Limited PREFIX support** - No support for standard `PREFIX` variable
+4. **Docker unfriendly** - Hardcoded assumptions don't work well in containers
+5. **No standard fallbacks** - Missing commonly-used environment variable patterns
+
+## Guiding Principles
+
+1. **Docker-first**: Works in containers without modification
+2. **Standard variables**: Use widely-recognized environment variables
+3. **Zero dependencies**: No dynamic detection requiring external tools
+4. **Portable**: Works across Linux distros, containers, and macOS
+5. **Backward compatible**: Existing behavior preserved by default
+6. **Simple**: Straightforward logic, no complex detection
 
 ## Proposed Improvements
 
-### 1. XDG Base Directory Specification Support
+### 1. XDG Base Directory Specification Support ✅ DOCKER-FRIENDLY
 
-**Rationale**: The XDG Base Directory specification is a well-established standard for organizing user files on Unix-like systems.
+**Rationale**: Industry standard, widely used, container-friendly.
 
 **Implementation**:
 ```bash
+# inc/env/xdg.sh
+
+# XDG Base Directory Specification
+# https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html
+export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
+export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
+export XDG_STATE_HOME="${XDG_STATE_HOME:-$HOME/.local/state}"
+export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
+export XDG_BIN_HOME="${XDG_BIN_HOME:-$HOME/.local/bin}"
+
+# Add XDG bin directory to PATH (already standard location)
+if [ -d "$XDG_BIN_HOME" ]; then
+    export PATH="$XDG_BIN_HOME:$PATH"
+fi
+```
+
+**Benefits**:
+- ✅ Docker-friendly: Works in containers
+- ✅ Standards-compliant (freedesktop.org specification)
+- ✅ Users can override via environment variables
+- ✅ No external dependencies
+- ✅ Used by pip, pipx, npm, and many modern tools
+
+**Container usage**:
+```dockerfile
+# In Dockerfile
+ENV XDG_CONFIG_HOME=/app/.config
+ENV XDG_BIN_HOME=/app/.local/bin
+```
+
+### 2. PREFIX Variable Support ✅ DOCKER-FRIENDLY
+
+**Rationale**: Standard Unix convention for custom installation prefixes. Commonly used in build systems and containers.
+
+**Implementation**:
+```bash
+# inc/env/prefix.sh
+
+# Standard PREFIX variable (common in autotools, make, etc.)
+# Used for: ./configure --prefix=$PREFIX
+export PREFIX="${PREFIX:-$HOME/.local}"
+
+# Add PREFIX paths if they exist
+if [ -d "$PREFIX/bin" ]; then
+    export PATH="$PREFIX/bin:$PATH"
+fi
+
+if [ -d "$PREFIX/lib" ]; then
+    export LD_LIBRARY_PATH="$PREFIX/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+fi
+
+if [ -d "$PREFIX/lib/pkgconfig" ]; then
+    export PKG_CONFIG_PATH="$PREFIX/lib/pkgconfig${PKG_CONFIG_PATH:+:$PKG_CONFIG_PATH}"
+fi
+
+if [ -d "$PREFIX/share/man" ]; then
+    export MANPATH="$PREFIX/share/man${MANPATH:+:$MANPATH}"
+fi
+```
+
+**Benefits**:
+- ✅ Docker-friendly: Standard in containers
+- ✅ Build system standard (autotools, cmake, meson)
+- ✅ Easy to override: `PREFIX=/opt/myapp`
+- ✅ No dependencies or detection needed
+- ✅ Works with compiled software
+
+**Container usage**:
+```dockerfile
+ENV PREFIX=/opt/app
+RUN ./configure --prefix=$PREFIX && make install
+```
+
+### 3. Language Environment Variables (Practical Subset)
+
+Only include variables that are **standard** and **don't require detection**:
+
+#### Go (GOPATH) ✅ PRACTICAL
+```bash
+# inc/env/languages.sh
+
+# Go uses GOPATH environment variable (standard)
+if [ -n "$GOPATH" ] && [ -d "$GOPATH/bin" ]; then
+    export PATH="$GOPATH/bin:$PATH"
+fi
+
+# Common default if not set
+if [ -z "$GOPATH" ] && [ -d "$HOME/go/bin" ]; then
+    export PATH="$HOME/go/bin:$PATH"
+fi
+```
+
+#### Rust (CARGO_HOME) ✅ PRACTICAL
+```bash
+# Rust/Cargo standard environment variable
+export CARGO_HOME="${CARGO_HOME:-$HOME/.cargo}"
+if [ -d "$CARGO_HOME/bin" ]; then
+    export PATH="$CARGO_HOME/bin:$PATH"
+fi
+```
+
+#### Python (User Base) ✅ PRACTICAL
+```bash
+# Python user site-packages (PEP 370)
+# This is where 'pip install --user' puts executables
+# Already covered by $HOME/.local/bin, but can be explicit:
+if [ -n "$PYTHONUSERBASE" ] && [ -d "$PYTHONUSERBASE/bin" ]; then
+    export PATH="$PYTHONUSERBASE/bin:$PATH"
+fi
+```
+
+#### Node.js (NPM_CONFIG_PREFIX) ✅ PRACTICAL
+```bash
+# NPM global packages prefix
+if [ -n "$NPM_CONFIG_PREFIX" ] && [ -d "$NPM_CONFIG_PREFIX/bin" ]; then
+    export PATH="$NPM_CONFIG_PREFIX/bin:$PATH"
+fi
+```
+
+**Why these are practical**:
+- ✅ All are **standard environment variables**
+- ✅ Set by users or build systems, not detected
+- ✅ Work in containers without modification
+- ✅ No `command -v` or external tool dependencies
+- ✅ Fail gracefully if not set
+
+### 4. ❌ REMOVED: Dynamic Homebrew Detection
+
+**Reason**: NOT docker-friendly, NOT practical
+- ❌ Requires `brew` command installed
+- ❌ `brew --prefix` is slow
+- ❌ Doesn't work in containers
+- ❌ macOS-specific, not portable
+- ❌ Complex detection logic
+
+**Alternative**: Users can set it themselves:
+```bash
+# In user's .bashrc if they want Homebrew
+export HOMEBREW_PREFIX="/opt/homebrew"  # or /usr/local
+export PATH="$HOMEBREW_PREFIX/bin:$PATH"
+```
+
+### 5. ❌ REMOVED: Package Manager Auto-Detection
+
+**Reason**: NOT docker-friendly, NOT practical
+- ❌ Requires specific package managers installed
+- ❌ Doesn't work in minimal containers
+- ❌ Platform-specific assumptions
+- ❌ Adds complexity for little benefit
+
+**Alternative**: Standard paths already cover most cases:
+- `/usr/local/bin` - already included
+- `$HOME/.local/bin` - already included
+- Container images set their own PATH
+
+### 6. ❌ REMOVED: Dynamic Platform Detection for Tools
+
+**Reason**: NOT practical
+- ❌ Requires commands like `ruby`, `python3` to be installed
+- ❌ Runtime detection is fragile
+- ❌ Doesn't work in minimal containers
+
+**Alternative**: Use environment variables only (no detection)
+
+## Proposed File Structure
+
+```
+shell-dev-env/
+├── inc/
+│   ├── settings.sh                    # Core settings (updated)
+│   ├── env.sh                         # Existing PATH functions
+│   ├── env/                           # NEW: Environment modules
+│   │   ├── xdg.sh                    # XDG Base Directory support
+│   │   ├── prefix.sh                 # PREFIX variable support
+│   │   └── languages.sh              # Language env vars (no detection)
+│   └── ...
+```
+
+## Revised Implementation
+
+### Phase 1: XDG and PREFIX Support (Week 1)
+
+**Create `inc/env/xdg.sh`**:
+```bash
+#!/bin/bash
+# XDG Base Directory Specification support
+
 # Set XDG defaults if not already set
 export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
 export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
@@ -38,330 +233,272 @@ export XDG_STATE_HOME="${XDG_STATE_HOME:-$HOME/.local/state}"
 export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
 export XDG_BIN_HOME="${XDG_BIN_HOME:-$HOME/.local/bin}"
 
-# Add XDG bin directory to PATH
-export PATH="$XDG_BIN_HOME:$PATH"
-```
-
-**Benefits**:
-- Standards-compliant
-- Users can customize locations via environment variables
-- Better organization of user files
-
-### 2. Dynamic Homebrew Detection (macOS/Linux)
-
-**Rationale**: Homebrew can be installed in different locations (Intel Mac: `/usr/local`, Apple Silicon: `/opt/homebrew`, Linux: `/home/linuxbrew/.linuxbrew`).
-
-**Implementation**:
-```bash
-# Detect Homebrew prefix dynamically
-if command -v brew &> /dev/null; then
-    HOMEBREW_PREFIX="${HOMEBREW_PREFIX:-$(brew --prefix)}"
-    export HOMEBREW_PREFIX
-    export PATH="$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin:$PATH"
-
-    # Add Homebrew-specific environment variables
-    export HOMEBREW_CELLAR="${HOMEBREW_CELLAR:-$HOMEBREW_PREFIX/Cellar}"
-    export HOMEBREW_REPOSITORY="${HOMEBREW_REPOSITORY:-$HOMEBREW_PREFIX}"
+# Add XDG bin directory to PATH if it exists
+if [ -d "$XDG_BIN_HOME" ]; then
+    registerPath "$XDG_BIN_HOME" 2>/dev/null || export PATH="$XDG_BIN_HOME:$PATH"
 fi
 ```
 
-**Benefits**:
-- Works across Intel and Apple Silicon Macs
-- Supports Linux Homebrew installations
-- Respects custom Homebrew installations
-
-### 3. Language-Specific Environment Variables
-
-#### Go (Golang)
+**Create `inc/env/prefix.sh`**:
 ```bash
-# Go environment
-if command -v go &> /dev/null; then
-    export GOPATH="${GOPATH:-$HOME/go}"
-    export GOBIN="${GOBIN:-$GOPATH/bin}"
-    export PATH="$GOBIN:$PATH"
-fi
+#!/bin/bash
+# Standard PREFIX variable support
+
+# Default to $HOME/.local (FHS user-local convention)
+export PREFIX="${PREFIX:-$HOME/.local}"
+
+# Add PREFIX paths if they exist
+[ -d "$PREFIX/bin" ] && registerPath "$PREFIX/bin" 2>/dev/null || export PATH="$PREFIX/bin:$PATH"
+[ -d "$PREFIX/lib" ] && export LD_LIBRARY_PATH="$PREFIX/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+[ -d "$PREFIX/lib/pkgconfig" ] && export PKG_CONFIG_PATH="$PREFIX/lib/pkgconfig${PKG_CONFIG_PATH:+:$PKG_CONFIG_PATH}"
+[ -d "$PREFIX/share/man" ] && export MANPATH="$PREFIX/share/man${MANPATH:+:$MANPATH}"
 ```
 
-#### Rust
+### Phase 2: Language Environment Variables (Week 2)
+
+**Create `inc/env/languages.sh`**:
 ```bash
-# Rust/Cargo environment
+#!/bin/bash
+# Language-specific environment variables (no auto-detection)
+
+# Go workspace
+if [ -n "$GOPATH" ] && [ -d "$GOPATH/bin" ]; then
+    registerPath "$GOPATH/bin" 2>/dev/null || export PATH="$GOPATH/bin:$PATH"
+elif [ -d "$HOME/go/bin" ]; then
+    # Common default location
+    registerPath "$HOME/go/bin" 2>/dev/null || export PATH="$HOME/go/bin:$PATH"
+fi
+
+# Rust/Cargo
 export CARGO_HOME="${CARGO_HOME:-$HOME/.cargo}"
-export RUSTUP_HOME="${RUSTUP_HOME:-$HOME/.rustup}"
 if [ -d "$CARGO_HOME/bin" ]; then
-    export PATH="$CARGO_HOME/bin:$PATH"
+    registerPath "$CARGO_HOME/bin" 2>/dev/null || export PATH="$CARGO_HOME/bin:$PATH"
 fi
-```
 
-#### Node.js / npm
-```bash
-# Node.js global packages
-export NPM_CONFIG_PREFIX="${NPM_CONFIG_PREFIX:-$HOME/.npm-global}"
-if [ -d "$NPM_CONFIG_PREFIX/bin" ]; then
-    export PATH="$NPM_CONFIG_PREFIX/bin:$PATH"
+# Python user base (PEP 370)
+if [ -n "$PYTHONUSERBASE" ] && [ -d "$PYTHONUSERBASE/bin" ]; then
+    registerPath "$PYTHONUSERBASE/bin" 2>/dev/null || export PATH="$PYTHONUSERBASE/bin:$PATH"
+fi
+
+# Node.js npm global prefix
+if [ -n "$NPM_CONFIG_PREFIX" ] && [ -d "$NPM_CONFIG_PREFIX/bin" ]; then
+    registerPath "$NPM_CONFIG_PREFIX/bin" 2>/dev/null || export PATH="$NPM_CONFIG_PREFIX/bin:$PATH"
 fi
 
 # pnpm
 export PNPM_HOME="${PNPM_HOME:-$HOME/.local/share/pnpm}"
 if [ -d "$PNPM_HOME" ]; then
-    export PATH="$PNPM_HOME:$PATH"
+    registerPath "$PNPM_HOME" 2>/dev/null || export PATH="$PNPM_HOME:$PATH"
 fi
 ```
 
-#### Python
-```bash
-# Python user site packages
-if command -v python3 &> /dev/null; then
-    PYTHON_USER_BASE="${PYTHON_USER_BASE:-$(python3 -m site --user-base)}"
-    export PATH="$PYTHON_USER_BASE/bin:$PATH"
-fi
-
-# Poetry
-export POETRY_HOME="${POETRY_HOME:-$HOME/.local/share/poetry}"
-if [ -d "$POETRY_HOME/bin" ]; then
-    export PATH="$POETRY_HOME/bin:$PATH"
-fi
-```
-
-#### Ruby
-```bash
-# Ruby Gems
-if command -v ruby &> /dev/null && command -v gem &> /dev/null; then
-    RUBY_GEM_HOME="${GEM_HOME:-$(ruby -e 'puts Gem.user_dir')}"
-    export PATH="$RUBY_GEM_HOME/bin:$PATH"
-fi
-```
-
-### 4. Custom Installation Prefix Support
-
-**Rationale**: Users may want to install software in custom locations using `PREFIX`.
-
-**Implementation**:
-```bash
-# Custom installation prefix
-export PREFIX="${PREFIX:-$HOME/.local}"
-export PATH="$PREFIX/bin:$PATH"
-export LD_LIBRARY_PATH="$PREFIX/lib:$LD_LIBRARY_PATH"
-export PKG_CONFIG_PATH="$PREFIX/lib/pkgconfig:$PKG_CONFIG_PATH"
-export MANPATH="$PREFIX/share/man:$MANPATH"
-```
-
-### 5. Modern Package Manager Support
+### Update `inc/settings.sh`
 
 ```bash
-# Snap packages
-if [ -d "/snap/bin" ]; then
-    export PATH="/snap/bin:$PATH"
+# Settings
+
+# Source new environment modules
+[ -f "$ENV_ROOT/inc/env/xdg.sh" ] && source "$ENV_ROOT/inc/env/xdg.sh"
+[ -f "$ENV_ROOT/inc/env/prefix.sh" ] && source "$ENV_ROOT/inc/env/prefix.sh"
+
+# Optional: language environments (can be disabled with NO_LANGUAGE_PATHS)
+if [ "${NO_LANGUAGE_PATHS:-0}" != "1" ]; then
+    [ -f "$ENV_ROOT/inc/env/languages.sh" ] && source "$ENV_ROOT/inc/env/languages.sh"
 fi
 
-# Flatpak
-if [ -d "$HOME/.local/share/flatpak/exports/bin" ]; then
-    export PATH="$HOME/.local/share/flatpak/exports/bin:$PATH"
+# Legacy PATH construction (still supported)
+export PATH=$HOME/local/bin:$HOME/.local/bin:$ENV_ROOT/bin:$PATH
+
+# Optional /usr/local paths
+if [ "${NO_USER_LOCAL:-0}" != "1" ]; then
+    export PATH=/usr/local/sbin:/usr/local/bin:$PATH
 fi
 
-if [ -d "/var/lib/flatpak/exports/bin" ]; then
-    export PATH="/var/lib/flatpak/exports/bin:$PATH"
-fi
+# Clean up duplicates
+uniqueify_PATH
 
-# AppImage directory
-if [ -d "$HOME/.local/bin/appimages" ]; then
-    export PATH="$HOME/.local/bin/appimages:$PATH"
-fi
-
-# Nix package manager
-if [ -e "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then
-    source "$HOME/.nix-profile/etc/profile.d/nix.sh"
-fi
+# Rest of settings...
+export VIM_BIN=/usr/bin/vim
+export EDITOR=$VIM_BIN
+# ... etc
 ```
 
-### 6. Enhanced Feature Flags
-
-Add more granular control flags:
+## Feature Flags (Simplified)
 
 ```bash
-# Feature flags (set to 1 to disable)
-NO_USER_LOCAL="${NO_USER_LOCAL:-0}"          # Existing flag
-NO_HOMEBREW="${NO_HOMEBREW:-0}"              # Skip Homebrew paths
-NO_LANGUAGE_PATHS="${NO_LANGUAGE_PATHS:-0}"  # Skip language-specific paths
-NO_PKG_MANAGERS="${NO_PKG_MANAGERS:-0}"      # Skip snap/flatpak/etc
-USE_MINIMAL_PATH="${USE_MINIMAL_PATH:-0}"    # Only essential paths
+# Existing
+NO_USER_LOCAL="${NO_USER_LOCAL:-0}"          # Skip /usr/local paths
+
+# New (practical only)
+NO_LANGUAGE_PATHS="${NO_LANGUAGE_PATHS:-0}"  # Skip language env vars
+XDG_COMPLIANCE="${XDG_COMPLIANCE:-1}"        # Enable XDG (default ON)
+PREFIX_SUPPORT="${PREFIX_SUPPORT:-1}"        # Enable PREFIX (default ON)
 ```
 
-### 7. Platform-Specific Optimizations
+## Docker-Friendly Examples
 
-```bash
-# Detect platform
-PLATFORM="$(uname -s)"
+### Example 1: Development Container
+```dockerfile
+FROM ubuntu:22.04
 
-case "$PLATFORM" in
-    Darwin)
-        # macOS-specific paths
-        export PATH="/usr/local/MacGPG2/bin:$PATH"  # GPG Suite
-        export PATH="/Applications/Visual Studio Code.app/Contents/Resources/app/bin:$PATH"
+# Set environment variables BEFORE installing shell-dev-env
+ENV PREFIX=/opt/app
+ENV GOPATH=/workspace/go
+ENV CARGO_HOME=/opt/cargo
+ENV XDG_CONFIG_HOME=/workspace/.config
+ENV XDG_BIN_HOME=/workspace/.local/bin
 
-        # Homebrew (if not already added)
-        if [ "$NO_HOMEBREW" != "1" ] && [ -z "$HOMEBREW_PREFIX" ]; then
-            if [ -f "/opt/homebrew/bin/brew" ]; then
-                eval "$(/opt/homebrew/bin/brew shellenv)"
-            elif [ -f "/usr/local/bin/brew" ]; then
-                eval "$(/usr/local/bin/brew shellenv)"
-            fi
-        fi
-        ;;
-    Linux)
-        # Linux-specific paths
-        export PATH="/usr/sbin:$PATH"
+# Install shell-dev-env
+RUN git clone https://github.com/rightson/shell-dev-env.git ~/.env
+RUN bash ~/.env/shell-env.sh patch
 
-        # Add user systemd binaries
-        if [ -d "$HOME/.local/lib/systemd/user" ]; then
-            export PATH="$HOME/.local/lib/systemd/user:$PATH"
-        fi
-        ;;
-esac
+# PATH is now correctly set based on environment variables
+# No detection, no assumptions, just respecting env vars
 ```
 
-## Proposed File Structure
+### Example 2: Production Container
+```dockerfile
+FROM alpine:3.18
 
-```
-shell-dev-env/
-├── inc/
-│   ├── settings.sh                    # Core settings (simplified)
-│   ├── env.sh                         # Existing PATH functions
-│   ├── env/                           # NEW: Environment modules
-│   │   ├── xdg.sh                    # XDG Base Directory support
-│   │   ├── homebrew.sh               # Homebrew detection
-│   │   ├── languages.sh              # Language-specific environments
-│   │   ├── package-managers.sh       # Snap, Flatpak, Nix support
-│   │   └── platform.sh               # Platform-specific paths
-│   └── ...
-└── docs/
-    ├── PROPOSAL.md                    # This document
-    ├── PATH_MANAGEMENT.md             # PATH management guide
-    ├── FEATURES.md                    # Feature overview
-    └── ENVIRONMENT_VARIABLES.md       # Env var reference
+# Minimal PATH, disable language detection
+ENV NO_LANGUAGE_PATHS=1
+ENV PREFIX=/usr/local
+ENV XDG_BIN_HOME=/app/bin
+
+RUN git clone https://github.com/rightson/shell-dev-env.git ~/.env
+RUN bash ~/.env/shell-env.sh patch
+
+# Clean, predictable PATH
 ```
 
-## Implementation Plan
+### Example 3: Multi-stage Build
+```dockerfile
+# Build stage
+FROM golang:1.21 AS builder
+ENV GOPATH=/build/go
+ENV PREFIX=/build/output
 
-### Phase 1: Foundation (Week 1)
-1. Create `inc/env/` directory structure
-2. Implement XDG Base Directory support (`inc/env/xdg.sh`)
-3. Add feature flags to control new behaviors
-4. Update `inc/settings.sh` to source new modules
-5. Comprehensive testing on Linux and macOS
+# Shell-dev-env respects these without detection
+RUN git clone https://github.com/rightson/shell-dev-env.git ~/.env && \
+    bash ~/.env/shell-env.sh patch
 
-### Phase 2: Language Support (Week 2)
-1. Implement language-specific environment detection (`inc/env/languages.sh`)
-2. Add Go, Rust, Node.js, Python, Ruby support
-3. Create optional loading mechanism
-4. Test with various language installations
-
-### Phase 3: Package Managers (Week 3)
-1. Implement modern package manager support (`inc/env/package-managers.sh`)
-2. Add Snap, Flatpak, Nix, AppImage support
-3. Platform-specific optimizations (`inc/env/platform.sh`)
-4. Homebrew dynamic detection (`inc/env/homebrew.sh`)
-
-### Phase 4: Documentation & Testing (Week 4)
-1. Create comprehensive documentation in `docs/`
-2. Update README.md with new features
-3. Add migration guide for existing users
-4. Test on various platforms and configurations
-5. Create example configurations
+# Runtime stage
+FROM alpine:3.18
+ENV PREFIX=/app
+COPY --from=builder /build/output /app
+# PATH automatically includes /app/bin
+```
 
 ## Backward Compatibility
 
-All changes will maintain backward compatibility:
+✅ **100% backward compatible**:
 
-1. **Default behavior unchanged**: If no environment variables are set, behavior matches current implementation
-2. **Feature flags**: All new features can be disabled via flags
-3. **Opt-in language support**: Language-specific paths only added if tools detected
-4. **Graceful degradation**: Missing commands/directories are safely skipped
-
-## Migration Guide for Users
-
-### Existing Users
-No action required - current behavior is preserved by default.
-
-### Users Who Want New Features
-
-**Option 1: Enable all features**
-```bash
-# In your .bashrc/.zshrc before sourcing shell-dev-env
-export SHELL_DEV_ENV_ENHANCED=1
-```
-
-**Option 2: Selective features**
-```bash
-# Enable specific features
-export XDG_COMPLIANCE=1
-export HOMEBREW_AUTO_DETECT=1
-export LANGUAGE_ENV_SUPPORT=1
-```
-
-**Option 3: Opt-out of specific features**
-```bash
-# Keep new defaults but disable specific features
-export NO_HOMEBREW=1
-export NO_LANGUAGE_PATHS=1
-```
+1. **Default behavior unchanged**: If no env vars set, works exactly as before
+2. **Existing paths preserved**: All current hardcoded paths still included
+3. **No breaking changes**: New functionality is additive only
+4. **Feature flags**: All new features can be disabled
 
 ## Testing Strategy
 
-1. **Unit tests**: Test each environment detection function
-2. **Integration tests**: Test full PATH construction
-3. **Platform tests**: Test on macOS (Intel/ARM), Ubuntu, Debian, Arch, Fedora
-4. **Shell tests**: Test on bash, zsh, tcsh
-5. **Edge cases**: Test missing commands, custom installations, etc.
+1. **Container tests**: Test in Docker/Podman containers
+2. **Minimal environments**: Test in Alpine, busybox
+3. **Standard environments**: Test in Ubuntu, Debian, Fedora
+4. **Without tools**: Test when language tools NOT installed
+5. **With env vars**: Test with various env var combinations
 
-## Performance Considerations
+## Performance
 
-- **Lazy evaluation**: Only detect tools when needed
-- **Caching**: Cache detected paths in session variables
-- **Conditional loading**: Skip checks if feature flags disabled
-- **Fast path**: Optimize common cases
-
-## Security Considerations
-
-1. **No automatic command execution**: Only source known-good scripts
-2. **Path validation**: Verify directories exist before adding to PATH
-3. **No untrusted inputs**: Don't evaluate user-provided strings
-4. **Privilege separation**: Don't require or assume root access
-
-## Expected Benefits
-
-1. **Better standards compliance** - XDG, language-specific conventions
-2. **Improved portability** - Works across different platforms and setups
-3. **Enhanced flexibility** - Users can customize via environment variables
-4. **Modern tool support** - Supports contemporary package managers and languages
-5. **Maintained simplicity** - Modular design keeps complexity manageable
-6. **Zero breaking changes** - Backward compatible with existing installations
+- **Zero overhead**: No command execution (`brew --prefix`, `python3 -m site`, etc.)
+- **No detection**: Just check if directories exist
+- **Fast startup**: Simple environment variable expansion
+- **Container-friendly**: No assumptions about installed tools
 
 ## Success Metrics
 
-- ✅ Zero breaking changes for existing users
-- ✅ Support for 5+ language ecosystems (Go, Rust, Node, Python, Ruby)
-- ✅ Dynamic Homebrew detection on macOS
-- ✅ XDG Base Directory compliance
-- ✅ Support for 3+ modern package managers (Snap, Flatpak, Nix)
-- ✅ Documentation coverage for all new features
-- ✅ Tests passing on 3+ platforms
+- ✅ Works in Docker containers without modification
+- ✅ Works in minimal environments (Alpine, busybox)
+- ✅ Zero external command dependencies
+- ✅ XDG Base Directory compliant
+- ✅ PREFIX variable support
+- ✅ Language env vars work without auto-detection
+- ✅ 100% backward compatible
+- ✅ No breaking changes
+
+## What Was Removed (Not Practical)
+
+### ❌ Dynamic Homebrew Detection
+```bash
+# REMOVED - too complex, not docker-friendly
+if command -v brew &> /dev/null; then
+    HOMEBREW_PREFIX="$(brew --prefix)"  # SLOW
+    export PATH="$HOMEBREW_PREFIX/bin:$PATH"
+fi
+```
+
+**Why removed**: Requires `brew` installed, slow, macOS-specific, doesn't work in containers.
+
+### ❌ Package Manager Detection
+```bash
+# REMOVED - not practical
+if [ -d "/snap/bin" ]; then
+    export PATH="/snap/bin:$PATH"
+fi
+```
+
+**Why removed**: Platform-specific, not portable, unnecessary in containers.
+
+### ❌ Language Tool Detection
+```bash
+# REMOVED - requires tools installed
+if command -v python3 &> /dev/null; then
+    PYTHON_USER_BASE="$(python3 -m site --user-base)"
+    export PATH="$PYTHON_USER_BASE/bin:$PATH"
+fi
+```
+
+**Why removed**: Requires Python installed, runtime detection fragile, doesn't work in minimal containers.
+
+## Migration Guide
+
+### For Existing Users
+No changes needed - everything works as before.
+
+### For Docker Users
+```dockerfile
+# Set env vars before installing
+ENV PREFIX=/app
+ENV GOPATH=/workspace/go
+ENV XDG_BIN_HOME=/app/.local/bin
+
+RUN git clone ... && bash ~/.env/shell-env.sh patch
+```
+
+### For Language Developers
+```bash
+# In your .bashrc / .zshrc
+export GOPATH="$HOME/projects/go"
+export CARGO_HOME="$HOME/.cargo"
+export NPM_CONFIG_PREFIX="$HOME/.npm-global"
+
+# Then source shell-dev-env
+source ~/.env/seeds/bashrc
+```
 
 ## Conclusion
 
-This proposal modernizes `shell-dev-env`'s PATH management while maintaining backward compatibility. By leveraging standard environment variables and supporting modern development tools, we make the system more flexible, portable, and user-friendly.
+This **practical, docker-friendly** proposal improves `shell-dev-env` by:
 
-The modular approach allows users to opt-in to features they need while keeping the core simple and fast for users who prefer the current behavior.
+1. ✅ **XDG compliance** - Industry standard, container-friendly
+2. ✅ **PREFIX support** - Build system standard, widely used
+3. ✅ **Language env vars** - Standard variables, no detection
+4. ❌ **No complex detection** - No `brew --prefix`, no `command -v`
+5. ❌ **No platform assumptions** - Works everywhere
+6. ✅ **100% backward compatible** - Zero breaking changes
 
-## Next Steps
-
-1. Review and approve this proposal
-2. Create detailed implementation issues
-3. Begin Phase 1 implementation
-4. Gather community feedback
-5. Iterate based on real-world usage
+**Focus**: Respect standard environment variables that users/containers already set, instead of trying to detect and guess what they want.
 
 ---
 
 **Author**: Claude (AI Assistant)
 **Date**: 2025-11-15
-**Status**: Draft - Pending Review
+**Status**: Revised - Practical & Docker-Friendly Approach
