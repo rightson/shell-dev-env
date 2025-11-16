@@ -11,7 +11,7 @@ if [ "$0" = "${BASH_SOURCE[0]}" ]; then
     SHELL_NAME=`ps -p$PPID | tail -1 | awk '{print $NF}' | tr -cd '[:alnum:]/' | xargs basename`
     export SHELL_PATH=$(which $SHELL_NAME)
 fi
-export SHELL_NAME=`basename $SHELL_PATH`
+export SHELL_NAME=`basename ${SHELL_PATH:-bash}`
 
 function print_usage() {
     echo "Usages: $0 patch|install|config|all"

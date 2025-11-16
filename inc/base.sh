@@ -19,7 +19,7 @@ elif [ -n "$ZSH_NAME" ]; then
     export SHELL_PATH=`which zsh`
 fi
 
-export SHELL_NAME=`basename $SHELL_PATH`
+export SHELL_NAME=`basename ${SHELL_PATH:-bash}`
 
 export EXIT_SUCCESS=0
 export EXIT_FAILURE=-1
