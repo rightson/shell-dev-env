@@ -91,7 +91,7 @@ All modifications are clearly marked with begin/end markers and timestamps:
 
 ### Core Documentation
 
-- **[PROPOSAL.md](PROPOSAL.md)** - Comprehensive proposal for PATH improvements using default environment variables
+- **[docs/PROPOSAL.md](docs/PROPOSAL.md)** - Comprehensive proposal for PATH improvements using default environment variables
 - **[docs/FEATURES.md](docs/FEATURES.md)** - Complete feature reference with examples
 - **[docs/PATH_MANAGEMENT.md](docs/PATH_MANAGEMENT.md)** - Detailed PATH management guide
 - **[docs/ENVIRONMENT_VARIABLES.md](docs/ENVIRONMENT_VARIABLES.md)** - All environment variables reference
@@ -225,7 +225,7 @@ Control behavior by setting variables **before** sourcing shell-dev-env:
 export NO_USER_LOCAL=1
 ```
 
-### Proposed Flags (See PROPOSAL.md)
+### Proposed Flags (See docs/PROPOSAL.md)
 
 ```bash
 # Skip language-specific environment variables (Go, Rust, Node, etc.)
@@ -310,11 +310,11 @@ esac
 ```
 shell-dev-env/
 ├── README.md                 # This file
-├── PROPOSAL.md              # Comprehensive improvement proposal
 ├── shell-env.sh             # Main installation script (Linux/macOS)
 ├── shell-env.ps1            # PowerShell variant (Windows)
 │
 ├── docs/                    # Documentation
+│   ├── PROPOSAL.md          # Comprehensive improvement proposal
 │   ├── FEATURES.md          # Complete feature reference
 │   ├── PATH_MANAGEMENT.md   # PATH management guide
 │   └── ENVIRONMENT_VARIABLES.md  # Environment variable reference
@@ -510,11 +510,11 @@ Contributions are welcome! Please:
 4. Test on multiple shells/platforms if possible
 5. Submit a pull request
 
-See [PROPOSAL.md](PROPOSAL.md) for planned improvements and areas where contributions are needed.
+See [docs/PROPOSAL.md](docs/PROPOSAL.md) for planned improvements and areas where contributions are needed.
 
 ## Roadmap
 
-See [PROPOSAL.md](PROPOSAL.md) for the practical, docker-friendly improvement plan, including:
+See [docs/PROPOSAL.md](docs/PROPOSAL.md) for the practical, docker-friendly improvement plan, including:
 
 - **XDG Base Directory Specification** support (industry standard, container-friendly)
 - **PREFIX variable support** (build system standard)
@@ -561,6 +561,6 @@ Thanks to all contributors and users who have helped improve shell-dev-env over 
 - [Features](docs/FEATURES.md)
 - [PATH Management](docs/PATH_MANAGEMENT.md)
 - [Environment Variables](docs/ENVIRONMENT_VARIABLES.md)
-- [Improvement Proposal](PROPOSAL.md)
+- [Improvement Proposal](docs/PROPOSAL.md)
 
 **Last Updated**: 2025-11-15

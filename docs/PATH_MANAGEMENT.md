@@ -561,7 +561,7 @@ fi
 
 - [FEATURES.md](FEATURES.md) - Complete feature list
 - [ENVIRONMENT_VARIABLES.md](ENVIRONMENT_VARIABLES.md) - All environment variables
-- [PROPOSAL.md](../PROPOSAL.md) - Proposed improvements to PATH management
+- [PROPOSAL.md](PROPOSAL.md) - Proposed improvements to PATH management
 - [README.md](../README.md) - Installation and quick start
 
 ---

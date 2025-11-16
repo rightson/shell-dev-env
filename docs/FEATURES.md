@@ -608,7 +608,7 @@ Vim-specific configuration files and plugins.
 
 - [PATH_MANAGEMENT.md](PATH_MANAGEMENT.md) - Detailed PATH guide
 - [ENVIRONMENT_VARIABLES.md](ENVIRONMENT_VARIABLES.md) - Environment variable reference
-- [PROPOSAL.md](../PROPOSAL.md) - Planned improvements
+- [PROPOSAL.md](PROPOSAL.md) - Planned improvements
 - [README.md](../README.md) - Installation and quick start
 
 ---

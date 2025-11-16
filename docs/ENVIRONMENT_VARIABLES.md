@@ -420,7 +420,7 @@ export PATH=$GOPATH/bin:$PATH
 
 **Type**: String (Path)
 **Default**: `$GOPATH/bin`
-**Proposed in**: PROPOSAL.md
+**Proposed in**: docs/PROPOSAL.md
 
 Go binary installation directory.
 
@@ -529,7 +529,7 @@ export EXIT_FAILURE=-1
 
 ## Proposed Variables (Future)
 
-These variables are proposed in PROPOSAL.md but not yet implemented.
+These variables are proposed in docs/PROPOSAL.md but not yet implemented.
 
 ### XDG Base Directory Variables
 
@@ -783,7 +783,7 @@ echo "PATH after: $PATH"
 
 - [PATH_MANAGEMENT.md](PATH_MANAGEMENT.md) - Detailed PATH guide
 - [FEATURES.md](FEATURES.md) - Complete feature list
-- [PROPOSAL.md](../PROPOSAL.md) - Proposed improvements
+- [PROPOSAL.md](PROPOSAL.md) - Proposed improvements
 - [README.md](../README.md) - Installation guide
 
 ---
