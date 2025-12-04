@@ -142,7 +142,7 @@ alias gsts 'git stash show --text'
 alias gsu 'git submodule update'
 
 alias gts 'git tag -s'
-alias gtt 'git tag | tail'
+alias gtt 'git tag | sort -V | tail'
 alias gtv 'git tag | sort -V'
 
 alias gunignore 'git update-index --no-assume-unchanged'
