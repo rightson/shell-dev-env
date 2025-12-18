@@ -107,7 +107,7 @@ end)
 -- ==========================================
 
 -- Option + D: 打開字典並查詢剪貼簿內容
-hs.hotkey.bind({"alt"}, "D", function()
+hs.hotkey.bind({"ctrl", "alt"}, "D", function()
     local clipboardContent = hs.pasteboard.getContents()
     if clipboardContent and clipboardContent ~= "" then
         hs.alert.show("查詢: " .. clipboardContent)
@@ -124,7 +124,7 @@ hs.hotkey.bind({"ctrl", "alt"}, "G", function()
     if clipboardContent and clipboardContent ~= "" then
         hs.alert.show("翻譯: " .. clipboardContent)
         -- 打開 Google 翻譯（自動偵測語言）
-        local url = "https://translate.google.com/?sl=auto&tl=en&text=" .. hs.http.encodeForQuery(clipboardContent)
+        local url = "https://translate.google.com/?sl=en&tl=zh-TW&text=" .. hs.http.encodeForQuery(clipboardContent)
         hs.urlevent.openURL(url)
     else
         hs.alert.show("剪貼簿是空的")
