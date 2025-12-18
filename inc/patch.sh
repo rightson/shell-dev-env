@@ -131,6 +131,44 @@ function patch_screen_rc() {
     fi
 }
 
+function patch_hammerspoon() {
+    local hammerspoon_init=$HOME/.hammerspoon/init.lua
+    local seed_file="${ENV_ROOT}/seeds/hammerspoon/init.lua"
+
+    # Create directory if it doesn't exist
+    mkdir -p `dirname $hammerspoon_init`
+
+    # Backup existing file if present
+    if [ -f "$hammerspoon_init" ]; then
+        local ts=`date +%Y-%m-%d-%H-%M-%S`
+        echo "Backing up $hammerspoon_init to $hammerspoon_init.bak-$ts"
+        cp "$hammerspoon_init" "$hammerspoon_init.bak-$ts"
+    fi
+
+    # Copy seed file to target
+    echo "Copying Hammerspoon config from $seed_file to $hammerspoon_init"
+    cp "$seed_file" "$hammerspoon_init"
+}
+
+function patch_karabiner() {
+    local karabiner_config=$HOME/.config/karabiner/karabiner.json
+    local seed_file="${ENV_ROOT}/seeds/karabiner/karabiner.json"
+
+    # Create directory if it doesn't exist
+    mkdir -p `dirname $karabiner_config`
+
+    # Backup existing file if present
+    if [ -f "$karabiner_config" ]; then
+        local ts=`date +%Y-%m-%d-%H-%M-%S`
+        echo "Backing up $karabiner_config to $karabiner_config.bak-$ts"
+        cp "$karabiner_config" "$karabiner_config.bak-$ts"
+    fi
+
+    # Copy seed file to target
+    echo "Copying Karabiner config from $seed_file to $karabiner_config"
+    cp "$seed_file" "$karabiner_config"
+}
+
 
 function patch_rc_files() {
     if [ "$1" = "" ]; then
@@ -146,6 +184,9 @@ function patch_rc_files() {
     patch_tmux_rc
     patch_vim_rc
     patch_screen_rc
+    patch_nvim_rc
+    patch_hammerspoon
+    patch_karabiner
 
     echo "Please run below command to update your shell setting:"
     echo -e "\n\tsource $rc\n"
