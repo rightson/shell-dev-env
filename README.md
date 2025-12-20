@@ -29,11 +29,11 @@ Installation
 
 Linux/MacOS:
 
-	bash ~/.env/shell-env.sh
+	bash ~/.env/dotenv
 
-If you don't wnat to install dependencies, just run
+If you don't want to install dependencies, just run
 
-	bash ~/.env/shell-env.sh patch
+	bash ~/.env/dotenv patch
 
 Windows:
 
