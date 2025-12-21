@@ -21,7 +21,7 @@ bash ~/.env/dotenv          # patches rc files + installs tools + configures git
    - Only patch rc files (no installs): `bash ~/.env/dotenv patch`
    - Only install helper tools: `bash ~/.env/dotenv install`
    - Only apply git/vim defaults: `bash ~/.env/dotenv config`
-3) Reload your shell rc  
+3) Reload your shell rc
 `source ~/.bashrc` or `source ~/.zshrc` (tcsh uses `~/.cshrc`).
 
 Windows PowerShell:
@@ -39,7 +39,7 @@ powershell -File $HOME\.env\dotenv.ps1   # patches your PowerShell profile with 
 - **Windows extras**: PowerShell profile patcher imports git aliases and a prompt from `inc/`.
 
 ## Usage
-- `bash ~/.env/dotenv patch|install|config|config-git|config-vim`  
+- `bash ~/.env/dotenv patch|install|config|config-git|config-vim`
   Run targeted steps instead of the full flow.
 - `ENV_ROOT` points to the clone; templates live in `seeds/`, and functions live in `inc/`.
 - Shell rc patching is idempotent; rerunning will skip already-patched files. For shell rc files, a `*.bak-<timestamp>` backup is created before changes.
@@ -47,14 +47,19 @@ powershell -File $HOME\.env\dotenv.ps1   # patches your PowerShell profile with 
 ## macOS Keyboard Shortcuts
 The included Karabiner and Hammerspoon configurations provide powerful keyboard shortcuts for window management and productivity.
 
+### Karabiner (System-level Key Remapping)
 | Category | Shortcut | Action |
 |----------|----------|--------|
-| **Karabiner (System-level Key Remapping)** |||
-| **Remapping** | **Cmd + Shift** (tap) | Switch input source (acts as Ctrl + Space when tapped alone) |
-| **Remapping** | **fn + Ctrl + 1/2/3** | Remapped to Ctrl + Shift + Option + 1/2/3 (triggers Hammerspoon 2/3 width layouts) |
+| **Remapping** | **Cmd + Shift** | Switch input source (acts as Ctrl + Space when tapped alone) |
+| **Remapping** | **fn + Ctrl + 1** | Remapped to Ctrl + Shift + Option + 1 (triggers Hammerspoon left 2/3 width layout) |
+| **Remapping** | **fn + Ctrl + 2** | Remapped to Ctrl + Shift + Option + 2 (triggers Hammerspoon middle 2/3 width layout) |
+| **Remapping** | **fn + Ctrl + 3** | Remapped to Ctrl + Shift + Option + 3 (triggers Hammerspoon right 2/3 width layout) |
 | **Remapping** | **Page Down/Up** | Remapped to fn + Down/Up |
 | **Remapping** | **Home/End** | Remapped to Cmd + Left/Right |
-| **Hammerspoon (Window Management & Utilities)** |||
+
+### Hammerspoon (Window Management & Utilities)
+| Category | Shortcut | Action |
+|----------|----------|--------|
 | **Window: 1/3** | **Ctrl + Option + 1** | Position window at left 1/3 |
 | **Window: 1/3** | **Ctrl + Option + 2** | Position window at middle 1/3 |
 | **Window: 1/3** | **Ctrl + Option + 3** | Position window at right 1/3 |
