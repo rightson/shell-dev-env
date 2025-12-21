@@ -148,16 +148,23 @@ function patch_hammerspoon() {
     # Create directory if it doesn't exist
     mkdir -p `dirname $hammerspoon_init`
 
-    # Backup existing file if present
+    # Backup existing file only if it would change after patching
     if [ -f "$hammerspoon_init" ]; then
-        local ts=`date +%Y-%m-%d-%H-%M-%S`
-        echo "Backing up $hammerspoon_init to $hammerspoon_init.bak-$ts"
-        cp "$hammerspoon_init" "$hammerspoon_init.bak-$ts"
+        if ! cmp -s "$hammerspoon_init" "$seed_file"; then
+            local ts=`date +%Y-%m-%d-%H-%M-%S`
+            echo "Backing up $hammerspoon_init to $hammerspoon_init.bak-$ts"
+            cp "$hammerspoon_init" "$hammerspoon_init.bak-$ts"
+            # Copy seed file to target
+            echo "Copying Hammerspoon config from $seed_file to $hammerspoon_init"
+            cp "$seed_file" "$hammerspoon_init"
+        else
+            echo "$hammerspoon_init is already up to date, skipping"
+        fi
+    else
+        # Copy seed file to target (no backup needed for new file)
+        echo "Copying Hammerspoon config from $seed_file to $hammerspoon_init"
+        cp "$seed_file" "$hammerspoon_init"
     fi
-
-    # Copy seed file to target
-    echo "Copying Hammerspoon config from $seed_file to $hammerspoon_init"
-    cp "$seed_file" "$hammerspoon_init"
 }
 
 function patch_karabiner() {
@@ -168,16 +175,23 @@ function patch_karabiner() {
     # Create directory if it doesn't exist
     mkdir -p `dirname $karabiner_config`
 
-    # Backup existing file if present
+    # Backup existing file only if it would change after patching
     if [ -f "$karabiner_config" ]; then
-        local ts=`date +%Y-%m-%d-%H-%M-%S`
-        echo "Backing up $karabiner_config to $karabiner_config.bak-$ts"
-        cp "$karabiner_config" "$karabiner_config.bak-$ts"
+        if ! cmp -s "$karabiner_config" "$seed_file"; then
+            local ts=`date +%Y-%m-%d-%H-%M-%S`
+            echo "Backing up $karabiner_config to $karabiner_config.bak-$ts"
+            cp "$karabiner_config" "$karabiner_config.bak-$ts"
+            # Copy seed file to target
+            echo "Copying Karabiner config from $seed_file to $karabiner_config"
+            cp "$seed_file" "$karabiner_config"
+        else
+            echo "$karabiner_config is already up to date, skipping"
+        fi
+    else
+        # Copy seed file to target (no backup needed for new file)
+        echo "Copying Karabiner config from $seed_file to $karabiner_config"
+        cp "$seed_file" "$karabiner_config"
     fi
-
-    # Copy seed file to target
-    echo "Copying Karabiner config from $seed_file to $karabiner_config"
-    cp "$seed_file" "$karabiner_config"
 }
 
 
