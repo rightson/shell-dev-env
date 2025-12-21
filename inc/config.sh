@@ -1,7 +1,8 @@
 # Config
 
 function config_vim_plug() {
-    vim -E -s -u "~/.vimrc" +PlugInstall +qall
+    local target_root="${TARGET_ROOT:-$HOME}"
+    vim -E -s -u "$target_root/.vimrc" +PlugInstall +qall
 }
 
 function config_git_vim_diff() {

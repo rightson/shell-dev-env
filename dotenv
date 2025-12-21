@@ -2,6 +2,9 @@
 
 export ENV_ROOT=$(cd `dirname ${BASH_SOURCE[0]}` && pwd)
 
+# Default target root to HOME, can be overridden with --target-root
+export TARGET_ROOT="$HOME"
+
 source ${ENV_ROOT}/inc/base.sh
 source ${ENV_ROOT}/inc/install.sh
 source ${ENV_ROOT}/inc/config.sh
@@ -14,7 +17,23 @@ fi
 export SHELL_NAME=`basename ${SHELL_PATH:-bash}`
 
 function print_usage() {
-    echo "Usages: $0 patch|install|config|all"
+    echo "Usages: $0 [OPTIONS] [COMMAND]"
+    echo ""
+    echo "OPTIONS:"
+    echo "  --target-root <path>  Specify target directory for rc files (default: \$HOME)"
+    echo ""
+    echo "COMMANDS:"
+    echo "  patch        Patch rc files (.bashrc, .vimrc, etc.)"
+    echo "  install      Install vim-plug, tmux tpm, fzf"
+    echo "  config       Configure git and vim"
+    echo "  config-git   Configure git only"
+    echo "  config-vim   Configure vim only"
+    echo "  all          Run all commands (default)"
+    echo ""
+    echo "EXAMPLES:"
+    echo "  $0                              # Run all commands with default target (~)"
+    echo "  $0 --target-root /opt/myenv     # Run all commands targeting /opt/myenv"
+    echo "  $0 --target-root /opt/myenv patch  # Only patch rc files in /opt/myenv"
 }
 
 function patch() {
@@ -52,13 +71,46 @@ function default_action() {
     config
 }
 
-if [ ${#@} -eq 0 ]; then
+# Parse arguments
+COMMANDS=()
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+        --target-root)
+            if [ -z "$2" ]; then
+                echo "Error: --target-root requires a path argument"
+                print_usage
+                exit 1
+            fi
+            export TARGET_ROOT="$2"
+            # Create target directory if it doesn't exist
+            mkdir -p "$TARGET_ROOT"
+            shift 2
+            ;;
+        -h|--help|--usage|-H)
+            print_usage
+            exit 0
+            ;;
+        patch|install|config|config-git|config-vim|all)
+            COMMANDS+=("$1")
+            shift
+            ;;
+        *)
+            echo "Unknown option or command: $1"
+            print_usage
+            exit 1
+            ;;
+    esac
+done
+
+# If no commands specified, run default action
+if [ ${#COMMANDS[@]} -eq 0 ]; then
     default_action
     exit 0
 fi
 
-for var in "$@"; do
-    case "$var" in
+# Execute commands
+for cmd in "${COMMANDS[@]}"; do
+    case "$cmd" in
         patch)
             patch;;
         install)
@@ -69,10 +121,7 @@ for var in "$@"; do
             config_git;;
         config-vim)
             config_vim;;
-        -h|--help|--usage|-H)
-            print_usage $0;;
-        *)
-            default_action
-            ;;
+        all)
+            default_action;;
     esac
 done

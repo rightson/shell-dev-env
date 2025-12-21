@@ -1,11 +1,16 @@
-call plug#begin('~/.vim/plugged')
+" Use target_root if set, otherwise default to $HOME
+if !exists('g:target_root')
+    let g:target_root = $HOME
+endif
+
+call plug#begin(g:target_root . '/.vim/plugged')
 
 if has("nvim")
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 endif
 
 if v:version < 800
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf', { 'dir': g:target_root . '/.fzf', 'do': './install --all' }
 else
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 endif
@@ -57,9 +62,9 @@ Plug 'NLKNguyen/papercolor-theme'
 "    let g:closetag_xhtml_filetypes = 'xhtml,jsx'
 "    let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.php,*.jsx"
 
-if filereadable($HOME."/.vimrc.plug")
+if filereadable(g:target_root . "/.vimrc.plug")
     " Put your local plug here
-    source $HOME/.vimrc.plug
+    execute 'source ' . g:target_root . '/.vimrc.plug'
 endif
 
 " Initialize plugin system

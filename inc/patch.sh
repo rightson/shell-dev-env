@@ -14,15 +14,16 @@ function get_line_number() {
 }
 
 function get_shell_rc_path() {
+    local target_root="${TARGET_ROOT:-$HOME}"
     case "$1" in
         *csh)
-            echo "$HOME/.cshrc"
+            echo "$target_root/.cshrc"
             ;;
         *bash)
-            echo "$HOME/.bashrc"
+            echo "$target_root/.bashrc"
             ;;
         *zsh)
-            echo "$HOME/.zshrc"
+            echo "$target_root/.zshrc"
             ;;
         *)
             echo "Unsupported shell (only supports csh, bash and zsh)"
@@ -62,15 +63,19 @@ function patch_shell_rc() {
         return
     fi
     local temp=`mktemp`
-    cat $rc > $temp
+    # Create rc file if it doesn't exist
+    if [ -f "$rc" ]; then
+        cat $rc > $temp
+        mv $rc ${rc}-`date +%F-%H-%M-%S`.bak
+    fi
     get_patched_rc $shell_name >> $temp
-    mv $rc ${rc}-`date +%F-%H-%M-%S`.bak
     mv $temp $rc
     echo "$rc patched"
 }
 
 function patch_tmux_rc() {
-    local tmuxrc=$HOME/.tmux.conf
+    local target_root="${TARGET_ROOT:-$HOME}"
+    local tmuxrc=$target_root/.tmux.conf
     if [ "`grep \"$ENV_BLOCK_HEAD\" $tmuxrc 2> /dev/null`" = "" ]; then
         echo "Patching $tmuxrc ... "
         cat "${ENV_ROOT}/seeds/tmux.conf" >> $tmuxrc
@@ -81,12 +86,14 @@ function patch_tmux_rc() {
 }
 
 function patch_vim_rc() {
-    local vimrc=$HOME/.vimrc
-    local local_vimrc=$HOME/.vimrc.plug
+    local target_root="${TARGET_ROOT:-$HOME}"
+    local vimrc=$target_root/.vimrc
+    local local_vimrc=$target_root/.vimrc.plug
     if [ "`grep \"$ENV_BLOCK_HEAD\" $vimrc 2> /dev/null`" = "" ]; then
         echo "Patching $vimrc ..."
         echo -e "\n\" $ENV_BLOCK_HEAD" >> $vimrc
         echo "\" =Begin=" >> $vimrc
+        echo "let g:target_root = '$target_root'" >> $vimrc
         echo "source $ENV_ROOT/vim/plug.vimrc" >> $vimrc
         echo "\" Update local Plug at $local_vimrc" >> $vimrc
         echo "source $ENV_ROOT/vim/helpers.vimrc" >> $vimrc
@@ -100,8 +107,9 @@ function patch_vim_rc() {
 }
 
 function patch_nvim_rc() {
-    local nvimrc=$HOME/.config/nvim/init.vim
-    local local_nvimrc=$HOME/.config/nvim/extra-plug.vim
+    local target_root="${TARGET_ROOT:-$HOME}"
+    local nvimrc=$target_root/.config/nvim/init.vim
+    local local_nvimrc=$target_root/.config/nvim/extra-plug.vim
     mkdir -p `dirname $nvimrc`;
     mkdir -p `dirname $local_nvimrc`;
 	touch $local_nvimrc
@@ -122,7 +130,8 @@ function patch_nvim_rc() {
 }
 
 function patch_screen_rc() {
-    local screenrc=$HOME/.screenrc
+    local target_root="${TARGET_ROOT:-$HOME}"
+    local screenrc=$target_root/.screenrc
     if [ "`grep \"$ENV_BLOCK_HEAD\" $screenrc 2> /dev/null`" = "" ]; then
         echo "Patching $screenrc ... "
         cat "${ENV_ROOT}/seeds/screenrc" >> $screenrc
@@ -132,7 +141,8 @@ function patch_screen_rc() {
 }
 
 function patch_hammerspoon() {
-    local hammerspoon_init=$HOME/.hammerspoon/init.lua
+    local target_root="${TARGET_ROOT:-$HOME}"
+    local hammerspoon_init=$target_root/.hammerspoon/init.lua
     local seed_file="${ENV_ROOT}/seeds/hammerspoon/init.lua"
 
     # Create directory if it doesn't exist
@@ -151,7 +161,8 @@ function patch_hammerspoon() {
 }
 
 function patch_karabiner() {
-    local karabiner_config=$HOME/.config/karabiner/karabiner.json
+    local target_root="${TARGET_ROOT:-$HOME}"
+    local karabiner_config=$target_root/.config/karabiner/karabiner.json
     local seed_file="${ENV_ROOT}/seeds/karabiner/karabiner.json"
 
     # Create directory if it doesn't exist
