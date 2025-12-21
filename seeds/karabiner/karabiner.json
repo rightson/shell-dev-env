@@ -37,6 +37,7 @@
                   "modifiers": { "mandatory": ["fn", "control"], "optional": ["any"] }
                 },
                 "to": [
+                  { "key_code": "vk_none" },
                   {
                     "key_code": "1",
                     "modifiers": ["control", "shift", "option"]
@@ -50,6 +51,7 @@
                   "modifiers": { "mandatory": ["fn", "control"], "optional": ["any"] }
                 },
                 "to": [
+                  { "key_code": "vk_none" },
                   {
                     "key_code": "2",
                     "modifiers": ["control", "shift", "option"]
@@ -63,6 +65,7 @@
                   "modifiers": { "mandatory": ["fn", "control"], "optional": ["any"] }
                 },
                 "to": [
+                  { "key_code": "vk_none" },
                   {
                     "key_code": "3",
                     "modifiers": ["control", "shift", "option"]
