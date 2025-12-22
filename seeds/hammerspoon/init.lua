@@ -62,7 +62,25 @@ hs.hotkey.bind({"ctrl", "alt", "cmd"}, "N", function()
     local win = hs.window.focusedWindow()
     if win then
         hs.alert.show("Next Display")
-        win:moveToScreen(win:screen():next(), false, true) -- Ensure it maintains aspect ratio
+        local currentFrame = win:frame()
+        local currentScreen = win:screen()
+        local nextScreen = currentScreen:next()
+
+        -- Get the relative position and size on current screen
+        local currentScreenFrame = currentScreen:frame()
+        local relativeX = (currentFrame.x - currentScreenFrame.x) / currentScreenFrame.w
+        local relativeY = (currentFrame.y - currentScreenFrame.y) / currentScreenFrame.h
+        local relativeW = currentFrame.w / currentScreenFrame.w
+        local relativeH = currentFrame.h / currentScreenFrame.h
+
+        -- Apply to next screen
+        local nextScreenFrame = nextScreen:frame()
+        win:setFrame({
+            x = nextScreenFrame.x + (nextScreenFrame.w * relativeX),
+            y = nextScreenFrame.y + (nextScreenFrame.h * relativeY),
+            w = nextScreenFrame.w * relativeW,
+            h = nextScreenFrame.h * relativeH
+        })
     end
 end)
 
