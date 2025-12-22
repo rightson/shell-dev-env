@@ -66,7 +66,7 @@ hs.hotkey.bind({"ctrl", "alt", "cmd"}, "N", function()
     end
 end)
 
-hs.hotkey.bind({"ctrl", "alt", "cmd"}, "M", function()
+hs.hotkey.bind({"ctrl", "alt", "cmd"}, "m", function()
     local win = hs.window.focusedWindow()
     if win then
         hs.alert.show("Next Display & Maximize")
