@@ -152,3 +152,37 @@ end
 -- Start the watcher
 local appWatcher = hs.application.watcher.new(handleAppEvent)
 appWatcher:start()
+
+-- ==========================================
+-- Dictionary Lookup & Translation
+-- ==========================================
+
+-- Ctrl + Option + D: Open dictionary and lookup clipboard content
+bind({"ctrl", "alt"}, "D", function()
+    local clipboardContent = hs.pasteboard.getContents()
+    if clipboardContent and clipboardContent ~= "" then
+        hs.alert.show("Lookup: " .. clipboardContent)
+        -- Use URL scheme to open Dictionary app and search
+        hs.urlevent.openURL("dict://" .. hs.http.encodeForQuery(clipboardContent))
+    else
+        hs.alert.show("Clipboard is empty")
+    end
+end)
+
+-- Ctrl + Option + G: Open Google Translate and translate clipboard content
+bind({"ctrl", "alt"}, "G", function()
+    local clipboardContent = hs.pasteboard.getContents()
+    if clipboardContent and clipboardContent ~= "" then
+        hs.alert.show("Translate: " .. clipboardContent)
+        -- Open Google Translate (auto-detect language)
+        local url = "https://translate.google.com/?sl=en&tl=zh-TW&text=" .. hs.http.encodeForQuery(clipboardContent)
+        hs.urlevent.openURL(url)
+    else
+        hs.alert.show("Clipboard is empty")
+    end
+end)
+
+-- ==========================================
+-- Startup Notification
+-- ==========================================
+hs.alert.show("✓ Window management loaded")
